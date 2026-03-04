@@ -56,12 +56,12 @@ const Contact = () => {
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 >
                   <option value="">{t("form.select-type")}</option>
-                  <option value="website">Website Platform</option>
-                  <option value="brand">Brand Identity</option>
-                  <option value="ecommerce">Ecommerce</option>
-                  <option value="marketing">Marketing Collateral</option>
-                  <option value="automation">AI Business Automation</option>
-                  <option value="other">Other</option>
+                  <option value="website">{t("form.opt.website")}</option>
+                  <option value="brand">{t("form.opt.brand")}</option>
+                  <option value="ecommerce">{t("form.opt.ecommerce")}</option>
+                  <option value="marketing">{t("form.opt.marketing")}</option>
+                  <option value="automation">{t("form.opt.automation")}</option>
+                  <option value="other">{t("form.opt.other")}</option>
                 </select>
               </div>
             </div>
@@ -86,7 +86,7 @@ const Contact = () => {
               <p className="font-medium">hello@blulumadesign.com</p>
             </div>
             <div>
-              <h3 className="text-label mb-2">Location</h3>
+              <h3 className="text-label mb-2">{t("contact.location")}</h3>
               <p className="font-medium">Vancouver, BC, Canada</p>
             </div>
           </div>

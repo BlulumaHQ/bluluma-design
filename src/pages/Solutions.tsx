@@ -3,12 +3,12 @@ import { Globe, Fingerprint, ShoppingBag, FileText, Bot, TrendingUp } from "luci
 import { useLang } from "@/lib/i18n";
 
 const solutions = [
-  { title: "Web Platforms", desc: "Modern, scalable websites designed for performance and long-term growth.", icon: Globe },
-  { title: "Brand Identity Systems", desc: "Strategic brand systems that create recognition and consistency across every touchpoint.", icon: Fingerprint },
-  { title: "Ecommerce Platforms", desc: "Online stores built to maximize product presentation and drive conversion.", icon: ShoppingBag },
-  { title: "Marketing Collateral", desc: "Printed and digital marketing materials that extend brand identity into the real world.", icon: FileText },
-  { title: "AI Business Automation", desc: "Intelligent workflows and automation tools that improve operational efficiency.", icon: Bot },
-  { title: "Conversion Optimization", desc: "Data-informed strategies that improve website performance and lead generation.", icon: TrendingUp },
+  { titleKey: "sol.web-platforms", descKey: "sol.web-platforms.desc", icon: Globe },
+  { titleKey: "sol.brand-identity", descKey: "sol.brand-identity.desc", icon: Fingerprint },
+  { titleKey: "sol.ecommerce", descKey: "sol.ecommerce.desc", icon: ShoppingBag },
+  { titleKey: "sol.marketing", descKey: "sol.marketing.desc", icon: FileText },
+  { titleKey: "sol.ai", descKey: "sol.ai.desc", icon: Bot },
+  { titleKey: "sol.conversion", descKey: "sol.conversion.desc", icon: TrendingUp },
 ];
 
 const Solutions = () => {
@@ -31,11 +31,11 @@ const Solutions = () => {
             {solutions.map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.title} className="bg-background p-8 flex gap-4 items-start">
+                <div key={s.titleKey} className="bg-background p-8 flex gap-4 items-start">
                   <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">{s.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                    <h3 className="text-lg font-semibold mb-3">{t(s.titleKey)}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{t(s.descKey)}</p>
                   </div>
                 </div>
               );

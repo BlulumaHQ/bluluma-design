@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
 import type { Project } from "@/lib/projects";
+import { useLang } from "@/lib/i18n";
+
+const serviceKeyMap: Record<string, string> = {
+  "Brand Identity": "svc.brand-identity",
+  "Website Platform": "svc.website-platform",
+  "Marketing Collateral": "svc.marketing-collateral",
+  "Website Design": "svc.website-design",
+  "Ecommerce Experiences": "svc.ecommerce-experiences",
+  "AI Business Automation": "svc.ai-business-automation",
+  "Conversion Optimization": "svc.conversion-optimization",
+};
 
 interface ProjectCardProps {
   project: Project;
@@ -8,6 +19,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardProps) => {
+  const { t } = useLang();
   const isLive = mode === "live" && project.liveUrl;
 
   const cardContent = (
@@ -21,7 +33,7 @@ const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardPro
         />
         {isLive && (
           <span className="absolute top-4 right-4 text-xs font-semibold tracking-wide bg-background/90 backdrop-blur-sm border border-border px-3 py-1">
-            LIVE ↗
+            {t("cta.live")}
           </span>
         )}
       </div>
@@ -34,12 +46,12 @@ const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardPro
               key={service}
               className="text-xs text-muted-foreground border border-border px-2 py-1"
             >
-              {service}
+              {serviceKeyMap[service] ? t(serviceKeyMap[service]) : service}
             </span>
           ))}
         </div>
         <span className="inline-block mt-4 text-sm font-medium text-primary">
-          {isLive ? "Visit Site ↗" : "View Project →"}
+          {isLive ? t("cta.visit-site") : t("cta.view-project")}
         </span>
       </div>
     </div>

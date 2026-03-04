@@ -13,6 +13,12 @@ const projectImages: Record<string, string> = {
 
 const caseStudyProjects = projects.filter((p) => p.caseStudy);
 
+const serviceKeyMap: Record<string, string> = {
+  "Brand Identity": "svc.brand-identity",
+  "Website Platform": "svc.website-platform",
+  "Marketing Collateral": "svc.marketing-collateral",
+};
+
 interface CaseStudyContent {
   overview: string[];
   challenge: { intro: string; bullets: string[] };
@@ -195,7 +201,7 @@ export const CaseStudyDetail = () => {
   if (!project) {
     return (
       <div className="section-container section-padding text-center">
-        <h1 className="text-2xl font-bold">Case study not found</h1>
+        <h1 className="text-2xl font-bold">{t("casestudy.not-found")}</h1>
         <Link to="/case-studies" className="text-primary mt-4 inline-block">{t("casestudy.back")}</Link>
       </div>
     );
@@ -234,7 +240,9 @@ export const CaseStudyDetail = () => {
             </div>
             <div>
               <h3 className="text-label mb-2">{t("casestudy.meta.services")}</h3>
-              <p className="font-medium">{project.services.join(", ")}</p>
+              <p className="font-medium">
+                {project.services.map((s) => serviceKeyMap[s] ? t(serviceKeyMap[s]) : s).join(", ")}
+              </p>
             </div>
           </div>
 
@@ -319,7 +327,7 @@ export const CaseStudyDetail = () => {
             </div>
           ) : (
             <div className="mt-16 max-w-2xl">
-              <p className="text-muted-foreground">Full case study content coming soon.</p>
+              <p className="text-muted-foreground">{t("casestudy.coming-soon")}</p>
             </div>
           )}
         </div>

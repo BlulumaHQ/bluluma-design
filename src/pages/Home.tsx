@@ -69,37 +69,37 @@ const testimonials = [
     quote: "Bluluma transformed our online presence completely. The new website and brand identity have brought us more patient inquiries than we ever expected.",
     name: "Michael Chen",
     company: "Friendly Dental Group",
-    projectType: "Brand + Website",
+    projectTypeKey: "testimonial.brand-website",
   },
   {
     quote: "Working with Bluluma was seamless from start to finish. They understood our vision and delivered a platform that truly represents our development.",
     name: "Sarah Thompson",
     company: "Headwater Developments",
-    projectType: "Brand + Website",
+    projectTypeKey: "testimonial.brand-website",
   },
   {
     quote: "The attention to detail and strategic thinking behind every design decision made all the difference. Our new site performs beyond expectations.",
     name: "Daniel Wong",
     company: "BTN Real Estate Advisory",
-    projectType: "Website Platform",
+    projectTypeKey: "testimonial.website-platform",
   },
   {
     quote: "Bluluma delivered a brand system and website that elevated our entire business. The clarity and professionalism speak for themselves.",
     name: "Jessica Lee",
     company: "NuEra Nutra",
-    projectType: "Brand + Website",
+    projectTypeKey: "testimonial.brand-website",
   },
   {
     quote: "Their process was structured, transparent, and efficient. We launched on time with a website that immediately started generating leads.",
     name: "Ryan Patel",
     company: "Vita Environmental",
-    projectType: "Website Platform",
+    projectTypeKey: "testimonial.website-platform",
   },
   {
     quote: "From strategy to launch, Bluluma brought a level of craft and professionalism that set them apart from every other agency we've worked with.",
     name: "David Nguyen",
     company: "Pacific Interior Studio",
-    projectType: "Brand + Website",
+    projectTypeKey: "testimonial.brand-website",
   },
 ];
 
@@ -149,7 +149,7 @@ const TestimonialsCarousel = () => {
                       <p className="text-xs text-muted-foreground">{testimonial.company}</p>
                     </div>
                     <span className="text-xs text-muted-foreground border border-border px-2 py-1">
-                      {testimonial.projectType}
+                      {t(testimonial.projectTypeKey)}
                     </span>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const TestimonialsCarousel = () => {
                             <p className="text-xs text-muted-foreground">{testimonial.company}</p>
                           </div>
                           <span className="text-xs text-muted-foreground border border-border px-2 py-1">
-                            {testimonial.projectType}
+                            {t(testimonial.projectTypeKey)}
                           </span>
                         </div>
                       </div>
@@ -259,12 +259,12 @@ const InlineQuoteForm = () => {
         <input type="url" name="currentUrl" placeholder={t("form.current-url")} value={form.currentUrl} onChange={handleChange} className={inputClass} />
         <select name="projectType" value={form.projectType} onChange={handleChange} required className={inputClass}>
           <option value="">{t("form.project-type")} *</option>
-          <option value="website">Website Platform</option>
-          <option value="brand">Brand Identity</option>
-          <option value="ecommerce">Ecommerce</option>
-          <option value="marketing">Marketing Collateral</option>
-          <option value="automation">AI Business Automation</option>
-          <option value="other">Other</option>
+          <option value="website">{t("form.opt.website")}</option>
+          <option value="brand">{t("form.opt.brand")}</option>
+          <option value="ecommerce">{t("form.opt.ecommerce")}</option>
+          <option value="marketing">{t("form.opt.marketing")}</option>
+          <option value="automation">{t("form.opt.automation")}</option>
+          <option value="other">{t("form.opt.other")}</option>
         </select>
         <textarea
           name="message" placeholder={`${t("form.message")} *`} rows={1} value={form.message} onChange={handleChange} required
@@ -301,10 +301,10 @@ const Home = () => {
   ];
 
   const workflowDeliverables = [
-    ["Project brief", "Site structure", "Design direction"],
-    ["Brand visuals", "Website layout", "UI design"],
-    ["Website development", "Responsive layout", "Performance optimization"],
-    ["Deployment", "Testing", "Final delivery"],
+    ["home.workflow.d1.1", "home.workflow.d1.2", "home.workflow.d1.3"],
+    ["home.workflow.d2.1", "home.workflow.d2.2", "home.workflow.d2.3"],
+    ["home.workflow.d3.1", "home.workflow.d3.2", "home.workflow.d3.3"],
+    ["home.workflow.d4.1", "home.workflow.d4.2", "home.workflow.d4.3"],
   ];
 
   return (
@@ -331,7 +331,7 @@ const Home = () => {
                 to="/contact"
                 className="cta-button inline-flex items-center px-6 py-3 border border-foreground text-sm font-medium hover:bg-foreground hover:text-background transition-colors"
               >
-                {t("cta.start-project")}
+                {t("cta.request-quote")}
               </Link>
             </div>
           </RevealSection>
@@ -468,8 +468,8 @@ const Home = () => {
                     <h3 className="text-lg font-semibold mb-2">{t(w.titleKey)}</h3>
                     <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{t(w.descKey)}</p>
                     <div className="space-y-1 mt-auto">
-                      {workflowDeliverables[i].map((d) => (
-                        <p key={d} className="text-xs text-muted-foreground">— {d}</p>
+                      {workflowDeliverables[i].map((dKey) => (
+                        <p key={dKey} className="text-xs text-muted-foreground">— {t(dKey)}</p>
                       ))}
                     </div>
                   </div>
@@ -493,8 +493,8 @@ const Home = () => {
                     <h3 className="text-lg font-semibold mb-2">{t(w.titleKey)}</h3>
                     <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{t(w.descKey)}</p>
                     <div className="space-y-1">
-                      {workflowDeliverables[i].map((d) => (
-                        <p key={d} className="text-xs text-muted-foreground">— {d}</p>
+                      {workflowDeliverables[i].map((dKey) => (
+                        <p key={dKey} className="text-xs text-muted-foreground">— {t(dKey)}</p>
                       ))}
                     </div>
                   </div>
@@ -521,9 +521,7 @@ const Home = () => {
         <div className="section-container py-12 md:py-16">
           <RevealSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-2">{t("home.quote.title")}</h2>
-            {lang === "zh" && t("home.quote.text") && (
-              <p className="text-muted-foreground mb-6">{t("home.quote.text")}</p>
-            )}
+            <p className="text-muted-foreground mb-6">{t("home.quote.text")}</p>
             <InlineQuoteForm />
           </RevealSection>
         </div>

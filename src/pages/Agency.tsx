@@ -41,46 +41,44 @@ const Agency = () => {
           <RevealDiv delay={100}>
             <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
               {[
-                { label: "Focus", value: "Strategic Digital Design" },
-                { label: "Location", value: "Vancouver, BC" },
-                { label: "Founded", value: "2024" },
+                { labelKey: "agency.focus", valueKey: "agency.focus.value" },
+                { labelKey: "agency.location", value: "Vancouver, BC" },
+                { labelKey: "agency.founded", value: "2024" },
               ].map((item) => (
-                <div key={item.label} className="bg-background p-8">
-                  <span className="text-label block mb-2">{item.label}</span>
-                  <p className="text-lg font-semibold">{item.value}</p>
+                <div key={item.labelKey} className="bg-background p-8">
+                  <span className="text-label block mb-2">{t(item.labelKey)}</span>
+                  <p className="text-lg font-semibold">{"valueKey" in item ? t(item.valueKey!) : item.value}</p>
                 </div>
               ))}
             </div>
           </RevealDiv>
 
-          {lang === "en" && (
-            <div className="mt-16 pt-16 border-t border-border space-y-16">
-              <RevealDiv delay={0}>
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">Vision</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-2xl">
-                  To build digital brand systems and websites that help businesses grow with clarity and long-term scalability.
-                </p>
-              </RevealDiv>
+          <div className="mt-16 pt-16 border-t border-border space-y-16">
+            <RevealDiv delay={0}>
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">{t("agency.vision")}</h3>
+              <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                {t("agency.vision.text")}
+              </p>
+            </RevealDiv>
 
-              <RevealDiv delay={100}>
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">Mission</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-2xl">
-                  To combine strategic design thinking, modern web technologies, and efficient production workflows to deliver professional digital platforms.
-                </p>
-              </RevealDiv>
+            <RevealDiv delay={100}>
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">{t("agency.mission")}</h3>
+              <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                {t("agency.mission.text")}
+              </p>
+            </RevealDiv>
 
-              <RevealDiv delay={200}>
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">Values</h3>
-                <ul className="text-muted-foreground leading-relaxed space-y-2 max-w-2xl">
-                  <li>Clarity over noise</li>
-                  <li>Systems thinking</li>
-                  <li>Craft and speed</li>
-                  <li>Evidence-led decisions</li>
-                  <li>Long-term maintainability</li>
-                </ul>
-              </RevealDiv>
-            </div>
-          )}
+            <RevealDiv delay={200}>
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">{t("agency.values")}</h3>
+              <ul className="text-muted-foreground leading-relaxed space-y-2 max-w-2xl">
+                <li>{t("agency.values.1")}</li>
+                <li>{t("agency.values.2")}</li>
+                <li>{t("agency.values.3")}</li>
+                <li>{t("agency.values.4")}</li>
+                <li>{t("agency.values.5")}</li>
+              </ul>
+            </RevealDiv>
+          </div>
 
           <RevealDiv delay={100}>
             <div className="mt-16 pt-16 border-t border-border text-center">

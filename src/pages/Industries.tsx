@@ -34,10 +34,10 @@ const projectImages: Record<string, string> = {
 interface IndustryData {
   slug: string;
   nameKey: string;
-  desc: string;
+  descKey: string;
+  overviewKey: string;
   icon: typeof Heart;
-  overview: string;
-  whatWeBuild: string[];
+  whatWeBuildKeys: string[];
   projectSlugs: string[];
 }
 
@@ -45,124 +45,86 @@ const industries: IndustryData[] = [
   {
     slug: "healthcare-dental",
     nameKey: "ind.healthcare-dental",
-    desc: "Websites and brand systems for healthcare providers, clinics, and dental practices.",
+    descKey: "ind.healthcare-dental.desc",
+    overviewKey: "ind.healthcare-dental.overview",
     icon: Heart,
-    overview: "Healthcare and dental practices need digital platforms that communicate trust, professionalism, and accessibility. Patients research online before booking — your website is often the first impression. We design clear, structured websites that help clinics attract new patients, explain services, and simplify the booking process. Our brand systems ensure every touchpoint — from the website to printed materials — feels cohesive and professional.",
-    whatWeBuild: [
-      "Patient-focused websites with online booking integration",
-      "Brand identity systems for clinics and multi-location practices",
-      "Service pages structured for SEO and local search visibility",
-      "Marketing collateral including business cards, brochures, and signage",
-      "HIPAA-aware design and accessibility considerations",
-    ],
+    whatWeBuildKeys: ["ind.healthcare-dental.wb.1", "ind.healthcare-dental.wb.2", "ind.healthcare-dental.wb.3", "ind.healthcare-dental.wb.4", "ind.healthcare-dental.wb.5"],
     projectSlugs: ["friendly-dental", "oakridge-dental-group"],
   },
   {
     slug: "professional-services",
     nameKey: "ind.professional-services",
-    desc: "Digital platforms for law firms, consultancies, and professional service providers.",
+    descKey: "ind.professional-services.desc",
+    overviewKey: "ind.professional-services.overview",
     icon: Briefcase,
-    overview: "Professional services firms compete on credibility and expertise. A generic website undermines both. We build structured digital platforms that clearly communicate your capabilities, showcase relevant experience, and make it easy for prospective clients to take the next step. Whether you're a financial advisory, law firm, or management consultancy, your website should position you as the obvious choice.",
-    whatWeBuild: [
-      "Corporate websites with clear service architecture",
-      "Brand identity systems that communicate authority and trust",
-      "Case study and portfolio sections to demonstrate expertise",
-      "Lead generation pages with conversion-focused UX",
-      "Marketing collateral for proposals, presentations, and events",
-    ],
+    whatWeBuildKeys: ["ind.professional-services.wb.1", "ind.professional-services.wb.2", "ind.professional-services.wb.3", "ind.professional-services.wb.4", "ind.professional-services.wb.5"],
     projectSlugs: ["northshore-finance", "bluewave-consulting"],
   },
   {
     slug: "real-estate-construction",
     nameKey: "ind.real-estate-construction",
-    desc: "Websites and brand systems for developers, builders, and real estate firms.",
+    descKey: "ind.real-estate-construction.desc",
+    overviewKey: "ind.real-estate-construction.overview",
     icon: Building2,
-    overview: "Real estate developments and construction firms require digital platforms that showcase projects with visual impact while providing the practical information buyers and investors need. We design websites that balance stunning visual presentation with structured content — floor plans, availability, location details, and contact pathways all work together to drive engagement and conversions.",
-    whatWeBuild: [
-      "Development marketing websites with project galleries and floor plans",
-      "Brand identity for new developments and construction companies",
-      "Interactive site plans and availability tools",
-      "Marketing collateral for pre-sales and investor presentations",
-      "SEO-optimized pages for local market visibility",
-    ],
+    whatWeBuildKeys: ["ind.real-estate-construction.wb.1", "ind.real-estate-construction.wb.2", "ind.real-estate-construction.wb.3", "ind.real-estate-construction.wb.4", "ind.real-estate-construction.wb.5"],
     projectSlugs: ["live-at-headwater", "vita-environmental"],
   },
   {
     slug: "lifestyle-businesses",
     nameKey: "ind.lifestyle-businesses",
-    desc: "Digital experiences for wellness, fitness, beauty, and lifestyle brands.",
+    descKey: "ind.lifestyle-businesses.desc",
+    overviewKey: "ind.lifestyle-businesses.overview",
     icon: Sparkles,
-    overview: "Lifestyle brands live and die by their aesthetic. Your website needs to feel like an extension of the experience you offer — whether that's a spa, gym, yoga studio, or wellness brand. We design digital experiences that capture the atmosphere and energy of your business, making it effortless for visitors to understand what you offer and book their first visit.",
-    whatWeBuild: [
-      "Brand-forward websites that capture your atmosphere and energy",
-      "Online booking and membership integration",
-      "Visual identity systems for physical and digital touchpoints",
-      "Social media templates and marketing materials",
-      "Photography direction and content strategy",
-    ],
+    whatWeBuildKeys: ["ind.lifestyle-businesses.wb.1", "ind.lifestyle-businesses.wb.2", "ind.lifestyle-businesses.wb.3", "ind.lifestyle-businesses.wb.4", "ind.lifestyle-businesses.wb.5"],
     projectSlugs: ["spa-alita", "urbanfit-gym"],
   },
   {
     slug: "creative-luxury-brands",
     nameKey: "ind.creative-luxury-brands",
-    desc: "High-end digital platforms for creative agencies and luxury brands.",
+    descKey: "ind.creative-luxury-brands.desc",
+    overviewKey: "ind.creative-luxury-brands.overview",
     icon: Palette,
-    overview: "Luxury and creative brands demand a level of design refinement that most agencies cannot deliver. Every pixel matters. We create digital platforms where typography, whitespace, and motion design work together to create an experience that feels premium and intentional. Our approach prioritizes restraint and craft — the hallmarks of true luxury design.",
-    whatWeBuild: [
-      "Portfolio and showcase websites with refined visual design",
-      "Brand identity systems with premium material specifications",
-      "Editorial-style content layouts and lookbooks",
-      "Ecommerce experiences designed for high-value products",
-      "Print collateral with luxury finishing specifications",
-    ],
+    whatWeBuildKeys: ["ind.creative-luxury-brands.wb.1", "ind.creative-luxury-brands.wb.2", "ind.creative-luxury-brands.wb.3", "ind.creative-luxury-brands.wb.4", "ind.creative-luxury-brands.wb.5"],
     projectSlugs: ["pacific-interior-studio"],
   },
   {
     slug: "home-services",
     nameKey: "ind.home-services",
-    desc: "Websites for contractors, landscapers, and home service providers.",
+    descKey: "ind.home-services.desc",
+    overviewKey: "ind.home-services.overview",
     icon: Wrench,
-    overview: "Home service businesses need websites that generate leads — not just look good. Homeowners searching for contractors, landscapers, or renovation companies make fast decisions based on professionalism and trust signals. We build clean, conversion-focused websites that clearly present your services, showcase completed projects, and make it easy for visitors to request a quote or call directly.",
-    whatWeBuild: [
-      "Lead-generation websites with clear service pages",
-      "Before/after project galleries",
-      "Local SEO optimization for service area visibility",
-      "Brand identity for trucks, uniforms, and signage",
-      "Google Business Profile optimization",
-    ],
+    whatWeBuildKeys: ["ind.home-services.wb.1", "ind.home-services.wb.2", "ind.home-services.wb.3", "ind.home-services.wb.4", "ind.home-services.wb.5"],
     projectSlugs: ["greenleaf-landscaping"],
   },
   {
     slug: "retail-ecommerce",
     nameKey: "ind.retail-ecommerce",
-    desc: "Online stores and ecommerce platforms designed for conversion.",
+    descKey: "ind.retail-ecommerce.desc",
+    overviewKey: "ind.retail-ecommerce.overview",
     icon: ShoppingCart,
-    overview: "Ecommerce success depends on product presentation, user experience, and trust. We design online stores that make products look their best, guide shoppers through intuitive navigation, and remove friction from the checkout process. Whether you're launching a new brand or refreshing an existing store, we build platforms that drive sales and scale with your business.",
-    whatWeBuild: [
-      "Custom ecommerce websites with optimized product pages",
-      "Brand identity systems for retail and DTC brands",
-      "Product photography direction and content strategy",
-      "Conversion-optimized checkout flows",
-      "Marketing collateral and packaging design",
-    ],
+    whatWeBuildKeys: ["ind.retail-ecommerce.wb.1", "ind.retail-ecommerce.wb.2", "ind.retail-ecommerce.wb.3", "ind.retail-ecommerce.wb.4", "ind.retail-ecommerce.wb.5"],
     projectSlugs: ["nuera-nutra"],
   },
   {
     slug: "education-training",
     nameKey: "ind.education-training",
-    desc: "Digital platforms for educational institutions and training providers.",
+    descKey: "ind.education-training.desc",
+    overviewKey: "ind.education-training.overview",
     icon: GraduationCap,
-    overview: "Educational institutions and training providers need websites that clearly communicate programs, build credibility, and drive enrollment. We design structured digital platforms that organize complex program information into clear, navigable experiences. Whether you're a university department, professional training provider, or online course creator, your website should make it easy for prospective students to find what they need and take action.",
-    whatWeBuild: [
-      "Program and course catalog websites with clear navigation",
-      "Brand identity systems for educational institutions",
-      "Enrollment and registration landing pages",
-      "Resource libraries and content management systems",
-      "Marketing materials for recruitment campaigns",
-    ],
+    whatWeBuildKeys: ["ind.education-training.wb.1", "ind.education-training.wb.2", "ind.education-training.wb.3", "ind.education-training.wb.4", "ind.education-training.wb.5"],
     projectSlugs: [],
   },
 ];
+
+const serviceKeyMap: Record<string, string> = {
+  "Brand Identity": "svc.brand-identity",
+  "Website Platform": "svc.website-platform",
+  "Marketing Collateral": "svc.marketing-collateral",
+  "Website Design": "svc.website-design",
+  "Ecommerce Experiences": "svc.ecommerce-experiences",
+  "AI Business Automation": "svc.ai-business-automation",
+  "Conversion Optimization": "svc.conversion-optimization",
+};
 
 const ProjectThumbnail = ({ slug }: { slug: string }) => {
   const project = projects.find((p) => p.slug === slug);
@@ -181,7 +143,9 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
       </div>
       <div className="p-5">
         <h4 className="text-sm font-semibold mb-1">{project.name}</h4>
-        <p className="text-xs text-muted-foreground">{project.services.join(" · ")}</p>
+        <p className="text-xs text-muted-foreground">
+          {project.services.map((s) => serviceKeyMap[s] ? t(serviceKeyMap[s]) : s).join(" · ")}
+        </p>
         <span className="text-xs font-medium text-primary mt-2 inline-block">
           {project.liveUrl ? t("cta.visit-site") : t("cta.view-project")}
         </span>
@@ -226,7 +190,7 @@ export const IndustriesList = () => {
                   <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{t(ind.nameKey)}</h3>
-                    <p className="text-sm text-muted-foreground">{ind.desc}</p>
+                    <p className="text-sm text-muted-foreground">{t(ind.descKey)}</p>
                     <span className="text-sm font-medium text-primary mt-3 inline-block">{t("cta.learn-more")}</span>
                   </div>
                 </Link>
@@ -247,7 +211,7 @@ export const IndustryDetail = () => {
   if (!industry) {
     return (
       <div className="section-container section-padding text-center">
-        <h1 className="text-2xl font-bold">Industry not found</h1>
+        <h1 className="text-2xl font-bold">{t("industries.not-found")}</h1>
         <Link to="/industries" className="text-primary mt-4 inline-block">{t("industries.back")}</Link>
       </div>
     );
@@ -271,16 +235,16 @@ export const IndustryDetail = () => {
           <div className="space-y-12">
             <div>
               <h2 className="text-2xl font-bold mb-4">{t("industries.overview")}</h2>
-              <p className="text-muted-foreground leading-relaxed">{industry.overview}</p>
+              <p className="text-muted-foreground leading-relaxed">{t(industry.overviewKey)}</p>
             </div>
 
             <div>
               <h2 className="text-2xl font-bold mb-4">{t("industries.what-we-build")}</h2>
               <ul className="space-y-2">
-                {industry.whatWeBuild.map((item, i) => (
+                {industry.whatWeBuildKeys.map((key, i) => (
                   <li key={i} className="text-muted-foreground leading-relaxed flex gap-2">
                     <span className="text-primary mt-0.5">—</span>
-                    {item}
+                    {t(key)}
                   </li>
                 ))}
               </ul>
