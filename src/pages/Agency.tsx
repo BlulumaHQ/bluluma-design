@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
-import agencyReception from "@/assets/agency-reception.jpg";
+import agencyImage from "@/assets/bluluma-logo-3d-sign.png";
 
 const RevealDiv = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -25,7 +25,7 @@ const Agency = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
               <div className="border border-border overflow-hidden">
                 <img
-                  src={agencyReception}
+                  src={agencyImage}
                   alt="Bluluma Design Studio Reception"
                   className="w-full h-full object-cover"
                 />
