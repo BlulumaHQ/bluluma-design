@@ -240,15 +240,15 @@ const Home = () => (
         </RevealSection>
 
         {/* Desktop: horizontal with arrows */}
-        <div className="hidden md:flex items-start justify-between">
+        <div className="hidden md:flex items-stretch justify-between">
           {workflow.map((w, i) => (
             <div key={w.step} className="contents">
-              <RevealSection delay={i * 150} className="flex-1">
-                <div className="card-border p-6 transition-all duration-300 hover:border-primary hover:-translate-y-1 group">
+              <RevealSection delay={i * 150} className="flex-1 flex">
+                <div className="card-border p-6 transition-all duration-300 hover:border-primary hover:-translate-y-1 group flex flex-col w-full">
                   <span className="text-label mb-4 block">0{i + 1}</span>
                   <h3 className="text-lg font-semibold mb-2">{w.step}</h3>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{w.desc}</p>
-                  <div className="space-y-1">
+                  <div className="space-y-1 mt-auto">
                     {w.deliverables.map((d) => (
                       <p key={d} className="text-xs text-muted-foreground">— {d}</p>
                     ))}
