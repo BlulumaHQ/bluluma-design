@@ -20,8 +20,9 @@ const Solutions = () => (
         </p>
       </div>
     </section>
-    <section>
-      <div className="section-container section-padding">
+    <section className="relative overflow-hidden">
+      <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <div className="section-container section-padding relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
           {solutions.map((s) => {
             const Icon = s.icon;

@@ -118,19 +118,41 @@ const FlowArrowDown = () => (
   </svg>
 );
 
+/* ── Sharp geometric quotation mark SVG ── */
+const SharpQuote = () => (
+  <svg
+    width="140"
+    height="100"
+    viewBox="0 0 140 100"
+    fill="none"
+    className="absolute top-4 left-5 pointer-events-none select-none"
+    style={{ opacity: 0.12 }}
+  >
+    <polygon points="0,0 55,0 35,100 0,100" fill="#5887da" />
+    <polygon points="65,0 120,0 100,100 65,100" fill="#5887da" />
+  </svg>
+);
+
 /* ── Testimonials Carousel ── */
-const SLIDES_COUNT = Math.ceil(testimonials.length / 2);
+const SLIDES_DESKTOP = Math.ceil(testimonials.length / 2);
 
 const TestimonialsCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Simple mobile detection
+  useState(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  });
+
+  const totalSlides = isMobile ? testimonials.length : SLIDES_DESKTOP;
 
   const goTo = useCallback((index: number) => {
     setCurrentSlide(index);
   }, []);
-
-  const slides = Array.from({ length: SLIDES_COUNT }, (_, i) =>
-    testimonials.slice(i * 2, i * 2 + 2)
-  );
 
   return (
     <div>
@@ -139,47 +161,68 @@ const TestimonialsCarousel = () => {
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {slides.map((pair, slideIdx) => (
-            <div key={slideIdx} className="min-w-full flex-shrink-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {pair.map((t, i) => (
-                  <div
-                    key={i}
-                    className="card-border p-8 transition-all duration-300 hover:border-primary hover:-translate-y-1 relative"
-                  >
-                    {/* Large quotation mark */}
-                    <span
-                      className="absolute top-4 left-6 text-[140px] leading-none font-serif select-none pointer-events-none"
-                      style={{ color: "#5887da", opacity: 0.15 }}
-                    >
-                      "
-                    </span>
-                    <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-12">
-                      "{t.quote}"
-                    </blockquote>
-                    <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
-                      <div>
-                        <p className="text-sm font-semibold">{t.name}</p>
-                        <p className="text-xs text-muted-foreground">{t.company}</p>
-                      </div>
-                      <span className="text-xs text-muted-foreground border border-border px-2 py-1">
-                        {t.projectType}
-                      </span>
+          {isMobile ? (
+            // Mobile: 1 card per slide
+            testimonials.map((t, i) => (
+              <div key={i} className="min-w-full flex-shrink-0 px-1">
+                <div className="card-border p-8 transition-all duration-300 hover:border-primary relative">
+                  <SharpQuote />
+                  <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-14">
+                    "{t.quote}"
+                  </blockquote>
+                  <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
+                    <div>
+                      <p className="text-sm font-semibold">{t.name}</p>
+                      <p className="text-xs text-muted-foreground">{t.company}</p>
                     </div>
+                    <span className="text-xs text-muted-foreground border border-border px-2 py-1">
+                      {t.projectType}
+                    </span>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            // Desktop: 2 cards per slide
+            Array.from({ length: SLIDES_DESKTOP }, (_, slideIdx) => {
+              const pair = testimonials.slice(slideIdx * 2, slideIdx * 2 + 2);
+              return (
+                <div key={slideIdx} className="min-w-full flex-shrink-0">
+                  <div className="grid grid-cols-2 gap-8">
+                    {pair.map((t, i) => (
+                      <div
+                        key={i}
+                        className="card-border p-8 transition-all duration-300 hover:border-primary hover:-translate-y-1 relative"
+                      >
+                        <SharpQuote />
+                        <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-14">
+                          "{t.quote}"
+                        </blockquote>
+                        <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
+                          <div>
+                            <p className="text-sm font-semibold">{t.name}</p>
+                            <p className="text-xs text-muted-foreground">{t.company}</p>
+                          </div>
+                          <span className="text-xs text-muted-foreground border border-border px-2 py-1">
+                            {t.projectType}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
       {/* Dots */}
-      <div className="flex justify-center gap-3 mt-8">
-        {slides.map((_, i) => (
+      <div className="flex justify-center gap-3 mt-6">
+        {Array.from({ length: totalSlides }, (_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+            className={`w-2 h-2 transition-colors duration-200 ${
               currentSlide === i ? "bg-primary" : "bg-border"
             }`}
             aria-label={`Go to slide ${i + 1}`}
@@ -187,6 +230,65 @@ const TestimonialsCarousel = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+/* ── Inline Quote Form ── */
+const InlineQuoteForm = () => {
+  const [form, setForm] = useState({ name: "", email: "", business: "", projectType: "", message: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you for your message. We'll be in touch.");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input
+          type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required
+          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
+        />
+        <input
+          type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required
+          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
+        />
+        <input
+          type="text" name="business" placeholder="Business" value={form.business} onChange={handleChange}
+          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <select
+          name="projectType" value={form.projectType} onChange={handleChange}
+          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
+        >
+          <option value="">Project Type</option>
+          <option value="website">Website Platform</option>
+          <option value="brand">Brand Identity</option>
+          <option value="ecommerce">Ecommerce</option>
+          <option value="marketing">Marketing Collateral</option>
+          <option value="automation">AI Business Automation</option>
+          <option value="other">Other</option>
+        </select>
+        <textarea
+          name="message" placeholder="Message" rows={1} value={form.message} onChange={handleChange} required
+          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors resize-none md:col-span-2"
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
+        >
+          Request a Quote
+        </button>
+      </div>
+    </form>
   );
 };
 
@@ -223,9 +325,9 @@ const Home = () => (
 
     {/* ═══════ SELECTED WORK (Live Sites) ═══════ */}
     <section className="section-border">
-      <div className="section-container section-padding">
+      <div className="section-container py-12 md:py-16">
         <RevealSection>
-          <div className="flex items-baseline justify-between mb-12">
+          <div className="flex items-baseline justify-between mb-8">
             <h2 className="text-3xl md:text-4xl font-bold">Selected Work</h2>
             <span className="text-xs text-muted-foreground tracking-wide uppercase hidden md:block">Live Sites</span>
           </div>
@@ -248,7 +350,7 @@ const Home = () => (
     <section className="section-border section-subtle-bg">
       <div className="section-container section-padding">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">What We Build</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">What We Build</h2>
         </RevealSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
           {capabilities.map((cap, i) => (
@@ -267,7 +369,7 @@ const Home = () => (
     <section className="section-border">
       <div className="section-container section-padding">
         <RevealSection>
-          <div className="flex items-baseline justify-between mb-12">
+          <div className="flex items-baseline justify-between mb-8">
             <h2 className="text-3xl md:text-4xl font-bold">Case Studies</h2>
             <span className="text-xs text-muted-foreground tracking-wide uppercase hidden md:block">Behind the Work</span>
           </div>
@@ -302,9 +404,9 @@ const Home = () => (
     {/* ═══════ INDUSTRIES ═══════ */}
     <section className="section-border section-subtle-bg relative overflow-hidden">
       <div className="logo-motif absolute inset-0 pointer-events-none" />
-      <div className="section-container section-padding relative z-10">
+      <div className="section-container py-12 md:py-16 relative z-10">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Industries We Work With</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Industries We Work With</h2>
         </RevealSection>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
           {industries.map((ind, i) => {
@@ -327,9 +429,9 @@ const Home = () => (
 
     {/* ═══════ HOW WE WORK ═══════ */}
     <section className="section-border">
-      <div className="section-container section-padding">
+      <div className="section-container py-12 md:py-16">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">How We Work</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">How We Work</h2>
         </RevealSection>
 
         {/* Desktop: horizontal with arrows */}
@@ -382,28 +484,20 @@ const Home = () => (
 
     {/* ═══════ TESTIMONIALS ═══════ */}
     <section className="section-border">
-      <div className="section-container section-padding">
+      <div className="section-container py-12 md:py-16">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">What Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">What Clients Say</h2>
         </RevealSection>
         <TestimonialsCarousel />
       </div>
     </section>
 
-    {/* ═══════ CONTACT CTA ═══════ */}
+    {/* ═══════ REQUEST A QUOTE (INLINE FORM) ═══════ */}
     <section>
-      <div className="section-container section-padding text-center">
+      <div className="section-container py-12 md:py-16">
         <RevealSection>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Start Your Project</h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-            Tell us about your business and the digital platform you want to build.
-          </p>
-          <Link
-            to="/contact"
-            className="cta-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
-          >
-            Contact Us
-          </Link>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Request a Quote</h2>
+          <InlineQuoteForm />
         </RevealSection>
       </div>
     </section>
