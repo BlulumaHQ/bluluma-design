@@ -8,7 +8,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Brand */}
         <div className="lg:col-span-2">
-          <img src={logo} alt="Bluluma Design" className="h-16 mb-6" />
+          <img src={logo} alt="Bluluma Design" className="h-[72px] w-auto mb-6" />
           <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
             Bluluma Design is a Vancouver-based digital studio specializing in websites, brand systems, and digital platforms.
           </p>
@@ -47,8 +47,8 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-        <span>© Bluluma Design</span>
-        <span>Web Design by Bluluma</span>
+        <span><a href="https://bluluma.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Bluluma</a> Design. Copyright © 2026 All Rights Reserved.</span>
+        <span>Web Design by <a href="https://bluluma.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Bluluma</a></span>
       </div>
     </div>
   </footer>

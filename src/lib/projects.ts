@@ -31,7 +31,7 @@ export const projects: Project[] = [
     image: "/projects/live-at-headwater.jpg",
     featured: true,
     caseStudy: true,
-    liveUrl: "https://liveatheadwater.com",
+    liveUrl: "https://liveatheadwater.ca",
   },
   {
     slug: "btn-real-estate",
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     image: "/projects/btn-real-estate.jpg",
     featured: true,
     caseStudy: true,
-    liveUrl: "https://btnrealestate.com",
+    liveUrl: "https://btn.bluluma.com",
   },
   {
     slug: "nuera-nutra",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     services: ["Website Platform"],
     description: "Professional website for an environmental construction services company.",
     image: "/projects/vita-environmental.jpg",
-    liveUrl: "https://vitaenvironmental.ca",
+    liveUrl: "https://vitaenv.com",
   },
   {
     slug: "spa-alita",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     services: ["Website Platform"],
     description: "Elegant website for a premium spa and wellness brand.",
     image: "/projects/spa-alita.jpg",
-    liveUrl: "https://spaalita.com",
+    liveUrl: "https://spaalita.ca",
   },
   {
     slug: "northshore-finance",
@@ -79,6 +79,7 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
     description: "Brand system and digital platform for a boutique financial advisory firm.",
     image: "/projects/northshore-finance.jpg",
+    liveUrl: "https://bluluma.com",
   },
   {
     slug: "urbanfit-gym",
@@ -87,6 +88,7 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
     description: "High-energy fitness brand website designed for member acquisition and retention.",
     image: "/projects/urbanfit-gym.jpg",
+    liveUrl: "https://bluluma.com",
   },
   {
     slug: "pacific-interior-studio",
@@ -95,6 +97,7 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
     description: "Refined brand and portfolio website for a Vancouver interior design studio.",
     image: "/projects/pacific-interior-studio.jpg",
+    liveUrl: "https://bluluma.com",
   },
   {
     slug: "greenleaf-landscaping",
@@ -103,6 +106,7 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
     description: "Clean, conversion-focused website for a residential landscaping company.",
     image: "/projects/greenleaf-landscaping.jpg",
+    liveUrl: "https://bluluma.com",
   },
   {
     slug: "bluewave-consulting",
@@ -111,6 +115,7 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform"],
     description: "Corporate brand and website for a management consulting firm.",
     image: "/projects/bluewave-consulting.jpg",
+    liveUrl: "https://bluluma.com",
   },
   {
     slug: "oakridge-dental-group",
@@ -119,5 +124,6 @@ export const projects: Project[] = [
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
     description: "Full brand system and website for a multi-location dental practice.",
     image: "/projects/oakridge-dental-group.jpg",
+    liveUrl: "https://bluluma.com",
   },
 ];
