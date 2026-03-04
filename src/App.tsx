@@ -14,6 +14,7 @@ import Insights from "./pages/Insights";
 import InsightDetail from "./pages/InsightDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import PageLoader from "./components/PageLoader";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <PageLoader />
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
