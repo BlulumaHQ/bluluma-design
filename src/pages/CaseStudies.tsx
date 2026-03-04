@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { projects } from "@/lib/projects";
+import { useLang } from "@/lib/i18n";
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
 import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
@@ -38,22 +39,10 @@ const caseStudyContent: Record<string, CaseStudyContent> = {
       ],
     },
     approach: [
-      {
-        heading: "Brand Strategy & Positioning",
-        body: "We began with a strategic audit of the competitive landscape and patient demographics. This informed a positioning strategy that emphasized approachability and clinical excellence — moving away from the clinical coldness typical of dental branding toward a warm, confident visual language.",
-      },
-      {
-        heading: "Visual Identity System",
-        body: "The brand identity was built around a clean, modern aesthetic with a carefully selected color palette that communicates trust and professionalism. Typography was chosen for clarity at all sizes, and a set of brand guidelines ensures consistency across all applications — from business cards to environmental signage.",
-      },
-      {
-        heading: "Website Architecture & Design",
-        body: "The website was structured to serve two primary audiences: new patients researching dental care options and existing patients looking to book appointments or access information. Clear navigation, prominent booking CTAs, and service-specific landing pages create an efficient user experience.",
-      },
-      {
-        heading: "Content & Photography Direction",
-        body: "Content was written to be informative without being clinical, addressing common patient concerns in accessible language. Photography direction focused on the real clinic environment and team, avoiding generic stock imagery that undermines credibility in healthcare.",
-      },
+      { heading: "Brand Strategy & Positioning", body: "We began with a strategic audit of the competitive landscape and patient demographics. This informed a positioning strategy that emphasized approachability and clinical excellence — moving away from the clinical coldness typical of dental branding toward a warm, confident visual language." },
+      { heading: "Visual Identity System", body: "The brand identity was built around a clean, modern aesthetic with a carefully selected color palette that communicates trust and professionalism. Typography was chosen for clarity at all sizes, and a set of brand guidelines ensures consistency across all applications — from business cards to environmental signage." },
+      { heading: "Website Architecture & Design", body: "The website was structured to serve two primary audiences: new patients researching dental care options and existing patients looking to book appointments or access information. Clear navigation, prominent booking CTAs, and service-specific landing pages create an efficient user experience." },
+      { heading: "Content & Photography Direction", body: "Content was written to be informative without being clinical, addressing common patient concerns in accessible language. Photography direction focused on the real clinic environment and team, avoiding generic stock imagery that undermines credibility in healthcare." },
     ],
     deliverables: [
       "Brand strategy and positioning document",
@@ -90,22 +79,10 @@ const caseStudyContent: Record<string, CaseStudyContent> = {
       ],
     },
     approach: [
-      {
-        heading: "Market Positioning",
-        body: "Research into the local market identified an opportunity to position Live at Headwater as a community-focused development that offered a premium lifestyle without the premium price point. This positioning informed every design and content decision throughout the project.",
-      },
-      {
-        heading: "Brand Identity Development",
-        body: "The visual identity was designed to convey modernity and quality through clean lines, a sophisticated color palette, and confident typography. The brand system was built to work across digital and print applications, from the website to on-site signage and presentation materials.",
-      },
-      {
-        heading: "Website Platform",
-        body: "The website was designed as a storytelling platform that walks visitors through the development's key selling points — location, lifestyle, floor plans, and community features. Lead capture was integrated naturally throughout the experience rather than relying on aggressive pop-ups or forms.",
-      },
-      {
-        heading: "Marketing Collateral",
-        body: "Print and digital marketing materials were designed within the brand system to ensure a consistent experience from online advertising through to in-person presentation. Materials included brochures, floor plan sheets, and social media templates.",
-      },
+      { heading: "Market Positioning", body: "Research into the local market identified an opportunity to position Live at Headwater as a community-focused development that offered a premium lifestyle without the premium price point. This positioning informed every design and content decision throughout the project." },
+      { heading: "Brand Identity Development", body: "The visual identity was designed to convey modernity and quality through clean lines, a sophisticated color palette, and confident typography. The brand system was built to work across digital and print applications, from the website to on-site signage and presentation materials." },
+      { heading: "Website Platform", body: "The website was designed as a storytelling platform that walks visitors through the development's key selling points — location, lifestyle, floor plans, and community features. Lead capture was integrated naturally throughout the experience rather than relying on aggressive pop-ups or forms." },
+      { heading: "Marketing Collateral", body: "Print and digital marketing materials were designed within the brand system to ensure a consistent experience from online advertising through to in-person presentation. Materials included brochures, floor plan sheets, and social media templates." },
     ],
     deliverables: [
       "Brand identity and visual system",
@@ -142,22 +119,10 @@ const caseStudyContent: Record<string, CaseStudyContent> = {
       ],
     },
     approach: [
-      {
-        heading: "Content Strategy",
-        body: "Before any design work began, we mapped out the content architecture based on how BTN's target clients evaluate advisory firms. This resulted in a clear hierarchy: firm positioning, service specifics, relevant experience, and direct contact pathways — in that order of priority.",
-      },
-      {
-        heading: "Visual Design",
-        body: "The design language was intentionally restrained — clean typography, generous spacing, and a limited color palette that lets the content lead. This approach signals confidence and professionalism, which is exactly what prospective clients look for in an advisory partner.",
-      },
-      {
-        heading: "Technical Implementation",
-        body: "The website was built for speed and reliability, with particular attention to mobile performance. Page load times were optimized, and the responsive design was tested across devices to ensure a consistent experience regardless of how the site is accessed.",
-      },
-      {
-        heading: "Conversion Architecture",
-        body: "Contact pathways were placed strategically throughout the site, appearing at natural decision points rather than competing for attention on every page. The goal was to make reaching out feel like a natural next step rather than a sales push.",
-      },
+      { heading: "Content Strategy", body: "Before any design work began, we mapped out the content architecture based on how BTN's target clients evaluate advisory firms. This resulted in a clear hierarchy: firm positioning, service specifics, relevant experience, and direct contact pathways — in that order of priority." },
+      { heading: "Visual Design", body: "The design language was intentionally restrained — clean typography, generous spacing, and a limited color palette that lets the content lead. This approach signals confidence and professionalism, which is exactly what prospective clients look for in an advisory partner." },
+      { heading: "Technical Implementation", body: "The website was built for speed and reliability, with particular attention to mobile performance. Page load times were optimized, and the responsive design was tested across devices to ensure a consistent experience regardless of how the site is accessed." },
+      { heading: "Conversion Architecture", body: "Contact pathways were placed strategically throughout the site, appearing at natural decision points rather than competing for attention on every page. The goal was to make reaching out feel like a natural next step rather than a sales push." },
     ],
     deliverables: [
       "Content strategy and information architecture",
@@ -178,47 +143,52 @@ const caseStudyContent: Record<string, CaseStudyContent> = {
   },
 };
 
-export const CaseStudyList = () => (
-  <div>
-    <section className="section-border">
-      <div className="section-container py-16 md:py-24">
-        <h1 className="text-4xl md:text-5xl font-bold">Case Studies</h1>
-        <p className="mt-4 text-muted-foreground max-w-xl">
-          In-depth looks at how we solve design and digital challenges for our clients.
-        </p>
-      </div>
-    </section>
-    <section>
-      <div className="section-container section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {caseStudyProjects.map((project) => (
-            <Link
-              key={project.slug}
-              to={`/case-studies/${project.slug}`}
-              className="group card-border overflow-hidden"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={projectImages[project.slug]}
-                  alt={project.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-semibold mb-1">{project.name}</h3>
-                <p className="text-sm text-muted-foreground mb-1">{project.industry}</p>
-                <span className="text-sm font-medium text-primary">Read Case Study →</span>
-              </div>
-            </Link>
-          ))}
+export const CaseStudyList = () => {
+  const { t } = useLang();
+
+  return (
+    <div>
+      <section className="section-border">
+        <div className="section-container py-16 md:py-24">
+          <h1 className="text-4xl md:text-5xl font-bold">{t("casestudies.title")}</h1>
+          <p className="mt-4 text-muted-foreground max-w-xl">
+            {t("casestudies.intro")}
+          </p>
         </div>
-      </div>
-    </section>
-  </div>
-);
+      </section>
+      <section>
+        <div className="section-container section-padding">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {caseStudyProjects.map((project) => (
+              <Link
+                key={project.slug}
+                to={`/case-studies/${project.slug}`}
+                className="group card-border overflow-hidden"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={projectImages[project.slug]}
+                    alt={project.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold mb-1">{project.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-1">{project.industry}</p>
+                  <span className="text-sm font-medium text-primary">{t("cta.read-case-study")}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export const CaseStudyDetail = () => {
   const { slug } = useParams();
+  const { t } = useLang();
   const project = projects.find((p) => p.slug === slug);
   const content = slug ? caseStudyContent[slug] : undefined;
 
@@ -226,7 +196,7 @@ export const CaseStudyDetail = () => {
     return (
       <div className="section-container section-padding text-center">
         <h1 className="text-2xl font-bold">Case study not found</h1>
-        <Link to="/case-studies" className="text-primary mt-4 inline-block">← Back to Case Studies</Link>
+        <Link to="/case-studies" className="text-primary mt-4 inline-block">{t("casestudy.back")}</Link>
       </div>
     );
   }
@@ -235,7 +205,7 @@ export const CaseStudyDetail = () => {
     <div>
       <section className="section-border">
         <div className="section-container py-16 md:py-24">
-          <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block">← Case Studies</Link>
+          <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block">{t("casestudy.back")}</Link>
           <h1 className="text-4xl md:text-5xl font-bold">{project.name}</h1>
           <p className="mt-4 text-muted-foreground max-w-2xl">{project.description}</p>
         </div>
@@ -253,27 +223,25 @@ export const CaseStudyDetail = () => {
 
       <section>
         <div className="section-container section-padding">
-          {/* Project meta */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-16 border-b border-border">
             <div>
-              <h3 className="text-label mb-2">Client</h3>
+              <h3 className="text-label mb-2">{t("casestudy.meta.client")}</h3>
               <p className="font-medium">{project.name}</p>
             </div>
             <div>
-              <h3 className="text-label mb-2">Industry</h3>
+              <h3 className="text-label mb-2">{t("casestudy.meta.industry")}</h3>
               <p className="font-medium">{project.industry}</p>
             </div>
             <div>
-              <h3 className="text-label mb-2">Services</h3>
+              <h3 className="text-label mb-2">{t("casestudy.meta.services")}</h3>
               <p className="font-medium">{project.services.join(", ")}</p>
             </div>
           </div>
 
           {content ? (
             <div className="mt-16 max-w-2xl space-y-16">
-              {/* Overview */}
               <div>
-                <h2 className="text-2xl font-bold mb-6">Project Overview</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("casestudy.overview")}</h2>
                 <div className="space-y-4">
                   {content.overview.map((p, i) => (
                     <p key={i} className="text-muted-foreground leading-relaxed">{p}</p>
@@ -281,9 +249,8 @@ export const CaseStudyDetail = () => {
                 </div>
               </div>
 
-              {/* Challenge */}
               <div>
-                <h2 className="text-2xl font-bold mb-6">The Challenge</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("casestudy.challenge")}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">{content.challenge.intro}</p>
                 <ul className="space-y-3">
                   {content.challenge.bullets.map((b, i) => (
@@ -295,9 +262,8 @@ export const CaseStudyDetail = () => {
                 </ul>
               </div>
 
-              {/* Approach */}
               <div>
-                <h2 className="text-2xl font-bold mb-6">The Approach</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("casestudy.approach")}</h2>
                 <div className="space-y-8">
                   {content.approach.map((section, i) => (
                     <div key={i}>
@@ -308,9 +274,8 @@ export const CaseStudyDetail = () => {
                 </div>
               </div>
 
-              {/* Deliverables */}
               <div>
-                <h2 className="text-2xl font-bold mb-6">Deliverables</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("casestudy.deliverables")}</h2>
                 <ul className="space-y-2">
                   {content.deliverables.map((d, i) => (
                     <li key={i} className="text-muted-foreground flex gap-3">
@@ -321,9 +286,8 @@ export const CaseStudyDetail = () => {
                 </ul>
               </div>
 
-              {/* Results */}
               <div>
-                <h2 className="text-2xl font-bold mb-6">Results</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("casestudy.results")}</h2>
                 <div className="space-y-4">
                   {content.results.map((r, i) => (
                     <p key={i} className="text-muted-foreground leading-relaxed">{r}</p>
@@ -331,10 +295,9 @@ export const CaseStudyDetail = () => {
                 </div>
               </div>
 
-              {/* Gallery placeholder */}
               {projectImages[project.slug] && (
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Gallery</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t("casestudy.gallery")}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="border border-border overflow-hidden">
                       <img src={projectImages[project.slug]} alt={`${project.name} showcase`} className="w-full h-auto" />
@@ -343,15 +306,14 @@ export const CaseStudyDetail = () => {
                 </div>
               )}
 
-              {/* CTA */}
               <div className="pt-8 border-t border-border text-center">
-                <h2 className="text-2xl font-bold mb-4">Start Your Project</h2>
-                <p className="text-muted-foreground mb-6">Ready to build something similar? Let's talk about your goals.</p>
+                <h2 className="text-2xl font-bold mb-4">{t("casestudy.cta.title")}</h2>
+                <p className="text-muted-foreground mb-6">{t("casestudy.cta.text")}</p>
                 <Link
                   to="/contact"
                   className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
                 >
-                  Request a Quote
+                  {t("cta.request-quote")}
                 </Link>
               </div>
             </div>

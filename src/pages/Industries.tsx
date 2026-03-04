@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { Heart, Briefcase, Building2, Sparkles, Palette, Wrench, ShoppingCart, GraduationCap } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { useLang } from "@/lib/i18n";
 
-/* ── Project images (reuse from Work) ── */
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
 import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
@@ -33,7 +33,7 @@ const projectImages: Record<string, string> = {
 
 interface IndustryData {
   slug: string;
-  name: string;
+  nameKey: string;
   desc: string;
   icon: typeof Heart;
   overview: string;
@@ -44,7 +44,7 @@ interface IndustryData {
 const industries: IndustryData[] = [
   {
     slug: "healthcare-dental",
-    name: "Healthcare & Dental",
+    nameKey: "ind.healthcare-dental",
     desc: "Websites and brand systems for healthcare providers, clinics, and dental practices.",
     icon: Heart,
     overview: "Healthcare and dental practices need digital platforms that communicate trust, professionalism, and accessibility. Patients research online before booking — your website is often the first impression. We design clear, structured websites that help clinics attract new patients, explain services, and simplify the booking process. Our brand systems ensure every touchpoint — from the website to printed materials — feels cohesive and professional.",
@@ -59,7 +59,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "professional-services",
-    name: "Professional Services",
+    nameKey: "ind.professional-services",
     desc: "Digital platforms for law firms, consultancies, and professional service providers.",
     icon: Briefcase,
     overview: "Professional services firms compete on credibility and expertise. A generic website undermines both. We build structured digital platforms that clearly communicate your capabilities, showcase relevant experience, and make it easy for prospective clients to take the next step. Whether you're a financial advisory, law firm, or management consultancy, your website should position you as the obvious choice.",
@@ -74,7 +74,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "real-estate-construction",
-    name: "Real Estate & Construction",
+    nameKey: "ind.real-estate-construction",
     desc: "Websites and brand systems for developers, builders, and real estate firms.",
     icon: Building2,
     overview: "Real estate developments and construction firms require digital platforms that showcase projects with visual impact while providing the practical information buyers and investors need. We design websites that balance stunning visual presentation with structured content — floor plans, availability, location details, and contact pathways all work together to drive engagement and conversions.",
@@ -89,7 +89,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "lifestyle-businesses",
-    name: "Lifestyle Businesses",
+    nameKey: "ind.lifestyle-businesses",
     desc: "Digital experiences for wellness, fitness, beauty, and lifestyle brands.",
     icon: Sparkles,
     overview: "Lifestyle brands live and die by their aesthetic. Your website needs to feel like an extension of the experience you offer — whether that's a spa, gym, yoga studio, or wellness brand. We design digital experiences that capture the atmosphere and energy of your business, making it effortless for visitors to understand what you offer and book their first visit.",
@@ -104,7 +104,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "creative-luxury-brands",
-    name: "Creative & Luxury Brands",
+    nameKey: "ind.creative-luxury-brands",
     desc: "High-end digital platforms for creative agencies and luxury brands.",
     icon: Palette,
     overview: "Luxury and creative brands demand a level of design refinement that most agencies cannot deliver. Every pixel matters. We create digital platforms where typography, whitespace, and motion design work together to create an experience that feels premium and intentional. Our approach prioritizes restraint and craft — the hallmarks of true luxury design.",
@@ -119,7 +119,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "home-services",
-    name: "Home Services",
+    nameKey: "ind.home-services",
     desc: "Websites for contractors, landscapers, and home service providers.",
     icon: Wrench,
     overview: "Home service businesses need websites that generate leads — not just look good. Homeowners searching for contractors, landscapers, or renovation companies make fast decisions based on professionalism and trust signals. We build clean, conversion-focused websites that clearly present your services, showcase completed projects, and make it easy for visitors to request a quote or call directly.",
@@ -134,7 +134,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "retail-ecommerce",
-    name: "Retail & Ecommerce",
+    nameKey: "ind.retail-ecommerce",
     desc: "Online stores and ecommerce platforms designed for conversion.",
     icon: ShoppingCart,
     overview: "Ecommerce success depends on product presentation, user experience, and trust. We design online stores that make products look their best, guide shoppers through intuitive navigation, and remove friction from the checkout process. Whether you're launching a new brand or refreshing an existing store, we build platforms that drive sales and scale with your business.",
@@ -149,7 +149,7 @@ const industries: IndustryData[] = [
   },
   {
     slug: "education-training",
-    name: "Education & Training",
+    nameKey: "ind.education-training",
     desc: "Digital platforms for educational institutions and training providers.",
     icon: GraduationCap,
     overview: "Educational institutions and training providers need websites that clearly communicate programs, build credibility, and drive enrollment. We design structured digital platforms that organize complex program information into clear, navigable experiences. Whether you're a university department, professional training provider, or online course creator, your website should make it easy for prospective students to find what they need and take action.",
@@ -164,9 +164,9 @@ const industries: IndustryData[] = [
   },
 ];
 
-/* ── Project Thumbnail Card ── */
 const ProjectThumbnail = ({ slug }: { slug: string }) => {
   const project = projects.find((p) => p.slug === slug);
+  const { t } = useLang();
   if (!project) return null;
   const img = projectImages[slug];
 
@@ -183,7 +183,7 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
         <h4 className="text-sm font-semibold mb-1">{project.name}</h4>
         <p className="text-xs text-muted-foreground">{project.services.join(" · ")}</p>
         <span className="text-xs font-medium text-primary mt-2 inline-block">
-          {project.liveUrl ? "Visit Site ↗" : "View Project →"}
+          {project.liveUrl ? t("cta.visit-site") : t("cta.view-project")}
         </span>
       </div>
     </div>
@@ -199,51 +199,56 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
   return <Link to={`/work/${slug}`} className="block">{card}</Link>;
 };
 
-export const IndustriesList = () => (
-  <div>
-    <section className="section-border">
-      <div className="section-container py-16 md:py-24">
-        <h1 className="text-4xl md:text-5xl font-bold">Industries We Work With</h1>
-        <p className="mt-4 text-muted-foreground max-w-xl">
-          We build digital platforms for businesses across a range of industries.
-        </p>
-      </div>
-    </section>
-    <section>
-      <div className="section-container section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
-          {industries.map((ind) => {
-            const Icon = ind.icon;
-            return (
-              <Link
-                key={ind.slug}
-                to={`/industries/${ind.slug}`}
-                className="group bg-background p-8 hover:bg-secondary transition-colors flex gap-4 items-start"
-              >
-                <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{ind.name}</h3>
-                  <p className="text-sm text-muted-foreground">{ind.desc}</p>
-                  <span className="text-sm font-medium text-primary mt-3 inline-block">Learn More →</span>
-                </div>
-              </Link>
-            );
-          })}
+export const IndustriesList = () => {
+  const { t } = useLang();
+
+  return (
+    <div>
+      <section className="section-border">
+        <div className="section-container py-16 md:py-24">
+          <h1 className="text-4xl md:text-5xl font-bold">{t("industries.title")}</h1>
+          <p className="mt-4 text-muted-foreground max-w-xl">
+            {t("industries.intro")}
+          </p>
         </div>
-      </div>
-    </section>
-  </div>
-);
+      </section>
+      <section>
+        <div className="section-container section-padding">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
+            {industries.map((ind) => {
+              const Icon = ind.icon;
+              return (
+                <Link
+                  key={ind.slug}
+                  to={`/industries/${ind.slug}`}
+                  className="group bg-background p-8 hover:bg-secondary transition-colors flex gap-4 items-start"
+                >
+                  <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{t(ind.nameKey)}</h3>
+                    <p className="text-sm text-muted-foreground">{ind.desc}</p>
+                    <span className="text-sm font-medium text-primary mt-3 inline-block">{t("cta.learn-more")}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export const IndustryDetail = () => {
   const { slug } = useParams();
+  const { t } = useLang();
   const industry = industries.find((i) => i.slug === slug);
 
   if (!industry) {
     return (
       <div className="section-container section-padding text-center">
         <h1 className="text-2xl font-bold">Industry not found</h1>
-        <Link to="/industries" className="text-primary mt-4 inline-block">← Back to Industries</Link>
+        <Link to="/industries" className="text-primary mt-4 inline-block">{t("industries.back")}</Link>
       </div>
     );
   }
@@ -254,10 +259,10 @@ export const IndustryDetail = () => {
     <div>
       <section className="section-border">
         <div className="section-container py-16 md:py-24">
-          <Link to="/industries" className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block">← Industries</Link>
+          <Link to="/industries" className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block">{t("industries.back")}</Link>
           <div className="flex items-center gap-4 mb-2">
             <Icon size={28} strokeWidth={1.5} className="text-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold">{industry.name}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">{t(industry.nameKey)}</h1>
           </div>
         </div>
       </section>
@@ -265,12 +270,12 @@ export const IndustryDetail = () => {
         <div className="section-container section-padding max-w-3xl">
           <div className="space-y-12">
             <div>
-              <h2 className="text-2xl font-bold mb-4">Overview</h2>
+              <h2 className="text-2xl font-bold mb-4">{t("industries.overview")}</h2>
               <p className="text-muted-foreground leading-relaxed">{industry.overview}</p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold mb-4">What We Typically Build</h2>
+              <h2 className="text-2xl font-bold mb-4">{t("industries.what-we-build")}</h2>
               <ul className="space-y-2">
                 {industry.whatWeBuild.map((item, i) => (
                   <li key={i} className="text-muted-foreground leading-relaxed flex gap-2">
@@ -283,7 +288,7 @@ export const IndustryDetail = () => {
 
             {industry.projectSlugs.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
+                <h2 className="text-2xl font-bold mb-6">{t("industries.featured")}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {industry.projectSlugs.map((s) => (
                     <ProjectThumbnail key={s} slug={s} />
@@ -294,7 +299,7 @@ export const IndustryDetail = () => {
 
             <div className="pt-8 border-t border-border">
               <Link to="/contact" className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors">
-                Start a Project
+                {t("cta.start-project")}
               </Link>
             </div>
           </div>

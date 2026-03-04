@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LangProvider } from "@/lib/i18n";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Work from "./pages/Work";
@@ -20,30 +21,32 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <PageLoader />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/work/:slug" element={<div className="section-container section-padding"><p>TBD — Individual project page</p></div>} />
-            <Route path="/case-studies" element={<CaseStudyList />} />
-            <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
-            <Route path="/industries" element={<IndustriesList />} />
-            <Route path="/industries/:slug" element={<IndustryDetail />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/agency" element={<Agency />} />
-            <Route path="/insights" element={<Insights />} />
-            <Route path="/insights/:slug" element={<InsightDetail />} />
-            <Route path="/contact" element={<Contact />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <LangProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <PageLoader />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/work" element={<Work />} />
+              <Route path="/work/:slug" element={<div className="section-container section-padding"><p>TBD — Individual project page</p></div>} />
+              <Route path="/case-studies" element={<CaseStudyList />} />
+              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+              <Route path="/industries" element={<IndustriesList />} />
+              <Route path="/industries/:slug" element={<IndustryDetail />} />
+              <Route path="/solutions" element={<Solutions />} />
+              <Route path="/agency" element={<Agency />} />
+              <Route path="/insights" element={<Insights />} />
+              <Route path="/insights/:slug" element={<InsightDetail />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LangProvider>
   </QueryClientProvider>
 );
 
