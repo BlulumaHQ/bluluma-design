@@ -21,7 +21,7 @@ const Header = () => {
     <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="section-container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Bluluma Design" className="h-[80px] w-auto" />
+          <img src={logo} alt="Bluluma Design" className="h-[74px] w-auto" />
         </Link>
 
         {/* Desktop nav */}
