@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -118,56 +118,61 @@ const FlowArrowDown = () => (
   </svg>
 );
 
-/* ── Sharp geometric quotation mark SVG ── */
+/* ── Sharp geometric quotation mark SVG (150-180px, sharp/geometric) ── */
 const SharpQuote = () => (
   <svg
-    width="140"
-    height="100"
-    viewBox="0 0 140 100"
+    width="160"
+    height="120"
+    viewBox="0 0 160 120"
     fill="none"
     className="absolute top-4 left-5 pointer-events-none select-none"
     style={{ opacity: 0.12 }}
   >
-    <polygon points="0,0 55,0 35,100 0,100" fill="#5887da" />
-    <polygon points="65,0 120,0 100,100 65,100" fill="#5887da" />
+    <polygon points="0,0 60,0 36,120 0,120" fill="#5887da" />
+    <polygon points="72,0 132,0 108,120 72,120" fill="#5887da" />
   </svg>
 );
 
-/* ── Testimonials Carousel ── */
-const SLIDES_DESKTOP = Math.ceil(testimonials.length / 2);
-
+/* ── Testimonials Carousel — rebuilt from scratch ── */
 const TestimonialsCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Simple mobile detection
-  useState(() => {
+  useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
-  });
-
-  const totalSlides = isMobile ? testimonials.length : SLIDES_DESKTOP;
-
-  const goTo = useCallback((index: number) => {
-    setCurrentSlide(index);
   }, []);
 
+  const desktopSlideCount = Math.ceil(testimonials.length / 2);
+  const totalSlides = isMobile ? testimonials.length : desktopSlideCount;
+
+  const goTo = useCallback((index: number) => {
+    setCurrentSlide(Math.max(0, Math.min(index, totalSlides - 1)));
+  }, [totalSlides]);
+
+  const next = () => goTo(currentSlide + 1);
+  const prev = () => goTo(currentSlide - 1);
+
   return (
-    <div>
+    <div className="relative">
+      {/* Carousel track */}
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          className="flex"
+          style={{
+            transform: `translateX(-${currentSlide * 100}%)`,
+            transition: "transform 500ms ease-in-out",
+          }}
         >
           {isMobile ? (
-            // Mobile: 1 card per slide
+            /* Mobile: 1 card per slide */
             testimonials.map((t, i) => (
-              <div key={i} className="min-w-full flex-shrink-0 px-1">
-                <div className="card-border p-8 transition-all duration-300 hover:border-primary relative">
+              <div key={i} className="w-full flex-shrink-0 flex-grow-0" style={{ minWidth: "100%" }}>
+                <div className="border border-border p-8 relative" style={{ minHeight: 260 }}>
                   <SharpQuote />
-                  <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-14">
+                  <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16">
                     "{t.quote}"
                   </blockquote>
                   <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
@@ -183,19 +188,24 @@ const TestimonialsCarousel = () => {
               </div>
             ))
           ) : (
-            // Desktop: 2 cards per slide
-            Array.from({ length: SLIDES_DESKTOP }, (_, slideIdx) => {
+            /* Desktop: 2 cards per slide */
+            Array.from({ length: desktopSlideCount }, (_, slideIdx) => {
               const pair = testimonials.slice(slideIdx * 2, slideIdx * 2 + 2);
               return (
-                <div key={slideIdx} className="min-w-full flex-shrink-0">
+                <div
+                  key={slideIdx}
+                  className="w-full flex-shrink-0 flex-grow-0"
+                  style={{ minWidth: "100%" }}
+                >
                   <div className="grid grid-cols-2 gap-8">
                     {pair.map((t, i) => (
                       <div
                         key={i}
-                        className="card-border p-8 transition-all duration-300 hover:border-primary hover:-translate-y-1 relative"
+                        className="border border-border p-8 relative transition-all duration-300 hover:border-primary"
+                        style={{ minHeight: 280 }}
                       >
                         <SharpQuote />
-                        <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-14">
+                        <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16">
                           "{t.quote}"
                         </blockquote>
                         <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
@@ -216,18 +226,35 @@ const TestimonialsCarousel = () => {
           )}
         </div>
       </div>
-      {/* Dots */}
-      <div className="flex justify-center gap-3 mt-6">
-        {Array.from({ length: totalSlides }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={`w-2 h-2 transition-colors duration-200 ${
-              currentSlide === i ? "bg-primary" : "bg-border"
-            }`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+
+      {/* Navigation arrows */}
+      <div className="flex items-center justify-between mt-6">
+        <button
+          onClick={prev}
+          disabled={currentSlide === 0}
+          className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
+        >
+          ← Previous
+        </button>
+        <div className="flex gap-3">
+          {Array.from({ length: totalSlides }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`w-2 h-2 transition-colors duration-200 ${
+                currentSlide === i ? "bg-primary" : "bg-border"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        <button
+          onClick={next}
+          disabled={currentSlide === totalSlides - 1}
+          className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
+        >
+          Next →
+        </button>
       </div>
     </div>
   );
@@ -235,7 +262,14 @@ const TestimonialsCarousel = () => {
 
 /* ── Inline Quote Form ── */
 const InlineQuoteForm = () => {
-  const [form, setForm] = useState({ name: "", email: "", business: "", projectType: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    currentUrl: "",
+    projectType: "",
+    message: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -246,28 +280,19 @@ const InlineQuoteForm = () => {
     alert("Thank you for your message. We'll be in touch.");
   };
 
+  const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors";
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <input
-          type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required
-          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
-        />
-        <input
-          type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required
-          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
-        />
-        <input
-          type="text" name="business" placeholder="Business" value={form.business} onChange={handleChange}
-          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
-        />
+        <input type="text" name="name" placeholder="Name *" value={form.name} onChange={handleChange} required className={inputClass} />
+        <input type="email" name="email" placeholder="Email *" value={form.email} onChange={handleChange} required className={inputClass} />
+        <input type="text" name="company" placeholder="Company Name *" value={form.company} onChange={handleChange} required className={inputClass} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <select
-          name="projectType" value={form.projectType} onChange={handleChange}
-          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
-        >
-          <option value="">Project Type</option>
+        <input type="url" name="currentUrl" placeholder="Current URL (optional)" value={form.currentUrl} onChange={handleChange} className={inputClass} />
+        <select name="projectType" value={form.projectType} onChange={handleChange} required className={inputClass}>
+          <option value="">Project Type *</option>
           <option value="website">Website Platform</option>
           <option value="brand">Brand Identity</option>
           <option value="ecommerce">Ecommerce</option>
@@ -276,14 +301,14 @@ const InlineQuoteForm = () => {
           <option value="other">Other</option>
         </select>
         <textarea
-          name="message" placeholder="Message" rows={1} value={form.message} onChange={handleChange} required
-          className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors resize-none md:col-span-2"
+          name="message" placeholder="Message *" rows={1} value={form.message} onChange={handleChange} required
+          className={`${inputClass} resize-none`}
         />
       </div>
       <div>
         <button
           type="submit"
-          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
+          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
         >
           Request a Quote
         </button>
@@ -308,7 +333,7 @@ const Home = () => (
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               to="/work"
-              className="cta-button inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
+              className="cta-button inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               View Our Work
             </Link>

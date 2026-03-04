@@ -22,8 +22,8 @@ const insightImages: Record<string, string> = {
   "website-architecture-that-scales": insight5,
   "conversion-ux-without-salesy-design": insight6,
   "premium-agency-website": insight7,
-  "ai-in-modern-website-production": insight8,
-  "common-website-mistakes-professional-services": insight9,
+  "ai-in-website-production": insight8,
+  "website-mistakes-professional-services": insight9,
   "launch-checklist-modern-websites": insight10,
 };
 
