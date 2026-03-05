@@ -1,7 +1,32 @@
 import { useLang } from "@/lib/i18n";
+import { useState, FormEvent } from "react";
 
 const Contact = () => {
   const { t } = useLang();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("https://formspree.io/f/xlgprnry", {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        window.location.href = "https://bluluma.com/thank-you";
+      } else {
+        setError("Something went wrong. Please try again.");
+        setSubmitting(false);
+      }
+    } catch {
+      setError("Network error. Please try again.");
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -16,11 +41,9 @@ const Contact = () => {
       <section>
         <div className="section-container section-padding">
           <form
-            action="https://formspree.io/f/xlgprnry?redirect=https%3A%2F%2Fbluluma.com%2Fthank-you"
-            method="POST"
+            onSubmit={handleSubmit}
             className="space-y-6 max-w-4xl"
           >
-            <input type="hidden" name="_next" value="https://bluluma.com/thank-you" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="name" className="text-sm font-medium block mb-2">Name</label>
@@ -75,11 +98,13 @@ const Contact = () => {
                 className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors resize-none"
               />
             </div>
+            {error && <p className="text-sm text-red-600">{error}</p>}
             <button
               type="submit"
-              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
+              disabled={submitting}
+              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors disabled:opacity-50"
             >
-              Request a Quote
+              {submitting ? "Sending..." : "Request a Quote"}
             </button>
           </form>
 

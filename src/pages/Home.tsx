@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback, FormEvent } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -228,11 +228,34 @@ const TestimonialsCarousel = () => {
 
 const InlineQuoteForm = () => {
   const { t } = useLang();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors";
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("https://formspree.io/f/xlgprnry", {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        window.location.href = "https://bluluma.com/thank-you";
+      } else {
+        setError("Something went wrong. Please try again.");
+        setSubmitting(false);
+      }
+    } catch {
+      setError("Network error. Please try again.");
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <form action="https://formspree.io/f/xlgprnry?redirect=https%3A%2F%2Fbluluma.com%2Fthank-you" method="POST" className="space-y-4">
-      <input type="hidden" name="_next" value="https://bluluma.com/thank-you" />
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="text" name="name" placeholder={`${t("form.name")} *`} required className={inputClass} />
         <input type="email" name="email" placeholder={`${t("form.email")} *`} required className={inputClass} />
@@ -256,12 +279,14 @@ const InlineQuoteForm = () => {
           className={`${inputClass} resize-none`}
         />
       </div>
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <div>
         <button
           type="submit"
-          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+          disabled={submitting}
+          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          {t("cta.request-quote")}
+          {submitting ? "Sending..." : t("cta.request-quote")}
         </button>
       </div>
     </form>
