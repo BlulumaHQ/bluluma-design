@@ -20,36 +20,35 @@ const Contact = () => {
             method="POST"
             className="space-y-6 max-w-4xl"
           >
-            <input type="hidden" name="_next" value={`${window.location.origin}/thank-you`} />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="text-sm font-medium block mb-2">{t("form.name")}</label>
+                <label htmlFor="name" className="text-sm font-medium block mb-2">Name</label>
                 <input
                   type="text" id="name" name="name" required
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="text-sm font-medium block mb-2">{t("form.email")}</label>
+                <label htmlFor="email" className="text-sm font-medium block mb-2">Email</label>
                 <input
                   type="email" id="email" name="email" required
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="company" className="text-sm font-medium block mb-2">{t("form.business")}</label>
+                <label htmlFor="company" className="text-sm font-medium block mb-2">Company</label>
                 <input
                   type="text" id="company" name="company" required
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="project_type" className="text-sm font-medium block mb-2">{t("form.project-type")}</label>
+                <label htmlFor="project_type" className="text-sm font-medium block mb-2">Project Type (Optional)</label>
                 <select
                   id="project_type" name="project_type"
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 >
-                  <option value="">{t("form.select-type")}</option>
+                  <option value="">Select</option>
                   <option value="Website">Website</option>
                   <option value="Brand Identity">Brand Identity</option>
                   <option value="Ecommerce">Ecommerce</option>
@@ -58,7 +57,7 @@ const Contact = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="message" className="text-sm font-medium block mb-2">{t("form.message")}</label>
+              <label htmlFor="message" className="text-sm font-medium block mb-2">Message</label>
               <textarea
                 id="message" name="message" rows={4} required
                 className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors resize-none"
@@ -68,7 +67,7 @@ const Contact = () => {
               type="submit"
               className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
             >
-              {t("cta.request-quote")}
+              Request a Quote
             </button>
           </form>
 
