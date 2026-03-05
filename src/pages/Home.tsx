@@ -232,7 +232,7 @@ const InlineQuoteForm = () => {
 
   return (
     <form action="https://formspree.io/f/xlgprnry" method="POST" className="space-y-4">
-      <input type="hidden" name="_next" value="https://bluluma-design-agency.lovable.app/thank-you" />
+      <input type="hidden" name="_next" value="https://bluluma.com/thank-you" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="text" name="name" placeholder={`${t("form.name")} *`} required className={inputClass} />
         <input type="email" name="email" placeholder={`${t("form.email")} *`} required className={inputClass} />
@@ -241,11 +241,15 @@ const InlineQuoteForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="text" name="website_url" placeholder={t("form.current-url")} className={inputClass} />
         <select name="project_type" required className={inputClass}>
-          <option value="">{t("form.project-type")} *</option>
-          <option value="Website">{t("form.opt.website")}</option>
-          <option value="Brand Identity">{t("form.opt.brand")}</option>
-          <option value="Ecommerce">{t("form.opt.ecommerce")}</option>
-          <option value="Marketing">{t("form.opt.marketing")}</option>
+          <option value="">Select Your Project Type *</option>
+          <option value="Website Design & Development">Website Design & Development</option>
+          <option value="Brand Identity & Visual Systems">Brand Identity & Visual Systems</option>
+          <option value="Ecommerce Platform Development">Ecommerce Platform Development</option>
+          <option value="Social Media Marketing Strategy">Social Media Marketing Strategy</option>
+          <option value="Graphic Design & Marketing Collateral">Graphic Design & Marketing Collateral</option>
+          <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
+          <option value="AI Automation & Workflow Integration">AI Automation & Workflow Integration</option>
+          <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
         </select>
         <textarea
           name="message" placeholder={`${t("form.message")} *`} rows={1} required

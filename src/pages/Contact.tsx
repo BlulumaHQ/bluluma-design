@@ -20,7 +20,7 @@ const Contact = () => {
             method="POST"
             className="space-y-6 max-w-4xl"
           >
-            <input type="hidden" name="_next" value="https://bluluma-design-agency.lovable.app/thank-you" />
+            <input type="hidden" name="_next" value="https://bluluma.com/thank-you" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="name" className="text-sm font-medium block mb-2">Name</label>
@@ -56,11 +56,15 @@ const Contact = () => {
                   id="project_type" name="project_type" required
                   className="w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors"
                 >
-                  <option value="">Select Project Type</option>
-                  <option value="Website">Website</option>
-                  <option value="Brand Identity">Brand Identity</option>
-                  <option value="Ecommerce">Ecommerce</option>
-                  <option value="Marketing">Marketing</option>
+                  <option value="">Select Your Project Type</option>
+                  <option value="Website Design & Development">Website Design & Development</option>
+                  <option value="Brand Identity & Visual Systems">Brand Identity & Visual Systems</option>
+                  <option value="Ecommerce Platform Development">Ecommerce Platform Development</option>
+                  <option value="Social Media Marketing Strategy">Social Media Marketing Strategy</option>
+                  <option value="Graphic Design & Marketing Collateral">Graphic Design & Marketing Collateral</option>
+                  <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
+                  <option value="AI Automation & Workflow Integration">AI Automation & Workflow Integration</option>
+                  <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
                 </select>
               </div>
             </div>
