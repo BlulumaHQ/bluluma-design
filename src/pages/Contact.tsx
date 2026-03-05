@@ -16,7 +16,7 @@ const Contact = () => {
       <section>
         <div className="section-container section-padding">
           <form
-            action="https://formspree.io/f/xlgprnry"
+            action="https://formspree.io/f/xlgprnry?redirect=https%3A%2F%2Fbluluma.com%2Fthank-you"
             method="POST"
             className="space-y-6 max-w-4xl"
           >

@@ -231,7 +231,7 @@ const InlineQuoteForm = () => {
   const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors";
 
   return (
-    <form action="https://formspree.io/f/xlgprnry" method="POST" className="space-y-4">
+    <form action="https://formspree.io/f/xlgprnry?redirect=https%3A%2F%2Fbluluma.com%2Fthank-you" method="POST" className="space-y-4">
       <input type="hidden" name="_next" value="https://bluluma.com/thank-you" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="text" name="name" placeholder={`${t("form.name")} *`} required className={inputClass} />
