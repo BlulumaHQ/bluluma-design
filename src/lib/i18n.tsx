@@ -47,6 +47,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "cta.submit": { en: "Submit", zh: "送出" },
   "cta.send-message": { en: "Send Message", zh: "送出訊息" },
   "cta.copy": { en: "Copy", zh: "複製" },
+  "cta.view-all-work": { en: "View All Work", zh: "查看所有作品" },
 
   // Form labels
   "form.name": { en: "Name", zh: "姓名" },
