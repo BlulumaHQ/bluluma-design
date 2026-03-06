@@ -282,4 +282,145 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "how-ai-is-changing-website-design",
+    title: "How AI Is Changing Website Design",
+    tag: "AI Automation",
+    summary:
+      "AI is transforming how websites are designed, built, and optimized. Here's what business owners need to know about the shift.",
+    sections: [
+      {
+        heading: "AI-Assisted Design Tools",
+        body: "Modern design tools now use AI to generate layouts, suggest color palettes, and create component variations in seconds. This accelerates the design process without replacing the strategic thinking that makes a website effective. Designers use these tools to explore more options faster, ultimately delivering better results.",
+      },
+      {
+        heading: "Automated Code Generation",
+        body: "AI can now generate production-quality front-end code from design files. This reduces development time and allows designers to focus on user experience rather than implementation details. However, human oversight remains essential for performance optimization and accessibility compliance.",
+      },
+      {
+        heading: "Personalized User Experiences",
+        body: "AI enables websites to adapt content, layout, and calls-to-action based on visitor behavior and preferences. This level of personalization was previously only available to enterprise companies — now it's accessible to businesses of all sizes.",
+      },
+      {
+        heading: "What This Means for Your Business",
+        body: "AI doesn't replace the need for professional web design — it raises the bar. Businesses that leverage AI-powered design and development get faster timelines, better optimization, and more competitive websites. The key is working with a team that understands how to use these tools strategically.",
+      },
+    ],
+  },
+  {
+    slug: "best-website-design-for-small-businesses",
+    title: "Best Website Design for Small Businesses",
+    tag: "Web Platforms",
+    summary:
+      "What makes a small business website effective? The essential elements every small business site needs to attract and convert customers.",
+    sections: [
+      {
+        heading: "Clarity Over Complexity",
+        body: "Small business websites don't need to be complex. They need to clearly communicate what you do, who you serve, and how to get started. Visitors should understand your value proposition within five seconds of landing on your homepage.",
+      },
+      {
+        heading: "Mobile-First Design",
+        body: "Over 60% of web traffic comes from mobile devices. Your website must look and function perfectly on phones and tablets. This means fast load times, easy navigation with thumbs, and content that reads well on small screens.",
+      },
+      {
+        heading: "Local SEO Integration",
+        body: "For businesses serving local markets, your website should be optimized for local search. This includes Google Business Profile integration, location-specific content, local schema markup, and consistent NAP (Name, Address, Phone) information across all platforms.",
+      },
+      {
+        heading: "Clear Calls to Action",
+        body: "Every page should guide visitors toward a specific action — calling your office, filling out a contact form, or booking a consultation. Don't make visitors guess what to do next. Make the path obvious and friction-free.",
+      },
+      {
+        heading: "Professional Credibility Signals",
+        body: "Testimonials, client logos, certifications, and case studies build trust with potential customers. Social proof is especially important for small businesses competing against larger, more established companies.",
+      },
+    ],
+  },
+  {
+    slug: "branding-mistakes-startups-make",
+    title: "Branding Mistakes Startups Make",
+    tag: "Brand Systems",
+    summary:
+      "The most common branding errors that hold startups back — and how to avoid them from the beginning.",
+    sections: [
+      {
+        heading: "Skipping Brand Strategy",
+        body: "Many startups jump straight to logo design without defining their brand positioning, target audience, or competitive differentiation. A logo without strategy is just a drawing. Brand strategy defines the foundation that every visual and verbal decision builds upon.",
+      },
+      {
+        heading: "Inconsistent Visual Identity",
+        body: "Using different colors, fonts, and styles across your website, social media, and marketing materials creates a fragmented impression. Consistency builds recognition and trust. Even simple brand guidelines dramatically improve how professional your business appears.",
+      },
+      {
+        heading: "Copying Competitors",
+        body: "When every startup in your industry looks the same, none of them stand out. Following competitor design trends feels safe but makes differentiation impossible. The strongest brands take a distinct visual position that reflects their unique value.",
+      },
+      {
+        heading: "Neglecting Digital Application",
+        body: "A brand identity that looks great on a business card but breaks down on screen is not fit for purpose. Modern brands must be designed for digital-first application — websites, social media, email, and mobile interfaces should all be primary considerations.",
+      },
+      {
+        heading: "Rebranding Too Soon",
+        body: "Some startups rebrand every year chasing trends. This destroys brand equity and confuses customers. Instead of starting over, invest in refining and evolving your existing brand identity. Consistency over time is one of the most valuable brand assets.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-build-a-website-that-converts",
+    title: "How to Build a Website That Converts",
+    tag: "Conversion & UX",
+    summary:
+      "Practical strategies for designing websites that turn visitors into leads and customers — without aggressive sales tactics.",
+    sections: [
+      {
+        heading: "Start With Clear Messaging",
+        body: "Before optimizing buttons and forms, get your messaging right. Visitors need to immediately understand what you offer, who it's for, and why it matters. Vague headlines and generic copy kill conversion rates before any design optimization can help.",
+      },
+      {
+        heading: "Design for the User Journey",
+        body: "High-converting websites guide visitors through a logical sequence: awareness, understanding, trust, and action. Each page and section should move the visitor one step closer to the desired outcome. Map this journey before designing a single page.",
+      },
+      {
+        heading: "Reduce Friction at Every Step",
+        body: "Every unnecessary form field, confusing navigation choice, or slow-loading page reduces conversions. Audit your website for friction points and eliminate anything that doesn't directly serve the user's goal or your business objective.",
+      },
+      {
+        heading: "Use Social Proof Strategically",
+        body: "Testimonials, case studies, client logos, and results data should appear at decision points — not buried on a separate page. Place social proof near calls-to-action where visitors are weighing whether to take the next step.",
+      },
+      {
+        heading: "Test and Iterate",
+        body: "Conversion optimization is not a one-time project. Use analytics to identify drop-off points, run A/B tests on key pages, and continuously refine based on real user behavior. Small improvements compound into significant results over time.",
+      },
+    ],
+  },
+  {
+    slug: "shopify-vs-custom-ecommerce",
+    title: "Shopify vs Custom Ecommerce Websites",
+    tag: "Web Platforms",
+    summary:
+      "Comparing Shopify and custom-built ecommerce platforms to help you choose the right approach for your online store.",
+    sections: [
+      {
+        heading: "When Shopify Makes Sense",
+        body: "Shopify is ideal for businesses that need a proven, reliable ecommerce platform with built-in payment processing, inventory management, and a large app ecosystem. If you're selling physical products and want to launch quickly, Shopify offers an excellent foundation with lower upfront costs.",
+      },
+      {
+        heading: "When Custom Is Worth It",
+        body: "Custom ecommerce platforms make sense when your business has unique requirements that Shopify can't accommodate — complex pricing models, subscription systems, custom product configurators, or deep integrations with existing business systems. The investment is higher but the flexibility is unlimited.",
+      },
+      {
+        heading: "Design Flexibility Comparison",
+        body: "Shopify themes offer a starting point but can limit design expression. Custom Shopify development (Liquid templates or headless Shopify) bridges this gap. Fully custom platforms offer complete design freedom but require more development resources.",
+      },
+      {
+        heading: "Total Cost of Ownership",
+        body: "Shopify has predictable monthly costs plus transaction fees and app subscriptions. Custom solutions have higher upfront development costs but potentially lower ongoing expenses. The right choice depends on your revenue, growth trajectory, and technical requirements.",
+      },
+      {
+        heading: "Making the Decision",
+        body: "Start with your business requirements, not technology preferences. List what your store needs to do, how it needs to look, and what systems it needs to connect with. The answer usually becomes clear once requirements are properly defined.",
+      },
+    ],
+  },
 ];

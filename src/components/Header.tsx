@@ -8,6 +8,7 @@ const navLinks = [
   { labelKey: "nav.work", to: "/work" },
   { labelKey: "nav.case-studies", to: "/case-studies" },
   { labelKey: "nav.industries", to: "/industries" },
+  { labelKey: "nav.services", to: "/services" },
   { labelKey: "nav.solutions", to: "/solutions" },
   { labelKey: "nav.agency", to: "/agency" },
   { labelKey: "nav.insights", to: "/insights" },

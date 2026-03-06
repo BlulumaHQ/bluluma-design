@@ -14,6 +14,8 @@ import Solutions from "./pages/Solutions";
 import Agency from "./pages/Agency";
 import Insights from "./pages/Insights";
 import InsightDetail from "./pages/InsightDetail";
+import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
@@ -48,6 +50,8 @@ const App = () => (
               <Route path="/industries" element={<IndustriesList />} />
               <Route path="/industries/:slug" element={<IndustryDetail />} />
               <Route path="/solutions" element={<Solutions />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/agency" element={<Agency />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightDetail />} />

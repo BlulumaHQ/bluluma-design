@@ -7,6 +7,7 @@ const Footer = () => {
 
   const footerLinks = [
     { labelKey: "nav.work", to: "/work" },
+    { labelKey: "nav.services", to: "/services" },
     { labelKey: "nav.industries", to: "/industries" },
     { labelKey: "nav.solutions", to: "/solutions" },
     { labelKey: "nav.insights", to: "/insights" },
