@@ -313,6 +313,11 @@ const InlineQuoteForm = () => {
 const Home = () => {
   const { t, lang } = useLang();
 
+  const randomProjects = useMemo(() => {
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
+
   const capKeys = [
     { titleKey: "home.build.cap1.title", descKey: "home.build.cap1.desc" },
     { titleKey: "home.build.cap2.title", descKey: "home.build.cap2.desc" },
