@@ -13,6 +13,11 @@ import insight7 from "@/assets/insights/insight-7.jpg";
 import insight8 from "@/assets/insights/insight-8.jpg";
 import insight9 from "@/assets/insights/insight-9.jpg";
 import insight10 from "@/assets/insights/insight-10.jpg";
+import insight11 from "@/assets/insights/insight-11.jpg";
+import insight12 from "@/assets/insights/insight-12.jpg";
+import insight13 from "@/assets/insights/insight-13.jpg";
+import insight14 from "@/assets/insights/insight-14.jpg";
+import insight15 from "@/assets/insights/insight-15.jpg";
 
 // Inline images per article
 import workVs1 from "@/assets/insights/inline/work-vs-1.jpg";
@@ -45,6 +50,21 @@ import mistakes3 from "@/assets/insights/inline/mistakes-3.jpg";
 import launch1 from "@/assets/insights/inline/launch-1.jpg";
 import launch2 from "@/assets/insights/inline/launch-2.jpg";
 import launch3 from "@/assets/insights/inline/launch-3.jpg";
+import aiChanging1 from "@/assets/insights/inline/ai-changing-1.jpg";
+import aiChanging2 from "@/assets/insights/inline/ai-changing-2.jpg";
+import aiChanging3 from "@/assets/insights/inline/ai-changing-3.jpg";
+import smallBiz1 from "@/assets/insights/inline/small-biz-1.jpg";
+import smallBiz2 from "@/assets/insights/inline/small-biz-2.jpg";
+import smallBiz3 from "@/assets/insights/inline/small-biz-3.jpg";
+import brandingMistakes1 from "@/assets/insights/inline/branding-mistakes-1.jpg";
+import brandingMistakes2 from "@/assets/insights/inline/branding-mistakes-2.jpg";
+import brandingMistakes3 from "@/assets/insights/inline/branding-mistakes-3.jpg";
+import converts1 from "@/assets/insights/inline/converts-1.jpg";
+import converts2 from "@/assets/insights/inline/converts-2.jpg";
+import converts3 from "@/assets/insights/inline/converts-3.jpg";
+import shopify1 from "@/assets/insights/inline/shopify-1.jpg";
+import shopify2 from "@/assets/insights/inline/shopify-2.jpg";
+import shopify3 from "@/assets/insights/inline/shopify-3.jpg";
 
 const insightImages: Record<string, string> = {
   "work-vs-case-studies": insight1,
@@ -57,6 +77,11 @@ const insightImages: Record<string, string> = {
   "ai-in-website-production": insight8,
   "website-mistakes-professional-services": insight9,
   "launch-checklist-modern-websites": insight10,
+  "how-ai-is-changing-website-design": insight11,
+  "best-website-design-for-small-businesses": insight12,
+  "branding-mistakes-startups-make": insight13,
+  "how-to-build-a-website-that-converts": insight14,
+  "shopify-vs-custom-ecommerce": insight15,
 };
 
 const insightInlineImages: Record<string, string[]> = {
@@ -70,6 +95,11 @@ const insightInlineImages: Record<string, string[]> = {
   "ai-in-website-production": [ai1, ai2, ai3],
   "website-mistakes-professional-services": [mistakes1, mistakes2, mistakes3],
   "launch-checklist-modern-websites": [launch1, launch2, launch3],
+  "how-ai-is-changing-website-design": [aiChanging1, aiChanging2, aiChanging3],
+  "best-website-design-for-small-businesses": [smallBiz1, smallBiz2, smallBiz3],
+  "branding-mistakes-startups-make": [brandingMistakes1, brandingMistakes2, brandingMistakes3],
+  "how-to-build-a-website-that-converts": [converts1, converts2, converts3],
+  "shopify-vs-custom-ecommerce": [shopify1, shopify2, shopify3],
 };
 
 export { insightImages, insightInlineImages };
