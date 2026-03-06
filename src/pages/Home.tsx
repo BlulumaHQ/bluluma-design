@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback, FormEvent } from "react";
+import { useState, useEffect, useCallback, useMemo, FormEvent } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -8,6 +8,14 @@ import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
 import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
 import nueranutra from "@/assets/projects/nuera-nutra.jpg";
+import vitaEnvironmental from "@/assets/projects/vita-environmental.jpg";
+import spaAlita from "@/assets/projects/spa-alita.jpg";
+import presotea from "@/assets/projects/presotea.jpg";
+import hsinHsin from "@/assets/projects/hsin-hsin-art-framing.jpg";
+import sonykunDesign from "@/assets/projects/sonykun-design.jpg";
+import kchenConstruction from "@/assets/projects/kchen-construction.jpg";
+import helenLam from "@/assets/projects/helen-lam-real-estate.jpg";
+import calinClub from "@/assets/projects/calin-club.jpg";
 import { Heart, Briefcase, Building2, Sparkles, Palette, Wrench, ShoppingCart, GraduationCap } from "lucide-react";
 
 const projectImages: Record<string, string> = {
@@ -15,9 +23,16 @@ const projectImages: Record<string, string> = {
   "live-at-headwater": liveAtHeadwater,
   "btn-real-estate": btnRealEstate,
   "nuera-nutra": nueranutra,
+  "vita-environmental": vitaEnvironmental,
+  "spa-alita": spaAlita,
+  "presotea": presotea,
+  "hsin-hsin-art-framing": hsinHsin,
+  "sonykun-design": sonykunDesign,
+  "kchen-construction": kchenConstruction,
+  "helen-lam-real-estate": helenLam,
+  "calin-club": calinClub,
 };
 
-const featuredProjects = projects.filter((p) => p.featured);
 const caseStudyProjects = projects.filter((p) => p.caseStudy);
 
 const industries = [
@@ -298,6 +313,11 @@ const InlineQuoteForm = () => {
 const Home = () => {
   const { t, lang } = useLang();
 
+  const randomProjects = useMemo(() => {
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
+
   const capKeys = [
     { titleKey: "home.build.cap1.title", descKey: "home.build.cap1.desc" },
     { titleKey: "home.build.cap2.title", descKey: "home.build.cap2.desc" },
@@ -366,7 +386,7 @@ const Home = () => {
             )}
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredProjects.map((project, i) => (
+            {randomProjects.map((project, i) => (
               <RevealSection key={project.slug} delay={i * 100}>
                 <ProjectCard
                   project={project}
