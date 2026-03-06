@@ -1,13 +1,17 @@
+export type ProjectCategory = "Web Design" | "Branding" | "Ecommerce" | "AI Automation";
+
 export interface Project {
   slug: string;
   name: string;
   industry: string;
   services: string[];
+  categories: ProjectCategory[];
   description: string;
   image: string;
   featured?: boolean;
   caseStudy?: boolean;
   liveUrl?: string;
+  year: number;
 }
 
 export const projects: Project[] = [
@@ -16,114 +20,138 @@ export const projects: Project[] = [
     name: "Friendly Dental",
     industry: "Healthcare",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Modern dental clinic brand and website designed to communicate trust, clarity, and professionalism.",
     image: "/projects/friendly-dental.jpg",
     featured: true,
     caseStudy: true,
     liveUrl: "https://friendlydental.ca",
+    year: 2025,
   },
   {
     slug: "live-at-headwater",
     name: "Live at Headwater",
     industry: "Real Estate Development",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Brand identity and digital platform for a modern residential development.",
     image: "/projects/live-at-headwater.jpg",
     featured: true,
     caseStudy: true,
     liveUrl: "https://liveatheadwater.ca",
+    year: 2025,
   },
   {
     slug: "btn-real-estate",
     name: "BTN Real Estate",
     industry: "Real Estate",
     services: ["Brand Identity", "Website Platform"],
+    categories: ["Web Design", "Branding"],
     description: "Brand and website platform created for a real estate development advisory firm.",
     image: "/projects/btn-real-estate.jpg",
     featured: true,
     caseStudy: true,
     liveUrl: "https://btn.bluluma.com",
+    year: 2026,
   },
   {
     slug: "nuera-nutra",
     name: "NuEra Nutra",
     industry: "Ecommerce",
     services: ["Website Platform"],
+    categories: ["Ecommerce", "Web Design"],
     description: "Modern ecommerce website designed for a nutrition brand.",
     image: "/projects/nuera-nutra.jpg",
     featured: true,
     liveUrl: "https://nueranutra.com",
+    year: 2026,
   },
   {
     slug: "vita-environmental",
     name: "Vita Environmental",
     industry: "Construction",
     services: ["Website Platform"],
+    categories: ["Web Design"],
     description: "Professional website for an environmental construction services company.",
     image: "/projects/vita-environmental.jpg",
     liveUrl: "https://vitaenv.com",
+    year: 2025,
   },
   {
     slug: "spa-alita",
     name: "Spa Alita",
     industry: "Lifestyle",
     services: ["Website Platform"],
+    categories: ["Web Design"],
     description: "Elegant website for a premium spa and wellness brand.",
     image: "/projects/spa-alita.jpg",
     liveUrl: "https://spaalita.ca",
+    year: 2025,
   },
   {
     slug: "presotea",
     name: "PresoTea",
     industry: "Bubble Tea Cafe",
     services: ["Website Platform", "Marketing Collateral"],
+    categories: ["Web Design"],
     description: "Website and marketing materials for a popular bubble tea franchise.",
     image: "/projects/presotea.jpg",
     liveUrl: "https://presoteabc.ca/",
+    year: 2024,
   },
   {
     slug: "hsin-hsin-art-framing",
     name: "Hsin Hsin Art & Framing",
     industry: "Art & Retail",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Brand identity and website for a premium art and custom framing studio.",
     image: "/projects/hsin-hsin-art-framing.jpg",
     liveUrl: "https://hsinhsin.ca/",
+    year: 2024,
   },
   {
     slug: "sonykun-design",
     name: "Sonykun Design",
     industry: "Creative Studio",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Brand and portfolio website for a multidisciplinary creative studio.",
     image: "/projects/sonykun-design.jpg",
     liveUrl: "https://sonykun-design.lovable.app/",
+    year: 2026,
   },
   {
     slug: "kchen-construction",
     name: "K. Chen Construction Management",
     industry: "Construction",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Brand identity and website for a construction management firm.",
     image: "/projects/kchen-construction.jpg",
     liveUrl: "https://kchencm.com/",
+    year: 2026,
   },
   {
     slug: "helen-lam-real-estate",
     name: "Helen Lam Real Estate",
     industry: "Real Estate",
     services: ["Website Platform", "MLS IDX Integration"],
+    categories: ["Web Design"],
     description: "Real estate website with MLS IDX integration for property search.",
     image: "/projects/helen-lam-real-estate.jpg",
     liveUrl: "https://helenlam.ca/",
+    year: 2025,
   },
   {
     slug: "calin-club",
     name: "Calin Club",
     industry: "Luxury Lifestyle",
     services: ["Brand Identity", "Website Platform", "Marketing Collateral"],
+    categories: ["Web Design", "Branding"],
     description: "Brand identity and website for a luxury lifestyle membership club.",
     image: "/projects/calin-club.jpg",
     liveUrl: "http://calinclub.ca/",
+    year: 2024,
   },
 ];

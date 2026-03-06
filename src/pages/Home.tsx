@@ -396,6 +396,16 @@ const Home = () => {
               </RevealSection>
             ))}
           </div>
+          <RevealSection delay={400}>
+            <div className="mt-10 text-center">
+              <Link
+                to="/work"
+                className="inline-flex items-center px-8 py-3 border border-foreground text-sm font-medium hover:bg-foreground hover:text-background transition-colors"
+              >
+                {t("cta.view-all-work")}
+              </Link>
+            </div>
+          </RevealSection>
         </div>
       </section>
 
