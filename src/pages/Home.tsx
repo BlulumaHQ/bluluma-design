@@ -386,7 +386,7 @@ const Home = () => {
             )}
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredProjects.map((project, i) => (
+            {randomProjects.map((project, i) => (
               <RevealSection key={project.slug} delay={i * 100}>
                 <ProjectCard
                   project={project}
