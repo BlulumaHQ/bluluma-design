@@ -163,6 +163,9 @@ const translations: Record<string, Record<Lang, string>> = {
   // Work page
   "work.title": { en: "Our Work", zh: "作品" },
   "work.intro": { en: "A selection of live websites, brand systems, and digital platforms we've designed and built.", zh: "以下為部分作品展示。點擊可直接開啟實際網站（新分頁）。" },
+  "work.curated": { en: "A curated selection of our favorite website, branding, and digital projects.", zh: "精心策劃的網站、品牌識別與數位專案精選。" },
+  "work.featured.title": { en: "Featured Case Studies", zh: "精選案例研究" },
+  "work.all.title": { en: "All Projects", zh: "所有專案" },
 
   // Case studies listing
   "casestudies.title": { en: "Case Studies", zh: "案例研究" },
