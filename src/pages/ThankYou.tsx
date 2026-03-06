@@ -10,16 +10,17 @@ declare global {
 
 const ThankYou = () => {
   useEffect(() => {
-    // Meta Pixel Lead Event
+    // TODO: Replace with real Meta Pixel ID once available
     if (window.fbq) {
       window.fbq('track', 'Lead');
     }
-    // Google Ads Conversion Event
+    // TODO: Replace 'AW-XXXXXXXX/XXXXXXXX' with real Google Ads Conversion ID/Label
     if (window.gtag) {
       window.gtag('event', 'conversion', {
-        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+        'send_to': 'AW-XXXXXXXX/XXXXXXXX',
       });
     }
+    // TODO: Add GA4 event tracking when GA4 property is configured
   }, []);
 
   return (

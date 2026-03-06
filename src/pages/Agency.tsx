@@ -26,7 +26,7 @@ const Agency = () => {
               <div className="border border-border overflow-hidden">
                 <img
                   src={agencyImage}
-                  alt="Bluluma Design Studio Reception"
+                  alt="Bluluma Design Agency studio and office"
                   className="w-full h-full object-cover"
                 />
               </div>

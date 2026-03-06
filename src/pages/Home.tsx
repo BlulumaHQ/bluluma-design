@@ -257,6 +257,7 @@ const InlineQuoteForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <input type="hidden" name="source" value="bluluma home form" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="text" name="name" placeholder={`${t("form.name")} *`} required className={inputClass} />
         <input type="email" name="email" placeholder={`${t("form.email")} *`} required className={inputClass} />

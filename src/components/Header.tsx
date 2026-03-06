@@ -23,7 +23,7 @@ const Header = () => {
     <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="section-container flex items-center justify-between h-20 md:h-24">
         <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Bluluma Design" className="h-14 md:h-[75px] w-auto" />
+          <img src={logo} alt="Bluluma Design Agency logo" className="h-14 md:h-[75px] w-auto" />
         </Link>
 
         {/* Desktop nav */}

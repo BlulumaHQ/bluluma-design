@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <img src={logo} alt="Bluluma Design" className="h-14 md:h-[75px] w-auto mb-6" />
+            <img src={logo} alt="Bluluma Design Agency logo" className="h-14 md:h-[75px] w-auto mb-6" />
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               {t("footer.desc")}
             </p>
