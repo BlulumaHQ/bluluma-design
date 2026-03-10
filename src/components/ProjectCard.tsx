@@ -60,14 +60,14 @@ const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardPro
 
   if (isLive) {
     return (
-      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="group block">
+      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="group block h-full">
         {cardContent}
       </a>
     );
   }
 
   return (
-    <Link to={`/work/${project.slug}`} className="group block">
+    <Link to={`/work/${project.slug}`} className="group block h-full">
       {cardContent}
     </Link>
   );
