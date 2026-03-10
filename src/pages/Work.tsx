@@ -131,7 +131,7 @@ const Work = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedProjects.map((project, i) => (
               <RevealDiv key={project.slug} delay={i * 80}>
-                <div className="relative">
+                <div className="relative h-full">
                   {project.year >= CURRENT_YEAR && (
                     <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold tracking-wider uppercase bg-primary text-primary-foreground px-2.5 py-1">
                       NEW
