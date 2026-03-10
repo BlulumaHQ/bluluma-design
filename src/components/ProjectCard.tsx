@@ -29,7 +29,7 @@ const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardPro
         <img
           src={imageImport}
           alt={`${project.name} — website and brand design project by Bluluma Design Agency`}
-          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
           loading="lazy"
         />
         {isLive && (
