@@ -41,9 +41,9 @@ const filters: Array<{ label: string; value: ProjectCategory | "All" }> = [
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-const RevealDiv = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+const RevealDiv = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
-  return <div ref={ref}>{children}</div>;
+  return <div ref={ref} className={`h-full ${className}`}>{children}</div>;
 };
 
 const Work = () => {
