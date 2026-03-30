@@ -16,7 +16,7 @@ import sonykunDesign from "@/assets/projects/sonykun-design.jpg";
 import kchenConstruction from "@/assets/projects/kchen-construction.jpg";
 import helenLam from "@/assets/projects/helen-lam-real-estate.jpg";
 import calinClub from "@/assets/projects/calin-club.jpg";
-import { Target, Zap, Gem, AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react";
+import { Target, Zap, Gem, AlertTriangle, CheckCircle2, ArrowRight, X, Check } from "lucide-react";
 
 const projectImages: Record<string, string> = {
   "friendly-dental": friendlyDental,
@@ -25,7 +25,7 @@ const projectImages: Record<string, string> = {
   "nuera-nutra": nueranutra,
   "vita-environmental": vitaEnvironmental,
   "spa-alita": spaAlita,
-  "presotea": presotea,
+  presotea,
   "hsin-hsin-art-framing": hsinHsin,
   "sonykun-design": sonykunDesign,
   "kchen-construction": kchenConstruction,
@@ -41,56 +41,19 @@ const RevealSection = ({ children, delay = 0, className = "" }: { children: Reac
 };
 
 const SharpQuote = () => (
-  <svg
-    width="160"
-    height="120"
-    viewBox="0 0 160 120"
-    fill="none"
-    className="absolute top-4 left-5 pointer-events-none select-none"
-    style={{ opacity: 0.12 }}
-  >
-    <polygon points="0,0 60,0 36,120 0,120" fill="#5887da" />
-    <polygon points="72,0 132,0 108,120 72,120" fill="#5887da" />
+  <svg width="160" height="120" viewBox="0 0 160 120" fill="none" className="absolute top-4 left-5 pointer-events-none select-none" style={{ opacity: 0.12 }}>
+    <polygon points="0,0 60,0 36,120 0,120" fill="hsl(265 80% 60%)" />
+    <polygon points="72,0 132,0 108,120 72,120" fill="hsl(265 80% 60%)" />
   </svg>
 );
 
 const testimonials = [
-  {
-    quoteKey: "testimonial.1.quote",
-    name: "Michael Chen",
-    company: "Friendly Dental Group",
-    projectTypeKey: "testimonial.brand-website",
-  },
-  {
-    quoteKey: "testimonial.2.quote",
-    name: "Sarah Thompson",
-    company: "Headwater Developments",
-    projectTypeKey: "testimonial.brand-website",
-  },
-  {
-    quoteKey: "testimonial.3.quote",
-    name: "Daniel Wong",
-    company: "BTN Real Estate Advisory",
-    projectTypeKey: "testimonial.website-platform",
-  },
-  {
-    quoteKey: "testimonial.4.quote",
-    name: "Jessica Lee",
-    company: "NuEra Nutra",
-    projectTypeKey: "testimonial.brand-website",
-  },
-  {
-    quoteKey: "testimonial.5.quote",
-    name: "Ryan Patel",
-    company: "Vita Environmental",
-    projectTypeKey: "testimonial.website-platform",
-  },
-  {
-    quoteKey: "testimonial.6.quote",
-    name: "David Nguyen",
-    company: "Pacific Interior Studio",
-    projectTypeKey: "testimonial.brand-website",
-  },
+  { quoteKey: "testimonial.1.quote", name: "Michael Chen", company: "Friendly Dental Group", projectTypeKey: "testimonial.brand-website" },
+  { quoteKey: "testimonial.2.quote", name: "Sarah Thompson", company: "Headwater Developments", projectTypeKey: "testimonial.brand-website" },
+  { quoteKey: "testimonial.3.quote", name: "Daniel Wong", company: "BTN Real Estate Advisory", projectTypeKey: "testimonial.website-platform" },
+  { quoteKey: "testimonial.4.quote", name: "Jessica Lee", company: "NuEra Nutra", projectTypeKey: "testimonial.brand-website" },
+  { quoteKey: "testimonial.5.quote", name: "Ryan Patel", company: "Vita Environmental", projectTypeKey: "testimonial.website-platform" },
+  { quoteKey: "testimonial.6.quote", name: "David Nguyen", company: "Pacific Interior Studio", projectTypeKey: "testimonial.brand-website" },
 ];
 
 const TestimonialsCarousel = () => {
@@ -112,167 +75,65 @@ const TestimonialsCarousel = () => {
     setCurrentSlide(Math.max(0, Math.min(index, totalSlides - 1)));
   }, [totalSlides]);
 
-  const next = () => goTo(currentSlide + 1);
-  const prev = () => goTo(currentSlide - 1);
-
   return (
     <div className="relative">
       <div className="overflow-hidden">
-        <div
-          className="flex"
-          style={{
-            transform: `translateX(-${currentSlide * 100}%)`,
-            transition: "transform 500ms ease-in-out",
-          }}
-        >
-          {isMobile ? (
-            testimonials.map((testimonial, i) => (
-              <div key={i} className="w-full flex-shrink-0 flex-grow-0" style={{ minWidth: "100%" }}>
-                <div className="border border-border p-8 relative" style={{ minHeight: 260 }}>
-                  <SharpQuote />
-                  <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16 whitespace-pre-line">
-                    "{t(testimonial.quoteKey)}"
-                  </blockquote>
-                  <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
-                    <div>
-                      <p className="text-sm font-semibold">{testimonial.name}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.company}</p>
-                    </div>
-                    <span className="text-xs text-muted-foreground border border-border px-2 py-1">
-                      {t(testimonial.projectTypeKey)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            Array.from({ length: desktopSlideCount }, (_, slideIdx) => {
-              const pair = testimonials.slice(slideIdx * 2, slideIdx * 2 + 2);
-              return (
-                <div key={slideIdx} className="w-full flex-shrink-0 flex-grow-0" style={{ minWidth: "100%" }}>
-                  <div className="grid grid-cols-2 gap-8">
-                    {pair.map((testimonial, i) => (
-                      <div
-                        key={i}
-                        className="border border-border p-8 relative transition-all duration-300 hover:border-primary"
-                        style={{ minHeight: 280 }}
-                      >
-                        <SharpQuote />
-                        <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16 whitespace-pre-line">
-                          "{t(testimonial.quoteKey)}"
-                        </blockquote>
-                        <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
-                          <div>
-                            <p className="text-sm font-semibold">{testimonial.name}</p>
-                            <p className="text-xs text-muted-foreground">{testimonial.company}</p>
-                          </div>
-                          <span className="text-xs text-muted-foreground border border-border px-2 py-1">
-                            {t(testimonial.projectTypeKey)}
-                          </span>
-                        </div>
+        <div className="flex" style={{ transform: `translateX(-${currentSlide * 100}%)`, transition: "transform 500ms ease-in-out" }}>
+          {isMobile
+            ? testimonials.map((testimonial, i) => (
+                <div key={i} className="w-full flex-shrink-0" style={{ minWidth: "100%" }}>
+                  <div className="border border-border p-8 relative" style={{ minHeight: 260 }}>
+                    <SharpQuote />
+                    <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16 whitespace-pre-line">"{t(testimonial.quoteKey)}"</blockquote>
+                    <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
+                      <div>
+                        <p className="text-sm font-semibold">{testimonial.name}</p>
+                        <p className="text-xs text-muted-foreground">{testimonial.company}</p>
                       </div>
-                    ))}
+                      <span className="text-xs text-muted-foreground border border-border px-2 py-1">{t(testimonial.projectTypeKey)}</span>
+                    </div>
                   </div>
                 </div>
-              );
-            })
-          )}
+              ))
+            : Array.from({ length: desktopSlideCount }, (_, slideIdx) => {
+                const pair = testimonials.slice(slideIdx * 2, slideIdx * 2 + 2);
+                return (
+                  <div key={slideIdx} className="w-full flex-shrink-0" style={{ minWidth: "100%" }}>
+                    <div className="grid grid-cols-2 gap-8">
+                      {pair.map((testimonial, i) => (
+                        <div key={i} className="border border-border p-8 relative transition-all duration-300 hover:border-primary" style={{ minHeight: 280 }}>
+                          <SharpQuote />
+                          <blockquote className="text-foreground leading-relaxed mb-6 relative z-10 pt-16 whitespace-pre-line">"{t(testimonial.quoteKey)}"</blockquote>
+                          <div className="border-t border-border pt-4 flex items-center justify-between relative z-10">
+                            <div>
+                              <p className="text-sm font-semibold">{testimonial.name}</p>
+                              <p className="text-xs text-muted-foreground">{testimonial.company}</p>
+                            </div>
+                            <span className="text-xs text-muted-foreground border border-border px-2 py-1">{t(testimonial.projectTypeKey)}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
         </div>
       </div>
-
       <div className="flex items-center justify-between mt-6">
-        <button onClick={prev} disabled={currentSlide === 0} className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors">
-          {t("prev")}
-        </button>
+        <button onClick={() => goTo(currentSlide - 1)} disabled={currentSlide === 0} className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors">{t("prev")}</button>
         <div className="flex gap-3">
           {Array.from({ length: totalSlides }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`w-2 h-2 transition-colors duration-200 ${currentSlide === i ? "bg-primary" : "bg-border"}`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
+            <button key={i} onClick={() => goTo(i)} className={`w-2 h-2 transition-colors duration-200 ${currentSlide === i ? "bg-primary" : "bg-border"}`} aria-label={`Go to slide ${i + 1}`} />
           ))}
         </div>
-        <button onClick={next} disabled={currentSlide === totalSlides - 1} className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors">
-          {t("next")}
-        </button>
+        <button onClick={() => goTo(currentSlide + 1)} disabled={currentSlide === totalSlides - 1} className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors">{t("next")}</button>
       </div>
     </div>
   );
 };
 
-const InlineQuoteForm = () => {
-  const { t } = useLang();
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background focus:outline-none focus:border-primary transition-colors";
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
-    setSubmitting(true);
-    try {
-      const res = await fetch("https://formspree.io/f/xlgprnry", {
-        method: "POST",
-        body: new FormData(e.currentTarget),
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        navigate("/thank-you");
-      } else {
-        setError("Something went wrong. Please try again.");
-        setSubmitting(false);
-      }
-    } catch {
-      setError("Network error. Please try again.");
-      setSubmitting(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input type="hidden" name="source" value="bluluma home form" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <input type="text" name="name" placeholder={`${t("form.name")} *`} required className={inputClass} />
-        <input type="email" name="email" placeholder={`${t("form.email")} *`} required className={inputClass} />
-        <input type="text" name="company" placeholder={`${t("form.company")} *`} required className={inputClass} />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <input type="text" name="current_url" placeholder={t("form.current-url")} className={inputClass} />
-        <select name="project_type" required className={inputClass}>
-          <option value="">Select Your Project Type *</option>
-          <option value="Website Design & Development">Website Design & Development</option>
-          <option value="Brand Identity & Visual System">Brand Identity & Visual System</option>
-          <option value="Ecommerce Platform">Ecommerce Platform</option>
-          <option value="Social Media Marketing">Social Media Marketing</option>
-          <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
-          <option value="AI Business Automation">AI Business Automation</option>
-          <option value="Graphic Design & Marketing Materials">Graphic Design & Marketing Materials</option>
-          <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
-        </select>
-        <textarea
-          name="message" placeholder={`${t("form.message")} *`} rows={1} required
-          className={`${inputClass} resize-none`}
-        />
-      </div>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-      <div>
-        <button
-          type="submit"
-          disabled={submitting}
-          className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
-        >
-          {submitting ? "Sending..." : t("cta.get-strategy")}
-        </button>
-      </div>
-    </form>
-  );
-};
-
 const Home = () => {
-  const { t, lang } = useLang();
+  const { t } = useLang();
 
   const randomProjects = useMemo(() => {
     const shuffled = [...projects].sort(() => Math.random() - 0.5);
@@ -300,28 +161,30 @@ const Home = () => {
   return (
     <div>
       {/* ═══════ HERO ═══════ */}
-      <section className="section-border relative overflow-hidden">
+      <section className="relative overflow-hidden border-b border-border">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
-        <div className="section-container py-24 md:py-36 relative z-10">
+        <div className="section-container py-28 md:py-40 relative z-10">
           <RevealSection>
-            <p className="text-label mb-4">{t("home.hero.trust")}</p>
+            <p className="text-label mb-6">{t("home.hero.trust")}</p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] max-w-4xl">
-              {t("home.hero.h1")}
+              <span className="gradient-text">{t("home.hero.h1.line1")}</span>
+              <br />
+              {t("home.hero.h1.line2")}
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
               {t("home.hero.sub")}
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Link
                 to="/contact"
-                className="cta-button inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
+                className="cta-button inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={18} />
               </Link>
               <Link
-                to="/case-studies"
-                className="cta-button inline-flex items-center px-8 py-4 border border-foreground text-base font-semibold hover:bg-foreground hover:text-background transition-colors"
+                to="/work"
+                className="cta-button inline-flex items-center justify-center px-8 py-4 border border-border text-base font-semibold hover:border-primary hover:text-primary transition-colors"
               >
                 {t("cta.view-case-studies")}
               </Link>
@@ -338,20 +201,20 @@ const Home = () => {
               <AlertTriangle size={28} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
               <h2 className="text-3xl md:text-4xl font-bold">{t("home.problem.title")}</h2>
             </div>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl">{t("home.problem.intro")}</p>
+            <p className="text-lg text-muted-foreground mb-10 max-w-2xl">{t("home.problem.intro")}</p>
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {["home.problem.b1", "home.problem.b2", "home.problem.b3", "home.problem.b4"].map((key, i) => (
               <RevealSection key={key} delay={i * 80}>
                 <div className="bg-background p-8 flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <X size={16} className="text-destructive flex-shrink-0 mt-1" />
                   <p className="text-foreground font-medium">{t(key)}</p>
                 </div>
               </RevealSection>
             ))}
           </div>
           <RevealSection delay={350}>
-            <div className="mt-10 p-8 border border-primary/20 bg-primary/5">
+            <div className="mt-10 p-8 border border-primary/30 bg-primary/5">
               <p className="text-lg font-semibold text-foreground">{t("home.problem.closing")}</p>
             </div>
           </RevealSection>
@@ -363,13 +226,10 @@ const Home = () => {
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.solution.title")}</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mb-8">{t("home.solution.intro")}</p>
+            <p className="text-lg text-muted-foreground max-w-3xl mb-10">{t("home.solution.intro")}</p>
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-            {[
-              "home.solution.i1", "home.solution.i2", "home.solution.i3",
-              "home.solution.i4", "home.solution.i5",
-            ].map((key, i) => (
+            {["home.solution.i1", "home.solution.i2", "home.solution.i3", "home.solution.i4", "home.solution.i5"].map((key, i) => (
               <RevealSection key={key} delay={i * 60}>
                 <div className="bg-background p-6 flex items-start gap-3 h-full">
                   <CheckCircle2 size={18} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-0.5" />
@@ -385,7 +245,7 @@ const Home = () => {
       <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
-            <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("home.services.title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">{t("home.services.title")}</h2>
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((svc, i) => {
@@ -396,7 +256,7 @@ const Home = () => {
                     <Icon size={32} strokeWidth={1.5} className="text-primary mb-6" />
                     <h3 className="text-xl font-bold mb-3">{t(svc.titleKey)}</h3>
                     <p className="text-muted-foreground leading-relaxed flex-grow">{t(svc.descKey)}</p>
-                    <Link to="/services" className="mt-6 text-sm font-medium text-primary inline-flex items-center gap-1 hover:gap-2 transition-all">
+                    <Link to="/solutions" className="mt-6 text-sm font-medium text-primary inline-flex items-center gap-1 hover:gap-2 transition-all">
                       {t("cta.learn-more")}
                     </Link>
                   </div>
@@ -411,13 +271,13 @@ const Home = () => {
       <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
-            <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("home.howitworks.title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">{t("home.howitworks.title")}</h2>
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, i) => (
               <RevealSection key={i} delay={i * 150} className="h-full">
                 <div className="card-border p-8 h-full flex flex-col transition-all duration-300 hover:border-primary hover:-translate-y-1">
-                  <span className="text-4xl font-extrabold text-primary/20 mb-4">{step.num}</span>
+                  <span className="text-5xl font-extrabold text-primary/20 mb-4">{step.num}</span>
                   <h3 className="text-xl font-bold mb-3">{t(step.titleKey)}</h3>
                   <p className="text-muted-foreground leading-relaxed">{t(step.descKey)}</p>
                 </div>
@@ -429,9 +289,9 @@ const Home = () => {
 
       {/* ═══════ SELECTED WORK ═══════ */}
       <section className="section-border section-subtle-bg">
-        <div className="section-container py-12 md:py-16">
+        <div className="section-container py-16 md:py-24">
           <RevealSection>
-            <div className="flex items-baseline justify-between mb-4">
+            <div className="flex items-baseline justify-between mb-8">
               <h2 className="text-3xl md:text-4xl font-bold">{t("home.work.title")}</h2>
               <span className="text-xs text-muted-foreground tracking-wide uppercase hidden md:block">{t("home.work.label")}</span>
             </div>
@@ -439,20 +299,13 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {randomProjects.map((project, i) => (
               <RevealSection key={project.slug} delay={i * 100} className="h-full">
-                <ProjectCard
-                  project={project}
-                  imageImport={projectImages[project.slug]}
-                  mode="live"
-                />
+                <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
               </RevealSection>
             ))}
           </div>
           <RevealSection delay={400}>
-            <div className="mt-10 text-center">
-              <Link
-                to="/work"
-                className="inline-flex items-center px-8 py-3 border border-foreground text-sm font-medium hover:bg-foreground hover:text-background transition-colors"
-              >
+            <div className="mt-12 text-center">
+              <Link to="/work" className="inline-flex items-center px-8 py-3 border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors">
                 {t("cta.view-all-work")}
               </Link>
             </div>
@@ -465,23 +318,15 @@ const Home = () => {
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-2">{t("home.proof.title")}</h2>
-            <p className="text-muted-foreground mb-8">{t("home.proof.sub")}</p>
+            <p className="text-muted-foreground mb-10">{t("home.proof.sub")}</p>
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {caseStudyProjects.map((project, i) => (
               <RevealSection key={project.slug} delay={i * 100}>
-                <Link
-                  to={`/case-studies/${project.slug}`}
-                  className="group card-border p-6 block transition-all duration-300 hover:border-primary hover:-translate-y-1"
-                >
+                <Link to={`/case-studies/${project.slug}`} className="group card-border p-6 block transition-all duration-300 hover:border-primary hover:-translate-y-1">
                   {projectImages[project.slug] && (
                     <div className="aspect-[16/9] overflow-hidden mb-4 border border-border">
-                      <img
-                        src={projectImages[project.slug]}
-                        alt={project.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
+                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
                     </div>
                   )}
                   <h3 className="text-lg font-semibold mb-2">{project.name}</h3>
@@ -498,10 +343,9 @@ const Home = () => {
       <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
-            <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("home.diff.title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">{t("home.diff.title")}</h2>
           </RevealSection>
           <div className="border border-border">
-            {/* Header row */}
             <div className="grid grid-cols-2 bg-primary/5">
               <div className="p-4 md:p-6 border-r border-border">
                 <p className="text-label">{t("home.diff.col.them")}</p>
@@ -513,10 +357,12 @@ const Home = () => {
             {diffItems.map((item, i) => (
               <RevealSection key={i} delay={i * 100}>
                 <div className="grid grid-cols-2 border-t border-border">
-                  <div className="p-4 md:p-6 border-r border-border text-muted-foreground">
+                  <div className="p-4 md:p-6 border-r border-border text-muted-foreground flex items-start gap-2">
+                    <X size={14} className="text-destructive flex-shrink-0 mt-1" />
                     {t(item.them)}
                   </div>
-                  <div className="p-4 md:p-6 font-semibold text-foreground">
+                  <div className="p-4 md:p-6 font-semibold text-foreground flex items-start gap-2">
+                    <Check size={14} className="text-primary flex-shrink-0 mt-1" />
                     {t(item.us)}
                   </div>
                 </div>
@@ -531,11 +377,11 @@ const Home = () => {
         <div className="section-container section-padding text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.pricing.title")}</h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t("home.pricing.sub")}</p>
-            <div className="inline-flex flex-col items-center border border-border p-8 md:p-12 bg-background">
-              <p className="text-label mb-3">{t("home.pricing.label")}</p>
-              <p className="text-4xl md:text-5xl font-extrabold text-foreground">{t("home.pricing.range")}</p>
-              <p className="text-muted-foreground mt-3 text-sm">{t("home.pricing.note")}</p>
+            <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{t("home.pricing.sub")}</p>
+            <div className="inline-flex flex-col items-center border border-border p-10 md:p-14 bg-card">
+              <p className="text-label mb-4">{t("home.pricing.label")}</p>
+              <p className="text-5xl md:text-6xl font-extrabold gradient-text">{t("home.pricing.range")}</p>
+              <p className="text-muted-foreground mt-4 text-sm">{t("home.pricing.note")}</p>
             </div>
           </RevealSection>
         </div>
@@ -543,46 +389,35 @@ const Home = () => {
 
       {/* ═══════ TESTIMONIALS ═══════ */}
       <section className="section-border section-subtle-bg">
-        <div className="section-container py-12 md:py-16">
+        <div className="section-container py-16 md:py-24">
           <RevealSection>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">{t("home.testimonials.title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("home.testimonials.title")}</h2>
           </RevealSection>
           <TestimonialsCarousel />
         </div>
       </section>
 
       {/* ═══════ FINAL CTA ═══════ */}
-      <section className="section-border">
-        <div className="section-container py-16 md:py-24 text-center">
+      <section>
+        <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 max-w-3xl mx-auto">{t("home.finalcta.title")}</h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/contact"
-                className="cta-button inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
+                className="cta-button inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/contact"
-                className="cta-button inline-flex items-center px-8 py-4 border border-foreground text-base font-semibold hover:bg-foreground hover:text-background transition-colors"
+                className="cta-button inline-flex items-center justify-center px-8 py-4 border border-border text-base font-semibold hover:border-primary hover:text-primary transition-colors"
               >
                 {t("cta.start-project")}
               </Link>
             </div>
-          </RevealSection>
-        </div>
-      </section>
-
-      {/* ═══════ REQUEST A QUOTE ═══════ */}
-      <section>
-        <div className="section-container py-12 md:py-16">
-          <RevealSection>
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">{t("home.quote.title")}</h2>
-            <p className="text-muted-foreground mb-6">{t("home.quote.text")}</p>
-            <InlineQuoteForm />
           </RevealSection>
         </div>
       </section>

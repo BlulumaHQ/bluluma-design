@@ -4,18 +4,12 @@ import logo from "@/assets/bluluma-logo.svg";
 import { useLang } from "@/lib/i18n";
 
 const navLinks = [
-  { labelKey: "nav.home", to: "/" },
-  { labelKey: "nav.work", to: "/work" },
-  { labelKey: "nav.case-studies", to: "/case-studies" },
-  { labelKey: "nav.industries", to: "/industries" },
-  { labelKey: "nav.services", to: "/services" },
   { labelKey: "nav.solutions", to: "/solutions" },
-  { labelKey: "nav.agency", to: "/agency" },
+  { labelKey: "nav.work", to: "/work" },
+  { labelKey: "nav.process", to: "/process" },
+  { labelKey: "nav.pricing", to: "/pricing" },
   { labelKey: "nav.insights", to: "/insights" },
-  { labelKey: "nav.contact", to: "/contact" },
 ];
-
-const headerCtaLabel = { en: "Get Strategy", zh: "獲取策略" };
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,7 +20,7 @@ const Header = () => {
     <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="section-container flex items-center justify-between h-20 md:h-24">
         <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Bluluma Design Agency logo" className="h-14 md:h-[75px] w-auto" />
+          <img src={logo} alt="Bluluma logo" className="h-14 md:h-[75px] w-auto" />
         </Link>
 
         {/* Desktop nav */}
@@ -36,20 +30,17 @@ const Header = () => {
               key={link.to}
               to={link.to}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.to
-                  ? "text-primary"
-                  : "text-foreground"
+                location.pathname === link.to ? "text-primary" : "text-foreground"
               }`}
             >
               {t(link.labelKey)}
             </Link>
           ))}
-          {/* CTA button */}
           <Link
             to="/contact"
-            className="px-5 py-2 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors"
+            className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors"
           >
-            {headerCtaLabel[lang]}
+            {t("cta.get-strategy-short")}
           </Link>
           {/* Language switcher */}
           <div className="flex items-center gap-1 text-xs font-medium border border-border">
@@ -68,7 +59,7 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Mobile toggle + lang switcher */}
+        {/* Mobile toggle + lang */}
         <div className="lg:hidden flex items-center gap-3">
           <div className="flex items-center text-xs font-medium border border-border">
             <button
@@ -106,14 +97,19 @@ const Header = () => {
                 to={link.to}
                 onClick={() => setMobileOpen(false)}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.to
-                    ? "text-primary"
-                    : "text-foreground"
+                  location.pathname === link.to ? "text-primary" : "text-foreground"
                 }`}
               >
                 {t(link.labelKey)}
               </Link>
             ))}
+            <Link
+              to="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="w-full text-center px-6 py-3 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors"
+            >
+              {t("cta.get-strategy-short")}
+            </Link>
           </div>
         </nav>
       )}
