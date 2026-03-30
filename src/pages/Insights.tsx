@@ -19,7 +19,6 @@ import insight13 from "@/assets/insights/insight-13.jpg";
 import insight14 from "@/assets/insights/insight-14.jpg";
 import insight15 from "@/assets/insights/insight-15.jpg";
 
-// Inline images per article
 import workVs1 from "@/assets/insights/inline/work-vs-1.jpg";
 import workVs2 from "@/assets/insights/inline/work-vs-2.jpg";
 import workVs3 from "@/assets/insights/inline/work-vs-3.jpg";
@@ -111,19 +110,18 @@ const RevealSection = ({ children, delay = 0, className = "" }: { children: Reac
 
 const Insights = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
-
   const filtered = activeTag ? insights.filter((i) => i.tag === activeTag) : insights;
 
   return (
     <div>
-      {/* Hero */}
-      <section className="section-border">
+      {/* Hero (Dark) */}
+      <section className="section-dark section-border">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">Insights</h1>
-          <p className="mt-4 text-muted-foreground max-w-xl leading-relaxed">
+          <p className="mt-4 max-w-xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
             Ideas, processes, and practical observations from building brands and websites.
           </p>
-          <p className="mt-2 text-muted-foreground max-w-xl leading-relaxed">
+          <p className="mt-2 max-w-xl leading-relaxed" style={{ color: "hsl(220 10% 50%)" }}>
             These articles explore design systems, digital platforms, and the thinking behind modern agency work.
           </p>
         </div>
@@ -135,10 +133,10 @@ const Insights = () => {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActiveTag(null)}
-              className={`text-xs px-3 py-1.5 border transition-colors duration-200 ${
+              className={`text-xs px-3 py-1.5 border rounded-lg transition-colors duration-200 ${
                 activeTag === null
-                  ? "border-primary text-primary"
-                  : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                  ? "border-primary text-primary bg-primary/5"
+                  : "border-border text-muted-foreground hover:border-primary hover:text-primary"
               }`}
             >
               All
@@ -147,10 +145,10 @@ const Insights = () => {
               <button
                 key={tag}
                 onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                className={`text-xs px-3 py-1.5 border transition-colors duration-200 ${
+                className={`text-xs px-3 py-1.5 border rounded-lg transition-colors duration-200 ${
                   activeTag === tag
-                    ? "border-primary text-primary"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                    ? "border-primary text-primary bg-primary/5"
+                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
                 }`}
               >
                 {tag}
@@ -160,17 +158,17 @@ const Insights = () => {
         </div>
       </section>
 
-      {/* Insights Grid */}
+      {/* Insights Grid (White) */}
       <section>
         <div className="section-container section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filtered.map((insight, i) => (
               <RevealSection key={insight.slug} delay={i * 80}>
                 <Link
                   to={`/insights/${insight.slug}`}
-                  className="block bg-background group transition-all duration-300 hover:-translate-y-0.5"
+                  className="block bg-background border border-border rounded-lg overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
                 >
-                  <div className="aspect-[16/9] bg-secondary border-b border-border overflow-hidden">
+                  <div className="aspect-[16/9] bg-muted overflow-hidden">
                     {insightImages[insight.slug] && (
                       <img
                         src={insightImages[insight.slug]}
@@ -190,9 +188,9 @@ const Insights = () => {
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                       {insight.summary}
                     </p>
-                    <span className="text-xs text-foreground font-medium inline-flex items-center gap-1 group-hover:text-primary transition-colors duration-200">
+                    <span className="text-xs text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
                       Read Insight
-                      <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                      <span>→</span>
                     </span>
                   </div>
                 </Link>

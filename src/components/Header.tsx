@@ -27,8 +27,8 @@ const Header = () => {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg shadow-background/50"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
+          : "bg-background border-b border-transparent"
       }`}
     >
       <div className="section-container flex items-center justify-between h-20 md:h-24">
@@ -51,7 +51,7 @@ const Header = () => {
           ))}
           <Link
             to="/contact"
-            className="cta-gradient px-6 py-2.5 text-sm font-semibold rounded-lg"
+            className="cta-solid px-6 py-2.5 text-sm font-semibold rounded-lg"
           >
             {t("cta.get-strategy-short")}
           </Link>
@@ -119,7 +119,7 @@ const Header = () => {
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="w-full text-center cta-gradient px-6 py-3.5 text-base font-semibold rounded-lg"
+              className="w-full text-center cta-solid px-6 py-3.5 text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy-short")}
             </Link>
