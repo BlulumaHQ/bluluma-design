@@ -33,7 +33,6 @@ const projectImages: Record<string, string> = {
   "calin-club": calinClub,
 };
 
-/* Result tags for work cards */
 const projectResults: Record<string, string> = {
   "friendly-dental": "+40% Patient Inquiries",
   "live-at-headwater": "+2x Lead Conversion",
@@ -57,9 +56,9 @@ const RevealSection = ({ children, delay = 0, className = "" }: { children: Reac
 };
 
 const SharpQuote = () => (
-  <svg width="160" height="120" viewBox="0 0 160 120" fill="none" className="absolute top-4 left-5 pointer-events-none select-none" style={{ opacity: 0.1 }}>
-    <polygon points="0,0 60,0 36,120 0,120" fill="hsl(220 72% 50%)" />
-    <polygon points="72,0 132,0 108,120 72,120" fill="hsl(260 70% 62%)" />
+  <svg width="160" height="120" viewBox="0 0 160 120" fill="none" className="absolute top-4 left-5 pointer-events-none select-none" style={{ opacity: 0.08 }}>
+    <polygon points="0,0 60,0 36,120 0,120" fill="hsl(220 55% 55%)" />
+    <polygon points="72,0 132,0 108,120 72,120" fill="hsl(250 50% 60%)" />
   </svg>
 );
 
@@ -92,7 +91,7 @@ const TestimonialsCarousel = () => {
   }, [totalSlides]);
 
   const renderCard = (testimonial: typeof testimonials[0], i: number) => (
-    <div key={i} className="border border-border rounded-lg p-10 relative transition-all duration-300 hover:border-primary/50" style={{ minHeight: 300 }}>
+    <div key={i} className="border border-border rounded-lg p-10 relative transition-all duration-300 hover:border-primary/50 bg-background" style={{ minHeight: 300 }}>
       <SharpQuote />
       <blockquote className="text-lg text-foreground leading-relaxed mb-8 relative z-10 pt-16 whitespace-pre-line">"{t(testimonial.quoteKey)}"</blockquote>
       <div className="border-t border-border pt-5 flex items-center justify-between relative z-10">
@@ -168,8 +167,8 @@ const Home = () => {
 
   return (
     <div>
-      {/* ═══════ HERO ═══════ */}
-      <section className="relative overflow-hidden">
+      {/* ═══════ HERO (DARK) ═══════ */}
+      <section className="section-dark relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-32 md:py-44 relative z-10">
           <RevealSection>
@@ -179,7 +178,7 @@ const Home = () => {
               <br />
               {t("home.hero.h1.line2")}
             </h1>
-            <p className="mt-10 text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-10 text-xl md:text-2xl max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 65%)" }}>
               {t("home.hero.sub")}
             </p>
             <div className="mt-14 flex flex-col sm:flex-row gap-5">
@@ -192,7 +191,8 @@ const Home = () => {
               </Link>
               <Link
                 to="/work"
-                className="cta-button inline-flex items-center justify-center px-10 py-5 border border-border text-lg font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+                className="cta-button inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-lg transition-colors"
+                style={{ border: "1px solid hsl(220 14% 22%)", color: "hsl(0 0% 90%)" }}
               >
                 See How We Increase Conversions
               </Link>
@@ -201,8 +201,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ PROBLEM ═══════ */}
-      <section className="section-border section-subtle-bg">
+      {/* ═══════ PROBLEM (WHITE) ═══════ */}
+      <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
             <div className="flex items-start gap-4 mb-8">
@@ -229,8 +229,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ SOLUTION ═══════ */}
-      <section className="section-border">
+      {/* ═══════ SOLUTION (SUBTLE BG) ═══════ */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-5">{t("home.solution.title")}</h2>
@@ -249,8 +249,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ CORE SERVICES ═══════ */}
-      <section className="section-border section-subtle-bg">
+      {/* ═══════ CORE SERVICES (WHITE) ═══════ */}
+      <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-14">{t("home.services.title")}</h2>
@@ -260,7 +260,7 @@ const Home = () => {
               const Icon = svc.icon;
               return (
                 <RevealSection key={i} delay={i * 120} className="h-full">
-                  <div className="border border-border bg-background rounded-lg p-10 md:p-12 h-full flex flex-col transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5">
+                  <div className="border border-border bg-background rounded-lg p-10 md:p-12 h-full flex flex-col transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                     <Icon size={36} strokeWidth={1.5} className="text-primary mb-8" />
                     <h3 className="text-2xl font-bold mb-4">{t(svc.titleKey)}</h3>
                     <p className="text-lg text-muted-foreground leading-relaxed flex-grow">{t(svc.descKey)}</p>
@@ -275,8 +275,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ HOW IT WORKS ═══════ */}
-      <section className="section-border">
+      {/* ═══════ HOW IT WORKS (SUBTLE BG) ═══════ */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-14">{t("home.howitworks.title")}</h2>
@@ -284,7 +284,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, i) => (
               <RevealSection key={i} delay={i * 150} className="h-full">
-                <div className="card-border p-10 h-full flex flex-col transition-all duration-300 hover:border-primary/50 hover:-translate-y-1">
+                <div className="card-border bg-background p-10 h-full flex flex-col transition-all duration-300 hover:border-primary/50 hover:-translate-y-1">
                   <span className="text-6xl font-extrabold gradient-text mb-6">{step.num}</span>
                   <h3 className="text-2xl font-bold mb-4">{t(step.titleKey)}</h3>
                   <p className="text-lg text-muted-foreground leading-relaxed">{t(step.descKey)}</p>
@@ -295,8 +295,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ SELECTED WORK ═══════ */}
-      <section className="section-border section-subtle-bg">
+      {/* ═══════ SELECTED WORK (WHITE) ═══════ */}
+      <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
             <div className="flex items-baseline justify-between mb-12">
@@ -310,7 +310,7 @@ const Home = () => {
                 <div className="relative">
                   <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
                   {projectResults[project.slug] && (
-                    <div className="absolute top-4 left-4 z-10 cta-gradient px-3 py-1.5 text-xs font-bold rounded">
+                    <div className="absolute top-4 left-4 z-10 cta-solid px-3 py-1.5 text-xs font-bold rounded">
                       {projectResults[project.slug]}
                     </div>
                   )}
@@ -328,8 +328,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ PROOF / CASE STUDIES ═══════ */}
-      <section className="section-border">
+      {/* ═══════ PROOF / CASE STUDIES (SUBTLE BG) ═══════ */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-3">{t("home.proof.title")}</h2>
@@ -338,7 +338,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {caseStudyProjects.map((project, i) => (
               <RevealSection key={project.slug} delay={i * 100}>
-                <Link to={`/case-studies/${project.slug}`} className="group card-border p-8 block transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5">
+                <Link to={`/case-studies/${project.slug}`} className="group card-border bg-background p-8 block transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                   {projectImages[project.slug] && (
                     <div className="aspect-[16/9] overflow-hidden mb-6 border border-border rounded-md">
                       <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
@@ -357,8 +357,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ DIFFERENTIATION ═══════ */}
-      <section className="section-border section-subtle-bg">
+      {/* ═══════ DIFFERENTIATION (WHITE) ═══════ */}
+      <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-14">{t("home.diff.title")}</h2>
@@ -390,13 +390,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ PRICING ANCHOR ═══════ */}
-      <section className="section-border">
+      {/* ═══════ PRICING ANCHOR (SUBTLE BG) ═══════ */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-5">{t("home.pricing.title")}</h2>
             <p className="text-xl text-muted-foreground mb-12 max-w-xl mx-auto">{t("home.pricing.sub")}</p>
-            <div className="inline-flex flex-col items-center border border-border rounded-xl p-12 md:p-16 bg-card">
+            <div className="inline-flex flex-col items-center border border-border rounded-xl p-12 md:p-16 bg-background">
               <p className="text-label mb-6">{t("home.pricing.label")}</p>
               <p className="text-5xl md:text-7xl font-extrabold gradient-text">{t("home.pricing.range")}</p>
               <p className="text-lg text-muted-foreground mt-6">{t("home.pricing.note")}</p>
@@ -406,8 +406,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ TESTIMONIALS ═══════ */}
-      <section className="section-border section-subtle-bg">
+      {/* ═══════ TESTIMONIALS (WHITE) ═══════ */}
+      <section className="section-border">
         <div className="section-container section-padding">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-12">{t("home.testimonials.title")}</h2>
@@ -416,12 +416,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
-      <section className="bg-card">
+      {/* ═══════ FINAL CTA (DARK) ═══════ */}
+      <section className="section-dark">
         <div className="section-container py-24 md:py-36 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-3xl mx-auto">{t("home.finalcta.title")}</h2>
-            <p className="text-xl text-muted-foreground mb-12 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
+            <p className="text-xl mb-12 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link
                 to="/contact"
@@ -432,7 +432,8 @@ const Home = () => {
               </Link>
               <Link
                 to="/contact"
-                className="cta-button inline-flex items-center justify-center px-10 py-5 border border-border text-lg font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+                className="cta-button inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-lg transition-colors"
+                style={{ border: "1px solid hsl(220 14% 22%)", color: "hsl(0 0% 90%)" }}
               >
                 {t("cta.start-project")}
               </Link>

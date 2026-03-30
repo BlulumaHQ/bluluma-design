@@ -13,8 +13,8 @@ const Pricing = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="section-border relative overflow-hidden">
+      {/* Hero (Dark) */}
+      <section className="section-dark section-border relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
@@ -22,24 +22,24 @@ const Pricing = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("pricing.hero.title")}
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
               {t("pricing.hero.sub")}
             </p>
           </RevealSection>
         </div>
       </section>
 
-      {/* Pricing Block */}
+      {/* Pricing Block (White) */}
       <section className="section-border">
         <div className="section-container section-padding text-center">
           <RevealSection>
-            <div className="inline-flex flex-col items-center border border-border p-12 md:p-16 bg-card max-w-lg w-full">
+            <div className="inline-flex flex-col items-center border border-border p-12 md:p-16 bg-background rounded-xl max-w-lg w-full">
               <p className="text-label mb-4">{t("home.pricing.label")}</p>
               <p className="text-5xl md:text-6xl font-extrabold gradient-text">{t("home.pricing.range")}</p>
               <p className="text-muted-foreground mt-4 text-sm max-w-sm">{t("home.pricing.note")}</p>
               <Link
                 to="/contact"
-                className="mt-8 inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors"
+                className="mt-8 inline-flex items-center gap-2 px-8 py-4 cta-solid text-sm font-semibold rounded-lg"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={16} />
@@ -49,8 +49,8 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Qualification */}
-      <section className="section-border">
+      {/* Qualification (Subtle bg) */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <RevealSection>
@@ -79,15 +79,15 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section>
+      {/* CTA (Dark) */}
+      <section className="section-dark">
         <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home.finalcta.title")}</h2>
-            <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
+            <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}
               <ArrowRight size={18} />

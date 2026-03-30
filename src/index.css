@@ -17,28 +17,34 @@
 
 @layer base {
   :root {
-    --background: 220 20% 7%;
-    --foreground: 210 20% 95%;
-    --card: 220 18% 10%;
-    --card-foreground: 210 20% 95%;
-    --popover: 220 18% 10%;
-    --popover-foreground: 210 20% 95%;
-    --primary: 220 72% 50%;
+    --background: 0 0% 100%;
+    --foreground: 220 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+    --primary: 220 55% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 225 72% 42%;
-    --primary-glow: 260 70% 62%;
-    --secondary: 220 18% 12%;
-    --secondary-foreground: 210 20% 95%;
-    --muted: 220 16% 16%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 230 30% 18%;
-    --accent-foreground: 210 20% 95%;
+    --primary-dark: 220 55% 45%;
+    --primary-glow: 250 50% 60%;
+    --secondary: 220 10% 96%;
+    --secondary-foreground: 220 15% 15%;
+    --muted: 220 10% 94%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 220 15% 93%;
+    --accent-foreground: 220 15% 15%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 14% 18%;
-    --input: 220 14% 18%;
-    --ring: 220 72% 50%;
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
+    --ring: 220 55% 55%;
     --radius: 0.5rem;
+
+    /* Dark section tokens */
+    --dark-bg: 220 20% 10%;
+    --dark-fg: 0 0% 95%;
+    --dark-muted: 220 10% 50%;
+    --dark-border: 220 14% 22%;
   }
 }
 
@@ -70,13 +76,37 @@
     @apply border border-border rounded-lg;
   }
   .section-subtle-bg {
-    @apply bg-secondary;
+    background: hsl(220 10% 97%);
   }
   .section-light-bg {
-    background: hsl(220 18% 10%);
+    background: hsl(0 0% 100%);
   }
   .text-label {
     @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground;
+  }
+
+  /* Dark sections: hero, final CTA, footer */
+  .section-dark {
+    background: hsl(var(--dark-bg));
+    color: hsl(var(--dark-fg));
+  }
+  .section-dark h1,
+  .section-dark h2,
+  .section-dark h3,
+  .section-dark h4,
+  .section-dark p,
+  .section-dark span,
+  .section-dark blockquote {
+    color: hsl(var(--dark-fg));
+  }
+  .section-dark .text-muted-foreground {
+    color: hsl(var(--dark-muted));
+  }
+  .section-dark .text-label {
+    color: hsl(var(--dark-muted));
+  }
+  .section-dark .border-border {
+    border-color: hsl(var(--dark-border));
   }
 
   .cta-button {
@@ -92,25 +122,35 @@
     color: hsl(var(--primary-foreground));
     border: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.4);
+    box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.3);
   }
   .cta-gradient:hover {
-    box-shadow: 0 8px 30px -4px hsl(var(--primary) / 0.6);
+    box-shadow: 0 8px 30px -4px hsl(var(--primary) / 0.5);
     transform: scale(1.03);
   }
 
+  .cta-solid {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border: none;
+    transition: all 0.3s ease;
+  }
+  .cta-solid:hover {
+    background: hsl(var(--primary-dark));
+  }
+
   .logo-motif {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L45 20 L45 40 L30 50 L15 40 L15 20 Z' fill='none' stroke='%233b82f6' stroke-width='0.5' opacity='0.05'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L45 20 L45 40 L30 50 L15 40 L15 20 Z' fill='none' stroke='%235887DA' stroke-width='0.5' opacity='0.06'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 80px 80px;
   }
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(220 72% 55%), hsl(260 70% 65%));
+    background-image: linear-gradient(135deg, hsl(220 55% 55%), hsl(250 50% 60%));
   }
 
   .gradient-border {
-    border-image: linear-gradient(135deg, hsl(220 72% 50%), hsl(260 70% 62%)) 1;
+    border-image: linear-gradient(135deg, hsl(220 55% 55%), hsl(250 50% 60%)) 1;
   }
 }

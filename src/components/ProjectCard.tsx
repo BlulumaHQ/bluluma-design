@@ -24,7 +24,7 @@ const ProjectCard = ({ project, imageImport, mode = "internal" }: ProjectCardPro
   const isLive = mode === "live" && project.liveUrl;
 
   const cardContent = (
-    <div className="card-border overflow-hidden transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 h-full flex flex-col">
+    <div className="border border-border bg-background rounded-lg overflow-hidden transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 h-full flex flex-col">
       <div className="h-[240px] md:h-[260px] overflow-hidden relative flex-shrink-0">
         <img
           src={imageImport}

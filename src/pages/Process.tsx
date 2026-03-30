@@ -9,36 +9,11 @@ const RevealSection = ({ children, delay = 0, className = "" }: { children: Reac
 };
 
 const steps = [
-  {
-    num: "01",
-    icon: Search,
-    titleKey: "process.s1.title",
-    descKey: "process.s1.desc",
-  },
-  {
-    num: "02",
-    icon: Palette,
-    titleKey: "process.s2.title",
-    descKey: "process.s2.desc",
-  },
-  {
-    num: "03",
-    icon: Code,
-    titleKey: "process.s3.title",
-    descKey: "process.s3.desc",
-  },
-  {
-    num: "04",
-    icon: Rocket,
-    titleKey: "process.s4.title",
-    descKey: "process.s4.desc",
-  },
-  {
-    num: "05",
-    icon: TrendingUp,
-    titleKey: "process.s5.title",
-    descKey: "process.s5.desc",
-  },
+  { num: "01", icon: Search, titleKey: "process.s1.title", descKey: "process.s1.desc" },
+  { num: "02", icon: Palette, titleKey: "process.s2.title", descKey: "process.s2.desc" },
+  { num: "03", icon: Code, titleKey: "process.s3.title", descKey: "process.s3.desc" },
+  { num: "04", icon: Rocket, titleKey: "process.s4.title", descKey: "process.s4.desc" },
+  { num: "05", icon: TrendingUp, titleKey: "process.s5.title", descKey: "process.s5.desc" },
 ];
 
 const Process = () => {
@@ -46,8 +21,8 @@ const Process = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="section-border relative overflow-hidden">
+      {/* Hero (Dark) */}
+      <section className="section-dark section-border relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
@@ -55,14 +30,14 @@ const Process = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("process.hero.title")}
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
               {t("process.hero.sub")}
             </p>
           </RevealSection>
         </div>
       </section>
 
-      {/* Steps */}
+      {/* Steps (White) */}
       <section>
         <div className="section-container section-padding">
           <div className="space-y-0">
@@ -87,15 +62,15 @@ const Process = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-border">
+      {/* CTA (Dark) */}
+      <section className="section-dark">
         <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("process.cta.title")}</h2>
-            <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{t("process.cta.sub")}</p>
+            <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("process.cta.sub")}</p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}
               <ArrowRight size={18} />

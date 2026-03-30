@@ -14,7 +14,7 @@ const Contact = () => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const inputClass = "w-full border border-border px-4 py-3 text-sm bg-card text-foreground focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground";
+  const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background text-foreground rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground";
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,8 +40,8 @@ const Contact = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="section-border relative overflow-hidden">
+      {/* Hero (Dark) */}
+      <section className="section-dark section-border relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
@@ -49,14 +49,14 @@ const Contact = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("contact.hero.title")}
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
               {t("contact.hero.sub")}
             </p>
           </RevealSection>
         </div>
       </section>
 
-      {/* Form */}
+      {/* Form (White) */}
       <section>
         <div className="section-container section-padding">
           <RevealSection>
@@ -119,7 +119,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50"
+                className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg disabled:opacity-50"
               >
                 {submitting ? "Sending..." : t("cta.get-strategy")}
               </button>

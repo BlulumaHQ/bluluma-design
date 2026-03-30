@@ -34,8 +34,8 @@ const Solutions = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="section-border relative overflow-hidden">
+      {/* Hero (Dark) */}
+      <section className="section-dark section-border relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
@@ -43,18 +43,18 @@ const Solutions = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("sol.hero.title")}
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
               {t("sol.hero.sub")}
             </p>
           </RevealSection>
         </div>
       </section>
 
-      {/* Solution Sections */}
+      {/* Solution Sections (alternating white / subtle) */}
       {solutions.map((sol, idx) => {
         const Icon = sol.icon;
         return (
-          <section key={idx} className={`section-border ${idx % 2 === 0 ? "section-subtle-bg" : ""}`}>
+          <section key={idx} className={`section-border ${idx % 2 === 0 ? "" : "section-subtle-bg"}`}>
             <div className="section-container section-padding">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 <RevealSection>
@@ -63,7 +63,7 @@ const Solutions = () => {
                   <p className="text-lg text-muted-foreground leading-relaxed mb-8">{t(sol.descKey)}</p>
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary-dark transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 cta-solid text-sm font-semibold rounded-lg"
                   >
                     {t("cta.start-project")}
                     <ArrowRight size={16} />
@@ -72,7 +72,7 @@ const Solutions = () => {
                 <RevealSection delay={200}>
                   <div className="space-y-4">
                     {sol.features.map((fKey, i) => (
-                      <div key={i} className="flex items-start gap-3 p-4 border border-border bg-card">
+                      <div key={i} className="flex items-start gap-3 p-4 border border-border bg-background rounded-lg">
                         <CheckCircle2 size={18} className="text-primary flex-shrink-0 mt-0.5" />
                         <p className="text-sm font-medium text-foreground">{t(fKey)}</p>
                       </div>
@@ -85,15 +85,15 @@ const Solutions = () => {
         );
       })}
 
-      {/* CTA */}
-      <section>
+      {/* CTA (Dark) */}
+      <section className="section-dark">
         <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home.finalcta.title")}</h2>
-            <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
+            <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-base font-semibold hover:bg-primary-dark transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}
               <ArrowRight size={18} />

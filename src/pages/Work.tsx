@@ -50,41 +50,32 @@ const Work = () => {
   const { t } = useLang();
   const [activeFilter, setActiveFilter] = useState<ProjectCategory | "All">("All");
 
-  // Featured case studies — top 3 featured projects sorted by year
   const featuredProjects = useMemo(
-    () =>
-      [...projects]
-        .filter((p) => p.featured)
-        .sort((a, b) => b.year - a.year)
-        .slice(0, 3),
+    () => [...projects].filter((p) => p.featured).sort((a, b) => b.year - a.year).slice(0, 3),
     []
   );
 
-  // All projects sorted newest first, filtered by category
   const sortedProjects = useMemo(
-    () =>
-      [...projects]
-        .sort((a, b) => b.year - a.year)
-        .filter((p) => activeFilter === "All" || p.categories.includes(activeFilter)),
+    () => [...projects].sort((a, b) => b.year - a.year).filter((p) => activeFilter === "All" || p.categories.includes(activeFilter)),
     [activeFilter]
   );
 
   return (
     <div>
-      {/* ── Header ── */}
-      <section className="section-border">
+      {/* Header (Dark) */}
+      <section className="section-dark section-border">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("work.title")}</h1>
-          <p className="mt-4 text-muted-foreground max-w-xl">
+          <p className="mt-4 max-w-xl" style={{ color: "hsl(220 10% 60%)" }}>
             {t("work.intro")}
           </p>
-          <p className="mt-2 text-sm text-muted-foreground max-w-xl">
+          <p className="mt-2 text-sm max-w-xl" style={{ color: "hsl(220 10% 50%)" }}>
             {t("work.curated")}
           </p>
         </div>
       </section>
 
-      {/* ── Featured Case Studies ── */}
+      {/* Featured (White) */}
       <section className="section-border">
         <div className="section-container section-padding">
           <RevealDiv>
@@ -93,34 +84,29 @@ const Work = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredProjects.map((project, i) => (
               <RevealDiv key={project.slug} delay={i * 80}>
-                <ProjectCard
-                  project={project}
-                  imageImport={projectImages[project.slug]}
-                  mode="live"
-                />
+                <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
               </RevealDiv>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Filters + All Projects ── */}
-      <section>
+      {/* All Projects (Subtle bg) */}
+      <section className="section-subtle-bg">
         <div className="section-container section-padding">
           <RevealDiv>
             <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("work.all.title")}</h2>
           </RevealDiv>
 
-          {/* Filter bar */}
           <div className="flex flex-wrap gap-2 mb-8">
             {filters.map((f) => (
               <button
                 key={f.value}
                 onClick={() => setActiveFilter(f.value)}
-                className={`text-xs font-medium px-4 py-2 border transition-colors ${
+                className={`text-xs font-medium px-4 py-2 border rounded-lg transition-colors ${
                   activeFilter === f.value
-                    ? "bg-foreground text-background border-foreground"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
                 }`}
               >
                 {f.label}
@@ -133,15 +119,11 @@ const Work = () => {
               <RevealDiv key={project.slug} delay={i * 80}>
                 <div className="relative h-full">
                   {project.year >= CURRENT_YEAR && (
-                    <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold tracking-wider uppercase bg-primary text-primary-foreground px-2.5 py-1">
+                    <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold tracking-wider uppercase bg-primary text-primary-foreground px-2.5 py-1 rounded">
                       NEW
                     </span>
                   )}
-                  <ProjectCard
-                    project={project}
-                    imageImport={projectImages[project.slug]}
-                    mode="live"
-                  />
+                  <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
                 </div>
               </RevealDiv>
             ))}
