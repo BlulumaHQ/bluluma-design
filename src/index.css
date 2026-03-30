@@ -17,28 +17,28 @@
 
 @layer base {
   :root {
-    --background: 240 10% 6%;
-    --foreground: 0 0% 95%;
-    --card: 240 10% 8%;
-    --card-foreground: 0 0% 95%;
-    --popover: 240 10% 8%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 265 80% 60%;
+    --background: 220 20% 7%;
+    --foreground: 210 20% 95%;
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 18% 10%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 220 72% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 265 80% 50%;
-    --primary-glow: 265 90% 70%;
-    --secondary: 240 10% 10%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 240 10% 14%;
-    --muted-foreground: 240 5% 55%;
-    --accent: 265 40% 16%;
-    --accent-foreground: 0 0% 95%;
+    --primary-dark: 225 72% 42%;
+    --primary-glow: 260 70% 62%;
+    --secondary: 220 18% 12%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 220 16% 16%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 230 30% 18%;
+    --accent-foreground: 210 20% 95%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 10% 16%;
-    --input: 240 10% 16%;
-    --ring: 265 80% 60%;
-    --radius: 0px;
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 220 72% 50%;
+    --radius: 0.5rem;
   }
 }
 
@@ -61,16 +61,19 @@
     @apply max-w-[1200px] mx-auto px-6 md:px-8;
   }
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28;
   }
   .section-border {
     @apply border-b border-border;
   }
   .card-border {
-    @apply border border-border;
+    @apply border border-border rounded-lg;
   }
   .section-subtle-bg {
     @apply bg-secondary;
+  }
+  .section-light-bg {
+    background: hsl(220 18% 10%);
   }
   .text-label {
     @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground;
@@ -80,19 +83,34 @@
     position: relative;
     transition: all 0.25s ease;
   }
+  .cta-button:hover {
+    transform: scale(1.03);
+  }
+
+  .cta-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    color: hsl(var(--primary-foreground));
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.4);
+  }
+  .cta-gradient:hover {
+    box-shadow: 0 8px 30px -4px hsl(var(--primary) / 0.6);
+    transform: scale(1.03);
+  }
 
   .logo-motif {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L45 20 L45 40 L30 50 L15 40 L15 20 Z' fill='none' stroke='%237c3aed' stroke-width='0.5' opacity='0.06'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L45 20 L45 40 L30 50 L15 40 L15 20 Z' fill='none' stroke='%233b82f6' stroke-width='0.5' opacity='0.05'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 80px 80px;
   }
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(265 80% 60%), hsl(265 90% 75%));
+    background-image: linear-gradient(135deg, hsl(220 72% 55%), hsl(260 70% 65%));
   }
 
   .gradient-border {
-    border-image: linear-gradient(135deg, hsl(265 80% 60%), hsl(265 90% 75%)) 1;
+    border-image: linear-gradient(135deg, hsl(220 72% 50%), hsl(260 70% 62%)) 1;
   }
 }
