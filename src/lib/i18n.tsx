@@ -401,7 +401,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "agency.values.5": { en: "Long-term maintainability", zh: "長期可維護性" },
 
   // Contact
-  "contact.title": { en: "Request a Quote", zh: "聯絡我們" },
+  "contact.title": { en: "Start Your Project", zh: "開始你的專案" },
   "contact.intro": { en: "Tell us about your business and the digital platform you want to build.", zh: "歡迎留下你的需求與目標，我們會盡快回覆。" },
   "contact.location": { en: "Location", zh: "地點" },
 
