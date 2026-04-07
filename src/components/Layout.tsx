@@ -49,6 +49,7 @@ const Layout = () => {
       >
         <ArrowUp size={18} strokeWidth={1.5} />
       </button>
+      <CookieConsent />
     </div>
   );
 };
