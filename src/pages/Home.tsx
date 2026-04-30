@@ -150,6 +150,60 @@ const Home = () => {
     return shuffled.slice(0, 4);
   }, []);
 
+  type RealEstateTile = {
+    key: string;
+    name: string;
+    result: string;
+    image: string;
+    href?: string;
+    isConcept?: boolean;
+  };
+
+  const realEstateProjects: RealEstateTile[] = [
+    {
+      key: "live-at-headwater",
+      name: "Live at Headwater",
+      result: "Luxury-focused redesign to attract high-end buyers",
+      image: liveAtHeadwater,
+      href: "https://liveatheadwater.ca",
+    },
+    {
+      key: "btn-real-estate",
+      name: "BTN Real Estate",
+      result: "Improved lead flow with clearer call-to-action",
+      image: btnRealEstate,
+      href: "https://btn.bluluma.com",
+    },
+    {
+      key: "helen-lam",
+      name: "Helen Lam Real Estate",
+      result: "MLS IDX integration for easier property browsing",
+      image: helenLam,
+      href: "https://helenlam.ca",
+    },
+    {
+      key: "concept-luxury",
+      name: "Luxury Estate Concept",
+      result: "Premium aesthetic positioning for luxury listings",
+      image: conceptLuxury,
+      isConcept: true,
+    },
+    {
+      key: "concept-personal",
+      name: "Realtor Personal Brand Concept",
+      result: "Stronger personal branding for competitive markets",
+      image: conceptPersonal,
+      isConcept: true,
+    },
+    {
+      key: "concept-mobile",
+      name: "Mobile Listings Concept",
+      result: "Optimized mobile layout for on-the-go buyers",
+      image: conceptMobile,
+      isConcept: true,
+    },
+  ];
+
   const services = [
     { icon: Target, titleKey: "home.svc1.title", descKey: "home.svc1.desc" },
     { icon: Zap, titleKey: "home.svc2.title", descKey: "home.svc2.desc" },
