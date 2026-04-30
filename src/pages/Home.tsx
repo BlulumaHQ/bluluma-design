@@ -241,11 +241,11 @@ const Home = () => {
                 <ArrowRight size={20} />
               </Link>
               <Link
-                to="/work"
+                to="/proposal"
                 className="cta-button inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-lg transition-colors"
                 style={{ border: "1px solid hsl(220 14% 22%)", color: "hsl(0 0% 90%)" }}
               >
-                See How We Increase Conversions
+                Start Your Project
               </Link>
             </div>
           </RevealSection>
