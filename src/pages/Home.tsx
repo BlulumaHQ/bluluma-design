@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback, useMemo, FormEvent } from "react";
+import { useState, useEffect, useCallback, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
