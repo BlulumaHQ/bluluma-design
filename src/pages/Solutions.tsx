@@ -62,7 +62,7 @@ const Solutions = () => {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">{t(sol.titleKey)}</h2>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-8">{t(sol.descKey)}</p>
                   <Link
-                    to="/contact"
+                    to="/proposal"
                     className="inline-flex items-center gap-2 px-6 py-3 cta-solid text-sm font-semibold rounded-lg"
                   >
                     {t("cta.start-project")}
@@ -92,7 +92,7 @@ const Solutions = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home.finalcta.title")}</h2>
             <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <Link
-              to="/contact"
+              to="/proposal"
               className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}

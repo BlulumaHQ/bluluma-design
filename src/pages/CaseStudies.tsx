@@ -332,7 +332,7 @@ export const CaseStudyDetail = () => {
                 <h2 className="text-2xl font-bold mb-4">{t("casestudy.cta.title")}</h2>
                 <p className="text-muted-foreground mb-6">{t("casestudy.cta.text")}</p>
                 <Link
-                  to="/contact"
+                  to="/proposal"
                   className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
                 >
                   {t("cta.request-quote")}

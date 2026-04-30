@@ -84,7 +84,7 @@ const Agency = () => {
             <div className="mt-16 pt-16 border-t border-border text-center">
               <h2 className="text-3xl font-bold mb-4">{t("agency.work-with-us")}</h2>
               <p className="text-muted-foreground mb-8">{t("agency.work-with-us-sub")}</p>
-              <Link to="/contact" className="cta-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
+              <Link to="/proposal" className="cta-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
                 {t("cta.contact-us")}
               </Link>
             </div>

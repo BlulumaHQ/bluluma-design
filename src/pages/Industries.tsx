@@ -262,7 +262,7 @@ export const IndustryDetail = () => {
             )}
 
             <div className="pt-8 border-t border-border">
-              <Link to="/contact" className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors">
+              <Link to="/proposal" className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors">
                 {t("cta.start-project")}
               </Link>
             </div>

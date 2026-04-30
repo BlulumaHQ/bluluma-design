@@ -189,7 +189,7 @@ const InsightDetail = () => {
                   trust from the first visit.
                 </p>
                 <Link
-                  to="/contact"
+                  to="/proposal"
                   className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Talk to Bluluma
@@ -208,7 +208,7 @@ const InsightDetail = () => {
                   structural update, we can help map the next step.
                 </p>
                 <Link
-                  to="/contact"
+                  to="/proposal"
                   className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Request a Quote

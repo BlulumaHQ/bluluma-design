@@ -252,7 +252,7 @@ const ServiceDetail = () => {
               Tell us about your project and we'll get back to you with a clear plan and next steps.
             </p>
             <Link
-              to="/contact"
+              to="/proposal"
               className="inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               Start a Project
