@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback, useMemo, FormEvent } from "react";
-import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
@@ -144,11 +143,6 @@ const TestimonialsCarousel = () => {
 
 const Home = () => {
   const { t } = useLang();
-
-  const randomProjects = useMemo(() => {
-    const shuffled = [...projects].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
-  }, []);
 
   type RealEstateTile = {
     key: string;
