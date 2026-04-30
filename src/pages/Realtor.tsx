@@ -69,10 +69,10 @@ const RealtorHeader = () => {
             </a>
           ))}
           <a
-            href="#cta"
+            href="/proposal"
             className="cta-solid px-5 py-2.5 text-sm font-semibold rounded-lg"
           >
-            Get My 2 Free Previews
+            Request a Proposal
           </a>
           <Link
             to="/"
@@ -106,11 +106,11 @@ const RealtorHeader = () => {
               </a>
             ))}
             <a
-              href="#cta"
+              href="/proposal"
               onClick={() => setOpen(false)}
               className="w-full text-center cta-solid px-6 py-3.5 text-base font-semibold rounded-lg"
             >
-              Get My 2 Free Previews
+              Request a Proposal
             </a>
             <Link to="/" className="text-xs text-muted-foreground">
               Bluluma →
@@ -198,7 +198,7 @@ const Realtor = () => {
 
   const steps = [
     { n: "01", title: "Submit", desc: "Tell us about your business and current website." },
-    { n: "02", title: "Receive 2 Previews", desc: "We design two redesigned previews — before you pay." },
+    { n: "02", title: "Proposal & Direction", desc: "We send a tailored proposal with scope, timeline, and recommended direction." },
     { n: "03", title: "Choose Your Direction", desc: "Pick the version that fits your brand and goals." },
     { n: "04", title: "Launch", desc: "We finalize, integrate listings, and launch." },
   ];
@@ -271,16 +271,16 @@ const Realtor = () => {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#cta"
+                  href="/proposal"
                   className="cta-solid inline-block text-center px-8 py-4 text-base font-semibold rounded-lg"
                 >
-                  Get My 2 Free Previews
+                  Request a Proposal for My Real Estate Business
                 </a>
                 <a
-                  href="#what-we-do"
+                  href="/proposal"
                   className="inline-block text-center px-8 py-4 text-base font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
                 >
-                  See How It Works
+                  Start Your Project
                 </a>
               </div>
               <p className="mt-6 text-sm" style={{ color: "hsl(220 10% 60%)" }}>
@@ -405,7 +405,7 @@ const Realtor = () => {
                     <div className="aspect-[4/3] bg-muted overflow-hidden">
                       <img
                         src={p.image}
-                        alt={`${p.name} real estate website preview`}
+                        alt={`${p.name} real estate website mockup`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         loading="lazy"
                       />
@@ -445,7 +445,7 @@ const Realtor = () => {
                 Process
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-2xl">
-                Submit → 2 previews → choose → launch.
+                Submit → Proposal → Build → Launch.
               </h2>
             </Reveal>
             <div className="mt-14 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -503,7 +503,7 @@ const Realtor = () => {
                       ))}
                     </ul>
                     <a
-                      href="#cta"
+                      href="/proposal"
                       className={`mt-8 inline-block text-center px-6 py-3.5 text-sm font-semibold rounded-lg ${
                         p.featured
                           ? "cta-solid"
@@ -568,19 +568,19 @@ const Realtor = () => {
           <div className="section-container py-20 md:py-28 text-center">
             <Reveal>
               <h2 className="text-3xl md:text-5xl font-bold max-w-3xl mx-auto leading-tight">
-                See your new real estate website before you pay.
+                Ready to grow your real estate business?
               </h2>
               <p
                 className="mt-5 max-w-xl mx-auto text-lg leading-relaxed"
                 style={{ color: "hsl(220 10% 65%)" }}
               >
-                Two redesigned previews. Zero risk. Pick the one that fits.
+                Request a tailored proposal for your real estate website and brand.
               </p>
               <Link
-                to="/contact"
+                to="/proposal"
                 className="mt-10 inline-block cta-solid px-10 py-4 text-base font-semibold rounded-lg"
               >
-                Get My 2 Free Previews
+                Request a Proposal for My Real Estate Business
               </Link>
             </Reveal>
           </div>

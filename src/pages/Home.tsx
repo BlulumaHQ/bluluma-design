@@ -234,18 +234,18 @@ const Home = () => {
             </p>
             <div className="mt-14 flex flex-col sm:flex-row gap-5">
               <Link
-                to="/contact"
+                to="/proposal"
                 className="cta-button cta-gradient inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold rounded-lg"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={20} />
               </Link>
               <Link
-                to="/work"
+                to="/proposal"
                 className="cta-button inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-lg transition-colors"
                 style={{ border: "1px solid hsl(220 14% 22%)", color: "hsl(0 0% 90%)" }}
               >
-                See How We Increase Conversions
+                Start Your Project
               </Link>
             </div>
           </RevealSection>
@@ -497,14 +497,14 @@ const Home = () => {
             <p className="text-xl mb-12 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link
-                to="/contact"
+                to="/proposal"
                 className="cta-button cta-gradient inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold rounded-lg"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={20} />
               </Link>
               <Link
-                to="/contact"
+                to="/proposal"
                 className="cta-button inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-lg transition-colors"
                 style={{ border: "1px solid hsl(220 14% 22%)", color: "hsl(0 0% 90%)" }}
               >

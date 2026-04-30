@@ -38,7 +38,7 @@ const Pricing = () => {
               <p className="text-5xl md:text-6xl font-extrabold gradient-text">{t("home.pricing.range")}</p>
               <p className="text-muted-foreground mt-4 text-sm max-w-sm">{t("home.pricing.note")}</p>
               <Link
-                to="/contact"
+                to="/proposal"
                 className="mt-8 inline-flex items-center gap-2 px-8 py-4 cta-solid text-sm font-semibold rounded-lg"
               >
                 {t("cta.get-strategy")}
@@ -86,7 +86,7 @@ const Pricing = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home.finalcta.title")}</h2>
             <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
             <Link
-              to="/contact"
+              to="/proposal"
               className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}

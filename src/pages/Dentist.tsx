@@ -77,10 +77,10 @@ const DentistHeader = () => {
             </a>
           ))}
           <a
-            href="#cta"
+            href="/proposal"
             className="cta-solid px-5 py-2.5 text-sm font-semibold rounded-lg"
           >
-            Get My Dental Website Preview
+            Request a Proposal
           </a>
           <Link
             to="/"
@@ -114,11 +114,11 @@ const DentistHeader = () => {
               </a>
             ))}
             <a
-              href="#cta"
+              href="/proposal"
               onClick={() => setOpen(false)}
               className="w-full text-center cta-solid px-6 py-3.5 text-base font-semibold rounded-lg"
             >
-              Get My Dental Website Preview
+              Request a Proposal
             </a>
             <Link to="/" className="text-xs text-muted-foreground">
               Sonykun →
@@ -239,16 +239,16 @@ const Dentist = () => {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#cta"
+                  href="/proposal"
                   className="cta-solid inline-block text-center px-8 py-4 text-base font-semibold rounded-lg"
                 >
-                  Get My Dental Website Preview
+                  Request a Proposal for My Clinic
                 </a>
                 <a
                   href="#portfolio"
                   className="inline-block text-center px-8 py-4 text-base font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
                 >
-                  View Dental Examples
+                  Start Your Project
                 </a>
               </div>
               <p className="mt-6 text-sm" style={{ color: "hsl(220 10% 60%)" }}>
@@ -357,7 +357,7 @@ const Dentist = () => {
                     <div className="aspect-[4/3] bg-muted overflow-hidden">
                       <img
                         src={p.image}
-                        alt={`${p.name} dental website preview`}
+                        alt={`${p.name} dental website mockup`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         loading="lazy"
                       />
@@ -440,10 +440,10 @@ const Dentist = () => {
                 We help dental clinics build better websites, improve online visibility, and prepare for AI-driven search and automation.
               </p>
               <Link
-                to="/contact"
+                to="/proposal"
                 className="mt-10 inline-block cta-solid px-10 py-4 text-base font-semibold rounded-lg"
               >
-                Get My Free Preview
+                Request a Proposal for My Clinic
               </Link>
             </Reveal>
           </div>

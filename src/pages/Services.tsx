@@ -91,7 +91,7 @@ const Services = () => {
               Tell us about your project and we'll recommend the best approach for your goals and budget.
             </p>
             <Link
-              to="/contact"
+              to="/proposal"
               className="inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               Start a Project

@@ -11,7 +11,7 @@ const Footer = () => {
     { label: "Process", to: "/process" },
     { label: "Pricing", to: "/pricing" },
     { label: "Insights", to: "/insights" },
-    { label: "Contact", to: "/contact" },
+    { label: "Request a Proposal", to: "/proposal" },
   ];
 
   const serviceLinks = [

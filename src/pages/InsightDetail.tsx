@@ -166,7 +166,7 @@ const InsightDetail = () => {
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
                   style={{ color: "hsl(220 10% 60%)" }}
                 >
-                  See two redesigned previews of your website before you pay —
+                  Request a tailored proposal for a real estate website
                   built to convert visitors into buyers and sellers.
                 </p>
                 <Link
@@ -189,7 +189,7 @@ const InsightDetail = () => {
                   trust from the first visit.
                 </p>
                 <Link
-                  to="/contact"
+                  to="/proposal"
                   className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Talk to Bluluma
@@ -208,7 +208,7 @@ const InsightDetail = () => {
                   structural update, we can help map the next step.
                 </p>
                 <Link
-                  to="/contact"
+                  to="/proposal"
                   className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Request a Quote

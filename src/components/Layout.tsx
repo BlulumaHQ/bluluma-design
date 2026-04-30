@@ -32,11 +32,11 @@ const Layout = () => {
 
       {/* Sticky CTA */}
       <Link
-        to="/contact"
+        to="/proposal"
         className="fixed right-0 top-1/2 -translate-y-1/2 z-40 cta-solid text-xs font-semibold px-3 py-6 hidden md:block rounded-l-md"
         style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
       >
-        Get Strategy
+        Request a Proposal
       </Link>
 
       {/* Scroll to top */}
