@@ -21,6 +21,7 @@ import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
+import Realtor from "./pages/Realtor";
 import PageLoader from "./components/PageLoader";
 
 const ScrollToTop = () => {
@@ -58,10 +59,14 @@ const App = () => (
               <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/agency" element={<Agency />} />
               <Route path="/insights" element={<Insights />} />
+              <Route path="/insights/industry/:industry" element={<Insights />} />
+              <Route path="/insights/realtor" element={<Insights />} />
+              <Route path="/insights/dentist" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/thank-you" element={<ThankYou />} />
             </Route>
+            <Route path="/realtor" element={<Realtor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
