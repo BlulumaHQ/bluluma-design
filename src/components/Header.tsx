@@ -1,19 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/bluluma-logo.svg";
 import { useLang } from "@/lib/i18n";
+import { ChevronDown } from "lucide-react";
 
-const navLinks = [
-  { labelKey: "nav.solutions", to: "/solutions" },
-  { labelKey: "nav.work", to: "/work" },
-  { labelKey: "nav.process", to: "/process" },
-  { labelKey: "nav.pricing", to: "/pricing" },
+interface NavItem {
+  labelKey: string;
+  to?: string;
+  children?: { label: string; to: string }[];
+}
+
+const navItems: NavItem[] = [
+  { labelKey: "nav.home", to: "/" },
+  { labelKey: "nav.services", to: "/services" },
+  { labelKey: "nav.portfolio", to: "/work" },
   { labelKey: "nav.insights", to: "/insights" },
+  {
+    labelKey: "nav.industries",
+    children: [
+      { label: "Realtor", to: "/realtor" },
+      { label: "Dentist", to: "/dentist" },
+    ],
+  },
+  { labelKey: "nav.contact", to: "/contact" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { lang, setLang, t } = useLang();
 
@@ -21,6 +37,16 @@ const Header = () => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
   return (
@@ -37,25 +63,54 @@ const Header = () => {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-[15px] font-semibold transition-colors hover:text-primary ${
-                location.pathname === link.to ? "text-primary" : "text-foreground"
-              }`}
-            >
-              {t(link.labelKey)}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center gap-9" ref={dropdownRef}>
+          {navItems.map((item) => {
+            if (item.children) {
+              const isOpen = openDropdown === item.labelKey;
+              return (
+                <div key={item.labelKey} className="relative">
+                  <button
+                    onClick={() => setOpenDropdown(isOpen ? null : item.labelKey)}
+                    className="text-[15px] font-semibold text-foreground hover:text-primary transition-colors flex items-center gap-1"
+                  >
+                    {t(item.labelKey)}
+                    <ChevronDown size={14} className={`transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {isOpen && (
+                    <div className="absolute top-full left-0 mt-2 min-w-[180px] bg-background border border-border rounded-lg shadow-lg overflow-hidden z-50">
+                      {item.children.map((c) => (
+                        <Link
+                          key={c.to}
+                          to={c.to}
+                          onClick={() => setOpenDropdown(null)}
+                          className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary transition-colors"
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+            return (
+              <Link
+                key={item.to}
+                to={item.to!}
+                className={`text-[15px] font-semibold transition-colors hover:text-primary ${
+                  location.pathname === item.to ? "text-primary" : "text-foreground"
+                }`}
+              >
+                {t(item.labelKey)}
+              </Link>
+            );
+          })}
           <Link
             to="/contact"
             className="cta-solid px-6 py-2.5 text-sm font-semibold rounded-lg"
           >
             {t("cta.get-strategy-short")}
           </Link>
-          {/* Language switcher */}
           <div className="flex items-center gap-1 text-xs font-medium border border-border rounded-md overflow-hidden">
             <button
               onClick={() => setLang("en")}
@@ -72,7 +127,7 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Mobile toggle + lang */}
+        {/* Mobile toggle */}
         <div className="lg:hidden flex items-center gap-3">
           <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
             <button
@@ -104,18 +159,41 @@ const Header = () => {
       {mobileOpen && (
         <nav className="lg:hidden border-t border-border bg-background/95 backdrop-blur-md">
           <div className="section-container py-6 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileOpen(false)}
-                className={`text-base font-semibold transition-colors hover:text-primary ${
-                  location.pathname === link.to ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {t(link.labelKey)}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.children) {
+                return (
+                  <div key={item.labelKey} className="flex flex-col gap-2">
+                    <span className="text-base font-semibold text-foreground">
+                      {t(item.labelKey)}
+                    </span>
+                    <div className="pl-4 flex flex-col gap-2">
+                      {item.children.map((c) => (
+                        <Link
+                          key={c.to}
+                          to={c.to}
+                          onClick={() => setMobileOpen(false)}
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to!}
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-base font-semibold transition-colors hover:text-primary ${
+                    location.pathname === item.to ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {t(item.labelKey)}
+                </Link>
+              );
+            })}
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
