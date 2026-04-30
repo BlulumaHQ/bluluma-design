@@ -16,6 +16,9 @@ import sonykunDesign from "@/assets/projects/sonykun-design.jpg";
 import kchenConstruction from "@/assets/projects/kchen-construction.jpg";
 import helenLam from "@/assets/projects/helen-lam-real-estate.jpg";
 import calinClub from "@/assets/projects/calin-club.jpg";
+import conceptLuxury from "@/assets/projects/concept-luxury-realtor.jpg";
+import conceptPersonal from "@/assets/projects/concept-personal-brand-realtor.jpg";
+import conceptMobile from "@/assets/projects/concept-mobile-listings.jpg";
 import { Target, Zap, Gem, AlertTriangle, CheckCircle2, ArrowRight, X, Check } from "lucide-react";
 
 const projectImages: Record<string, string> = {
