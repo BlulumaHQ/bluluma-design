@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   articles,
   allCategories,
@@ -50,9 +50,9 @@ const Insights = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
   // Sync when route changes
-  if (lockedIndustry && industry !== lockedIndustry) {
-    setIndustry(lockedIndustry);
-  }
+  useEffect(() => {
+    if (lockedIndustry) setIndustry(lockedIndustry);
+  }, [lockedIndustry]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
