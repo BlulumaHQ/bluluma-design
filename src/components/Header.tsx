@@ -106,7 +106,7 @@ const Header = () => {
             );
           })}
           <Link
-            to="/contact"
+            to="/start"
             className="cta-solid px-6 py-2.5 text-sm font-semibold rounded-lg"
           >
             {t("cta.get-strategy-short")}
@@ -195,7 +195,7 @@ const Header = () => {
               );
             })}
             <Link
-              to="/contact"
+              to="/start"
               onClick={() => setMobileOpen(false)}
               className="w-full text-center cta-solid px-6 py-3.5 text-base font-semibold rounded-lg"
             >
