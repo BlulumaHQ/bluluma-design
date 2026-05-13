@@ -136,7 +136,7 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
     <div className="card-border overflow-hidden transition-all duration-300 hover:border-primary hover:-translate-y-1 group">
       <div className="aspect-[16/9] overflow-hidden border-b border-border">
         {img ? (
-          <img src={img} alt={`${project.name} — website and brand design by Bluluma Design Agency`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
+          <img src={img} alt={`${project.name} — website and brand design by Bluluma Design Agency`} className="w-full h-full object-cover" loading="lazy" />
         ) : (
           <div className="w-full h-full bg-secondary" />
         )}

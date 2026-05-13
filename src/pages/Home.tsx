@@ -373,7 +373,7 @@ const Home = () => {
                       <img
                         src={tile.image}
                         alt={`${tile.name} — real estate website project by Bluluma`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                         width={1280}
                         height={960}
@@ -416,7 +416,7 @@ const Home = () => {
                 <Link to={`/case-studies/${project.slug}`} className="group card-border bg-background p-8 block transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                   {projectImages[project.slug] && (
                     <div className="aspect-[16/9] overflow-hidden mb-6 border border-border rounded-md">
-                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
+                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   )}
                   <h3 className="text-xl font-semibold mb-2">{project.name}</h3>

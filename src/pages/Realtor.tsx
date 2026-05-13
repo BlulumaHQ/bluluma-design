@@ -462,7 +462,7 @@ const Realtor = () => {
                       <img
                         src={p.image}
                         alt={`${p.name} real estate website mockup`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
                     </div>
