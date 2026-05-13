@@ -476,6 +476,14 @@ export const LangProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("bluluma_lang", l);
   };
 
+  // Reflect language on <html lang="..."> so :lang(zh) styles apply
+  if (typeof document !== "undefined") {
+    const htmlLang = lang === "zh" ? "zh-TW" : "en";
+    if (document.documentElement.lang !== htmlLang) {
+      document.documentElement.lang = htmlLang;
+    }
+  }
+
   const t = (key: string): string => {
     const entry = translations[key];
     if (!entry) return key;
