@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUp, Mail, MessageCircle } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 
 const HIDE_ON = ["/proposal", "/start", "/contact", "/thank-you"];
 
@@ -19,31 +19,26 @@ const MobileStickyCTA = () => {
 
   return (
     <>
-      {/* Floating right-side action stack (mobile + tablet) */}
-      <div className="md:hidden fixed right-3 z-40 flex flex-col gap-2.5"
-           style={{ bottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
+      {/* Floating action — only appears after scroll, sits well below hero */}
+      <div
+        className={`md:hidden fixed right-4 z-40 flex flex-col gap-2 transition-opacity duration-300 ${
+          showTop ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        style={{ bottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}
+      >
         <a
           href="mailto:support@bluluma.com"
           aria-label="Email Bluluma"
           className="mobile-cta-fab"
         >
-          <Mail size={18} strokeWidth={1.6} />
+          <Mail size={16} strokeWidth={1.6} />
         </a>
-        <Link
-          to="/proposal"
-          aria-label="Send a message"
-          className="mobile-cta-fab"
-        >
-          <MessageCircle size={18} strokeWidth={1.6} />
-        </Link>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className={`mobile-cta-fab transition-opacity duration-300 ${
-            showTop ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+          className="mobile-cta-fab"
         >
-          <ArrowUp size={18} strokeWidth={1.6} />
+          <ArrowUp size={16} strokeWidth={1.6} />
         </button>
       </div>
 
