@@ -221,18 +221,19 @@ const Home = () => {
       {/* ═══════ HERO (DARK) ═══════ */}
       <section className="section-dark relative overflow-hidden">
         <div className="logo-motif absolute inset-0 pointer-events-none" />
-        <div className="section-container py-32 md:py-44 relative z-10">
+        <div className="section-container py-24 md:py-44 relative z-10">
           <RevealSection>
-            <p className="text-label mb-8">{t("home.hero.trust")}</p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] max-w-4xl">
+            <div className="hero-mobile-rhythm">
+            <p className="text-label">{t("home.hero.trust")}</p>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] md:leading-[1.05] max-w-4xl">
               <span className="gradient-text">{t("home.hero.h1.line1")}</span>
               <br />
               {t("home.hero.h1.line2")}
             </h1>
-            <p className="mt-10 text-xl md:text-2xl max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 65%)" }}>
+            <p className="text-lg md:text-2xl max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 65%)" }}>
               {t("home.hero.sub")}
             </p>
-            <div className="mt-14 flex flex-col sm:flex-row gap-5">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 pt-2">
               <Link
                 to="/proposal"
                 className="cta-button cta-gradient inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold rounded-lg"
@@ -247,6 +248,7 @@ const Home = () => {
               >
                 Start Your Project
               </Link>
+            </div>
             </div>
           </RevealSection>
         </div>
@@ -371,7 +373,7 @@ const Home = () => {
                       <img
                         src={tile.image}
                         alt={`${tile.name} — real estate website project by Bluluma`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                         width={1280}
                         height={960}
@@ -414,7 +416,7 @@ const Home = () => {
                 <Link to={`/case-studies/${project.slug}`} className="group card-border bg-background p-8 block transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                   {projectImages[project.slug] && (
                     <div className="aspect-[16/9] overflow-hidden mb-6 border border-border rounded-md">
-                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
+                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   )}
                   <h3 className="text-xl font-semibold mb-2">{project.name}</h3>

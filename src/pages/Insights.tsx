@@ -236,7 +236,7 @@ const Insights = () => {
                           <img
                             src={img}
                             alt={a.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            className="w-full h-full object-cover"
                             loading="lazy"
                           />
                         ) : (
