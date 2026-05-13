@@ -97,7 +97,7 @@ const Work = () => {
             outside the centered content container (≥1280px). */}
         <aside
           className="portfolio-edge-sidebar hidden min-[1600px]:block absolute top-0 bottom-0 pointer-events-none"
-          style={{ left: "calc((100vw - 1200px) / 2 - 200px)", width: 180 }}
+          style={{ left: "max(20px, calc((100vw - 1200px) / 2 - 200px))", width: 180 }}
           aria-label="Filter portfolio by industry"
         >
           <div className="sticky top-28 pointer-events-auto pt-20 md:pt-28">
