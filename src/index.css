@@ -62,6 +62,73 @@
   }
 }
 
+/* Premium Traditional Chinese typography */
+:lang(zh) body,
+html[lang="zh"] body,
+html[lang="zh-TW"] body,
+:lang(zh) p,
+:lang(zh) li,
+:lang(zh) span,
+:lang(zh) blockquote {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Inter", system-ui, sans-serif;
+  letter-spacing: 0.025em;
+  line-height: 1.85;
+}
+:lang(zh) h1,
+:lang(zh) h2,
+:lang(zh) h3,
+:lang(zh) h4,
+:lang(zh) h5,
+:lang(zh) h6 {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Inter", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+/* Mobile premium spacing & rhythm */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  :lang(zh) body,
+  :lang(zh) p,
+  :lang(zh) li {
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+  }
+  .section-padding {
+    @apply py-16;
+  }
+  .section-container {
+    @apply px-5;
+  }
+  /* Allow space for sticky bottom CTA bar */
+  main {
+    padding-bottom: 88px;
+  }
+  p {
+    max-width: 60ch;
+  }
+}
+
+/* Floating CTA stack */
+.mobile-cta-fab {
+  @apply flex items-center justify-center rounded-full bg-background border border-border shadow-lg text-foreground;
+  width: 48px;
+  height: 48px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.mobile-cta-fab:active {
+  transform: scale(0.94);
+}
+.mobile-cta-fab.is-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: transparent;
+}
+
 @layer components {
   .section-container {
     @apply max-w-[1200px] mx-auto px-6 md:px-8;
