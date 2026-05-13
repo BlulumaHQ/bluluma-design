@@ -12,6 +12,12 @@ export interface Project {
   caseStudy?: boolean;
   liveUrl?: string;
   year: number;
+  /** Optional long full-page "before" screenshot URL/path. */
+  beforeImage?: string;
+  /** Optional design preview A — long full-page screenshot + optional live URL. */
+  previewA?: { image: string; url?: string };
+  /** Optional design preview B — long full-page screenshot + optional live URL. */
+  previewB?: { image: string; url?: string };
 }
 
 export const projects: Project[] = [
