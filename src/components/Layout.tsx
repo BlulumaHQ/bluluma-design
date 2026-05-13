@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { ArrowUp } from "lucide-react";
 import CookieConsent from "./CookieConsent";
+import MobileStickyCTA from "./MobileStickyCTA";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ const Layout = () => {
         <ArrowUp size={18} strokeWidth={1.5} />
       </button>
       <CookieConsent />
+      <MobileStickyCTA />
     </div>
   );
 };
