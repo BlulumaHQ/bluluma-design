@@ -96,8 +96,8 @@ const Work = () => {
         {/* Edge sidebar — only visible when viewport is wide enough to host it
             outside the centered content container (≥1280px). */}
         <aside
-          className="portfolio-edge-sidebar hidden xl:block absolute top-0 bottom-0 pointer-events-none"
-          style={{ left: "max(24px, calc((100vw - 1200px) / 2 - 220px))", width: 200 }}
+          className="portfolio-edge-sidebar hidden min-[1600px]:block absolute top-0 bottom-0 pointer-events-none"
+          style={{ left: "calc((100vw - 1200px) / 2 - 200px)", width: 180 }}
           aria-label="Filter portfolio by industry"
         >
           <div className="sticky top-28 pointer-events-auto pt-20 md:pt-28">
@@ -137,8 +137,8 @@ const Work = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("work.all.title")}</h2>
           </RevealDiv>
 
-          {/* Horizontal filters — hidden on xl+ where the edge sidebar takes over */}
-          <div className="xl:hidden flex flex-wrap gap-2 mb-8">
+          {/* Horizontal filters — hidden when the edge sidebar takes over */}
+          <div className="min-[1600px]:hidden flex flex-wrap gap-2 mb-8">
             {filters.map((f) => (
               <button
                 key={f.value}
