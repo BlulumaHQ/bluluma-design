@@ -92,13 +92,53 @@ const Work = () => {
       </section>
 
       {/* All Projects (Subtle bg) */}
-      <section className="section-subtle-bg">
+      <section className="section-subtle-bg portfolio-layout-shell relative">
+        {/* Edge sidebar — only visible when viewport is wide enough to host it
+            outside the centered content container (≥1280px). */}
+        <aside
+          className="portfolio-edge-sidebar hidden min-[1600px]:block absolute top-0 bottom-0 pointer-events-none"
+          style={{ left: "max(20px, calc((100vw - 1200px) / 2 - 200px))", width: 180 }}
+          aria-label="Filter portfolio by industry"
+        >
+          <div className="sticky top-28 pointer-events-auto pt-20 md:pt-28">
+            <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-5">
+              {t("work.filter.label") || "Industries"}
+            </p>
+            <nav className="flex flex-col gap-1">
+              {filters.map((f) => {
+                const isActive = activeFilter === f.value;
+                return (
+                  <button
+                    key={f.value}
+                    onClick={() => setActiveFilter(f.value)}
+                    className={`group flex items-center gap-3 text-left text-sm py-2 pl-3 pr-2 rounded-md transition-colors ${
+                      isActive
+                        ? "text-primary font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <span
+                      className={`block h-px transition-all duration-300 ${
+                        isActive
+                          ? "w-6 bg-primary"
+                          : "w-3 bg-border group-hover:w-5 group-hover:bg-foreground/40"
+                      }`}
+                    />
+                    {f.label}
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+        </aside>
+
         <div className="section-container section-padding">
           <RevealDiv>
             <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("work.all.title")}</h2>
           </RevealDiv>
 
-          <div className="flex flex-wrap gap-2 mb-8">
+          {/* Horizontal filters — hidden when the edge sidebar takes over */}
+          <div className="min-[1600px]:hidden flex flex-wrap gap-2 mb-8">
             {filters.map((f) => (
               <button
                 key={f.value}
@@ -114,7 +154,7 @@ const Work = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          <div className="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 lg:gap-8">
             {sortedProjects.map((project, i) => (
               <RevealDiv key={project.slug} delay={i * 80}>
                 <div className="relative h-full">
