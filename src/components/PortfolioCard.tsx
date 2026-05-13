@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import type { Project } from "@/lib/projects";
 import { useLang } from "@/lib/i18n";
 
@@ -53,15 +54,21 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
 
   const viewportRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (!sources.some((source) => source.key === activeKey)) {
+      setActiveKey(sources[0].key);
+    }
+  }, [activeKey, sources]);
+
   // Reset scroll position when switching tabs.
   useEffect(() => {
     if (viewportRef.current) viewportRef.current.scrollTop = 0;
   }, [activeKey]);
 
   return (
-    <div className="group bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+    <article className="portfolio-card rounded-xl border border-border bg-card shadow-sm">
       {sources.length > 1 && (
-        <div className="flex flex-wrap gap-1 px-4 pt-4">
+        <div className="flex flex-wrap gap-1 px-5 pt-5">
           {sources.map((s) => (
             <button
               key={s.key}
@@ -70,7 +77,7 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
               className={`text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
                 activeKey === s.key
                   ? "bg-primary text-primary-foreground"
-                  : "bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-muted"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
               {s.label}
@@ -79,9 +86,8 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
         </div>
       )}
 
-      <div className={`px-4 ${sources.length > 1 ? "pt-3" : "pt-4"}`}>
-        {/* Browser chrome */}
-        <div className="flex items-center gap-1.5 px-3 py-2 bg-muted/50 border border-b-0 border-border rounded-t-lg">
+      <div className={`px-5 ${sources.length > 1 ? "pt-3" : "pt-5"}`}>
+        <div className="flex items-center gap-1.5 rounded-t-xl border border-border border-b-0 bg-muted px-3 py-2">
           <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
@@ -91,7 +97,7 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
         </div>
         <div
           ref={viewportRef}
-          className="portfolio-scroll-viewport bg-muted border border-border rounded-b-lg"
+          className="portfolio-preview-box rounded-b-xl border border-border bg-muted"
         >
           {active.src ? (
             <img
@@ -101,29 +107,29 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
               alt={`${project.name} — full-page website preview by Bluluma Design`}
             />
           ) : (
-            <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
+            <div className="flex h-full items-center justify-center p-6 text-center text-sm text-muted-foreground">
               {tt("Screenshot coming soon.", "預覽圖即將上線。")}
             </div>
           )}
         </div>
       </div>
 
-      <div className="p-6 md:p-7">
-        <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground mb-1.5">
+      <div className="portfolio-card-content p-5 md:p-6">
+        <p className="mb-1.5 text-xs uppercase tracking-[0.12em] text-muted-foreground">
           {project.industry}
         </p>
-        <h3 className="text-xl md:text-2xl font-semibold mb-2">{project.name}</h3>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">
+        <h3 className="mb-2 text-xl font-semibold md:text-2xl">{project.name}</h3>
+        <p className="mb-5 text-sm leading-relaxed text-muted-foreground md:text-base">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               {tt("View Live Website", "查看官網")} ↗
             </a>
@@ -133,7 +139,7 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
               href={project.previewA.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium px-4 py-2 rounded-lg border border-border hover:border-primary hover:text-primary transition"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
             >
               {tt("Open Preview A", "查看提案 A")} ↗
             </a>
@@ -143,22 +149,22 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
               href={project.previewB.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium px-4 py-2 rounded-lg border border-border hover:border-primary hover:text-primary transition"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
             >
               {tt("Open Preview B", "查看提案 B")} ↗
             </a>
           )}
           {project.caseStudy && (
-            <a
-              href={`/case-studies/${project.slug}`}
-              className="text-sm font-medium px-4 py-2 rounded-lg border border-border hover:border-primary hover:text-primary transition"
+            <Link
+              to={`/case-study/${project.slug}`}
+              className="rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
             >
               {tt("View Case Study", "查看案例研究")} →
-            </a>
+            </Link>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
