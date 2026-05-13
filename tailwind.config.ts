@@ -14,7 +14,22 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: [
+          "Inter",
+          "Noto Sans TC",
+          "PingFang TC",
+          "Microsoft JhengHei",
+          "system-ui",
+          "sans-serif",
+        ],
+        zh: [
+          "Noto Sans TC",
+          "PingFang TC",
+          "Microsoft JhengHei",
+          "Inter",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       colors: {
         border: "hsl(var(--border))",
