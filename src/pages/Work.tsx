@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import ProjectCard from "@/components/ProjectCard";
+import PortfolioCard from "@/components/PortfolioCard";
 import { projects, type ProjectCategory } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
@@ -81,10 +81,10 @@ const Work = () => {
           <RevealDiv>
             <h2 className="text-2xl md:text-3xl font-bold mb-8">{t("work.featured.title")}</h2>
           </RevealDiv>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {featuredProjects.map((project, i) => (
               <RevealDiv key={project.slug} delay={i * 80}>
-                <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
+                <PortfolioCard project={project} imageImport={projectImages[project.slug]} />
               </RevealDiv>
             ))}
           </div>
@@ -114,7 +114,7 @@ const Work = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {sortedProjects.map((project, i) => (
               <RevealDiv key={project.slug} delay={i * 80}>
                 <div className="relative h-full">
@@ -123,7 +123,7 @@ const Work = () => {
                       NEW
                     </span>
                   )}
-                  <ProjectCard project={project} imageImport={projectImages[project.slug]} mode="live" />
+                  <PortfolioCard project={project} imageImport={projectImages[project.slug]} />
                 </div>
               </RevealDiv>
             ))}
