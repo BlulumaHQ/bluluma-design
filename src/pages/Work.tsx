@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
-import PortfolioCard from "@/components/PortfolioCard";
+import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
-import { getProjectImage } from "@/lib/portfolio-system";
-import { portfolioIndustries, projects, type ProjectIndustry } from "@/lib/projects";
+import { usePortfolioItems } from "@/lib/cms";
 
 const RevealDiv = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -13,14 +12,21 @@ const RevealDiv = ({ children, delay = 0, className = "" }: { children: React.Re
 const Work = () => {
   const { t, lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
-  const [activeFilter, setActiveFilter] = useState<ProjectIndustry | "All">("All");
+  const { items, loading, error } = usePortfolioItems();
+  const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  const visibleProjects = useMemo(
+  const serviceFilters = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach((item) => item.details?.services?.forEach((s) => set.add(s)));
+    return ["All", ...Array.from(set).sort()];
+  }, [items]);
+
+  const visibleItems = useMemo(
     () =>
-      [...projects]
-        .sort((a, b) => b.year - a.year)
-        .filter((project) => activeFilter === "All" || project.industry === activeFilter),
-    [activeFilter],
+      activeFilter === "All"
+        ? items
+        : items.filter((item) => item.details?.services?.includes(activeFilter)),
+    [items, activeFilter],
   );
 
   return (
@@ -39,22 +45,22 @@ const Work = () => {
         >
           <div className="sticky top-28">
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              {tt("Industries", "產業")}
+              {tt("Services", "服務類別")}
             </p>
             <nav className="flex flex-col gap-1.5">
-              {portfolioIndustries.map((industry) => {
-                const isActive = activeFilter === industry;
+              {serviceFilters.map((service) => {
+                const isActive = activeFilter === service;
                 return (
                   <button
-                    key={industry}
+                    key={service}
                     type="button"
-                    onClick={() => setActiveFilter(industry)}
+                    onClick={() => setActiveFilter(service)}
                     className={`flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors ${
                       isActive ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     <span className={`h-px transition-all ${isActive ? "w-6 bg-primary" : "w-3 bg-border"}`} />
-                    {industry}
+                    {service}
                   </button>
                 );
               })}
@@ -75,33 +81,43 @@ const Work = () => {
           </RevealDiv>
 
           <div className="mb-8 flex gap-2 overflow-x-auto pb-1 xl:hidden">
-            {portfolioIndustries.map((industry) => (
+            {serviceFilters.map((service) => (
               <button
-                key={industry}
+                key={service}
                 type="button"
-                onClick={() => setActiveFilter(industry)}
+                onClick={() => setActiveFilter(service)}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
-                  activeFilter === industry
+                  activeFilter === service
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background text-muted-foreground"
                 }`}
               >
-                {industry}
+                {service}
               </button>
             ))}
           </div>
 
           <div className="portfolio-grid grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3 xl:gap-8">
-            {visibleProjects.map((project, index) => (
-              <RevealDiv key={project.slug} delay={index * 60}>
-                <PortfolioCard project={project} imageImport={getProjectImage(project)} />
+            {visibleItems.map((item, index) => (
+              <RevealDiv key={item.id} delay={index * 60}>
+                <CmsPortfolioCard item={item} />
               </RevealDiv>
             ))}
           </div>
 
-          {visibleProjects.length === 0 && (
+          {loading && (
             <p className="py-12 text-center text-sm text-muted-foreground">
-              {tt("No projects found in this industry.", "此產業目前沒有作品。")}
+              {tt("Loading portfolio…", "正在載入作品…")}
+            </p>
+          )}
+          {!loading && error && (
+            <p className="py-12 text-center text-sm text-destructive">
+              {tt("Unable to load portfolio projects.", "無法載入作品資料。")}
+            </p>
+          )}
+          {!loading && !error && visibleItems.length === 0 && (
+            <p className="py-12 text-center text-sm text-muted-foreground">
+              {tt("No portfolio projects found.", "目前沒有作品。")}
             </p>
           )}
         </div>
