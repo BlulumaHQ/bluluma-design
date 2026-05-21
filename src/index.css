@@ -268,3 +268,30 @@ html[lang="zh-TW"] body,
     height: 520px;
   }
 }
+
+/* Portfolio preview viewport — hidden scrollbar, scroll only on hover */
+.portfolio-preview-viewport {
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.portfolio-preview-viewport::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.portfolio-preview-viewport:hover {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+}
+.portfolio-preview-viewport:hover::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.portfolio-preview-viewport:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.4);
+  border-radius: 3px;
+}
+.portfolio-preview-viewport:hover::-webkit-scrollbar-track {
+  background: transparent;
+}
