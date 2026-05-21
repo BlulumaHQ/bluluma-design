@@ -21,17 +21,19 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
   const liveUrl = details?.live_url || undefined;
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+    <CardWrapper liveUrl={liveUrl} title={item.title}>
+      <div className="portfolio-preview-viewport relative bg-muted" style={{ height: 320 }}>
         {item.featured_image_url ? (
           <img
             src={item.featured_image_url}
             alt={`${item.title} — portfolio project by Bluluma`}
             loading="lazy"
-            className="h-full w-full object-cover"
+            className="block w-full h-auto"
           />
         ) : (
-          <Placeholder label={tt("Preview coming soon", "預覽圖即將上線")} />
+          <div className="absolute inset-0">
+            <Placeholder label={tt("Preview coming soon", "預覽圖即將上線")} />
+          </div>
         )}
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
@@ -63,21 +65,43 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
             ))}
           </div>
         )}
-        <div className="mt-auto flex flex-wrap gap-2 pt-2">
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
+        {liveUrl && (
+          <div className="mt-auto pt-2">
+            <span className="block w-full rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground transition-opacity group-hover:opacity-90">
               {tt("Open Live Website", "查看官網")} ↗
-            </a>
-          )}
-        </div>
+            </span>
+          </div>
+        )}
       </div>
-    </article>
+    </CardWrapper>
   );
+};
+
+const CardWrapper = ({
+  liveUrl,
+  title,
+  children,
+}: {
+  liveUrl?: string;
+  title: string;
+  children: React.ReactNode;
+}) => {
+  const cls =
+    "group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10";
+  if (liveUrl) {
+    return (
+      <a
+        href={liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${title} live website in a new tab`}
+        className={cls}
+      >
+        {children}
+      </a>
+    );
+  }
+  return <article className={cls}>{children}</article>;
 };
 
 export default CmsPortfolioCard;
