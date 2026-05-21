@@ -145,6 +145,7 @@ const TestimonialsCarousel = () => {
 
 const Home = () => {
   const { t } = useLang();
+  const { items: featuredPortfolio, loading: portfolioLoading, error: portfolioError } = usePortfolioItems({ featuredOnly: true, limit: 6 });
 
   type RealEstateTile = {
     key: string;
