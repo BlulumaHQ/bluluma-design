@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
+import { usePortfolioItems } from "@/lib/cms";
+import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
 import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
