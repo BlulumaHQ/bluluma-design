@@ -221,44 +221,11 @@ const Dentist = () => {
     { icon: Bot, label: tt("AI-ready structure for future automation", "預留 AI 自動化結構") },
   ];
 
-  const portfolio = [
-    {
-      name: "SmileCraft Dental Clinic",
-      tag: tt("Family Dental", "家庭牙科"),
-      desc: tt("Clean modern clinic, focus on family dentistry.", "簡潔現代的診所，專注於家庭牙科。"),
-      image: smilecraftImg,
-    },
-    {
-      name: "BrightPath Dental Studio",
-      tag: tt("Cosmetic", "美學牙科"),
-      desc: tt("High-end aesthetic dental branding.", "高端美學牙科品牌設計。"),
-      image: brightpathImg,
-    },
-    {
-      name: "WestSide Dental Care",
-      tag: tt("Community Clinic", "社區診所"),
-      desc: tt("Local community clinic feel.", "在地社區診所的親切感。"),
-      image: westsideImg,
-    },
-    {
-      name: "PureSmile Implant Centre",
-      tag: tt("Implant Specialist", "植牙專科"),
-      desc: tt("Implant-focused professional site.", "專注植牙的專業網站。"),
-      image: puresmileImg,
-    },
-    {
-      name: "CityCore Dental Group",
-      tag: tt("Multi-Location", "多分院"),
-      desc: tt("Multi-location clinic branding.", "多分院診所品牌設計。"),
-      image: citycoreImg,
-    },
-    {
-      name: "GentleTouch Family Dental",
-      tag: tt("Patient-First", "患者優先"),
-      desc: tt("Friendly, patient-first design.", "友善、以患者為先的設計。"),
-      image: gentletouchImg,
-    },
-  ];
+  const { items: portfolio } = useRandomPortfolioByCategory(
+    "dental-healthcare",
+    6,
+  );
+  const featured: PortfolioItem | undefined = portfolio[0];
 
   return (
     <div id="top" className="flex flex-col min-h-screen">
@@ -413,34 +380,51 @@ const Dentist = () => {
             </Reveal>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolio.map((p, i) => (
-                <Reveal key={p.name} delay={i * 60}>
-                  <div className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                    <div className="aspect-[4/3] bg-muted overflow-hidden">
-                      <img
-                        src={p.image}
-                        alt={`${p.name} dental website mockup`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <span className="inline-block w-fit text-[10px] uppercase tracking-widest text-primary font-semibold border border-primary/30 bg-primary/5 rounded px-2 py-1 mb-3">
-                        {p.tag}
-                      </span>
-                      <h3 className="text-lg font-bold">{p.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                        {p.desc}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+              {portfolio.map((p, i) => {
+                const summary = p.details?.short_summary || p.excerpt || "";
+                const tag = p.category?.name;
+                return (
+                  <Reveal key={p.id} delay={i * 60}>
+                    <Link
+                      to={getPortfolioUrl(p)}
+                      className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-colors duration-300 h-full flex flex-col"
+                    >
+                      <div className="aspect-[4/3] bg-muted overflow-hidden">
+                        {p.featured_image_url ? (
+                          <img
+                            src={p.featured_image_url}
+                            alt={`${p.title} dental website mockup`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                            {tt("Preview coming soon", "預覽圖即將上線")}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6 flex flex-col flex-1">
+                        {tag && (
+                          <span className="inline-block w-fit text-[10px] uppercase tracking-widest text-primary font-semibold border border-primary/30 bg-primary/5 rounded px-2 py-1 mb-3">
+                            {tag}
+                          </span>
+                        )}
+                        <h3 className="text-lg font-bold">{p.title}</h3>
+                        {summary && (
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
+                            {summary}
+                          </p>
+                        )}
+                        <span className="mt-5 inline-flex items-center text-xs font-semibold text-primary">
+                          {tt("View Project →", "查看作品 →")}
+                        </span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </div>
 
-            <p className="mt-8 text-xs text-muted-foreground">
-              {tt("Mock portfolio examples for presentation purposes.", "示意作品集範例，僅供呈現參考。")}
-            </p>
           </div>
         </section>
 
