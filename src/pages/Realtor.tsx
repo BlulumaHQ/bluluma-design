@@ -6,12 +6,11 @@ import { useLang } from "@/lib/i18n";
 import { LayoutDashboard, Building2, FileText } from "lucide-react";
 import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/realtor/hero-mockup.jpg";
-import sterlingImg from "@/assets/realtor/sterling-wong.jpg";
-import tiffanyImg from "@/assets/realtor/tiffany-tseng.jpg";
-import ericImg from "@/assets/realtor/eric-kim.jpg";
-import preSaleImg from "@/assets/realtor/pre-sale.jpg";
-import helenImg from "@/assets/projects/helen-lam-real-estate.jpg";
-import luxuryImg from "@/assets/projects/concept-luxury-realtor.jpg";
+import {
+  useRandomPortfolioByCategory,
+  getPortfolioUrl,
+  type PortfolioItem,
+} from "@/lib/cms";
 
 const Reveal = ({
   children,
@@ -37,10 +36,34 @@ const formatDate = (iso: string, lang: "en" | "zh") =>
     day: "numeric",
   });
 
+/* Minimal text-only language switcher used in industry landing headers */
+const MiniLangSwitcher = () => {
+  const { lang, setLang } = useLang();
+  const base = "text-xs font-medium tracking-wide transition-colors";
+  return (
+    <div className="flex items-center gap-1.5">
+      <button
+        onClick={() => setLang("en")}
+        className={`${base} ${lang === "en" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
+      <span className="text-muted-foreground/40 text-xs">/</span>
+      <button
+        onClick={() => setLang("zh")}
+        className={`${base} ${lang === "zh" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="切換到中文"
+      >
+        中文
+      </button>
+    </div>
+  );
+};
+
 /* ── Local minimal header for /realtor only ── */
 const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const [open, setOpen] = useState(false);
-  const { lang, setLang } = useLang();
   const links = [
     { label: tt("Home", "首頁"), to: "#top" },
     { label: tt("What We Do", "服務內容"), to: "#what-we-do" },
@@ -53,46 +76,44 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="section-container flex items-center justify-between h-20">
-        <a href="#top" className="flex-shrink-0 flex items-center gap-3">
-          <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
-          <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-            {tt("for Realtors", "房地產經紀專屬")}
-          </span>
-        </a>
+        <div className="flex items-center gap-8">
+          <a href="#top" className="flex-shrink-0 flex items-center gap-3">
+            <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
+            <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
+              {tt("for Realtors", "房地產經紀專屬")}
+            </span>
+          </a>
+          <nav className="hidden lg:flex items-center gap-6">
+            {links.map((l) => (
+              <a
+                key={l.label}
+                href={l.to}
+                className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
 
-        <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.to}
-              className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="hidden lg:flex items-center gap-5">
           <a
             href="/proposal"
             className="cta-solid px-5 py-2.5 text-sm font-semibold rounded-lg"
           >
             {tt("Request a Proposal", "申請提案")}
           </a>
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2.5 py-1.5 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2.5 py-1.5 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+          <MiniLangSwitcher />
           <Link
             to="/"
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
           >
-            Bluluma →
+            {tt("Back to Bluluma", "返回 Bluluma")} →
           </Link>
-        </nav>
+        </div>
 
-        <div className="lg:hidden flex items-center gap-3">
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2 py-1 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+        <div className="lg:hidden flex items-center gap-4">
+          <MiniLangSwitcher />
           <button
             className="flex flex-col gap-1.5 p-2"
             onClick={() => setOpen(!open)}
@@ -125,7 +146,7 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
               {tt("Request a Proposal", "申請提案")}
             </a>
             <Link to="/" className="text-xs text-muted-foreground">
-              Bluluma →
+              {tt("Back to Bluluma", "返回 Bluluma")} →
             </Link>
           </div>
         </nav>
