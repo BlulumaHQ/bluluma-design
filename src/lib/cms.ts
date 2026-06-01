@@ -1,5 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import {
+  CATEGORY_DB_SLUGS,
+  OTHERS_SLUG,
+  VISIBLE_CMS_CATEGORY_SLUGS,
+} from "./portfolioCategories";
 
 const SUPABASE_URL = "https://uzdjwpkgldzhnoxjeyrw.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ifsg2zxajGqu19GsJ2X4RQ_KHBHGIvi";
@@ -201,27 +206,76 @@ export function useRandomPortfolioItems(limit = 12) {
   return { items, loading, error };
 }
 
-// Random portfolio items scoped to a single category slug.
-export async function fetchRandomPortfolioByCategory(
-  categorySlug: string,
-  limit = 6,
-): Promise<PortfolioItem[]> {
+// Resolve a sidebar slug to the list of CMS category slugs it should query.
+const dbSlugsFor = (sidebarSlug: string): string[] =>
+  CATEGORY_DB_SLUGS[sidebarSlug] ?? [sidebarSlug];
+
+// Fetch the IDs of content items linked to ANY of the given CMS category slugs.
+async function fetchContentIdsForSlugs(slugs: string[]): Promise<string[]> {
+  if (slugs.length === 0) return [];
   const { data: catRows, error: catErr } = await cms
     .from("categories")
     .select("id")
     .eq("client_id", BLULUMA_CLIENT_ID)
     .eq("category_type", "portfolio")
-    .eq("slug", categorySlug)
-    .limit(1);
+    .in("slug", slugs);
   if (catErr) throw catErr;
-  const catId = (catRows as { id: string }[] | null)?.[0]?.id;
-  if (!catId) return [];
+  const catIds = ((catRows as { id: string }[] | null) ?? []).map((r) => r.id);
+  if (catIds.length === 0) return [];
   const { data: links, error: linkErr } = await cms
     .from("content_categories")
     .select("content_id")
-    .eq("category_id", catId);
+    .in("category_id", catIds);
   if (linkErr) throw linkErr;
-  const ids = (links as { content_id: string }[] | null)?.map((l) => l.content_id) ?? [];
+  const ids = ((links as { content_id: string }[] | null) ?? []).map(
+    (l) => l.content_id,
+  );
+  return Array.from(new Set(ids));
+}
+
+// Fetch content IDs that should fall under the "Others" bucket: items whose
+// every assigned portfolio category is outside the visible sidebar set
+// (or items with no portfolio category at all).
+async function fetchOthersContentIds(): Promise<string[]> {
+  const { data, error } = await cms
+    .from("content_items")
+    .select("id, content_categories(categories(slug, category_type))")
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID);
+  if (error) throw error;
+  const rows = (data ?? []) as Array<{
+    id: string;
+    content_categories?: Array<{
+      categories:
+        | { slug: string; category_type: string }
+        | Array<{ slug: string; category_type: string }>
+        | null;
+    }>;
+  }>;
+  return rows
+    .filter((row) => {
+      const cats = (row.content_categories ?? [])
+        .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+        .filter(
+          (c): c is { slug: string; category_type: string } =>
+            !!c && c.category_type === "portfolio",
+        );
+      if (cats.length === 0) return true;
+      return !cats.some((c) => VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug));
+    })
+    .map((r) => r.id);
+}
+
+// Random portfolio items scoped to a single category slug.
+export async function fetchRandomPortfolioByCategory(
+  categorySlug: string,
+  limit = 6,
+): Promise<PortfolioItem[]> {
+  const ids =
+    categorySlug === OTHERS_SLUG
+      ? await fetchOthersContentIds()
+      : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
   if (ids.length === 0) return [];
   const { data, error } = await cms
     .from("content_items")
@@ -266,22 +320,10 @@ export async function fetchPortfolioPage(
 ): Promise<PaginatedPortfolio> {
   let categoryFilterIds: string[] | null = null;
   if (categorySlug) {
-    const { data: catRows, error: catErr } = await cms
-      .from("categories")
-      .select("id")
-      .eq("client_id", BLULUMA_CLIENT_ID)
-      .eq("category_type", "portfolio")
-      .eq("slug", categorySlug)
-      .limit(1);
-    if (catErr) throw catErr;
-    const catId = (catRows as { id: string }[] | null)?.[0]?.id;
-    if (!catId) return { items: [], total: 0 };
-    const { data: links, error: linkErr } = await cms
-      .from("content_categories")
-      .select("content_id")
-      .eq("category_id", catId);
-    if (linkErr) throw linkErr;
-    categoryFilterIds = (links as { content_id: string }[] | null)?.map((l) => l.content_id) ?? [];
+    categoryFilterIds =
+      categorySlug === OTHERS_SLUG
+        ? await fetchOthersContentIds()
+        : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
     if (categoryFilterIds.length === 0) return { items: [], total: 0 };
   }
 
@@ -332,6 +374,14 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
   if (error) throw error;
   const counts: Record<string, number> = {};
   let total = 0;
+  // Reverse map: CMS slug → sidebar slug it rolls up into.
+  const cmsToSidebar: Record<string, string> = {};
+  Object.entries(CATEGORY_DB_SLUGS).forEach(([sidebar, dbSlugs]) => {
+    dbSlugs.forEach((s) => {
+      cmsToSidebar[s] = sidebar;
+    });
+  });
+  let othersCount = 0;
   (data ?? []).forEach((row: {
     content_categories?: Array<{
       categories:
@@ -341,13 +391,28 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
     }>;
   }) => {
     total += 1;
-    (row.content_categories ?? []).forEach((cc) => {
-      const c = Array.isArray(cc.categories) ? cc.categories[0] : cc.categories;
-      if (c && c.category_type === "portfolio") {
-        counts[c.slug] = (counts[c.slug] ?? 0) + 1;
+    const cats = (row.content_categories ?? [])
+      .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+      .filter(
+        (c): c is { slug: string; category_type: string } =>
+          !!c && c.category_type === "portfolio",
+      );
+    const sidebarBuckets = new Set<string>();
+    cats.forEach((c) => {
+      const bucket = cmsToSidebar[c.slug] ?? c.slug;
+      if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
+        sidebarBuckets.add(bucket);
       }
     });
+    if (sidebarBuckets.size === 0) {
+      othersCount += 1;
+    } else {
+      sidebarBuckets.forEach((slug) => {
+        counts[slug] = (counts[slug] ?? 0) + 1;
+      });
+    }
   });
+  if (othersCount > 0) counts[OTHERS_SLUG] = othersCount;
   counts.__all__ = total;
   return counts;
 }
