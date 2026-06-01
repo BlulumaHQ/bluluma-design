@@ -81,7 +81,7 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
           <a href="#top" className="flex-shrink-0 flex items-center gap-3">
             <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
             <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-              {tt("for Realtors", "房地產經紀專屬")}
+            {tt("for Real Estate", "房地產專屬")}
             </span>
           </a>
           <nav className="hidden lg:flex items-center gap-6">
