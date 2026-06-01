@@ -53,7 +53,10 @@ interface RawRow {
   seo_description?: string | null;
   portfolio_details: PortfolioDetails[] | PortfolioDetails | null;
   content_categories?: Array<{
-    categories: { id: string; name: string; slug: string; category_type: string } | null;
+    categories:
+      | { id: string; name: string; slug: string; category_type: string }
+      | Array<{ id: string; name: string; slug: string; category_type: string }>
+      | null;
   }> | null;
 }
 
@@ -61,12 +64,13 @@ const mapRow = (row: RawRow): PortfolioItem => {
   const details = Array.isArray(row.portfolio_details)
     ? row.portfolio_details[0] ?? null
     : row.portfolio_details;
-  const catLink = (row.content_categories ?? []).find(
-    (cc) => cc.categories && cc.categories.category_type === "portfolio",
-  );
-  const category = catLink?.categories
-    ? { id: catLink.categories.id, name: catLink.categories.name, slug: catLink.categories.slug }
-    : null;
+  const catCandidates = (row.content_categories ?? [])
+    .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+    .filter((c): c is { id: string; name: string; slug: string; category_type: string } =>
+      !!c && c.category_type === "portfolio",
+    );
+  const first = catCandidates[0];
+  const category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
   return {
     id: row.id,
     title: row.title,
@@ -107,7 +111,7 @@ export async function fetchPortfolioItems(opts: FetchOptions = {}): Promise<Port
 
   const { data, error } = await query;
   if (error) throw error;
-  return (data as RawRow[] | null)?.map(mapRow) ?? [];
+  return (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
 }
 
 export async function fetchPortfolioBySlug(
@@ -122,7 +126,7 @@ export async function fetchPortfolioBySlug(
     .eq("client_id", BLULUMA_CLIENT_ID)
     .eq("slug", slug);
   if (error) throw error;
-  const items = (data as RawRow[] | null)?.map(mapRow) ?? [];
+  const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
   return items.find((i) => i.category?.slug === categorySlug) ?? items[0] ?? null;
 }
 
