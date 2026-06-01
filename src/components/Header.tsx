@@ -24,8 +24,8 @@ const navItems: NavItem[] = [
   {
     labelKey: "nav.industries",
     children: [
-      { label: "Realtor", to: "/realtor" },
-      { label: "Dentist", to: "/dentist" },
+      { label: "Real Estate", to: "/real-estate" },
+      { label: "Healthcare", to: "/healthcare" },
     ],
   },
   { labelKey: "nav.contact", to: "/contact" },
