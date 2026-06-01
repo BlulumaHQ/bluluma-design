@@ -355,14 +355,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ SELECTED WORK (WHITE) ═══════ */}
-      <section className="section-border">
+      {/* ═══════ REAL RESULTS — RANDOM CMS PORTFOLIO (SUBTLE BG) ═══════ */}
+      <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
-            <div className="flex items-baseline justify-between mb-12">
-              <h2 className="text-3xl md:text-5xl font-bold">Selected Work</h2>
-              <span className="text-xs text-muted-foreground tracking-wide uppercase hidden md:block">{t("home.work.label")}</span>
-            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-3">{t("home.proof.title")}</h2>
+            <p className="text-xl text-muted-foreground mb-12">{t("home.proof.sub")}</p>
           </RevealSection>
           {portfolioLoading && (
             <p className="py-12 text-center text-sm text-muted-foreground">Loading portfolio…</p>
@@ -370,54 +368,28 @@ const Home = () => {
           {!portfolioLoading && portfolioError && (
             <p className="py-12 text-center text-sm text-destructive">Unable to load portfolio projects.</p>
           )}
-          {!portfolioLoading && !portfolioError && featuredPortfolio.length === 0 && (
+          {!portfolioLoading && !portfolioError && randomPortfolio.length === 0 && (
             <p className="py-12 text-center text-sm text-muted-foreground">No portfolio projects found.</p>
           )}
-          {!portfolioLoading && featuredPortfolio.length > 0 && (
+          {!portfolioLoading && randomPortfolio.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredPortfolio.map((item, i) => (
-                <RevealSection key={item.id} delay={i * 80} className="h-full">
+              {randomPortfolio.map((item, i) => (
+                <RevealSection key={item.id} delay={i * 60} className="h-full">
                   <CmsPortfolioCard item={item} />
                 </RevealSection>
               ))}
             </div>
           )}
-          <RevealSection delay={400}>
+          <RevealSection delay={300}>
             <div className="mt-14 text-center">
-              <Link to="/portfolio" className="cta-button inline-flex items-center gap-2 px-10 py-4 border border-border text-base font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors">
-                {t("cta.view-all-work")} <ArrowRight size={16} />
+              <Link
+                to="/portfolio"
+                className="cta-button inline-flex items-center gap-2 px-10 py-4 border border-border text-base font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+              >
+                View All Projects <ArrowRight size={16} />
               </Link>
             </div>
           </RevealSection>
-        </div>
-      </section>
-
-      {/* ═══════ PROOF / CASE STUDIES (SUBTLE BG) ═══════ */}
-      <section className="section-border section-subtle-bg">
-        <div className="section-container section-padding">
-          <RevealSection>
-            <h2 className="text-3xl md:text-5xl font-bold mb-3">{t("home.proof.title")}</h2>
-            <p className="text-xl text-muted-foreground mb-12">{t("home.proof.sub")}</p>
-          </RevealSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {caseStudyProjects.map((project, i) => (
-              <RevealSection key={project.slug} delay={i * 100}>
-                <Link to={`/case-studies/${project.slug}`} className="group card-border bg-background p-8 block transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
-                  {projectImages[project.slug] && (
-                    <div className="aspect-[16/9] overflow-hidden mb-6 border border-border rounded-md">
-                      <img src={projectImages[project.slug]} alt={project.name} className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                  )}
-                  <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-                  <p className="text-base text-muted-foreground mb-3">{project.industry}</p>
-                  {projectResults[project.slug] && (
-                    <p className="text-sm font-bold text-primary mb-3">{projectResults[project.slug]}</p>
-                  )}
-                  <span className="text-base font-medium text-primary">{t("cta.read-case-study")}</span>
-                </Link>
-              </RevealSection>
-            ))}
-          </div>
         </div>
       </section>
 
