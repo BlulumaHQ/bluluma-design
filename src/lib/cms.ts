@@ -201,6 +201,58 @@ export function useRandomPortfolioItems(limit = 12) {
   return { items, loading, error };
 }
 
+// Random portfolio items scoped to a single category slug.
+export async function fetchRandomPortfolioByCategory(
+  categorySlug: string,
+  limit = 6,
+): Promise<PortfolioItem[]> {
+  const { data: catRows, error: catErr } = await cms
+    .from("categories")
+    .select("id")
+    .eq("client_id", BLULUMA_CLIENT_ID)
+    .eq("category_type", "portfolio")
+    .eq("slug", categorySlug)
+    .limit(1);
+  if (catErr) throw catErr;
+  const catId = (catRows as { id: string }[] | null)?.[0]?.id;
+  if (!catId) return [];
+  const { data: links, error: linkErr } = await cms
+    .from("content_categories")
+    .select("content_id")
+    .eq("category_id", catId);
+  if (linkErr) throw linkErr;
+  const ids = (links as { content_id: string }[] | null)?.map((l) => l.content_id) ?? [];
+  if (ids.length === 0) return [];
+  const { data, error } = await cms
+    .from("content_items")
+    .select(PORTFOLIO_SELECT)
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID)
+    .in("id", ids);
+  if (error) throw error;
+  const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
+  return shuffle(items).slice(0, limit);
+}
+
+export function useRandomPortfolioByCategory(categorySlug: string, limit = 6) {
+  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchRandomPortfolioByCategory(categorySlug, limit)
+      .then((d) => !cancelled && setItems(d))
+      .catch((e) => !cancelled && setError(e instanceof Error ? e : new Error(String(e))))
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [categorySlug, limit]);
+  return { items, loading, error };
+}
+
 export interface PaginatedPortfolio {
   items: PortfolioItem[];
   total: number;
