@@ -151,6 +151,165 @@ export function getPortfolioUrl(item: PortfolioItem): string {
   return `/portfolio/${cat}/${item.slug}`;
 }
 
+const shuffle = <T,>(arr: T[]): T[] => {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+// Fetches a random sample of N published portfolio items.
+// Two-step: pull only IDs (lightweight) then fetch the chosen rows in full.
+export async function fetchRandomPortfolioItems(limit = 12): Promise<PortfolioItem[]> {
+  const { data: idRows, error: idErr } = await cms
+    .from("content_items")
+    .select("id")
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID);
+  if (idErr) throw idErr;
+  const ids = shuffle((idRows ?? []).map((r: { id: string }) => r.id)).slice(0, limit);
+  if (ids.length === 0) return [];
+  const { data, error } = await cms
+    .from("content_items")
+    .select(PORTFOLIO_SELECT)
+    .in("id", ids);
+  if (error) throw error;
+  const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
+  // Preserve the random order chosen above.
+  const order = new Map(ids.map((id, i) => [id, i]));
+  return items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
+}
+
+export function useRandomPortfolioItems(limit = 12) {
+  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchRandomPortfolioItems(limit)
+      .then((d) => !cancelled && setItems(d))
+      .catch((e) => !cancelled && setError(e instanceof Error ? e : new Error(String(e))))
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [limit]);
+  return { items, loading, error };
+}
+
+export interface PaginatedPortfolio {
+  items: PortfolioItem[];
+  total: number;
+}
+
+// Server-paginated fetch, newest first, optionally scoped to a category slug.
+export async function fetchPortfolioPage(
+  page: number,
+  perPage: number,
+  categorySlug?: string,
+): Promise<PaginatedPortfolio> {
+  let categoryFilterIds: string[] | null = null;
+  if (categorySlug) {
+    const { data: catRows, error: catErr } = await cms
+      .from("categories")
+      .select("id")
+      .eq("client_id", BLULUMA_CLIENT_ID)
+      .eq("category_type", "portfolio")
+      .eq("slug", categorySlug)
+      .limit(1);
+    if (catErr) throw catErr;
+    const catId = (catRows as { id: string }[] | null)?.[0]?.id;
+    if (!catId) return { items: [], total: 0 };
+    const { data: links, error: linkErr } = await cms
+      .from("content_categories")
+      .select("content_id")
+      .eq("category_id", catId);
+    if (linkErr) throw linkErr;
+    categoryFilterIds = (links as { content_id: string }[] | null)?.map((l) => l.content_id) ?? [];
+    if (categoryFilterIds.length === 0) return { items: [], total: 0 };
+  }
+
+  const from = (page - 1) * perPage;
+  const to = from + perPage - 1;
+  let q = cms
+    .from("content_items")
+    .select(PORTFOLIO_SELECT, { count: "exact" })
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID)
+    .order("created_at", { ascending: false })
+    .range(from, to);
+  if (categoryFilterIds) q = q.in("id", categoryFilterIds);
+  const { data, error, count } = await q;
+  if (error) throw error;
+  const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
+  return { items, total: count ?? items.length };
+}
+
+export function usePortfolioPage(page: number, perPage: number, categorySlug?: string) {
+  const [data, setData] = useState<PaginatedPortfolio>({ items: [], total: 0 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    fetchPortfolioPage(page, perPage, categorySlug)
+      .then((d) => !cancelled && setData(d))
+      .catch((e) => !cancelled && setError(e instanceof Error ? e : new Error(String(e))))
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [page, perPage, categorySlug]);
+  return { ...data, loading, error };
+}
+
+// Counts per portfolio category, used by the sidebar.
+export async function fetchPortfolioCategoryCounts(): Promise<Record<string, number>> {
+  const { data, error } = await cms
+    .from("content_items")
+    .select("id, content_categories(categories(slug, category_type))")
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID);
+  if (error) throw error;
+  const counts: Record<string, number> = {};
+  let total = 0;
+  (data ?? []).forEach((row: {
+    content_categories?: Array<{
+      categories:
+        | { slug: string; category_type: string }
+        | Array<{ slug: string; category_type: string }>
+        | null;
+    }>;
+  }) => {
+    total += 1;
+    (row.content_categories ?? []).forEach((cc) => {
+      const c = Array.isArray(cc.categories) ? cc.categories[0] : cc.categories;
+      if (c && c.category_type === "portfolio") {
+        counts[c.slug] = (counts[c.slug] ?? 0) + 1;
+      }
+    });
+  });
+  counts.__all__ = total;
+  return counts;
+}
+
+export function usePortfolioCategoryCounts() {
+  const [counts, setCounts] = useState<Record<string, number>>({});
+  useEffect(() => {
+    fetchPortfolioCategoryCounts()
+      .then(setCounts)
+      .catch(() => setCounts({}));
+  }, []);
+  return counts;
+}
+
 export function usePortfolioItems(opts: FetchOptions = {}) {
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
