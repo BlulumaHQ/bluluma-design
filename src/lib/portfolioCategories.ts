@@ -31,8 +31,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   },
   {
     slug: "realtor",
-    name: "Realtor",
-    nameZh: "房地產經紀",
+    name: "Realtor / Realty",
+    nameZh: "房地產經紀 / 房仲",
     description: {
       en: "Realtor website design portfolio — high-converting agent and team sites built for lead generation.",
       zh: "房地產經紀網站作品集 — 為經紀人打造的高轉換潛在客戶系統。",
@@ -41,7 +41,7 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   },
   {
     slug: "real-estate-development-pre-sale",
-    name: "Real Estate Development",
+    name: "Real Estate Development / Presale",
     nameZh: "建案 / 預售屋",
     description: {
       en: "Real estate development and pre-sale website portfolio — premium project sites for developers and sales teams.",
@@ -51,8 +51,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   },
   {
     slug: "construction-architecture-development",
-    name: "Construction / Architecture / Development",
-    nameZh: "建築 / 營造 / 開發",
+    name: "Construction / Architecture",
+    nameZh: "建築 / 營造",
     description: {
       en: "Construction, architecture and development portfolio — websites that showcase craftsmanship and win project bids.",
       zh: "建築、營造與開發網站作品集。",
@@ -71,8 +71,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   },
   {
     slug: "travel-tourism",
-    name: "Travel / Tourism",
-    nameZh: "旅遊 / 觀光",
+    name: "Travel / Tourism / Hotel",
+    nameZh: "旅遊 / 觀光 / 酒店",
     description: {
       en: "Travel and tourism website portfolio — destination, tour operator and hospitality experiences.",
       zh: "旅遊與觀光網站作品集。",
@@ -81,8 +81,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   },
   {
     slug: "tattoo-creative-industry",
-    name: "Tattoo / Creative Industry",
-    nameZh: "刺青 / 創意產業",
+    name: "Artist / Tattoo / Creative Industry",
+    nameZh: "藝術家 / 刺青 / 創意產業",
     description: {
       en: "Tattoo studios and creative industry portfolio — bold artist-driven brand sites.",
       zh: "刺青與創意產業網站作品集。",
@@ -100,16 +100,6 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
     seoTitle: "Restaurant Website Design Portfolio | Bluluma",
   },
   {
-    slug: "automotive",
-    name: "Automotive",
-    nameZh: "汽車產業",
-    description: {
-      en: "Automotive website portfolio — dealership, service and brand websites with measurable lead generation.",
-      zh: "汽車產業網站作品集。",
-    },
-    seoTitle: "Automotive Website Design Portfolio | Bluluma",
-  },
-  {
     slug: "professional-services-corporate",
     name: "Professional Services / Corporate",
     nameZh: "專業服務 / 企業",
@@ -119,11 +109,51 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
     },
     seoTitle: "Corporate Website Design Portfolio | Bluluma",
   },
+  {
+    slug: "others",
+    name: "Others",
+    nameZh: "其他",
+    description: {
+      en: "Other client projects that don't fit a single industry vertical.",
+      zh: "其他不屬於特定產業類別的客戶作品。",
+    },
+    seoTitle: "Other Projects Portfolio | Bluluma",
+  },
 ];
+
+// Sort order is defined by array position above. The canonical order is:
+// Dental → Beauty → Realtor → Real Estate Dev → Construction → Education →
+// Travel → Artist/Tattoo → Restaurant → Professional Services → Others.
+
+// Sidebar slug → list of underlying CMS category slugs that roll up into it.
+// Used so legacy/retired CMS slugs (e.g. "automotive") continue to surface
+// in the merged sidebar bucket without touching the CMS data.
+export const CATEGORY_DB_SLUGS: Record<string, string[]> = {
+  "professional-services-corporate": [
+    "professional-services-corporate",
+    "automotive",
+  ],
+};
+
+// CMS slugs that are intentionally not shown as their own sidebar entry.
+// Items in these categories are merged into another bucket via CATEGORY_DB_SLUGS.
+export const HIDDEN_CMS_CATEGORY_SLUGS = new Set<string>(["automotive"]);
+
+// All CMS slugs that map to a visible sidebar entry. Anything outside this
+// set is bucketed under "others".
+export const VISIBLE_CMS_CATEGORY_SLUGS: Set<string> = new Set(
+  PORTFOLIO_CATEGORIES.flatMap((c) =>
+    c.slug === "others" ? [] : (CATEGORY_DB_SLUGS[c.slug] ?? [c.slug]),
+  ),
+);
+
+export const OTHERS_SLUG = "others";
 
 // Aliases for backward compatibility / pretty URLs from the brief.
 export const CATEGORY_ALIASES: Record<string, string> = {
   "real-estate-development": "real-estate-development-pre-sale",
+  // Retired sidebar category — redirect to the merged bucket.
+  automotive: "professional-services-corporate",
 };
 
 export const resolveCategorySlug = (raw: string): string =>
