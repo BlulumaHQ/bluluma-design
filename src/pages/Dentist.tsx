@@ -499,14 +499,14 @@ const Dentist = () => {
                   {tt("Insights", "洞察")}
                 </span>
                 <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-                  {tt("Insights for Dental Clinics", "牙科診所洞察")}
+                  {tt("Insights for Healthcare Providers", "醫療業洞察")}
                 </h2>
               </Reveal>
               <Link
                 to="/insights/dentist"
                 className="text-sm font-semibold text-primary hover:underline"
               >
-                {tt("View More Dental Insights →", "查看更多牙科洞察 →")}
+                {tt("View More Healthcare Insights →", "查看更多醫療洞察 →")}
               </Link>
             </div>
 
@@ -539,22 +539,22 @@ const Dentist = () => {
           <div className="section-container py-20 md:py-28 text-center">
             <Reveal>
               <h2 className="text-3xl md:text-5xl font-bold max-w-3xl mx-auto leading-tight">
-                {tt("Ready to Improve Your Dental Clinic Website?", "準備好提升你的牙科診所網站了嗎？")}
+                {tt("Ready to Improve Your Healthcare Website?", "準備好提升你的醫療網站了嗎？")}
               </h2>
               <p
                 className="mt-5 max-w-2xl mx-auto text-lg leading-relaxed"
                 style={{ color: "hsl(220 10% 65%)" }}
               >
                 {tt(
-                  "We help dental clinics build better websites, improve online visibility, and prepare for AI-driven search and automation.",
-                  "我們協助牙科診所建立更好的網站、提升能見度，並為 AI 驅動的搜尋與自動化做好準備。"
+                  "We help healthcare providers build better websites, improve online visibility, and prepare for AI-driven search and automation.",
+                  "我們協助醫療業建立更好的網站、提升能見度，並為 AI 驅動的搜尋與自動化做好準備。"
                 )}
               </p>
               <Link
                 to="/proposal"
                 className="mt-10 inline-block cta-solid px-10 py-4 text-base font-semibold rounded-lg"
               >
-                {tt("Request a Proposal for My Clinic", "為我的診所申請提案")}
+                {tt("Request a Proposal", "申請提案")}
               </Link>
             </Reveal>
           </div>
