@@ -485,6 +485,15 @@ const Realtor = () => {
                 );
               })}
             </div>
+
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/portfolio/realtor"
+                className="inline-flex items-center px-8 py-3.5 text-sm font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
+              >
+                {tt("View All Real Estate Projects", "查看所有房地產作品")} →
+              </Link>
+            </div>
           </div>
         </section>
 
