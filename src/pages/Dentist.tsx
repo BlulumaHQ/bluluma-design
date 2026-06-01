@@ -74,10 +74,8 @@ const MiniLangSwitcher = () => {
 const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const [open, setOpen] = useState(false);
   const links = [
-    { label: tt("Home", "首頁"), to: "#top" },
-    { label: tt("Problem", "問題"), to: "#problem" },
-    { label: tt("What We Build", "我們建構什麼"), to: "#solution" },
-    { label: tt("Examples", "案例"), to: "#portfolio" },
+    { label: tt("Services", "服務"), to: "#solution" },
+    { label: tt("Portfolio", "作品集"), to: "#portfolio" },
     { label: tt("Insights", "洞察"), to: "#insights" },
     { label: tt("Contact", "聯絡"), to: "#cta" },
   ];
@@ -85,7 +83,7 @@ const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="section-container flex items-center justify-between h-20">
         <div className="flex items-center gap-8">
-          <a href="#top" className="flex-shrink-0 flex items-center gap-3">
+          <a href="https://bluluma.com" className="flex-shrink-0 flex items-center gap-3">
             <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
             <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
             {tt("for Healthcare", "醫療業專屬")}
