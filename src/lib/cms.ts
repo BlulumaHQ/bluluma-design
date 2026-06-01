@@ -225,6 +225,40 @@ const shuffle = <T,>(arr: T[]): T[] => {
   return a;
 };
 
+// Daily seed in UTC so all visitors see the same ordering for the entire day.
+const dailySeed = (salt = ""): number => {
+  const d = new Date();
+  const key = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}:${salt}`;
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+};
+
+// mulberry32 PRNG — deterministic given a seed.
+const mulberry32 = (seed: number) => {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+};
+
+const seededShuffle = <T,>(arr: T[], seed: number): T[] => {
+  const a = arr.slice();
+  const rand = mulberry32(seed);
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
 // Fetches a random sample of N published portfolio items.
 // Two-step: pull only IDs (lightweight) then fetch the chosen rows in full.
 export async function fetchRandomPortfolioItems(limit = 12): Promise<PortfolioItem[]> {
@@ -235,7 +269,11 @@ export async function fetchRandomPortfolioItems(limit = 12): Promise<PortfolioIt
     .eq("status", "published")
     .eq("client_id", BLULUMA_CLIENT_ID);
   if (idErr) throw idErr;
-  const ids = shuffle((idRows ?? []).map((r: { id: string }) => r.id)).slice(0, limit);
+  const allIds = (idRows ?? [])
+    .map((r: { id: string }) => r.id)
+    .slice()
+    .sort();
+  const ids = seededShuffle(allIds, dailySeed("home")).slice(0, limit);
   if (ids.length === 0) return [];
   const { data, error } = await cms
     .from("content_items")
@@ -347,7 +385,7 @@ export async function fetchRandomPortfolioByCategory(
     .in("id", ids);
   if (error) throw error;
   const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
-  return shuffle(items).slice(0, limit);
+  return seededShuffle(items, dailySeed(`cat:${categorySlug}`)).slice(0, limit);
 }
 
 export function useRandomPortfolioByCategory(categorySlug: string, limit = 6) {
@@ -389,18 +427,49 @@ export async function fetchPortfolioPage(
     if (categoryFilterIds.length === 0) return { items: [], total: 0 };
   }
 
+  // All Projects (no category): daily-random ordering, consistent across
+  // pagination for the entire day. Fetch all IDs, deterministically shuffle,
+  // then fetch only the page slice.
+  if (!categorySlug) {
+    const { data: idRows, error: idErr } = await cms
+      .from("content_items")
+      .select("id")
+      .eq("content_type", "portfolio")
+      .eq("status", "published")
+      .eq("client_id", BLULUMA_CLIENT_ID);
+    if (idErr) throw idErr;
+    const allIds = (idRows ?? [])
+      .map((r: { id: string }) => r.id)
+      .slice()
+      .sort();
+    const ordered = seededShuffle(allIds, dailySeed("portfolio-all"));
+    const total = ordered.length;
+    const from = (page - 1) * perPage;
+    const pageIds = ordered.slice(from, from + perPage);
+    if (pageIds.length === 0) return { items: [], total };
+    const { data, error } = await cms
+      .from("content_items")
+      .select(PORTFOLIO_SELECT)
+      .in("id", pageIds);
+    if (error) throw error;
+    const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
+    const order = new Map(pageIds.map((id, i) => [id, i]));
+    items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
+    return { items, total };
+  }
+
+  // Category pages: fixed order (created_at desc).
   const from = (page - 1) * perPage;
   const to = from + perPage - 1;
-  let q = cms
+  const { data, error, count } = await cms
     .from("content_items")
     .select(PORTFOLIO_SELECT, { count: "exact" })
     .eq("content_type", "portfolio")
     .eq("status", "published")
     .eq("client_id", BLULUMA_CLIENT_ID)
     .order("created_at", { ascending: false })
-    .range(from, to);
-  if (categoryFilterIds) q = q.in("id", categoryFilterIds);
-  const { data, error, count } = await q;
+    .range(from, to)
+    .in("id", categoryFilterIds!);
   if (error) throw error;
   const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
   return { items, total: count ?? items.length };
