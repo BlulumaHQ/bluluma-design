@@ -4,6 +4,7 @@ import {
   CATEGORY_DB_SLUGS,
   OTHERS_SLUG,
   VISIBLE_CMS_CATEGORY_SLUGS,
+  PORTFOLIO_CATEGORIES,
 } from "./portfolioCategories";
 
 const SUPABASE_URL = "https://uzdjwpkgldzhnoxjeyrw.supabase.co";
@@ -75,7 +76,17 @@ const mapRow = (row: RawRow): PortfolioItem => {
       !!c && c.category_type === "portfolio",
     );
   const first = catCandidates[0];
-  const category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
+  let category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
+  // Site-level category overrides (CMS is not modified).
+  const overrideTarget = ITEM_CATEGORY_OVERRIDES[row.slug];
+  if (overrideTarget) {
+    const def = PORTFOLIO_CATEGORIES.find((c) => c.slug === overrideTarget);
+    category = {
+      id: category?.id ?? `override-${overrideTarget}`,
+      name: def?.name ?? overrideTarget,
+      slug: overrideTarget,
+    };
+  }
   return {
     id: row.id,
     title: row.title,
@@ -92,6 +103,46 @@ const mapRow = (row: RawRow): PortfolioItem => {
     seo_description: row.seo_description ?? null,
   };
 };
+
+// Site-level category overrides keyed by content_item slug.
+// The CMS is not modified; these overrides apply to display, filtering, and counts.
+const ITEM_CATEGORY_OVERRIDES: Record<string, string> = {
+  "first-third-designs": "tattoo-creative-industry",
+};
+
+const overrideSlugsTargeting = (sidebarSlug: string): string[] =>
+  Object.entries(ITEM_CATEGORY_OVERRIDES)
+    .filter(([, target]) => target === sidebarSlug)
+    .map(([s]) => s);
+
+const overrideSlugsNotTargeting = (sidebarSlug: string): string[] =>
+  Object.entries(ITEM_CATEGORY_OVERRIDES)
+    .filter(([, target]) => target !== sidebarSlug)
+    .map(([s]) => s);
+
+async function fetchContentIdsByItemSlugs(slugs: string[]): Promise<string[]> {
+  if (slugs.length === 0) return [];
+  const { data, error } = await cms
+    .from("content_items")
+    .select("id")
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID)
+    .in("slug", slugs);
+  if (error) throw error;
+  return ((data as { id: string }[] | null) ?? []).map((r) => r.id);
+}
+
+async function applyOverridesToCategoryIds(
+  ids: string[],
+  sidebarSlug: string,
+): Promise<string[]> {
+  const addIds = await fetchContentIdsByItemSlugs(overrideSlugsTargeting(sidebarSlug));
+  const removeIds = new Set(
+    await fetchContentIdsByItemSlugs(overrideSlugsNotTargeting(sidebarSlug)),
+  );
+  return Array.from(new Set([...ids, ...addIds])).filter((id) => !removeIds.has(id));
+}
 
 interface FetchOptions {
   featuredOnly?: boolean;
@@ -272,10 +323,11 @@ export async function fetchRandomPortfolioByCategory(
   categorySlug: string,
   limit = 6,
 ): Promise<PortfolioItem[]> {
-  const ids =
+  let ids =
     categorySlug === OTHERS_SLUG
       ? await fetchOthersContentIds()
       : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
+  ids = await applyOverridesToCategoryIds(ids, categorySlug);
   if (ids.length === 0) return [];
   const { data, error } = await cms
     .from("content_items")
@@ -320,10 +372,11 @@ export async function fetchPortfolioPage(
 ): Promise<PaginatedPortfolio> {
   let categoryFilterIds: string[] | null = null;
   if (categorySlug) {
-    categoryFilterIds =
+    const baseIds =
       categorySlug === OTHERS_SLUG
         ? await fetchOthersContentIds()
         : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
+    categoryFilterIds = await applyOverridesToCategoryIds(baseIds, categorySlug);
     if (categoryFilterIds.length === 0) return { items: [], total: 0 };
   }
 
@@ -367,7 +420,7 @@ export function usePortfolioPage(page: number, perPage: number, categorySlug?: s
 export async function fetchPortfolioCategoryCounts(): Promise<Record<string, number>> {
   const { data, error } = await cms
     .from("content_items")
-    .select("id, content_categories(categories(slug, category_type))")
+    .select("id, slug, content_categories(categories(slug, category_type))")
     .eq("content_type", "portfolio")
     .eq("status", "published")
     .eq("client_id", BLULUMA_CLIENT_ID);
@@ -383,6 +436,7 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
   });
   let othersCount = 0;
   (data ?? []).forEach((row: {
+    slug?: string;
     content_categories?: Array<{
       categories:
         | { slug: string; category_type: string }
@@ -391,19 +445,24 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
     }>;
   }) => {
     total += 1;
-    const cats = (row.content_categories ?? [])
-      .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
-      .filter(
-        (c): c is { slug: string; category_type: string } =>
-          !!c && c.category_type === "portfolio",
-      );
     const sidebarBuckets = new Set<string>();
-    cats.forEach((c) => {
-      const bucket = cmsToSidebar[c.slug] ?? c.slug;
-      if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
-        sidebarBuckets.add(bucket);
-      }
-    });
+    const override = row.slug ? ITEM_CATEGORY_OVERRIDES[row.slug] : undefined;
+    if (override) {
+      sidebarBuckets.add(override);
+    } else {
+      const cats = (row.content_categories ?? [])
+        .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+        .filter(
+          (c): c is { slug: string; category_type: string } =>
+            !!c && c.category_type === "portfolio",
+        );
+      cats.forEach((c) => {
+        const bucket = cmsToSidebar[c.slug] ?? c.slug;
+        if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
+          sidebarBuckets.add(bucket);
+        }
+      });
+    }
     if (sidebarBuckets.size === 0) {
       othersCount += 1;
     } else {
