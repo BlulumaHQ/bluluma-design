@@ -4,6 +4,7 @@ import {
   CATEGORY_DB_SLUGS,
   OTHERS_SLUG,
   VISIBLE_CMS_CATEGORY_SLUGS,
+  PORTFOLIO_CATEGORIES,
 } from "./portfolioCategories";
 
 const SUPABASE_URL = "https://uzdjwpkgldzhnoxjeyrw.supabase.co";
@@ -75,7 +76,17 @@ const mapRow = (row: RawRow): PortfolioItem => {
       !!c && c.category_type === "portfolio",
     );
   const first = catCandidates[0];
-  const category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
+  let category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
+  // Site-level category overrides (CMS is not modified).
+  const overrideTarget = ITEM_CATEGORY_OVERRIDES[row.slug];
+  if (overrideTarget) {
+    const def = PORTFOLIO_CATEGORIES.find((c) => c.slug === overrideTarget);
+    category = {
+      id: category?.id ?? `override-${overrideTarget}`,
+      name: def?.name ?? overrideTarget,
+      slug: overrideTarget,
+    };
+  }
   return {
     id: row.id,
     title: row.title,
