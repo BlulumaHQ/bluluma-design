@@ -17,9 +17,8 @@ import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/dentist/hero.jpg";
 import {
   useRandomPortfolioByCategory,
-  getPortfolioUrl,
-  type PortfolioItem,
 } from "@/lib/cms";
+import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
@@ -233,7 +232,6 @@ const Dentist = () => {
     "dental-healthcare",
     6,
   );
-  const featured: PortfolioItem | undefined = portfolio[0];
 
   return (
     <div id="top" className="flex flex-col min-h-screen">
