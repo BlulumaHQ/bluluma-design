@@ -65,18 +65,17 @@ const MiniLangSwitcher = () => {
 const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const [open, setOpen] = useState(false);
   const links = [
-    { label: tt("Home", "首頁"), to: "#top" },
-    { label: tt("What We Do", "服務內容"), to: "#what-we-do" },
+    { label: tt("Services", "服務"), to: "#what-we-do" },
     { label: tt("Portfolio", "作品集"), to: "#portfolio" },
-    { label: tt("Insights", "洞察"), to: "#insights" },
     { label: tt("Pricing", "價格"), to: "#pricing" },
+    { label: tt("Insights", "洞察"), to: "#insights" },
     { label: tt("Contact", "聯絡"), to: "#cta" },
   ];
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="section-container flex items-center justify-between h-20">
         <div className="flex items-center gap-8">
-          <a href="#top" className="flex-shrink-0 flex items-center gap-3">
+          <a href="https://bluluma.com" className="flex-shrink-0 flex items-center gap-3">
             <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
             <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
             {tt("for Real Estate", "房地產專屬")}
