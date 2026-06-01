@@ -23,6 +23,7 @@ import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 import Realtor from "./pages/Realtor";
 import Dentist from "./pages/Dentist";
+import PortfolioDetail from "./pages/PortfolioDetail";
 import PageLoader from "./components/PageLoader";
 
 const ScrollToTop = () => {
@@ -48,6 +49,7 @@ const App = () => (
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/portfolio" element={<Work />} />
+              <Route path="/portfolio/:category/:slug" element={<PortfolioDetail />} />
               <Route path="/work" element={<Work />} />
               <Route path="/case-study" element={<CaseStudyList />} />
               <Route path="/case-study/:slug" element={<CaseStudyDetail />} />
