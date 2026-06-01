@@ -15,12 +15,11 @@ import {
 } from "lucide-react";
 import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/dentist/hero.jpg";
-import smilecraftImg from "@/assets/dentist/smilecraft.jpg";
-import brightpathImg from "@/assets/dentist/brightpath.jpg";
-import westsideImg from "@/assets/dentist/westside.jpg";
-import puresmileImg from "@/assets/dentist/puresmile.jpg";
-import citycoreImg from "@/assets/dentist/citycore.jpg";
-import gentletouchImg from "@/assets/dentist/gentletouch.jpg";
+import {
+  useRandomPortfolioByCategory,
+  getPortfolioUrl,
+  type PortfolioItem,
+} from "@/lib/cms";
 
 const Reveal = ({
   children,
@@ -46,10 +45,34 @@ const formatDate = (iso: string, lang: "en" | "zh") =>
     day: "numeric",
   });
 
+/* Minimal text-only language switcher used in industry landing headers */
+const MiniLangSwitcher = () => {
+  const { lang, setLang } = useLang();
+  const base = "text-xs font-medium tracking-wide transition-colors";
+  return (
+    <div className="flex items-center gap-1.5">
+      <button
+        onClick={() => setLang("en")}
+        className={`${base} ${lang === "en" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
+      <span className="text-muted-foreground/40 text-xs">/</span>
+      <button
+        onClick={() => setLang("zh")}
+        className={`${base} ${lang === "zh" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="切換到中文"
+      >
+        中文
+      </button>
+    </div>
+  );
+};
+
 /* ── Local minimal header for /dentist only ── */
 const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const [open, setOpen] = useState(false);
-  const { lang, setLang } = useLang();
   const links = [
     { label: tt("Home", "首頁"), to: "#top" },
     { label: tt("Problem", "問題"), to: "#problem" },
@@ -61,46 +84,44 @@ const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="section-container flex items-center justify-between h-20">
-        <a href="#top" className="flex-shrink-0 flex items-center gap-3">
-          <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
-          <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-            {tt("for Dental Clinics", "牙科診所專屬")}
-          </span>
-        </a>
+        <div className="flex items-center gap-8">
+          <a href="#top" className="flex-shrink-0 flex items-center gap-3">
+            <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
+            <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
+              {tt("for Dental Clinics", "牙科診所專屬")}
+            </span>
+          </a>
+          <nav className="hidden lg:flex items-center gap-6">
+            {links.map((l) => (
+              <a
+                key={l.label}
+                href={l.to}
+                className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
 
-        <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.to}
-              className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="hidden lg:flex items-center gap-5">
           <a
             href="/proposal"
             className="cta-solid px-5 py-2.5 text-sm font-semibold rounded-lg"
           >
             {tt("Request a Proposal", "申請提案")}
           </a>
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2.5 py-1.5 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2.5 py-1.5 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+          <MiniLangSwitcher />
           <Link
             to="/"
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
           >
-            Bluluma →
+            {tt("Back to Bluluma", "返回 Bluluma")} →
           </Link>
-        </nav>
+        </div>
 
-        <div className="lg:hidden flex items-center gap-3">
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2 py-1 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+        <div className="lg:hidden flex items-center gap-4">
+          <MiniLangSwitcher />
           <button
             className="flex flex-col gap-1.5 p-2"
             onClick={() => setOpen(!open)}
@@ -133,7 +154,7 @@ const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
               {tt("Request a Proposal", "申請提案")}
             </a>
             <Link to="/" className="text-xs text-muted-foreground">
-              Bluluma →
+              {tt("Back to Bluluma", "返回 Bluluma")} →
             </Link>
           </div>
         </nav>
@@ -200,44 +221,11 @@ const Dentist = () => {
     { icon: Bot, label: tt("AI-ready structure for future automation", "預留 AI 自動化結構") },
   ];
 
-  const portfolio = [
-    {
-      name: "SmileCraft Dental Clinic",
-      tag: tt("Family Dental", "家庭牙科"),
-      desc: tt("Clean modern clinic, focus on family dentistry.", "簡潔現代的診所，專注於家庭牙科。"),
-      image: smilecraftImg,
-    },
-    {
-      name: "BrightPath Dental Studio",
-      tag: tt("Cosmetic", "美學牙科"),
-      desc: tt("High-end aesthetic dental branding.", "高端美學牙科品牌設計。"),
-      image: brightpathImg,
-    },
-    {
-      name: "WestSide Dental Care",
-      tag: tt("Community Clinic", "社區診所"),
-      desc: tt("Local community clinic feel.", "在地社區診所的親切感。"),
-      image: westsideImg,
-    },
-    {
-      name: "PureSmile Implant Centre",
-      tag: tt("Implant Specialist", "植牙專科"),
-      desc: tt("Implant-focused professional site.", "專注植牙的專業網站。"),
-      image: puresmileImg,
-    },
-    {
-      name: "CityCore Dental Group",
-      tag: tt("Multi-Location", "多分院"),
-      desc: tt("Multi-location clinic branding.", "多分院診所品牌設計。"),
-      image: citycoreImg,
-    },
-    {
-      name: "GentleTouch Family Dental",
-      tag: tt("Patient-First", "患者優先"),
-      desc: tt("Friendly, patient-first design.", "友善、以患者為先的設計。"),
-      image: gentletouchImg,
-    },
-  ];
+  const { items: portfolio } = useRandomPortfolioByCategory(
+    "dental-healthcare",
+    6,
+  );
+  const featured: PortfolioItem | undefined = portfolio[0];
 
   return (
     <div id="top" className="flex flex-col min-h-screen">
@@ -375,6 +363,51 @@ const Dentist = () => {
 
         {/* PORTFOLIO */}
         <section id="portfolio" className="section-border bg-background">
+          {featured && (
+            <div className="section-container section-padding grid md:grid-cols-2 gap-12 items-center !pb-0">
+              <Reveal>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">
+                  {tt("Featured Project", "精選作品")}
+                </span>
+                <h2 className="mt-3 text-3xl md:text-4xl font-bold">
+                  {featured.title}
+                </h2>
+                <p className="mt-5 text-muted-foreground leading-relaxed">
+                  {featured.details?.short_summary ||
+                    featured.excerpt ||
+                    tt(
+                      "A recent dental website project — design direction, structure, and conversion approach.",
+                      "近期牙科網站專案 — 設計方向、結構與轉換策略。",
+                    )}
+                </p>
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="mt-8 inline-flex items-center cta-solid px-6 py-3 text-sm font-semibold rounded-lg"
+                >
+                  {tt("View Project", "查看作品")} →
+                </Link>
+              </Reveal>
+              <Reveal delay={120}>
+                {featured.featured_image_url ? (
+                  <Link
+                    to={getPortfolioUrl(featured)}
+                    className="block rounded-xl overflow-hidden border border-border shadow-lg hover:border-primary/40 transition-colors"
+                  >
+                    <img
+                      src={featured.featured_image_url}
+                      alt={`${featured.title} — featured dental project`}
+                      className="w-full h-auto block"
+                      loading="lazy"
+                    />
+                  </Link>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-border aspect-[4/3] flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {tt("Loading featured project…", "載入精選作品中…")}
+                  </div>
+                )}
+              </Reveal>
+            </div>
+          )}
           <div className="section-container section-padding">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
@@ -392,34 +425,51 @@ const Dentist = () => {
             </Reveal>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolio.map((p, i) => (
-                <Reveal key={p.name} delay={i * 60}>
-                  <div className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                    <div className="aspect-[4/3] bg-muted overflow-hidden">
-                      <img
-                        src={p.image}
-                        alt={`${p.name} dental website mockup`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <span className="inline-block w-fit text-[10px] uppercase tracking-widest text-primary font-semibold border border-primary/30 bg-primary/5 rounded px-2 py-1 mb-3">
-                        {p.tag}
-                      </span>
-                      <h3 className="text-lg font-bold">{p.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                        {p.desc}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+              {portfolio.map((p, i) => {
+                const summary = p.details?.short_summary || p.excerpt || "";
+                const tag = p.category?.name;
+                return (
+                  <Reveal key={p.id} delay={i * 60}>
+                    <Link
+                      to={getPortfolioUrl(p)}
+                      className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-colors duration-300 h-full flex flex-col"
+                    >
+                      <div className="aspect-[4/3] bg-muted overflow-hidden">
+                        {p.featured_image_url ? (
+                          <img
+                            src={p.featured_image_url}
+                            alt={`${p.title} dental website mockup`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                            {tt("Preview coming soon", "預覽圖即將上線")}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6 flex flex-col flex-1">
+                        {tag && (
+                          <span className="inline-block w-fit text-[10px] uppercase tracking-widest text-primary font-semibold border border-primary/30 bg-primary/5 rounded px-2 py-1 mb-3">
+                            {tag}
+                          </span>
+                        )}
+                        <h3 className="text-lg font-bold">{p.title}</h3>
+                        {summary && (
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
+                            {summary}
+                          </p>
+                        )}
+                        <span className="mt-5 inline-flex items-center text-xs font-semibold text-primary">
+                          {tt("View Project →", "查看作品 →")}
+                        </span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </div>
 
-            <p className="mt-8 text-xs text-muted-foreground">
-              {tt("Mock portfolio examples for presentation purposes.", "示意作品集範例，僅供呈現參考。")}
-            </p>
           </div>
         </section>
 

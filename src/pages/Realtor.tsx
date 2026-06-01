@@ -6,12 +6,11 @@ import { useLang } from "@/lib/i18n";
 import { LayoutDashboard, Building2, FileText } from "lucide-react";
 import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/realtor/hero-mockup.jpg";
-import sterlingImg from "@/assets/realtor/sterling-wong.jpg";
-import tiffanyImg from "@/assets/realtor/tiffany-tseng.jpg";
-import ericImg from "@/assets/realtor/eric-kim.jpg";
-import preSaleImg from "@/assets/realtor/pre-sale.jpg";
-import helenImg from "@/assets/projects/helen-lam-real-estate.jpg";
-import luxuryImg from "@/assets/projects/concept-luxury-realtor.jpg";
+import {
+  useRandomPortfolioByCategory,
+  getPortfolioUrl,
+  type PortfolioItem,
+} from "@/lib/cms";
 
 const Reveal = ({
   children,
@@ -37,10 +36,34 @@ const formatDate = (iso: string, lang: "en" | "zh") =>
     day: "numeric",
   });
 
+/* Minimal text-only language switcher used in industry landing headers */
+const MiniLangSwitcher = () => {
+  const { lang, setLang } = useLang();
+  const base = "text-xs font-medium tracking-wide transition-colors";
+  return (
+    <div className="flex items-center gap-1.5">
+      <button
+        onClick={() => setLang("en")}
+        className={`${base} ${lang === "en" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
+      <span className="text-muted-foreground/40 text-xs">/</span>
+      <button
+        onClick={() => setLang("zh")}
+        className={`${base} ${lang === "zh" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        aria-label="切換到中文"
+      >
+        中文
+      </button>
+    </div>
+  );
+};
+
 /* ── Local minimal header for /realtor only ── */
 const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const [open, setOpen] = useState(false);
-  const { lang, setLang } = useLang();
   const links = [
     { label: tt("Home", "首頁"), to: "#top" },
     { label: tt("What We Do", "服務內容"), to: "#what-we-do" },
@@ -53,46 +76,44 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="section-container flex items-center justify-between h-20">
-        <a href="#top" className="flex-shrink-0 flex items-center gap-3">
-          <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
-          <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-            {tt("for Realtors", "房地產經紀專屬")}
-          </span>
-        </a>
+        <div className="flex items-center gap-8">
+          <a href="#top" className="flex-shrink-0 flex items-center gap-3">
+            <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
+            <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
+              {tt("for Realtors", "房地產經紀專屬")}
+            </span>
+          </a>
+          <nav className="hidden lg:flex items-center gap-6">
+            {links.map((l) => (
+              <a
+                key={l.label}
+                href={l.to}
+                className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
 
-        <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.to}
-              className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="hidden lg:flex items-center gap-5">
           <a
             href="/proposal"
             className="cta-solid px-5 py-2.5 text-sm font-semibold rounded-lg"
           >
             {tt("Request a Proposal", "申請提案")}
           </a>
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2.5 py-1.5 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2.5 py-1.5 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+          <MiniLangSwitcher />
           <Link
             to="/"
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
           >
-            Bluluma →
+            {tt("Back to Bluluma", "返回 Bluluma")} →
           </Link>
-        </nav>
+        </div>
 
-        <div className="lg:hidden flex items-center gap-3">
-          <div className="flex items-center text-xs font-medium border border-border rounded-md overflow-hidden">
-            <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>EN</button>
-            <button onClick={() => setLang("zh")} className={`px-2 py-1 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>中文</button>
-          </div>
+        <div className="lg:hidden flex items-center gap-4">
+          <MiniLangSwitcher />
           <button
             className="flex flex-col gap-1.5 p-2"
             onClick={() => setOpen(!open)}
@@ -125,7 +146,7 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
               {tt("Request a Proposal", "申請提案")}
             </a>
             <Link to="/" className="text-xs text-muted-foreground">
-              Bluluma →
+              {tt("Back to Bluluma", "返回 Bluluma")} →
             </Link>
           </div>
         </nav>
@@ -182,60 +203,8 @@ const Realtor = () => {
     },
   ];
 
-  const portfolio = [
-    {
-      name: "Sterling Wong",
-      desc: tt(
-        "Personal real estate branding with a premium, trust-focused website presence.",
-        "個人房地產品牌，呈現高端、值得信賴的網站形象。"
-      ),
-      image: sterlingImg,
-      url: "https://sterling-wong-concept-a.lovable.app/",
-    },
-    {
-      name: "Tiffany Tseng",
-      desc: tt(
-        "Clean Realtor website structure designed for stronger positioning and lead clarity.",
-        "簡潔的房仲網站架構，強化定位與客戶轉換清晰度。"
-      ),
-      image: tiffanyImg,
-      url: "https://tiffany-tseng-concept-a.lovable.app/",
-    },
-    {
-      name: "Helen Lam",
-      desc: tt(
-        "Modern Realtor presentation with improved service flow and mobile-first layout.",
-        "現代化房仲呈現，優化服務流程與行動裝置優先佈局。"
-      ),
-      image: helenImg,
-      url: "https://helenlam-concept-a.lovable.app/",
-    },
-    {
-      name: "Eric Kim Realty",
-      desc: tt(
-        "Real estate website concept focused on stronger branding and clearer buyer/seller actions.",
-        "房地產網站概念，聚焦更強的品牌與清晰的買賣方行動引導。"
-      ),
-      image: ericImg,
-      url: "https://eric-kim-realty-concept-a.lovable.app/",
-    },
-    {
-      name: tt("Luxury Realtor Website", "豪宅房仲網站"),
-      desc: tt(
-        "Luxury-focused layout for high-end property presentation and personal branding.",
-        "聚焦豪宅的版面，用於高端物件展示與個人品牌經營。"
-      ),
-      image: luxuryImg,
-    },
-    {
-      name: tt("Pre-Sale Project Website", "預售案網站"),
-      desc: tt(
-        "Project-focused real estate website structure for development and pre-sale marketing.",
-        "以建案為核心的房地產網站結構，適用於開發與預售行銷。"
-      ),
-      image: preSaleImg,
-    },
-  ];
+  const { items: portfolio } = useRandomPortfolioByCategory("realtor", 6);
+  const featured: PortfolioItem | undefined = portfolio[0];
 
   const steps = [
     { n: "01", title: tt("Submit", "提交需求"), desc: tt("Tell us about your business and current website.", "告訴我們你的業務與目前的網站狀況。") },
@@ -405,33 +374,47 @@ const Realtor = () => {
           <div className="section-container section-padding grid md:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("Feature Listings", "精選房源")}
+                {tt("Featured Project", "精選作品")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-                {tt("Listings designed to sell, not just to display.", "為成交而設計的房源，不只是展示。")}
+                {featured?.title ??
+                  tt("Featured Realtor Project", "精選房仲作品")}
               </h2>
               <p className="mt-5 text-muted-foreground leading-relaxed">
-                {tt(
-                  "Standard MLS pages all look the same. Our Feature Listings approach turns each property into a high-conversion landing page — strong headline, curated photography, lifestyle copywriting, and a clear next step for buyers.",
-                  "標準 MLS 頁面千篇一律。我們的精選房源做法將每個物件變成高轉換的著陸頁 — 強而有力的標題、精選攝影、生活風格文案，並為買方提供清晰的下一步。"
-                )}
+                {featured?.details?.short_summary ||
+                  featured?.excerpt ||
+                  tt(
+                    "A look at a recent Realtor website project — branding, structure, and conversion design.",
+                    "近期房仲網站專案 — 品牌、架構與轉換設計。",
+                  )}
               </p>
-              <ul className="mt-6 space-y-3 text-muted-foreground">
-                <li>• {tt("Strong, headline-driven property pages", "以強標題為核心的房源頁")}</li>
-                <li>• {tt("Curated photo galleries", "精選攝影圖庫")}</li>
-                <li>• {tt("Lifestyle-focused descriptions", "聚焦生活風格的描述")}</li>
-                <li>• {tt("Clear, single call-to-action per listing", "每個房源一個清晰的 CTA")}</li>
-              </ul>
+              {featured && (
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="mt-8 inline-flex items-center cta-solid px-6 py-3 text-sm font-semibold rounded-lg"
+                >
+                  {tt("View Project", "查看作品")} →
+                </Link>
+              )}
             </Reveal>
             <Reveal delay={120}>
-              <div className="rounded-xl overflow-hidden border border-border shadow-lg">
-                <img
-                  src={luxuryImg}
-                  alt="Sample feature listing page mockup"
-                  className="w-full h-auto block"
-                  loading="lazy"
-                />
-              </div>
+              {featured?.featured_image_url ? (
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="block rounded-xl overflow-hidden border border-border shadow-lg hover:border-primary/40 transition-colors"
+                >
+                  <img
+                    src={featured.featured_image_url}
+                    alt={`${featured.title} — featured Realtor project`}
+                    className="w-full h-auto block"
+                    loading="lazy"
+                  />
+                </Link>
+              ) : (
+                <div className="rounded-xl border border-dashed border-border aspect-[4/3] flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {tt("Loading featured project…", "載入精選作品中…")}
+                </div>
+              )}
             </Reveal>
           </div>
         </section>
@@ -455,40 +438,44 @@ const Realtor = () => {
             </Reveal>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolio.map((p, i) => (
-                <Reveal key={p.name} delay={i * 60}>
-                  <div className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                    <div className="aspect-[4/3] bg-muted overflow-hidden">
-                      <img
-                        src={p.image}
-                        alt={`${p.name} real estate website mockup`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="text-lg font-bold">{p.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                        {p.desc}
-                      </p>
-                      {p.url ? (
-                        <a
-                          href={p.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-5 inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors w-fit"
-                        >
-                          {tt("View Project →", "查看專案 →")}
-                        </a>
-                      ) : (
-                        <span className="mt-5 inline-flex items-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-dashed border-border text-muted-foreground w-fit">
-                          {tt("Concept Sample", "概念樣本")}
+              {portfolio.map((p, i) => {
+                const summary =
+                  p.details?.short_summary || p.excerpt || "";
+                return (
+                  <Reveal key={p.id} delay={i * 60}>
+                    <Link
+                      to={getPortfolioUrl(p)}
+                      className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-colors duration-300 h-full flex flex-col"
+                    >
+                      <div className="aspect-[4/3] bg-muted overflow-hidden">
+                        {p.featured_image_url ? (
+                          <img
+                            src={p.featured_image_url}
+                            alt={`${p.title} real estate website mockup`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                            {tt("Preview coming soon", "預覽圖即將上線")}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6 flex flex-col flex-1">
+                        <h3 className="text-lg font-bold">{p.title}</h3>
+                        {summary && (
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
+                            {summary}
+                          </p>
+                        )}
+                        <span className="mt-5 inline-flex items-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-border group-hover:border-primary group-hover:text-primary transition-colors w-fit">
+                          {tt("View Project →", "查看作品 →")}
                         </span>
-                      )}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
