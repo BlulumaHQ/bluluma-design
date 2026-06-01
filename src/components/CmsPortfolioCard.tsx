@@ -1,4 +1,5 @@
-import type { PortfolioItem } from "@/lib/cms";
+import { Link } from "react-router-dom";
+import { getPortfolioUrl, type PortfolioItem } from "@/lib/cms";
 import { useLang } from "@/lib/i18n";
 
 interface Props {
@@ -19,9 +20,10 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
   const summary = details?.short_summary || item.excerpt || "";
   const services = details?.services ?? [];
   const liveUrl = details?.live_url || undefined;
+  const detailUrl = getPortfolioUrl(item);
 
   return (
-    <CardWrapper liveUrl={liveUrl} title={item.title}>
+    <CardWrapper detailUrl={detailUrl} title={item.title}>
       <div className="portfolio-preview-viewport relative bg-muted" style={{ height: 320 }}>
         {item.featured_image_url ? (
           <img
@@ -68,7 +70,7 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
         {liveUrl && (
           <div className="mt-auto pt-2">
             <span className="block w-full rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground transition-opacity group-hover:opacity-90">
-              {tt("Open Live Website", "查看官網")} ↗
+              {tt("View Project", "查看作品")} →
             </span>
           </div>
         )}
@@ -78,30 +80,21 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
 };
 
 const CardWrapper = ({
-  liveUrl,
+  detailUrl,
   title,
   children,
 }: {
-  liveUrl?: string;
+  detailUrl: string;
   title: string;
   children: React.ReactNode;
 }) => {
   const cls =
-    "group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10";
-  if (liveUrl) {
-    return (
-      <a
-        href={liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Open ${title} live website in a new tab`}
-        className={cls}
-      >
-        {children}
-      </a>
-    );
-  }
-  return <article className={cls}>{children}</article>;
+    "group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-background transition-colors duration-300 hover:border-primary/50";
+  return (
+    <Link to={detailUrl} aria-label={`View ${title} portfolio details`} className={cls}>
+      {children}
+    </Link>
+  );
 };
 
 export default CmsPortfolioCard;
