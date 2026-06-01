@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import {
   CATEGORY_DB_SLUGS,
+  CMS_SLUG_TO_SIDEBAR,
   OTHERS_SLUG,
   VISIBLE_CMS_CATEGORY_SLUGS,
   PORTFOLIO_CATEGORIES,
@@ -76,7 +77,15 @@ const mapRow = (row: RawRow): PortfolioItem => {
       !!c && c.category_type === "portfolio",
     );
   const first = catCandidates[0];
-  let category = first ? { id: first.id, name: first.name, slug: first.slug } : null;
+  let category = first
+    ? {
+        id: first.id,
+        name: first.name,
+        // Translate CMS slug → sidebar slug so portfolio URLs use the
+        // pretty site routes (e.g. realtor-realty) instead of raw CMS slugs.
+        slug: CMS_SLUG_TO_SIDEBAR[first.slug] ?? first.slug,
+      }
+    : null;
   // Site-level category overrides (CMS is not modified).
   const overrideTarget = ITEM_CATEGORY_OVERRIDES[row.slug];
   if (overrideTarget) {
@@ -107,7 +116,7 @@ const mapRow = (row: RawRow): PortfolioItem => {
 // Site-level category overrides keyed by content_item slug.
 // The CMS is not modified; these overrides apply to display, filtering, and counts.
 const ITEM_CATEGORY_OVERRIDES: Record<string, string> = {
-  "first-third-designs": "tattoo-creative-industry",
+  "first-third-designs": "artist-tattoo-creative-industry",
 };
 
 const overrideSlugsTargeting = (sidebarSlug: string): string[] =>
