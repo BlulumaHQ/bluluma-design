@@ -307,8 +307,8 @@ const Dentist = () => {
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-3xl">
                 {tt(
-                  "Most Dental Websites Look Fine — But Don't Bring Patients",
-                  "多數牙科網站看起來不錯 — 但帶不來患者"
+                  "Most Healthcare Websites Look Fine — But Don't Bring Patients",
+                  "多數醫療網站看起來不錯 — 但帶不來患者"
                 )}
               </h2>
             </Reveal>
@@ -339,12 +339,12 @@ const Dentist = () => {
                 {tt("What We Build", "我們建構什麼")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-2xl">
-                {tt("What We Build for Dental Clinics", "我們為牙科診所建構的內容")}
+                {tt("What We Build for Healthcare Providers", "我們為醫療業建構的內容")}
               </h2>
               <p className="mt-4 text-muted-foreground max-w-2xl leading-relaxed">
                 {tt(
-                  "A clear, conversion-focused website system designed around how patients actually choose a dentist.",
-                  "圍繞患者實際如何選擇牙醫所設計的、清晰且以轉換為核心的網站系統。"
+                  "A clear, conversion-focused website system designed around how patients actually choose a healthcare provider.",
+                  "圍繞患者實際如何選擇醫療提供者所設計的、清晰且以轉換為核心的網站系統。"
                 )}
               </p>
             </Reveal>
@@ -422,12 +422,12 @@ const Dentist = () => {
                 {tt("Examples", "案例")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-2xl">
-                {tt("Dental Website Examples", "牙科網站案例")}
+                {tt("Healthcare Website Examples", "醫療網站案例")}
               </h2>
               <p className="mt-4 text-muted-foreground max-w-2xl leading-relaxed">
                 {tt(
-                  "Sample dental clinic website concepts — design direction, structure, and conversion approach.",
-                  "牙科診所網站概念樣本 — 設計方向、結構與轉換策略。"
+                  "Recent healthcare website projects — design direction, structure, and conversion approach.",
+                  "近期醫療網站作品 — 設計方向、結構與轉換策略。"
                 )}
               </p>
             </Reveal>
@@ -476,6 +476,15 @@ const Dentist = () => {
                   </Reveal>
                 );
               })}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/portfolio/dental-healthcare"
+                className="inline-flex items-center px-8 py-3.5 text-sm font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
+              >
+                {tt("View All Healthcare Projects", "查看所有醫療作品")} →
+              </Link>
             </div>
 
           </div>
