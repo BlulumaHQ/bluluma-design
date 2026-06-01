@@ -8,9 +8,8 @@ import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/realtor/hero-mockup.jpg";
 import {
   useRandomPortfolioByCategory,
-  getPortfolioUrl,
-  type PortfolioItem,
 } from "@/lib/cms";
+import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
@@ -68,7 +67,6 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const links = [
     { label: tt("Home", "首頁"), to: "#top" },
     { label: tt("What We Do", "服務內容"), to: "#what-we-do" },
-    { label: tt("Listings", "房源"), to: "#listings" },
     { label: tt("Portfolio", "作品集"), to: "#portfolio" },
     { label: tt("Insights", "洞察"), to: "#insights" },
     { label: tt("Pricing", "價格"), to: "#pricing" },
@@ -212,7 +210,6 @@ const Realtor = () => {
   ];
 
   const { items: portfolio } = useRandomPortfolioByCategory("realtor", 6);
-  const featured: PortfolioItem | undefined = portfolio[0];
 
   const steps = [
     { n: "01", title: tt("Submit", "提交需求"), desc: tt("Tell us about your business and current website.", "告訴我們你的業務與目前的網站狀況。") },
@@ -377,56 +374,6 @@ const Realtor = () => {
           </div>
         </section>
 
-        {/* LISTINGS */}
-        <section id="listings" className="section-border bg-background">
-          <div className="section-container section-padding grid md:grid-cols-2 gap-12 items-center">
-            <Reveal>
-              <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("Featured Project", "精選作品")}
-              </span>
-              <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-                {featured?.title ??
-                  tt("Featured Realtor Project", "精選房仲作品")}
-              </h2>
-              <p className="mt-5 text-muted-foreground leading-relaxed">
-                {featured?.details?.short_summary ||
-                  featured?.excerpt ||
-                  tt(
-                    "A look at a recent Realtor website project — branding, structure, and conversion design.",
-                    "近期房仲網站專案 — 品牌、架構與轉換設計。",
-                  )}
-              </p>
-              {featured && (
-                <Link
-                  to={getPortfolioUrl(featured)}
-                  className="mt-8 inline-flex items-center cta-solid px-6 py-3 text-sm font-semibold rounded-lg"
-                >
-                  {tt("View Project", "查看作品")} →
-                </Link>
-              )}
-            </Reveal>
-            <Reveal delay={120}>
-              {featured?.featured_image_url ? (
-                <Link
-                  to={getPortfolioUrl(featured)}
-                  className="block rounded-xl overflow-hidden border border-border shadow-lg hover:border-primary/40 transition-colors"
-                >
-                  <img
-                    src={featured.featured_image_url}
-                    alt={`${featured.title} — featured Realtor project`}
-                    className="w-full h-auto block"
-                    loading="lazy"
-                  />
-                </Link>
-              ) : (
-                <div className="rounded-xl border border-dashed border-border aspect-[4/3] flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  {tt("Loading featured project…", "載入精選作品中…")}
-                </div>
-              )}
-            </Reveal>
-          </div>
-        </section>
-
         {/* PORTFOLIO */}
         <section id="portfolio" className="section-border bg-background">
           <div className="section-container section-padding">
@@ -446,44 +393,11 @@ const Realtor = () => {
             </Reveal>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolio.map((p, i) => {
-                const summary =
-                  p.details?.short_summary || p.excerpt || "";
-                return (
-                  <Reveal key={p.id} delay={i * 60}>
-                    <Link
-                      to={getPortfolioUrl(p)}
-                      className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-colors duration-300 h-full flex flex-col"
-                    >
-                      <div className="aspect-[4/3] bg-muted overflow-hidden">
-                        {p.featured_image_url ? (
-                          <img
-                            src={p.featured_image_url}
-                            alt={`${p.title} real estate website mockup`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                            {tt("Preview coming soon", "預覽圖即將上線")}
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-6 flex flex-col flex-1">
-                        <h3 className="text-lg font-bold">{p.title}</h3>
-                        {summary && (
-                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                            {summary}
-                          </p>
-                        )}
-                        <span className="mt-5 inline-flex items-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-border group-hover:border-primary group-hover:text-primary transition-colors w-fit">
-                          {tt("View Project →", "查看作品 →")}
-                        </span>
-                      </div>
-                    </Link>
-                  </Reveal>
-                );
-              })}
+              {portfolio.map((p, i) => (
+                <Reveal key={p.id} delay={i * 60} className="h-full">
+                  <CmsPortfolioCard item={p} />
+                </Reveal>
+              ))}
             </div>
 
             <div className="mt-12 flex justify-center">
