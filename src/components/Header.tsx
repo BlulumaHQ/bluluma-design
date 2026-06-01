@@ -19,13 +19,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { labelKey: "nav.home", to: "/" },
   { labelKey: "nav.services", to: "/services" },
-  {
-    labelKey: "nav.work",
-    children: [
-      { labelKey: "nav.case-studies", to: "/case-study" },
-      { labelKey: "nav.portfolio", to: "/portfolio" },
-    ],
-  },
+  { labelKey: "nav.portfolio", to: "/portfolio" },
   { labelKey: "nav.insights", to: "/insights" },
   {
     labelKey: "nav.industries",
