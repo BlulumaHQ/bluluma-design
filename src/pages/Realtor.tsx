@@ -8,9 +8,8 @@ import logo from "@/assets/bluluma-logo.svg";
 import heroImg from "@/assets/realtor/hero-mockup.jpg";
 import {
   useRandomPortfolioByCategory,
-  getPortfolioUrl,
-  type PortfolioItem,
 } from "@/lib/cms";
+import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
@@ -68,7 +67,6 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
   const links = [
     { label: tt("Home", "首頁"), to: "#top" },
     { label: tt("What We Do", "服務內容"), to: "#what-we-do" },
-    { label: tt("Listings", "房源"), to: "#listings" },
     { label: tt("Portfolio", "作品集"), to: "#portfolio" },
     { label: tt("Insights", "洞察"), to: "#insights" },
     { label: tt("Pricing", "價格"), to: "#pricing" },
@@ -212,7 +210,6 @@ const Realtor = () => {
   ];
 
   const { items: portfolio } = useRandomPortfolioByCategory("realtor", 6);
-  const featured: PortfolioItem | undefined = portfolio[0];
 
   const steps = [
     { n: "01", title: tt("Submit", "提交需求"), desc: tt("Tell us about your business and current website.", "告訴我們你的業務與目前的網站狀況。") },
