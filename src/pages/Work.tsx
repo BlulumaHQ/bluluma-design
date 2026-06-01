@@ -142,9 +142,9 @@ const Work = () => {
       </section>
 
       <section className="section-border section-subtle-bg">
-        <div className="section-container section-padding">
-          <div className="grid gap-10 lg:grid-cols-[240px,1fr] xl:gap-12">
-            <aside className="lg:sticky lg:top-28 lg:self-start">
+        <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">
+            <aside className="lg:sticky lg:top-[110px] lg:self-start">
               <PortfolioSidebar activeSlug={categoryDef?.slug} />
             </aside>
 
@@ -167,7 +167,7 @@ const Work = () => {
 
               {items.length > 0 && (
                 <>
-                  <div className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3 xl:gap-8">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {items.map((item, index) => (
                       <RevealDiv key={item.id} delay={index * 50}>
                         <CmsPortfolioCard item={item} />
