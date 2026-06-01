@@ -20,6 +20,7 @@ import {
   getPortfolioUrl,
   type PortfolioItem,
 } from "@/lib/cms";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
   children,
@@ -88,7 +89,7 @@ const DentistHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
           <a href="#top" className="flex-shrink-0 flex items-center gap-3">
             <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
             <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-              {tt("for Dental Clinics", "牙科診所專屬")}
+            {tt("for Healthcare", "醫療業專屬")}
             </span>
           </a>
           <nav className="hidden lg:flex items-center gap-6">
@@ -186,6 +187,13 @@ const Dentist = () => {
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const insights = getLatestByIndustry("Dentist", 3);
 
+  useDocumentMeta({
+    title: "Healthcare Website Design | Bluluma",
+    description:
+      "Healthcare website design for dental clinics, medical practices and patient-focused healthcare businesses.",
+    canonicalPath: "/healthcare",
+  });
+
   const problems = [
     {
       title: tt("Outdated Website Structure", "過時的網站結構"),
@@ -237,12 +245,12 @@ const Dentist = () => {
           <div className="section-container py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("For Dental Clinics", "牙科診所專屬")}
+                {tt("Healthcare Website Design", "醫療網站設計")}
               </span>
               <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 {tt(
-                  "Websites for Dental Clinics That Actually Bring in Patients",
-                  "真正能為牙科診所帶來患者的網站"
+                  "Healthcare Websites Built to Attract More Patients",
+                  "為醫療業打造、吸引更多患者的網站"
                 )}
               </h1>
               <p
@@ -250,8 +258,8 @@ const Dentist = () => {
                 style={{ color: "hsl(220 10% 70%)" }}
               >
                 {tt(
-                  "We help dental clinics build professional websites, improve online visibility, and use AI tools to reduce front desk workload and increase patient inquiries.",
-                  "我們協助牙科診所建立專業網站、提升網路能見度，並運用 AI 工具減輕前台工作負擔、增加患者諮詢。"
+                  "Designed for dental clinics, medical clinics, family practices, wellness providers, healthcare specialists and growing patient-focused businesses.",
+                  "專為牙科診所、醫療診所、家庭醫師、健康服務提供者、醫療專科及成長中的患者導向業務所設計。"
                 )}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -259,7 +267,7 @@ const Dentist = () => {
                   href="/proposal"
                   className="cta-solid inline-block text-center px-8 py-4 text-base font-semibold rounded-lg"
                 >
-                  {tt("Request a Proposal for My Clinic", "為我的診所申請提案")}
+                  {tt("Request a Proposal", "申請提案")}
                 </a>
                 <a
                   href="#portfolio"
@@ -270,8 +278,8 @@ const Dentist = () => {
               </div>
               <p className="mt-6 text-sm" style={{ color: "hsl(220 10% 60%)" }}>
                 {tt(
-                  "Website design, branding, and AI automation support for dental clinics.",
-                  "為牙科診所提供網站設計、品牌打造與 AI 自動化支援。"
+                  "Website design, branding, and AI automation support for healthcare providers.",
+                  "為醫療業提供網站設計、品牌打造與 AI 自動化支援。"
                 )}
               </p>
             </Reveal>
@@ -280,7 +288,7 @@ const Dentist = () => {
               <div className="rounded-xl overflow-hidden border border-border shadow-2xl shadow-primary/10">
                 <img
                   src={heroImg}
-                  alt="Modern bright dental clinic interior"
+                  alt="Modern bright healthcare clinic interior"
                   className="w-full h-auto block"
                   width={1600}
                   height={1024}
@@ -299,8 +307,8 @@ const Dentist = () => {
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-3xl">
                 {tt(
-                  "Most Dental Websites Look Fine — But Don't Bring Patients",
-                  "多數牙科網站看起來不錯 — 但帶不來患者"
+                  "Most Healthcare Websites Look Fine — But Don't Bring Patients",
+                  "多數醫療網站看起來不錯 — 但帶不來患者"
                 )}
               </h2>
             </Reveal>
@@ -331,12 +339,12 @@ const Dentist = () => {
                 {tt("What We Build", "我們建構什麼")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-2xl">
-                {tt("What We Build for Dental Clinics", "我們為牙科診所建構的內容")}
+                {tt("What We Build for Healthcare Providers", "我們為醫療業建構的內容")}
               </h2>
               <p className="mt-4 text-muted-foreground max-w-2xl leading-relaxed">
                 {tt(
-                  "A clear, conversion-focused website system designed around how patients actually choose a dentist.",
-                  "圍繞患者實際如何選擇牙醫所設計的、清晰且以轉換為核心的網站系統。"
+                  "A clear, conversion-focused website system designed around how patients actually choose a healthcare provider.",
+                  "圍繞患者實際如何選擇醫療提供者所設計的、清晰且以轉換為核心的網站系統。"
                 )}
               </p>
             </Reveal>
@@ -414,12 +422,12 @@ const Dentist = () => {
                 {tt("Examples", "案例")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold max-w-2xl">
-                {tt("Dental Website Examples", "牙科網站案例")}
+                {tt("Healthcare Website Examples", "醫療網站案例")}
               </h2>
               <p className="mt-4 text-muted-foreground max-w-2xl leading-relaxed">
                 {tt(
-                  "Sample dental clinic website concepts — design direction, structure, and conversion approach.",
-                  "牙科診所網站概念樣本 — 設計方向、結構與轉換策略。"
+                  "Recent healthcare website projects — design direction, structure, and conversion approach.",
+                  "近期醫療網站作品 — 設計方向、結構與轉換策略。"
                 )}
               </p>
             </Reveal>
@@ -470,6 +478,15 @@ const Dentist = () => {
               })}
             </div>
 
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/portfolio/dental-healthcare"
+                className="inline-flex items-center px-8 py-3.5 text-sm font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
+              >
+                {tt("View All Healthcare Projects", "查看所有醫療作品")} →
+              </Link>
+            </div>
+
           </div>
         </section>
 
@@ -482,14 +499,14 @@ const Dentist = () => {
                   {tt("Insights", "洞察")}
                 </span>
                 <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-                  {tt("Insights for Dental Clinics", "牙科診所洞察")}
+                  {tt("Insights for Healthcare Providers", "醫療業洞察")}
                 </h2>
               </Reveal>
               <Link
                 to="/insights/dentist"
                 className="text-sm font-semibold text-primary hover:underline"
               >
-                {tt("View More Dental Insights →", "查看更多牙科洞察 →")}
+                {tt("View More Healthcare Insights →", "查看更多醫療洞察 →")}
               </Link>
             </div>
 
@@ -522,22 +539,22 @@ const Dentist = () => {
           <div className="section-container py-20 md:py-28 text-center">
             <Reveal>
               <h2 className="text-3xl md:text-5xl font-bold max-w-3xl mx-auto leading-tight">
-                {tt("Ready to Improve Your Dental Clinic Website?", "準備好提升你的牙科診所網站了嗎？")}
+                {tt("Ready to Improve Your Healthcare Website?", "準備好提升你的醫療網站了嗎？")}
               </h2>
               <p
                 className="mt-5 max-w-2xl mx-auto text-lg leading-relaxed"
                 style={{ color: "hsl(220 10% 65%)" }}
               >
                 {tt(
-                  "We help dental clinics build better websites, improve online visibility, and prepare for AI-driven search and automation.",
-                  "我們協助牙科診所建立更好的網站、提升能見度，並為 AI 驅動的搜尋與自動化做好準備。"
+                  "We help healthcare providers build better websites, improve online visibility, and prepare for AI-driven search and automation.",
+                  "我們協助醫療業建立更好的網站、提升能見度，並為 AI 驅動的搜尋與自動化做好準備。"
                 )}
               </p>
               <Link
                 to="/proposal"
                 className="mt-10 inline-block cta-solid px-10 py-4 text-base font-semibold rounded-lg"
               >
-                {tt("Request a Proposal for My Clinic", "為我的診所申請提案")}
+                {tt("Request a Proposal", "申請提案")}
               </Link>
             </Reveal>
           </div>

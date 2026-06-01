@@ -11,6 +11,7 @@ import {
   getPortfolioUrl,
   type PortfolioItem,
 } from "@/lib/cms";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
   children,
@@ -80,7 +81,7 @@ const RealtorHeader = ({ tt }: { tt: (en: string, zh: string) => string }) => {
           <a href="#top" className="flex-shrink-0 flex items-center gap-3">
             <img src={logo} alt="Bluluma logo" className="h-10 w-auto" />
             <span className="text-sm font-semibold text-muted-foreground hidden sm:inline">
-              {tt("for Realtors", "房地產經紀專屬")}
+            {tt("for Real Estate", "房地產專屬")}
             </span>
           </a>
           <nav className="hidden lg:flex items-center gap-6">
@@ -174,6 +175,13 @@ const Realtor = () => {
   const { lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const insights = getLatestByIndustry("Realtor", 3);
+
+  useDocumentMeta({
+    title: "Real Estate Website Design | Bluluma",
+    description:
+      "Real estate websites for Realtors, teams, developers and pre-sale projects.",
+    canonicalPath: "/real-estate",
+  });
 
   const services = [
     {
@@ -271,15 +279,15 @@ const Realtor = () => {
           <div className="section-container py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("For Realtors", "房地產經紀專屬")}
+                {tt("Real Estate Website Design", "房地產網站設計")}
               </span>
               <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 {tt("Real Estate Websites Built to Attract More Buyers and Sellers", "為房仲打造、吸引更多買賣方的房地產網站")}
               </h1>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "hsl(220 10% 70%)" }}>
                 {tt(
-                  "Bluluma creates conversion-focused Realtor websites with stronger branding, better listing presentation, and clearer lead flow.",
-                  "Bluluma 為房仲打造以轉換為核心的網站，提供更強的品牌、更佳的房源呈現與更清晰的客戶流程。"
+                  "Built for Realtors, real estate teams, developers, pre-sale projects and property management companies — stronger branding, better listing presentation, and clearer lead flow.",
+                  "為房仲、房地產團隊、開發商、預售案與物業管理公司打造 — 更強的品牌、更佳的房源呈現與更清晰的客戶流程。"
                 )}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -287,7 +295,7 @@ const Realtor = () => {
                   href="/proposal"
                   className="cta-solid inline-block text-center px-8 py-4 text-base font-semibold rounded-lg"
                 >
-                  {tt("Request a Proposal for My Real Estate Business", "為我的房地產業務申請提案")}
+                  {tt("Request a Proposal", "申請提案")}
                 </a>
                 <a
                   href="/proposal"
@@ -298,8 +306,8 @@ const Realtor = () => {
               </div>
               <p className="mt-6 text-sm" style={{ color: "hsl(220 10% 60%)" }}>
                 {tt(
-                  "Website design, branding, listing presentation, and ongoing content support for Realtors.",
-                  "為房仲提供網站設計、品牌打造、房源呈現與持續內容支援。"
+                  "Website design, branding, listing presentation, and ongoing content support for real estate professionals.",
+                  "為房地產專業人士提供網站設計、品牌打造、房源呈現與持續內容支援。"
                 )}
               </p>
             </Reveal>
@@ -476,6 +484,15 @@ const Realtor = () => {
                   </Reveal>
                 );
               })}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/portfolio/realtor"
+                className="inline-flex items-center px-8 py-3.5 text-sm font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors"
+              >
+                {tt("View All Real Estate Projects", "查看所有房地產作品")} →
+              </Link>
             </div>
           </div>
         </section>
