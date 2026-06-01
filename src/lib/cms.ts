@@ -323,10 +323,11 @@ export async function fetchRandomPortfolioByCategory(
   categorySlug: string,
   limit = 6,
 ): Promise<PortfolioItem[]> {
-  const ids =
+  let ids =
     categorySlug === OTHERS_SLUG
       ? await fetchOthersContentIds()
       : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
+  ids = await applyOverridesToCategoryIds(ids, categorySlug);
   if (ids.length === 0) return [];
   const { data, error } = await cms
     .from("content_items")
@@ -371,10 +372,11 @@ export async function fetchPortfolioPage(
 ): Promise<PaginatedPortfolio> {
   let categoryFilterIds: string[] | null = null;
   if (categorySlug) {
-    categoryFilterIds =
+    const baseIds =
       categorySlug === OTHERS_SLUG
         ? await fetchOthersContentIds()
         : await fetchContentIdsForSlugs(dbSlugsFor(categorySlug));
+    categoryFilterIds = await applyOverridesToCategoryIds(baseIds, categorySlug);
     if (categoryFilterIds.length === 0) return { items: [], total: 0 };
   }
 
@@ -418,7 +420,7 @@ export function usePortfolioPage(page: number, perPage: number, categorySlug?: s
 export async function fetchPortfolioCategoryCounts(): Promise<Record<string, number>> {
   const { data, error } = await cms
     .from("content_items")
-    .select("id, content_categories(categories(slug, category_type))")
+    .select("id, slug, content_categories(categories(slug, category_type))")
     .eq("content_type", "portfolio")
     .eq("status", "published")
     .eq("client_id", BLULUMA_CLIENT_ID);
@@ -434,6 +436,7 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
   });
   let othersCount = 0;
   (data ?? []).forEach((row: {
+    slug?: string;
     content_categories?: Array<{
       categories:
         | { slug: string; category_type: string }
@@ -442,19 +445,24 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
     }>;
   }) => {
     total += 1;
-    const cats = (row.content_categories ?? [])
-      .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
-      .filter(
-        (c): c is { slug: string; category_type: string } =>
-          !!c && c.category_type === "portfolio",
-      );
     const sidebarBuckets = new Set<string>();
-    cats.forEach((c) => {
-      const bucket = cmsToSidebar[c.slug] ?? c.slug;
-      if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
-        sidebarBuckets.add(bucket);
-      }
-    });
+    const override = row.slug ? ITEM_CATEGORY_OVERRIDES[row.slug] : undefined;
+    if (override) {
+      sidebarBuckets.add(override);
+    } else {
+      const cats = (row.content_categories ?? [])
+        .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+        .filter(
+          (c): c is { slug: string; category_type: string } =>
+            !!c && c.category_type === "portfolio",
+        );
+      cats.forEach((c) => {
+        const bucket = cmsToSidebar[c.slug] ?? c.slug;
+        if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
+          sidebarBuckets.add(bucket);
+        }
+      });
+    }
     if (sidebarBuckets.size === 0) {
       othersCount += 1;
     } else {
