@@ -374,33 +374,47 @@ const Realtor = () => {
           <div className="section-container section-padding grid md:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("Feature Listings", "精選房源")}
+                {tt("Featured Project", "精選作品")}
               </span>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-                {tt("Listings designed to sell, not just to display.", "為成交而設計的房源，不只是展示。")}
+                {featured?.title ??
+                  tt("Featured Realtor Project", "精選房仲作品")}
               </h2>
               <p className="mt-5 text-muted-foreground leading-relaxed">
-                {tt(
-                  "Standard MLS pages all look the same. Our Feature Listings approach turns each property into a high-conversion landing page — strong headline, curated photography, lifestyle copywriting, and a clear next step for buyers.",
-                  "標準 MLS 頁面千篇一律。我們的精選房源做法將每個物件變成高轉換的著陸頁 — 強而有力的標題、精選攝影、生活風格文案，並為買方提供清晰的下一步。"
-                )}
+                {featured?.details?.short_summary ||
+                  featured?.excerpt ||
+                  tt(
+                    "A look at a recent Realtor website project — branding, structure, and conversion design.",
+                    "近期房仲網站專案 — 品牌、架構與轉換設計。",
+                  )}
               </p>
-              <ul className="mt-6 space-y-3 text-muted-foreground">
-                <li>• {tt("Strong, headline-driven property pages", "以強標題為核心的房源頁")}</li>
-                <li>• {tt("Curated photo galleries", "精選攝影圖庫")}</li>
-                <li>• {tt("Lifestyle-focused descriptions", "聚焦生活風格的描述")}</li>
-                <li>• {tt("Clear, single call-to-action per listing", "每個房源一個清晰的 CTA")}</li>
-              </ul>
+              {featured && (
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="mt-8 inline-flex items-center cta-solid px-6 py-3 text-sm font-semibold rounded-lg"
+                >
+                  {tt("View Project", "查看作品")} →
+                </Link>
+              )}
             </Reveal>
             <Reveal delay={120}>
-              <div className="rounded-xl overflow-hidden border border-border shadow-lg">
-                <img
-                  src={luxuryImg}
-                  alt="Sample feature listing page mockup"
-                  className="w-full h-auto block"
-                  loading="lazy"
-                />
-              </div>
+              {featured?.featured_image_url ? (
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="block rounded-xl overflow-hidden border border-border shadow-lg hover:border-primary/40 transition-colors"
+                >
+                  <img
+                    src={featured.featured_image_url}
+                    alt={`${featured.title} — featured Realtor project`}
+                    className="w-full h-auto block"
+                    loading="lazy"
+                  />
+                </Link>
+              ) : (
+                <div className="rounded-xl border border-dashed border-border aspect-[4/3] flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {tt("Loading featured project…", "載入精選作品中…")}
+                </div>
+              )}
             </Reveal>
           </div>
         </section>
@@ -424,40 +438,44 @@ const Realtor = () => {
             </Reveal>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolio.map((p, i) => (
-                <Reveal key={p.name} delay={i * 60}>
-                  <div className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                    <div className="aspect-[4/3] bg-muted overflow-hidden">
-                      <img
-                        src={p.image}
-                        alt={`${p.name} real estate website mockup`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="text-lg font-bold">{p.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                        {p.desc}
-                      </p>
-                      {p.url ? (
-                        <a
-                          href={p.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-5 inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-border hover:border-primary hover:text-primary transition-colors w-fit"
-                        >
-                          {tt("View Project →", "查看專案 →")}
-                        </a>
-                      ) : (
-                        <span className="mt-5 inline-flex items-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-dashed border-border text-muted-foreground w-fit">
-                          {tt("Concept Sample", "概念樣本")}
+              {portfolio.map((p, i) => {
+                const summary =
+                  p.details?.short_summary || p.excerpt || "";
+                return (
+                  <Reveal key={p.id} delay={i * 60}>
+                    <Link
+                      to={getPortfolioUrl(p)}
+                      className="group border border-border rounded-lg overflow-hidden bg-background hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-colors duration-300 h-full flex flex-col"
+                    >
+                      <div className="aspect-[4/3] bg-muted overflow-hidden">
+                        {p.featured_image_url ? (
+                          <img
+                            src={p.featured_image_url}
+                            alt={`${p.title} real estate website mockup`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                            {tt("Preview coming soon", "預覽圖即將上線")}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6 flex flex-col flex-1">
+                        <h3 className="text-lg font-bold">{p.title}</h3>
+                        {summary && (
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
+                            {summary}
+                          </p>
+                        )}
+                        <span className="mt-5 inline-flex items-center px-4 py-2.5 text-xs font-semibold rounded-lg border border-border group-hover:border-primary group-hover:text-primary transition-colors w-fit">
+                          {tt("View Project →", "查看作品 →")}
                         </span>
-                      )}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
