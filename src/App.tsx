@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LangProvider } from "@/lib/i18n";
 import Layout from "./components/Layout";
@@ -76,8 +76,11 @@ const App = () => (
               <Route path="/proposal" element={<Start />} />
               <Route path="/thank-you" element={<ThankYou />} />
             </Route>
-            <Route path="/realtor" element={<Realtor />} />
-            <Route path="/dentist" element={<Dentist />} />
+            <Route path="/real-estate" element={<Realtor />} />
+            <Route path="/healthcare" element={<Dentist />} />
+            {/* Permanent redirects from old industry URLs */}
+            <Route path="/realtor" element={<Navigate to="/real-estate" replace />} />
+            <Route path="/dentist" element={<Navigate to="/healthcare" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
