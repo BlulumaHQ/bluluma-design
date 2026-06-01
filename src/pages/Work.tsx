@@ -15,17 +15,22 @@ const Work = () => {
   const { items, loading, error } = usePortfolioItems();
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  const serviceFilters = useMemo(() => {
-    const set = new Set<string>();
-    items.forEach((item) => item.details?.services?.forEach((s) => set.add(s)));
-    return ["All", ...Array.from(set).sort()];
-  }, [items]);
+  const categoryFilters = useMemo(() => {
+    const map = new Map<string, string>();
+    items.forEach((it) => {
+      if (it.category) map.set(it.category.slug, it.category.name);
+    });
+    const list = Array.from(map.entries())
+      .map(([slug, name]) => ({ slug, name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    return [{ slug: "All", name: tt("All", "全部") }, ...list];
+  }, [items, lang]);
 
   const visibleItems = useMemo(
     () =>
       activeFilter === "All"
         ? items
-        : items.filter((item) => item.details?.services?.includes(activeFilter)),
+        : items.filter((item) => item.category?.slug === activeFilter),
     [items, activeFilter],
   );
 
@@ -48,19 +53,19 @@ const Work = () => {
               {tt("Services", "服務類別")}
             </p>
             <nav className="flex flex-col gap-1.5">
-              {serviceFilters.map((service) => {
-                const isActive = activeFilter === service;
+              {categoryFilters.map((cat) => {
+                const isActive = activeFilter === cat.slug;
                 return (
                   <button
-                    key={service}
+                    key={cat.slug}
                     type="button"
-                    onClick={() => setActiveFilter(service)}
+                    onClick={() => setActiveFilter(cat.slug)}
                     className={`flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors ${
                       isActive ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     <span className={`h-px transition-all ${isActive ? "w-6 bg-primary" : "w-3 bg-border"}`} />
-                    {service}
+                    {cat.name}
                   </button>
                 );
               })}
@@ -81,18 +86,18 @@ const Work = () => {
           </RevealDiv>
 
           <div className="mb-8 flex gap-2 overflow-x-auto pb-1 xl:hidden">
-            {serviceFilters.map((service) => (
+            {categoryFilters.map((cat) => (
               <button
-                key={service}
+                key={cat.slug}
                 type="button"
-                onClick={() => setActiveFilter(service)}
+                onClick={() => setActiveFilter(cat.slug)}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
-                  activeFilter === service
+                  activeFilter === cat.slug
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background text-muted-foreground"
                 }`}
               >
-                {service}
+                {cat.name}
               </button>
             ))}
           </div>
