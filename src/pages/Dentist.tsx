@@ -20,6 +20,7 @@ import {
   getPortfolioUrl,
   type PortfolioItem,
 } from "@/lib/cms";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({
   children,
@@ -186,6 +187,13 @@ const Dentist = () => {
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const insights = getLatestByIndustry("Dentist", 3);
 
+  useDocumentMeta({
+    title: "Healthcare Website Design | Bluluma",
+    description:
+      "Healthcare website design for dental clinics, medical practices and patient-focused healthcare businesses.",
+    canonicalPath: "/healthcare",
+  });
+
   const problems = [
     {
       title: tt("Outdated Website Structure", "過時的網站結構"),
@@ -237,12 +245,12 @@ const Dentist = () => {
           <div className="section-container py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
-                {tt("For Dental Clinics", "牙科診所專屬")}
+                {tt("Healthcare Website Design", "醫療網站設計")}
               </span>
               <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 {tt(
-                  "Websites for Dental Clinics That Actually Bring in Patients",
-                  "真正能為牙科診所帶來患者的網站"
+                  "Healthcare Websites Built to Attract More Patients",
+                  "為醫療業打造、吸引更多患者的網站"
                 )}
               </h1>
               <p
@@ -250,8 +258,8 @@ const Dentist = () => {
                 style={{ color: "hsl(220 10% 70%)" }}
               >
                 {tt(
-                  "We help dental clinics build professional websites, improve online visibility, and use AI tools to reduce front desk workload and increase patient inquiries.",
-                  "我們協助牙科診所建立專業網站、提升網路能見度，並運用 AI 工具減輕前台工作負擔、增加患者諮詢。"
+                  "Designed for dental clinics, medical clinics, family practices, wellness providers, healthcare specialists and growing patient-focused businesses.",
+                  "專為牙科診所、醫療診所、家庭醫師、健康服務提供者、醫療專科及成長中的患者導向業務所設計。"
                 )}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -259,7 +267,7 @@ const Dentist = () => {
                   href="/proposal"
                   className="cta-solid inline-block text-center px-8 py-4 text-base font-semibold rounded-lg"
                 >
-                  {tt("Request a Proposal for My Clinic", "為我的診所申請提案")}
+                  {tt("Request a Proposal", "申請提案")}
                 </a>
                 <a
                   href="#portfolio"
@@ -270,8 +278,8 @@ const Dentist = () => {
               </div>
               <p className="mt-6 text-sm" style={{ color: "hsl(220 10% 60%)" }}>
                 {tt(
-                  "Website design, branding, and AI automation support for dental clinics.",
-                  "為牙科診所提供網站設計、品牌打造與 AI 自動化支援。"
+                  "Website design, branding, and AI automation support for healthcare providers.",
+                  "為醫療業提供網站設計、品牌打造與 AI 自動化支援。"
                 )}
               </p>
             </Reveal>
@@ -280,7 +288,7 @@ const Dentist = () => {
               <div className="rounded-xl overflow-hidden border border-border shadow-2xl shadow-primary/10">
                 <img
                   src={heroImg}
-                  alt="Modern bright dental clinic interior"
+                  alt="Modern bright healthcare clinic interior"
                   className="w-full h-auto block"
                   width={1600}
                   height={1024}
