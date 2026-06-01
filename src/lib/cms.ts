@@ -374,6 +374,14 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
   if (error) throw error;
   const counts: Record<string, number> = {};
   let total = 0;
+  // Reverse map: CMS slug → sidebar slug it rolls up into.
+  const cmsToSidebar: Record<string, string> = {};
+  Object.entries(CATEGORY_DB_SLUGS).forEach(([sidebar, dbSlugs]) => {
+    dbSlugs.forEach((s) => {
+      cmsToSidebar[s] = sidebar;
+    });
+  });
+  let othersCount = 0;
   (data ?? []).forEach((row: {
     content_categories?: Array<{
       categories:
@@ -383,13 +391,28 @@ export async function fetchPortfolioCategoryCounts(): Promise<Record<string, num
     }>;
   }) => {
     total += 1;
-    (row.content_categories ?? []).forEach((cc) => {
-      const c = Array.isArray(cc.categories) ? cc.categories[0] : cc.categories;
-      if (c && c.category_type === "portfolio") {
-        counts[c.slug] = (counts[c.slug] ?? 0) + 1;
+    const cats = (row.content_categories ?? [])
+      .map((cc) => (Array.isArray(cc.categories) ? cc.categories[0] : cc.categories))
+      .filter(
+        (c): c is { slug: string; category_type: string } =>
+          !!c && c.category_type === "portfolio",
+      );
+    const sidebarBuckets = new Set<string>();
+    cats.forEach((c) => {
+      const bucket = cmsToSidebar[c.slug] ?? c.slug;
+      if (VISIBLE_CMS_CATEGORY_SLUGS.has(c.slug)) {
+        sidebarBuckets.add(bucket);
       }
     });
+    if (sidebarBuckets.size === 0) {
+      othersCount += 1;
+    } else {
+      sidebarBuckets.forEach((slug) => {
+        counts[slug] = (counts[slug] ?? 0) + 1;
+      });
+    }
   });
+  if (othersCount > 0) counts[OTHERS_SLUG] = othersCount;
   counts.__all__ = total;
   return counts;
 }
