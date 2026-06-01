@@ -363,6 +363,51 @@ const Dentist = () => {
 
         {/* PORTFOLIO */}
         <section id="portfolio" className="section-border bg-background">
+          {featured && (
+            <div className="section-container section-padding grid md:grid-cols-2 gap-12 items-center !pb-0">
+              <Reveal>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">
+                  {tt("Featured Project", "精選作品")}
+                </span>
+                <h2 className="mt-3 text-3xl md:text-4xl font-bold">
+                  {featured.title}
+                </h2>
+                <p className="mt-5 text-muted-foreground leading-relaxed">
+                  {featured.details?.short_summary ||
+                    featured.excerpt ||
+                    tt(
+                      "A recent dental website project — design direction, structure, and conversion approach.",
+                      "近期牙科網站專案 — 設計方向、結構與轉換策略。",
+                    )}
+                </p>
+                <Link
+                  to={getPortfolioUrl(featured)}
+                  className="mt-8 inline-flex items-center cta-solid px-6 py-3 text-sm font-semibold rounded-lg"
+                >
+                  {tt("View Project", "查看作品")} →
+                </Link>
+              </Reveal>
+              <Reveal delay={120}>
+                {featured.featured_image_url ? (
+                  <Link
+                    to={getPortfolioUrl(featured)}
+                    className="block rounded-xl overflow-hidden border border-border shadow-lg hover:border-primary/40 transition-colors"
+                  >
+                    <img
+                      src={featured.featured_image_url}
+                      alt={`${featured.title} — featured dental project`}
+                      className="w-full h-auto block"
+                      loading="lazy"
+                    />
+                  </Link>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-border aspect-[4/3] flex items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {tt("Loading featured project…", "載入精選作品中…")}
+                  </div>
+                )}
+              </Reveal>
+            </div>
+          )}
           <div className="section-container section-padding">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
