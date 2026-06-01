@@ -104,6 +104,46 @@ const mapRow = (row: RawRow): PortfolioItem => {
   };
 };
 
+// Site-level category overrides keyed by content_item slug.
+// The CMS is not modified; these overrides apply to display, filtering, and counts.
+const ITEM_CATEGORY_OVERRIDES: Record<string, string> = {
+  "first-third-designs": "tattoo-creative-industry",
+};
+
+const overrideSlugsTargeting = (sidebarSlug: string): string[] =>
+  Object.entries(ITEM_CATEGORY_OVERRIDES)
+    .filter(([, target]) => target === sidebarSlug)
+    .map(([s]) => s);
+
+const overrideSlugsNotTargeting = (sidebarSlug: string): string[] =>
+  Object.entries(ITEM_CATEGORY_OVERRIDES)
+    .filter(([, target]) => target !== sidebarSlug)
+    .map(([s]) => s);
+
+async function fetchContentIdsByItemSlugs(slugs: string[]): Promise<string[]> {
+  if (slugs.length === 0) return [];
+  const { data, error } = await cms
+    .from("content_items")
+    .select("id")
+    .eq("content_type", "portfolio")
+    .eq("status", "published")
+    .eq("client_id", BLULUMA_CLIENT_ID)
+    .in("slug", slugs);
+  if (error) throw error;
+  return ((data as { id: string }[] | null) ?? []).map((r) => r.id);
+}
+
+async function applyOverridesToCategoryIds(
+  ids: string[],
+  sidebarSlug: string,
+): Promise<string[]> {
+  const addIds = await fetchContentIdsByItemSlugs(overrideSlugsTargeting(sidebarSlug));
+  const removeIds = new Set(
+    await fetchContentIdsByItemSlugs(overrideSlugsNotTargeting(sidebarSlug)),
+  );
+  return Array.from(new Set([...ids, ...addIds])).filter((id) => !removeIds.has(id));
+}
+
 interface FetchOptions {
   featuredOnly?: boolean;
   limit?: number;
