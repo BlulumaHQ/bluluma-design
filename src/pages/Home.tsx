@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
-import { usePortfolioItems } from "@/lib/cms";
+import { useRandomPortfolioItems } from "@/lib/cms";
 import CmsPortfolioCard from "@/components/CmsPortfolioCard";
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
@@ -145,7 +145,11 @@ const TestimonialsCarousel = () => {
 
 const Home = () => {
   const { t } = useLang();
-  const { items: featuredPortfolio, loading: portfolioLoading, error: portfolioError } = usePortfolioItems({ featuredOnly: true, limit: 6 });
+  const {
+    items: randomPortfolio,
+    loading: portfolioLoading,
+    error: portfolioError,
+  } = useRandomPortfolioItems(12);
 
   type RealEstateTile = {
     key: string;
