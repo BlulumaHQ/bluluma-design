@@ -203,60 +203,8 @@ const Realtor = () => {
     },
   ];
 
-  const portfolio = [
-    {
-      name: "Sterling Wong",
-      desc: tt(
-        "Personal real estate branding with a premium, trust-focused website presence.",
-        "個人房地產品牌，呈現高端、值得信賴的網站形象。"
-      ),
-      image: sterlingImg,
-      url: "https://sterling-wong-concept-a.lovable.app/",
-    },
-    {
-      name: "Tiffany Tseng",
-      desc: tt(
-        "Clean Realtor website structure designed for stronger positioning and lead clarity.",
-        "簡潔的房仲網站架構，強化定位與客戶轉換清晰度。"
-      ),
-      image: tiffanyImg,
-      url: "https://tiffany-tseng-concept-a.lovable.app/",
-    },
-    {
-      name: "Helen Lam",
-      desc: tt(
-        "Modern Realtor presentation with improved service flow and mobile-first layout.",
-        "現代化房仲呈現，優化服務流程與行動裝置優先佈局。"
-      ),
-      image: helenImg,
-      url: "https://helenlam-concept-a.lovable.app/",
-    },
-    {
-      name: "Eric Kim Realty",
-      desc: tt(
-        "Real estate website concept focused on stronger branding and clearer buyer/seller actions.",
-        "房地產網站概念，聚焦更強的品牌與清晰的買賣方行動引導。"
-      ),
-      image: ericImg,
-      url: "https://eric-kim-realty-concept-a.lovable.app/",
-    },
-    {
-      name: tt("Luxury Realtor Website", "豪宅房仲網站"),
-      desc: tt(
-        "Luxury-focused layout for high-end property presentation and personal branding.",
-        "聚焦豪宅的版面，用於高端物件展示與個人品牌經營。"
-      ),
-      image: luxuryImg,
-    },
-    {
-      name: tt("Pre-Sale Project Website", "預售案網站"),
-      desc: tt(
-        "Project-focused real estate website structure for development and pre-sale marketing.",
-        "以建案為核心的房地產網站結構，適用於開發與預售行銷。"
-      ),
-      image: preSaleImg,
-    },
-  ];
+  const { items: portfolio } = useRandomPortfolioByCategory("realtor", 6);
+  const featured: PortfolioItem | undefined = portfolio[0];
 
   const steps = [
     { n: "01", title: tt("Submit", "提交需求"), desc: tt("Tell us about your business and current website.", "告訴我們你的業務與目前的網站狀況。") },
