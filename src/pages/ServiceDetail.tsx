@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
+import LinePattern from "@/components/LinePattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
 
@@ -181,7 +181,7 @@ const ServiceDetail = () => {
     <div>
       {/* Hero */}
       <section className="section-border relative overflow-hidden">
-        <GeometricPattern variant="cubes" tone="dark" fade="right" />
+        <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
             <Link to="/services" className="text-xs text-muted-foreground hover:text-foreground transition-colors mb-6 inline-block">
@@ -209,7 +209,8 @@ const ServiceDetail = () => {
 
       {/* Related Insights */}
       {relatedArticles.length > 0 && (
-        <section className="section-border">
+        <section className="section-border relative overflow-hidden">
+        <LinePattern variation={4} />
           <div className="section-container section-padding">
             <RevealSection>
               <h2 className="text-2xl font-bold mb-8">Related Insights</h2>

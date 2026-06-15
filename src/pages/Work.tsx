@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import GeometricPattern from "@/components/GeometricPattern";
+import LinePattern from "@/components/LinePattern";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CmsPortfolioCard from "@/components/CmsPortfolioCard";
@@ -119,8 +119,7 @@ const Work = () => {
 
   return (
     <div>
-      <section className="section-dark section-border relative overflow-hidden">
-        <GeometricPattern variant="diamonds" tone="dark" fade="right" />
+      <section className="section-dark section-border">
         <div className="section-container py-14 md:py-20">
           <nav
             aria-label="Breadcrumb"
@@ -143,7 +142,8 @@ const Work = () => {
         </div>
       </section>
 
-      <section className="section-border section-subtle-bg">
+      <section className="section-border section-subtle-bg relative overflow-hidden">
+        <LinePattern variation={8} />
         <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
           <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">
             <aside className="lg:sticky lg:top-[110px] lg:self-start">

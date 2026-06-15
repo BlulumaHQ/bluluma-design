@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import { Target, Zap, Gem, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
@@ -37,7 +36,7 @@ const Solutions = () => {
     <div>
       {/* Hero (Dark) */}
       <section className="section-dark section-border relative overflow-hidden">
-        <GeometricPattern variant="diamonds" tone="dark" fade="right" />
+        <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("sol.label")}</p>

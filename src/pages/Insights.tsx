@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
+import LinePattern from "@/components/LinePattern";
 import { useState, useMemo, useEffect } from "react";
 import {
   articles,
@@ -83,8 +83,7 @@ const Insights = () => {
   return (
     <div>
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <GeometricPattern variant="isoGrid" tone="dark" fade="left" />
+      <section className="section-dark section-border">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{heroTitle}</h1>
           <p
@@ -105,7 +104,8 @@ const Insights = () => {
       </section>
 
       {/* Filters */}
-      <section className="section-border bg-background">
+      <section className="section-border bg-background relative overflow-hidden">
+        <LinePattern variation={6} />
         <div className="section-container py-8 space-y-5">
           {/* Search */}
           <div>

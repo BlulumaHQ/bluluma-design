@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import { Search, Palette, Code, Rocket, TrendingUp, ArrowRight } from "lucide-react";
@@ -24,7 +23,7 @@ const Process = () => {
     <div>
       {/* Hero (Dark) */}
       <section className="section-dark section-border relative overflow-hidden">
-        <GeometricPattern variant="stacked" tone="dark" fade="left" />
+        <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("process.label")}</p>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import logo from "@/assets/bluluma-logo.svg";
 import { useLang } from "@/lib/i18n";
 import { Mail, MapPin, ArrowUpRight } from "lucide-react";
@@ -23,7 +22,7 @@ const Footer = () => {
 
   return (
     <footer className="section-dark relative overflow-hidden">
-      <GeometricPattern variant="cubes" tone="dark" fade="bottom" />
+      <div className="logo-motif absolute inset-0 pointer-events-none" />
 
       <div className="section-container relative z-10 py-10 md:hidden">
         <img src={logo} alt="Bluluma logo" className="mb-5 h-10 w-auto" />
