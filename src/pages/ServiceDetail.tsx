@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
 
@@ -210,7 +210,7 @@ const ServiceDetail = () => {
       {/* Related Insights */}
       {relatedArticles.length > 0 && (
         <section className="section-border relative overflow-hidden">
-        <LinePattern variation={4} />
+        <HexPattern variation={4} />
           <div className="section-container section-padding">
             <RevealSection>
               <h2 className="text-2xl font-bold mb-8">Related Insights</h2>

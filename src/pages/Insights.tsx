@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { useState, useMemo, useEffect } from "react";
 import {
   articles,
@@ -105,7 +105,7 @@ const Insights = () => {
 
       {/* Filters */}
       <section className="section-border bg-background relative overflow-hidden">
-        <LinePattern variation={6} />
+        <HexPattern variation={6} />
         <div className="section-container py-8 space-y-5">
           {/* Search */}
           <div>

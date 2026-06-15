@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getLatestByIndustry } from "@/lib/articles";
@@ -325,7 +325,7 @@ const Realtor = () => {
 
         {/* WHAT WE DO */}
         <section id="what-we-do" className="section-border bg-background relative overflow-hidden">
-        <LinePattern variation={3} />
+        <HexPattern variation={3} />
           <div className="section-container section-padding">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">

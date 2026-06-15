@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import { ArrowRight, Check, X } from "lucide-react";
@@ -32,7 +32,7 @@ const Pricing = () => {
 
       {/* Pricing Block (White) */}
       <section className="section-border relative overflow-hidden">
-        <LinePattern variation={5} />
+        <HexPattern variation={5} />
         <div className="section-container section-padding text-center">
           <RevealSection>
             <div className="inline-flex flex-col items-center border border-border p-12 md:p-16 bg-background rounded-xl max-w-lg w-full">

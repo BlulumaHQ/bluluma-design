@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { useLang } from "@/lib/i18n";
 import { caseStudyProjects, getProjectImage } from "@/lib/portfolio-system";
 
@@ -10,7 +10,7 @@ const CaseStudyList = () => {
   return (
     <div>
       <section className="section-border relative overflow-hidden">
-        <LinePattern variation={10} />
+        <HexPattern variation={10} />
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl font-bold md:text-5xl">{t("nav.case-studies")}</h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
