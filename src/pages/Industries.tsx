@@ -169,7 +169,7 @@ export const IndustriesList = () => {
 
   return (
     <div>
-      <section className="isolate section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden bg-background">
         <HexPattern variation={9} />
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("industries.title")}</h1>
