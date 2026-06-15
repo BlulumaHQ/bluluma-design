@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { Globe, Fingerprint, ShoppingBag, Bot, TrendingUp, Megaphone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -85,7 +85,7 @@ const Services = () => {
 
       {/* CTA */}
       <section className="section-border relative overflow-hidden">
-        <LinePattern variation={3} />
+        <HexPattern variation={3} />
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start?</h2>

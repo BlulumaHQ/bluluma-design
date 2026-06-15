@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CmsPortfolioCard from "@/components/CmsPortfolioCard";
@@ -143,7 +143,7 @@ const Work = () => {
       </section>
 
       <section className="section-border section-subtle-bg relative overflow-hidden">
-        <LinePattern variation={8} />
+        <HexPattern variation={8} />
         <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
           <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">
             <aside className="lg:sticky lg:top-[110px] lg:self-start">

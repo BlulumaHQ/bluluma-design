@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import LinePattern from "@/components/LinePattern";
+import HexPattern from "@/components/HexPattern";
 import { getArticleBySlug } from "@/lib/articles";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insightImages, insightInlineImages } from "@/pages/insightImages";
@@ -54,7 +54,7 @@ const InsightDetail = () => {
     <div>
       {/* SEO-style hero */}
       <section className="section-border relative overflow-hidden">
-        <LinePattern variation={7} />
+        <HexPattern variation={7} />
         <div className="section-container py-16 md:py-24">
           <Link
             to="/insights"
