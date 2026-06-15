@@ -120,7 +120,7 @@ const Insights = () => {
 
           {/* Category */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mr-2">
+            <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
               Category
             </span>
             <button
@@ -140,7 +140,7 @@ const Insights = () => {
                 className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                   category === c
                     ? "border-primary text-primary bg-primary/5"
-                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                    : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                 }`}
               >
                 {c}
@@ -151,7 +151,7 @@ const Insights = () => {
           {/* Industry (hidden when locked by route) */}
           {!lockedIndustry && (
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mr-2">
+                <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
                 Industry
               </span>
               <button
@@ -171,7 +171,7 @@ const Insights = () => {
                   className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                     industry === ind
                       ? "border-primary text-primary bg-primary/5"
-                      : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                      : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                   }`}
                 >
                   {ind}
@@ -182,7 +182,7 @@ const Insights = () => {
 
           {/* Tags */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mr-2">
+            <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
               Tags
             </span>
             <button
@@ -202,7 +202,7 @@ const Insights = () => {
                 className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                   activeTag === tag
                     ? "border-primary text-primary bg-primary/5"
-                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                    : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                 }`}
               >
                 {tag}
@@ -210,7 +210,7 @@ const Insights = () => {
             ))}
           </div>
 
-          <div className="text-xs text-muted-foreground pt-2">
+          <div className="text-xs text-foreground/70 pt-2">
             Sorted by date (newest first) · {filtered.length} article{filtered.length === 1 ? "" : "s"}
           </div>
         </div>

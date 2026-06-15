@@ -20,16 +20,16 @@ const ARRANGEMENTS: Record<Variation, {
   mask: string;
   transform?: string;
 }> = {
-  1:  { size: "100% auto",   position: "center",        repeat: "no-repeat", opacity: 0.9,  mask: "radial-gradient(ellipse 70% 80% at 50% 50%, #000 40%, transparent 90%)" },
-  2:  { size: "140% auto",   position: "left center",   repeat: "no-repeat", opacity: 0.85, mask: "linear-gradient(to right, #000 30%, transparent 90%)" },
-  3:  { size: "140% auto",   position: "right center",  repeat: "no-repeat", opacity: 0.85, mask: "linear-gradient(to left, #000 30%, transparent 90%)" },
-  4:  { size: "120% auto",   position: "top center",    repeat: "no-repeat", opacity: 0.9,  mask: "linear-gradient(to bottom, #000 20%, transparent 85%)" },
-  5:  { size: "120% auto",   position: "bottom center", repeat: "no-repeat", opacity: 0.9,  mask: "linear-gradient(to top, #000 20%, transparent 85%)" },
-  6:  { size: "160% auto",   position: "30% 40%",       repeat: "no-repeat", opacity: 0.8,  mask: "radial-gradient(ellipse 60% 70% at 30% 40%, #000 30%, transparent 80%)" },
-  7:  { size: "160% auto",   position: "70% 60%",       repeat: "no-repeat", opacity: 0.8,  mask: "radial-gradient(ellipse 60% 70% at 70% 60%, #000 30%, transparent 80%)" },
-  8:  { size: "80% auto",    position: "center",        repeat: "repeat-x",  opacity: 0.7,  mask: "linear-gradient(to right, transparent, #000 20%, #000 80%, transparent)" },
-  9:  { size: "180% auto",   position: "center",        repeat: "no-repeat", opacity: 0.85, mask: "radial-gradient(ellipse 80% 60% at 50% 50%, #000 35%, transparent 85%)", transform: "rotate(-6deg) scale(1.1)" },
-  10: { size: "150% auto",   position: "center",        repeat: "no-repeat", opacity: 0.85, mask: "radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%)", transform: "rotate(8deg) scale(1.1)" },
+  1:  { size: "68% auto", position: "110% 54%", repeat: "no-repeat", opacity: 0.11, mask: "linear-gradient(to left, transparent 0%, #000 24%, #000 62%, transparent 100%)" },
+  2:  { size: "64% auto", position: "-8% 50%",  repeat: "no-repeat", opacity: 0.1,  mask: "linear-gradient(to right, transparent 0%, #000 24%, #000 62%, transparent 100%)" },
+  3:  { size: "64% auto", position: "108% 46%", repeat: "no-repeat", opacity: 0.1,  mask: "linear-gradient(to left, transparent 0%, #000 24%, #000 62%, transparent 100%)" },
+  4:  { size: "60% auto", position: "82% -12%", repeat: "no-repeat", opacity: 0.09, mask: "linear-gradient(to bottom, transparent 0%, #000 22%, #000 58%, transparent 100%)" },
+  5:  { size: "60% auto", position: "18% 118%", repeat: "no-repeat", opacity: 0.09, mask: "linear-gradient(to top, transparent 0%, #000 22%, #000 58%, transparent 100%)" },
+  6:  { size: "58% auto", position: "-10% 82%", repeat: "no-repeat", opacity: 0.08, mask: "radial-gradient(ellipse 56% 56% at 0% 100%, #000 22%, transparent 76%)" },
+  7:  { size: "58% auto", position: "112% 0%",  repeat: "no-repeat", opacity: 0.08, mask: "radial-gradient(ellipse 56% 56% at 100% 0%, #000 22%, transparent 76%)" },
+  8:  { size: "56% auto", position: "-8% 56%",  repeat: "no-repeat", opacity: 0.09, mask: "linear-gradient(to right, transparent 0%, #000 22%, #000 56%, transparent 100%)" },
+  9:  { size: "62% auto", position: "112% 34%", repeat: "no-repeat", opacity: 0.08, mask: "radial-gradient(ellipse 58% 52% at 100% 35%, #000 22%, transparent 76%)", transform: "rotate(-4deg)" },
+  10: { size: "62% auto", position: "-12% 70%", repeat: "no-repeat", opacity: 0.08, mask: "radial-gradient(ellipse 58% 52% at 0% 70%, #000 22%, transparent 76%)", transform: "rotate(4deg)" },
 };
 
 const HexPattern = ({ variation = 1, className = "" }: Props) => {
@@ -47,6 +47,7 @@ const HexPattern = ({ variation = 1, className = "" }: Props) => {
           backgroundPosition: a.position,
           backgroundRepeat: a.repeat,
           opacity: a.opacity,
+          filter: "grayscale(1) brightness(1.06)",
           WebkitMaskImage: a.mask,
           maskImage: a.mask,
           transform: a.transform,
