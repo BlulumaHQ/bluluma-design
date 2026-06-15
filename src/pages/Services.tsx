@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GeometricPattern from "@/components/GeometricPattern";
 import { Globe, Fingerprint, ShoppingBag, Bot, TrendingUp, Megaphone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -45,7 +46,7 @@ const Services = () => {
     <div>
       {/* Hero */}
       <section className="section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+        <GeometricPattern variant="isoGrid" tone="dark" fade="left" />
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
             <h1 className="text-4xl md:text-5xl font-bold">Our Services</h1>

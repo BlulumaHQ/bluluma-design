@@ -1,4 +1,5 @@
 import { useLang } from "@/lib/i18n";
+import GeometricPattern from "@/components/GeometricPattern";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -42,7 +43,7 @@ const Contact = () => {
     <div>
       {/* Hero (Dark) */}
       <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+        <GeometricPattern variant="stacked" tone="dark" fade="bottom" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("contact.label")}</p>
