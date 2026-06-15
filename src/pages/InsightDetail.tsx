@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import GeometricPattern from "@/components/GeometricPattern";
 import { getArticleBySlug } from "@/lib/articles";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insightImages, insightInlineImages } from "@/pages/insightImages";
@@ -154,7 +155,8 @@ const InsightDetail = () => {
       </section>
 
       {/* Industry-aware CTA */}
-      <section className="section-dark section-border">
+      <section className="section-dark section-border relative overflow-hidden">
+        <GeometricPattern variant="hexagons" tone="dark" fade="center" />
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
             {isRealtor ? (

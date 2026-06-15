@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GeometricPattern from "@/components/GeometricPattern";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getLatestByIndustry } from "@/lib/articles";
@@ -237,7 +238,8 @@ const Dentist = () => {
 
       <main className="flex-1">
         {/* HERO (dark) */}
-        <section className="section-dark section-border">
+        <section className="section-dark section-border relative overflow-hidden">
+        <GeometricPattern variant="cubes" tone="dark" fade="right" />
           <div className="section-container py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
