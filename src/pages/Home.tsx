@@ -263,7 +263,7 @@ const Home = () => {
       </section>
 
       {/* ═══════ PROBLEM (WHITE) ═══════ */}
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={1} />
         <div className="section-container section-padding">
           <RevealSection>

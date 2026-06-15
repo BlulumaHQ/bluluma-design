@@ -104,7 +104,7 @@ const Insights = () => {
       </section>
 
       {/* Filters */}
-      <section className="section-border bg-background relative overflow-hidden">
+      <section className="isolate section-border bg-background relative overflow-hidden">
         <HexPattern variation={6} />
         <div className="section-container py-8 space-y-5">
           {/* Search */}

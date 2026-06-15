@@ -324,7 +324,7 @@ const Realtor = () => {
         </section>
 
         {/* WHAT WE DO */}
-        <section id="what-we-do" className="section-border bg-background relative overflow-hidden">
+        <section id="what-we-do" className="isolate section-border bg-background relative overflow-hidden">
         <HexPattern variation={3} />
           <div className="section-container section-padding">
             <Reveal>

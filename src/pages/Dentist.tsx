@@ -296,7 +296,7 @@ const Dentist = () => {
         </section>
 
         {/* PROBLEM */}
-        <section id="problem" className="section-border bg-background relative overflow-hidden">
+        <section id="problem" className="isolate section-border bg-background relative overflow-hidden">
         <HexPattern variation={2} />
           <div className="section-container section-padding">
             <Reveal>

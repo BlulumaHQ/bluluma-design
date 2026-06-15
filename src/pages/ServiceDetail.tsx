@@ -209,7 +209,7 @@ const ServiceDetail = () => {
 
       {/* Related Insights */}
       {relatedArticles.length > 0 && (
-        <section className="section-border relative overflow-hidden">
+        <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={4} />
           <div className="section-container section-padding">
             <RevealSection>
