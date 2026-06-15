@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
+import GeometricPattern from "@/components/GeometricPattern";
 import { useNavigate, Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Check, X } from "lucide-react";
@@ -78,7 +79,7 @@ const Start = () => {
     <div>
       {/* Hero (Dark) */}
       <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+        <GeometricPattern variant="triangles" tone="dark" fade="right" />
         <div className="section-container py-24 md:py-36 relative z-10">
           <Reveal>
             <p className="text-label mb-4">Start Your Project</p>
@@ -312,7 +313,7 @@ const Start = () => {
 
       {/* Final CTA */}
       <section className="section-dark relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+        <GeometricPattern variant="triangles" tone="dark" fade="right" />
         <div className="section-container py-20 md:py-28 relative z-10 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
