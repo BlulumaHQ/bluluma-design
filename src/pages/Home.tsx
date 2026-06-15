@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import { useState, useEffect, useCallback, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -228,7 +227,7 @@ const Home = () => {
     <div>
       {/* ═══════ HERO (DARK) ═══════ */}
       <section className="section-dark relative overflow-hidden">
-        <GeometricPattern variant="hexagons" tone="dark" fade="center" />
+        <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-24 md:py-44 relative z-10">
           <RevealSection>
             <div className="hero-mobile-rhythm">

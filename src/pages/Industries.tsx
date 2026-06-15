@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import { Heart, Briefcase, Building2, Sparkles, Palette, Wrench, ShoppingCart, GraduationCap } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { useLang } from "@/lib/i18n";
@@ -169,8 +168,7 @@ export const IndustriesList = () => {
 
   return (
     <div>
-      <section className="section-border relative overflow-hidden">
-        <GeometricPattern variant="cubes" tone="blueOnLight" fade="left" />
+      <section className="section-border">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("industries.title")}</h1>
           <p className="mt-4 text-muted-foreground max-w-xl">

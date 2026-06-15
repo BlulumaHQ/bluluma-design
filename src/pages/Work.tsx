@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "react";
-import GeometricPattern from "@/components/GeometricPattern";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CmsPortfolioCard from "@/components/CmsPortfolioCard";
@@ -119,8 +118,7 @@ const Work = () => {
 
   return (
     <div>
-      <section className="section-dark section-border relative overflow-hidden">
-        <GeometricPattern variant="diamonds" tone="dark" fade="right" />
+      <section className="section-dark section-border">
         <div className="section-container py-14 md:py-20">
           <nav
             aria-label="Breadcrumb"

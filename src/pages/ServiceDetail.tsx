@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import GeometricPattern from "@/components/GeometricPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
 
@@ -181,7 +180,7 @@ const ServiceDetail = () => {
     <div>
       {/* Hero */}
       <section className="section-border relative overflow-hidden">
-        <GeometricPattern variant="cubes" tone="dark" fade="right" />
+        <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
             <Link to="/services" className="text-xs text-muted-foreground hover:text-foreground transition-colors mb-6 inline-block">
