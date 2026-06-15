@@ -31,7 +31,7 @@ const Pricing = () => {
       </section>
 
       {/* Pricing Block (White) */}
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={5} />
         <div className="section-container section-padding text-center">
           <RevealSection>

@@ -84,7 +84,7 @@ const Services = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={3} />
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>

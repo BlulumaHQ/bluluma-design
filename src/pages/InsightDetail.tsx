@@ -53,7 +53,7 @@ const InsightDetail = () => {
   return (
     <div>
       {/* SEO-style hero */}
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={7} />
         <div className="section-container py-16 md:py-24">
           <Link

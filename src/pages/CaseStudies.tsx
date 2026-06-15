@@ -9,7 +9,7 @@ const CaseStudyList = () => {
 
   return (
     <div>
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={10} />
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl font-bold md:text-5xl">{t("nav.case-studies")}</h1>

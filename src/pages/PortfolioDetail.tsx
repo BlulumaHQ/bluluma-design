@@ -88,7 +88,7 @@ const PortfolioDetail = () => {
 
   return (
     <article>
-      <section className="section-border section-subtle-bg relative overflow-hidden">
+      <section className="isolate section-border section-subtle-bg relative overflow-hidden">
         <HexPattern variation={1} />
         <div className="section-container py-10 md:py-14">
           <nav

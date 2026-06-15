@@ -142,7 +142,7 @@ const Work = () => {
         </div>
       </section>
 
-      <section className="section-border section-subtle-bg relative overflow-hidden">
+      <section className="isolate section-border section-subtle-bg relative overflow-hidden">
         <HexPattern variation={8} />
         <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
           <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">

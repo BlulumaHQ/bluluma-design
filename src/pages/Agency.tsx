@@ -14,7 +14,7 @@ const Agency = () => {
 
   return (
     <div>
-      <section className="section-border relative overflow-hidden">
+      <section className="isolate section-border relative overflow-hidden">
         <HexPattern variation={2} />
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("agency.title")}</h1>
