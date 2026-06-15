@@ -37,7 +37,7 @@ const HexPattern = ({ variation = 1, className = "" }: Props) => {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      className={`pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className}`}
     >
       <div
         className="absolute inset-0"
