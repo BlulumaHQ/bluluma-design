@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import LinePattern from "@/components/LinePattern";
 import { useState, useMemo, useEffect } from "react";
 import {
   articles,
@@ -103,7 +104,8 @@ const Insights = () => {
       </section>
 
       {/* Filters */}
-      <section className="section-border bg-background">
+      <section className="section-border bg-background relative overflow-hidden">
+        <LinePattern variation={6} />
         <div className="section-container py-8 space-y-5">
           {/* Search */}
           <div>

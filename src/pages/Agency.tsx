@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LinePattern from "@/components/LinePattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import agencyImage from "@/assets/bluluma-logo-3d-sign.jpg";
@@ -13,7 +14,8 @@ const Agency = () => {
 
   return (
     <div>
-      <section className="section-border">
+      <section className="section-border relative overflow-hidden">
+        <LinePattern variation={2} />
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("agency.title")}</h1>
         </div>

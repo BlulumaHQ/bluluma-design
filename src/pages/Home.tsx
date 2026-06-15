@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import LinePattern from "@/components/LinePattern";
 import { useState, useEffect, useCallback, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -262,7 +263,8 @@ const Home = () => {
       </section>
 
       {/* ═══════ PROBLEM (WHITE) ═══════ */}
-      <section className="section-border">
+      <section className="section-border relative overflow-hidden">
+        <LinePattern variation={1} />
         <div className="section-container section-padding">
           <RevealSection>
             <div className="flex items-start gap-4 mb-8">

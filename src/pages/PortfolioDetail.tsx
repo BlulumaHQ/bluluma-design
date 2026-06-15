@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import LinePattern from "@/components/LinePattern";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/i18n";
@@ -87,7 +88,8 @@ const PortfolioDetail = () => {
 
   return (
     <article>
-      <section className="section-border section-subtle-bg">
+      <section className="section-border section-subtle-bg relative overflow-hidden">
+        <LinePattern variation={1} />
         <div className="section-container py-10 md:py-14">
           <nav
             aria-label="Breadcrumb"

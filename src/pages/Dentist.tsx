@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LinePattern from "@/components/LinePattern";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getLatestByIndustry } from "@/lib/articles";
@@ -295,7 +296,8 @@ const Dentist = () => {
         </section>
 
         {/* PROBLEM */}
-        <section id="problem" className="section-border bg-background">
+        <section id="problem" className="section-border bg-background relative overflow-hidden">
+        <LinePattern variation={2} />
           <div className="section-container section-padding">
             <Reveal>
               <span className="text-xs uppercase tracking-widest text-primary font-semibold">
