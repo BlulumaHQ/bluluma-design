@@ -77,6 +77,18 @@ const Work = () => {
   const { items, total, loading, error } = usePortfolioPage(page, PER_PAGE, categorySlug);
   const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
 
+  // If a page number is requested beyond the last valid page, redirect
+  // to the last page instead of showing an empty valid page.
+  if (!loading && !error && total > 0 && page > totalPages) {
+    const base = categoryDef ? `/portfolio/${categoryDef.slug}` : "/portfolio";
+    return (
+      <Navigate
+        to={totalPages > 1 ? `${base}/page/${totalPages}` : base}
+        replace
+      />
+    );
+  }
+
   const heading = useMemo(() => {
     if (categoryDef) {
       return lang === "zh"
