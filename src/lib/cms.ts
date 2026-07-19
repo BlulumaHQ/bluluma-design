@@ -427,49 +427,24 @@ export async function fetchPortfolioPage(
     if (categoryFilterIds.length === 0) return { items: [], total: 0 };
   }
 
-  // All Projects (no category): daily-random ordering, consistent across
-  // pagination for the entire day. Fetch all IDs, deterministically shuffle,
-  // then fetch only the page slice.
-  if (!categorySlug) {
-    const { data: idRows, error: idErr } = await cms
-      .from("content_items")
-      .select("id")
-      .eq("content_type", "portfolio")
-      .eq("status", "published")
-      .eq("client_id", BLULUMA_CLIENT_ID);
-    if (idErr) throw idErr;
-    const allIds = (idRows ?? [])
-      .map((r: { id: string }) => r.id)
-      .slice()
-      .sort();
-    const ordered = seededShuffle(allIds, dailySeed("portfolio-all"));
-    const total = ordered.length;
-    const from = (page - 1) * perPage;
-    const pageIds = ordered.slice(from, from + perPage);
-    if (pageIds.length === 0) return { items: [], total };
-    const { data, error } = await cms
-      .from("content_items")
-      .select(PORTFOLIO_SELECT)
-      .in("id", pageIds);
-    if (error) throw error;
-    const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
-    const order = new Map(pageIds.map((id, i) => [id, i]));
-    items.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
-    return { items, total };
-  }
-
-  // Category pages: fixed order (created_at desc).
+  // Stable CMS-driven ordering everywhere:
+  //   1. sort_order ASC (nulls last)
+  //   2. created_at DESC
+  //   3. id ASC (deterministic tie-breaker)
   const from = (page - 1) * perPage;
   const to = from + perPage - 1;
-  const { data, error, count } = await cms
+  let query = cms
     .from("content_items")
     .select(PORTFOLIO_SELECT, { count: "exact" })
     .eq("content_type", "portfolio")
     .eq("status", "published")
     .eq("client_id", BLULUMA_CLIENT_ID)
+    .order("sort_order", { ascending: true, nullsFirst: false })
     .order("created_at", { ascending: false })
-    .range(from, to)
-    .in("id", categoryFilterIds!);
+    .order("id", { ascending: true })
+    .range(from, to);
+  if (categoryFilterIds) query = query.in("id", categoryFilterIds);
+  const { data, error, count } = await query;
   if (error) throw error;
   const items = (data as unknown as RawRow[] | null)?.map(mapRow) ?? [];
   return { items, total: count ?? items.length };
