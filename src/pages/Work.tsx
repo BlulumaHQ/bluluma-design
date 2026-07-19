@@ -13,7 +13,7 @@ import {
   resolveCategorySlug,
 } from "@/lib/portfolioCategories";
 
-const PER_PAGE = 12;
+const PER_PAGE = 20;
 const SITE = "https://bluluma-design-agency.lovable.app";
 
 const RevealDiv = ({
