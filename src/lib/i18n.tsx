@@ -452,10 +452,6 @@ const translations: Record<string, Record<Lang, string>> = {
   "contact.form.sending": { en: "Sending...", zh: "傳送中..." },
   "contact.form.error.generic": { en: "Something went wrong. Please try again.", zh: "發生錯誤，請再試一次。" },
   "contact.form.error.network": { en: "Network error. Please try again.", zh: "網路連線錯誤，請再試一次。" },
-  "contact.label": { en: "Contact", zh: "聯絡我們" },
-  "contact.hero.title": { en: "Start Your Project", zh: "開始你的專案" },
-  "contact.hero.sub": { en: "Tell us about your business and the digital platform you want to build.", zh: "歡迎留下你的業務背景與想打造的數位平台需求。" },
-  "contact.response": { en: "We usually respond within 1–2 business days.", zh: "我們通常會在 1–2 個工作日內回覆。" },
 
   // Prev/Next
   "prev": { en: "← Previous", zh: "← 上一頁" },

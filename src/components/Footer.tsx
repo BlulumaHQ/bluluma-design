@@ -7,17 +7,17 @@ const Footer = () => {
   const { t } = useLang();
 
   const navLinks = [
-    { label: "Solutions", to: "/solutions" },
-    { label: "Portfolio", to: "/portfolio" },
-    { label: "Process", to: "/process" },
-    { label: "Insights", to: "/insights" },
-    { label: "Request a Proposal", to: "/proposal" },
+    { key: "footer.link.solutions", to: "/solutions" },
+    { key: "footer.link.portfolio", to: "/portfolio" },
+    { key: "footer.link.process", to: "/process" },
+    { key: "footer.link.insights", to: "/insights" },
+    { key: "footer.link.proposal", to: "/proposal" },
   ];
 
   const serviceLinks = [
-    { label: "Conversion Websites", to: "/solutions" },
-    { label: "AI Automation", to: "/solutions" },
-    { label: "Brand Identity", to: "/solutions" },
+    { key: "footer.link.conversion-websites", to: "/solutions" },
+    { key: "footer.link.ai-automation", to: "/solutions" },
+    { key: "footer.link.brand-identity", to: "/solutions" },
   ];
 
   return (
@@ -67,19 +67,19 @@ const Footer = () => {
             <h4 className="mb-5 text-base font-semibold">{t("footer.navigation")}</h4>
             <nav className="flex flex-col gap-3.5">
               {navLinks.map((link) => (
-                <Link key={link.to} to={link.to} className="text-base transition-colors duration-200 hover:text-primary" style={{ color: "hsl(220 10% 55%)" }}>
-                  {link.label}
+                <Link key={link.key} to={link.to} className="text-base transition-colors duration-200 hover:text-primary" style={{ color: "hsl(220 10% 55%)" }}>
+                  {t(link.key)}
                 </Link>
               ))}
             </nav>
           </div>
 
           <div>
-            <h4 className="mb-5 text-base font-semibold">Services</h4>
+            <h4 className="mb-5 text-base font-semibold">{t("footer.services")}</h4>
             <nav className="flex flex-col gap-3.5">
               {serviceLinks.map((link) => (
-                <Link key={link.label} to={link.to} className="text-base transition-colors duration-200 hover:text-primary" style={{ color: "hsl(220 10% 55%)" }}>
-                  {link.label}
+                <Link key={link.key} to={link.to} className="text-base transition-colors duration-200 hover:text-primary" style={{ color: "hsl(220 10% 55%)" }}>
+                  {t(link.key)}
                 </Link>
               ))}
             </nav>
@@ -95,11 +95,10 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 pt-10 text-sm md:flex-row" style={{ borderTop: "1px solid hsl(220 14% 22%)", color: "hsl(220 10% 45%)" }}>
+          <span>{t("footer.copyright")}</span>
           <span>
-            © 2026 <a href="https://bluluma.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">Bluluma Design</a>. All rights reserved.
-          </span>
-          <span>
-            Web Design by <a href="https://bluluma.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">Bluluma</a>
+            {t("footer.web-design-by")}{" "}
+            <a href="https://bluluma.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">Bluluma</a>
           </span>
         </div>
       </div>
