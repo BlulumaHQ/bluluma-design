@@ -29,11 +29,11 @@ const Contact = () => {
       if (res.ok) {
         navigate("/thank-you");
       } else {
-        setError("Something went wrong. Please try again.");
+        setError(t("contact.form.error.generic"));
         setSubmitting(false);
       }
     } catch {
-      setError("Network error. Please try again.");
+      setError(t("contact.form.error.network"));
       setSubmitting(false);
     }
   };
@@ -64,21 +64,21 @@ const Contact = () => {
               <input type="hidden" name="source" value="bluluma contact form" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="text-sm font-medium block mb-2">Name *</label>
+                  <label htmlFor="name" className="text-sm font-medium block mb-2">{t("contact.form.name")} *</label>
                   <input type="text" id="name" name="name" required className={inputClass} />
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-sm font-medium block mb-2">Email *</label>
+                  <label htmlFor="email" className="text-sm font-medium block mb-2">{t("contact.form.email")} *</label>
                   <input type="email" id="email" name="email" required className={inputClass} />
                 </div>
                 <div>
-                  <label htmlFor="current_url" className="text-sm font-medium block mb-2">Website URL</label>
+                  <label htmlFor="current_url" className="text-sm font-medium block mb-2">{t("contact.form.website")}</label>
                   <input type="text" id="current_url" name="current_url" className={inputClass} />
                 </div>
                 <div>
-                  <label htmlFor="budget" className="text-sm font-medium block mb-2">Budget Range</label>
+                  <label htmlFor="budget" className="text-sm font-medium block mb-2">{t("contact.form.budget")}</label>
                   <select id="budget" name="budget" className={inputClass}>
-                    <option value="">Select budget range</option>
+                    <option value="">{t("contact.form.budget.select")}</option>
                     <option value="$1,500 - $3,000">$1,500 – $3,000</option>
                     <option value="$3,000 - $5,000">$3,000 – $5,000</option>
                     <option value="$5,000 - $10,000">$5,000 – $10,000</option>
@@ -86,33 +86,33 @@ const Contact = () => {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="timeline" className="text-sm font-medium block mb-2">Timeline</label>
+                  <label htmlFor="timeline" className="text-sm font-medium block mb-2">{t("contact.form.timeline")}</label>
                   <select id="timeline" name="timeline" className={inputClass}>
-                    <option value="">Select timeline</option>
-                    <option value="ASAP">ASAP</option>
-                    <option value="1-2 months">1–2 months</option>
-                    <option value="3-6 months">3–6 months</option>
-                    <option value="Flexible">Flexible</option>
+                    <option value="">{t("contact.form.timeline.select")}</option>
+                    <option value="ASAP">{t("contact.form.timeline.asap")}</option>
+                    <option value="1-2 months">{t("contact.form.timeline.1-2")}</option>
+                    <option value="3-6 months">{t("contact.form.timeline.3-6")}</option>
+                    <option value="Flexible">{t("contact.form.timeline.flexible")}</option>
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="project_type" className="text-sm font-medium block mb-2">Project Type *</label>
+                  <label htmlFor="project_type" className="text-sm font-medium block mb-2">{t("contact.form.project-type")} *</label>
                   <select id="project_type" name="project_type" required className={inputClass}>
-                    <option value="">Select project type</option>
-                    <option value="Conversion Website System">Conversion Website System</option>
-                    <option value="AI Automation System">AI Automation System</option>
-                    <option value="Brand Identity System">Brand Identity System</option>
-                    <option value="Ecommerce Platform">Ecommerce Platform</option>
-                    <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
+                    <option value="">{t("contact.form.project-type.select")}</option>
+                    <option value="Conversion Website System">{t("contact.form.project.website")}</option>
+                    <option value="AI Automation System">{t("contact.form.project.ai")}</option>
+                    <option value="Brand Identity System">{t("contact.form.project.brand")}</option>
+                    <option value="Ecommerce Platform">{t("contact.form.project.ecom")}</option>
+                    <option value="Other / Not Sure Yet">{t("contact.form.project.other")}</option>
                   </select>
                 </div>
               </div>
               <div>
-                <label htmlFor="message" className="text-sm font-medium block mb-2">Project Details *</label>
+                <label htmlFor="message" className="text-sm font-medium block mb-2">{t("contact.form.details")} *</label>
                 <textarea
                   id="message" name="message" rows={5} required
                   className={`${inputClass} resize-none`}
-                  placeholder="Tell us about your project, goals, and what you're looking to achieve."
+                  placeholder={t("contact.form.details.placeholder")}
                 />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
@@ -121,7 +121,7 @@ const Contact = () => {
                 disabled={submitting}
                 className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg disabled:opacity-50"
               >
-                {submitting ? "Sending..." : t("cta.get-strategy")}
+                {submitting ? t("contact.form.sending") : t("cta.get-strategy")}
               </button>
             </form>
           </RevealSection>
@@ -133,11 +133,11 @@ const Contact = () => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
                 <div>
-                  <h3 className="text-label mb-2">Email</h3>
+                  <h3 className="text-label mb-2">{t("footer.email")}</h3>
                   <p className="font-medium">support@bluluma.com</p>
                 </div>
                 <div>
-                  <h3 className="text-label mb-2">Location</h3>
+                  <h3 className="text-label mb-2">{t("footer.location")}</h3>
                   <p className="font-medium">Vancouver, BC, Canada</p>
                 </div>
               </div>
