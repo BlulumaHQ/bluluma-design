@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global horizontal-overflow guard — prevents accidental side-to-side scroll on mobile
+   caused by decorative absolutely-positioned elements, oversized shadows, or transforms.
+   Uses `clip` where supported (falls back to `hidden` in older engines). */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Media and embeds must never overflow their container on mobile. */
+img,
+video,
+iframe,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* Long unbroken URLs / tokens should wrap instead of pushing the viewport wider. */
+@media (max-width: 767px) {
+  a,
+  p,
+  h1,
+  h2,
+  h3,
+  li,
+  span {
+    overflow-wrap: anywhere;
+  }
+  /* Flex/grid children must be allowed to shrink so long content doesn't
+     force horizontal overflow of the parent. */
+  main [class*="grid-"] > *,
+  main [class*="flex"] > * {
+    min-width: 0;
+  }
+}
+
 @keyframes loaderReveal {
   0% {
     opacity: 0;
