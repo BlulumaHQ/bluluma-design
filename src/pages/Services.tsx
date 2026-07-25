@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import HexPattern from "@/components/HexPattern";
 import { Globe, Fingerprint, ShoppingBag, Bot, TrendingUp, Megaphone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useLang } from "@/lib/i18n";
 
 const RevealSection = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -10,38 +11,39 @@ const RevealSection = ({ children, delay = 0, className = "" }: { children: Reac
 
 const services = [
   {
-    title: "Web Design & Development",
-    desc: "Custom websites built for performance, clarity, and conversion. From single-page sites to complex multi-page platforms.",
+    titleKey: "svc.web-design.title",
+    descKey: "svc.web-design.desc",
     icon: Globe,
     to: "/services/web-design",
   },
   {
-    title: "Ecommerce Websites",
-    desc: "Shopify, custom-built, and hybrid ecommerce solutions designed to maximize product presentation and sales.",
+    titleKey: "svc.ecom.title",
+    descKey: "svc.ecom.desc",
     icon: ShoppingBag,
     to: "/services/ecommerce-websites",
   },
   {
-    title: "Branding & Identity Design",
-    desc: "Logo design, visual identity systems, and brand guidelines that create consistent, recognizable brands.",
+    titleKey: "svc.brand.title",
+    descKey: "svc.brand.desc",
     icon: Fingerprint,
     to: "/services/branding-design",
   },
   {
-    title: "AI & Business Automation",
-    desc: "Intelligent workflows, chatbots, and automation tools that streamline operations and improve efficiency.",
+    titleKey: "svc.ai.title",
+    descKey: "svc.ai.desc",
     icon: Bot,
     to: "/services/ai-automation",
   },
   {
-    title: "Digital Marketing",
-    desc: "SEO, social media strategy, and paid advertising campaigns that drive traffic and generate leads.",
+    titleKey: "svc.mkt.title",
+    descKey: "svc.mkt.desc",
     icon: Megaphone,
     to: "/services/digital-marketing",
   },
 ];
 
 const Services = () => {
+  const { t } = useLang();
   return (
     <div>
       {/* Hero */}
@@ -49,10 +51,8 @@ const Services = () => {
         <div className="logo-motif absolute inset-0 pointer-events-none" />
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
-            <h1 className="text-4xl md:text-5xl font-bold">Our Services</h1>
-            <p className="mt-4 text-muted-foreground max-w-xl leading-relaxed">
-              End-to-end design and digital services for businesses that want to stand out, convert more customers, and scale with confidence.
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold">{t("services.page.title")}</h1>
+            <p className="mt-4 text-muted-foreground max-w-xl leading-relaxed">{t("services.page.intro")}</p>
           </RevealSection>
         </div>
       </section>
@@ -70,10 +70,10 @@ const Services = () => {
                     className="block bg-background p-8 md:p-10 group transition-colors duration-300 hover:bg-secondary h-full"
                   >
                     <Icon size={24} strokeWidth={1.5} className="text-primary mb-4" />
-                    <h2 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors">{s.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.desc}</p>
+                    <h2 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors">{t(s.titleKey)}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{t(s.descKey)}</p>
                     <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors inline-flex items-center gap-1">
-                      Learn More <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                      {t("services.learn-more")} <span className="transition-transform group-hover:translate-x-0.5">→</span>
                     </span>
                   </Link>
                 </RevealSection>
@@ -88,15 +88,13 @@ const Services = () => {
         <HexPattern variation={3} />
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start?</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">
-              Tell us about your project and we'll recommend the best approach for your goals and budget.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t("services.cta.ready")}</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">{t("services.cta.text")}</p>
             <Link
               to="/proposal"
               className="inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
             >
-              Start a Project
+              {t("services.cta.start")}
             </Link>
           </RevealSection>
         </div>
