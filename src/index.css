@@ -559,6 +559,8 @@ html[lang="zh-TW"] body,
 .hc-confirmation { display: flex; gap: 10px; align-items: center; padding: 12px; border-radius: 8px; background: var(--hc-success-bg); color: var(--hc-success-text); font-size: 13px; margin-top: 24px; }
 .hc-confirmation svg { flex-shrink: 0; }
 .hc-section-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
+.hc-section-heading > * { min-width: 0; max-width: 100%; }
+.hc-page :lang(zh) h2, html[lang="zh-TW"] .hc-main h2 { word-break: normal; overflow-wrap: anywhere; }
 .hc-text-link { color: var(--hc-blue); font-size: 14px; padding: 0; white-space: normal; text-align: left; height: auto; }
 .hc-grid-work { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
 .hc-work-browser { overflow: hidden; border-radius: 12px; border: 1px solid var(--hc-border); box-shadow: var(--preview-shadow); }
@@ -629,6 +631,7 @@ html[lang="zh-TW"] body,
   .hc-transcript { padding: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .industry-menu { animation: none !important; }
   .hc-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .hc-browser, .hc-collage-phone, .hc-booking-note, .hc-skeleton { animation: none; }
 }
