@@ -7,6 +7,6 @@
 
 # Healthcare rebuild
 
-- [ ] Add the reusable industry header and rebuild Healthcare’s nine sections with bilingual copy.
-- [ ] Connect live CMS hero screenshots and six category-scoped previews without changing the central feed.
-- [ ] Verify navigation, previews, both languages, and mobile widths including 375px.
+- [x] Add the reusable industry header and rebuild Healthcare’s nine sections with bilingual copy.
+- [x] Connect live CMS hero screenshots and six category-scoped previews without changing the central feed.
+- [x] Verify navigation, previews, both languages, and mobile widths including 375px.

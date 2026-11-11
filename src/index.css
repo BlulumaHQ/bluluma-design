@@ -427,6 +427,7 @@ html[lang="zh-TW"] body,
 }
 
 /* Healthcare-specific semantic palette; never changes the main site theme. */
+html:has(.hc-page) { scroll-behavior: smooth; }
 .healthcare-theme {
   --hc-ink: #14151F;
   --hc-surface: #1E2030;
@@ -631,6 +632,7 @@ html[lang="zh-TW"] body,
   .hc-transcript { padding: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  html:has(.hc-page) { scroll-behavior: auto; }
   .industry-menu { animation: none !important; }
   .hc-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .hc-browser, .hc-collage-phone, .hc-booking-note, .hc-skeleton { animation: none; }
