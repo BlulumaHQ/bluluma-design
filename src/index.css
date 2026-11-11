@@ -85,6 +85,12 @@ canvas {
     --dark-fg: 0 0% 95%;
     --dark-muted: 220 10% 50%;
     --dark-border: 220 14% 22%;
+    --preview-scroll-thumb: 0 0% 0% / 0.18;
+    --preview-scroll-thumb-hover: 0 0% 0% / 0.4;
+    --preview-hint-background: 0 0% 100% / 0.9;
+    --preview-shadow: 0 1px 3px hsl(var(--foreground) / 0.08);
+    --preview-shadow-hover: 0 16px 36px -12px hsl(var(--foreground) / 0.2);
+    --preview-hint-shadow: 0 2px 8px hsl(var(--foreground) / 0.12);
   }
 }
 
@@ -336,5 +342,86 @@ html[lang="zh-TW"] body,
   background: transparent;
 }
 
-.feed-card-frame { scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior: contain; }
-.feed-card-frame::-webkit-scrollbar { display: none; }
+.feed-portfolio-card {
+  transition: transform 250ms ease;
+}
+.portfolio-screenshot {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+.portfolio-screenshot--card {
+  aspect-ratio: 4 / 5;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  box-shadow: var(--preview-shadow);
+  transition: box-shadow 250ms ease;
+}
+.portfolio-screenshot--phone {
+  aspect-ratio: 9 / 19;
+  border-radius: 1.75rem;
+  background: hsl(var(--background));
+}
+.portfolio-screenshot-screen {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--preview-scroll-thumb)) transparent;
+}
+.portfolio-screenshot-screen::-webkit-scrollbar { width: 3px; }
+.portfolio-screenshot-screen::-webkit-scrollbar-track { background: transparent; }
+.portfolio-screenshot-screen::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: hsl(var(--preview-scroll-thumb));
+}
+.portfolio-scroll-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: hsl(var(--preview-hint-background));
+  color: hsl(var(--foreground));
+  font-size: 12px;
+  line-height: 1.5;
+  box-shadow: var(--preview-hint-shadow);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.feed-portfolio-arrow { transition: transform 250ms ease; }
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .feed-portfolio-card:hover { transform: translateY(-4px); }
+  .feed-portfolio-card:hover .portfolio-screenshot--card { box-shadow: var(--preview-shadow-hover); }
+  .feed-portfolio-card:hover .feed-portfolio-arrow { transform: translateX(4px); }
+  .feed-portfolio-card:hover .portfolio-scroll-hint,
+  .portfolio-screenshot--phone:hover .portfolio-scroll-hint { opacity: 1; }
+  .feed-portfolio-card:hover .portfolio-screenshot-screen,
+  .portfolio-screenshot--phone:hover .portfolio-screenshot-screen {
+    scrollbar-color: hsl(var(--preview-scroll-thumb-hover)) transparent;
+  }
+  .feed-portfolio-card:hover .portfolio-screenshot-screen::-webkit-scrollbar-thumb,
+  .portfolio-screenshot--phone:hover .portfolio-screenshot-screen::-webkit-scrollbar-thumb {
+    background: hsl(var(--preview-scroll-thumb-hover));
+  }
+}
+@media (pointer: coarse), (max-width: 767px) {
+  .portfolio-screenshot--card .portfolio-screenshot-screen {
+    overflow: hidden;
+    overscroll-behavior: auto;
+    touch-action: pan-y;
+  }
+  .portfolio-scroll-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feed-portfolio-card, .portfolio-screenshot--card, .feed-portfolio-arrow, .portfolio-scroll-hint {
+    transition: none;
+  }
+  .feed-portfolio-card:hover, .feed-portfolio-card:hover .feed-portfolio-arrow { transform: none; }
+}

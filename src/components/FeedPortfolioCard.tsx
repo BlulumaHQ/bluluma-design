@@ -1,23 +1,21 @@
 import { Link } from "react-router-dom";
 import type { FeedItem } from "@/lib/portfolioFeed";
+import PortfolioScreenshotViewport from "./PortfolioScreenshotViewport";
 
 const FeedPortfolioCard = ({ item }: { item: FeedItem }) => {
   const img = item.homepage_full_url || item.featured_image_url;
   const services = (item.services ?? []).filter(Boolean);
   return (
-    <div className="flex flex-col">
-      <div className="feed-card-frame aspect-[4/5] w-full overflow-y-auto rounded-xl border border-border bg-muted shadow-sm">
-        {img && (
-          <img src={img} alt={`${item.title} homepage`} loading="lazy" decoding="async" className="block h-auto w-full" />
-        )}
+    <Link to={`/portfolio/${item.slug}`} className="feed-portfolio-card flex cursor-pointer flex-col rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
+      <PortfolioScreenshotViewport src={img} alt={`${item.title} homepage`} />
+      <div className="mt-4 flex min-w-0 items-center justify-between gap-3 text-base font-semibold text-foreground">
+        <span className="truncate">{item.title}</span>
+        <span className="feed-portfolio-arrow shrink-0" aria-hidden="true">→</span>
       </div>
-      <Link to={`/portfolio/${item.slug}`} className="mt-4 truncate text-base font-semibold text-foreground hover:text-primary">
-        {item.title}
-      </Link>
       {services.length > 0 && (
         <p className="mt-1 text-xs text-muted-foreground">{services.join(" · ")}</p>
       )}
-    </div>
+    </Link>
   );
 };
 
