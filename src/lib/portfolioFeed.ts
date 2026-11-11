@@ -23,6 +23,7 @@ export interface FeedItem {
   services: string[] | null;
   project_year: string | null;
   category: string | null;
+  categories: string[] | null;
   homepage_full_url: string | null;
   gallery: GalleryItem[] | null;
 }
@@ -31,7 +32,7 @@ export const categorySlug = (name: string) =>
   name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const COLS =
-  "id,title,slug,excerpt,featured_image_url,is_featured,sort_order,show_on,publish_date,live_url,services,project_year,category,homepage_full_url,gallery";
+  "id,title,slug,excerpt,featured_image_url,is_featured,sort_order,show_on,publish_date,live_url,services,project_year,category,categories,homepage_full_url,gallery";
 
 let cache: Promise<FeedItem[]> | null = null;
 
@@ -71,14 +72,22 @@ export const usePortfolioFeed = () => {
   return { items, loading, error };
 };
 
+/** Categories a project belongs to: its `categories` array, falling back to the single `category` string. */
+export const itemCategories = (it: FeedItem): string[] =>
+  it.categories && it.categories.length > 0 ? it.categories.filter(Boolean) : it.category ? [it.category] : [];
+
+export const itemInCategory = (it: FeedItem, catSlug: string): boolean =>
+  itemCategories(it).some((c) => categorySlug(c) === catSlug);
+
 export const feedCategories = (items: FeedItem[]) => {
   const map = new Map<string, { name: string; slug: string; count: number }>();
   for (const it of items) {
-    if (!it.category) continue;
-    const slug = categorySlug(it.category);
-    const e = map.get(slug) ?? { name: it.category, slug, count: 0 };
-    e.count++;
-    map.set(slug, e);
+    for (const name of itemCategories(it)) {
+      const slug = categorySlug(name);
+      const e = map.get(slug) ?? { name, slug, count: 0 };
+      e.count++;
+      map.set(slug, e);
+    }
   }
   return [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
 };
