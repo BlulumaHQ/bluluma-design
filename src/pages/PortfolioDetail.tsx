@@ -37,6 +37,7 @@ const PortfolioDetail = () => {
     if (item.featured_image_url) setMeta("og:image", item.featured_image_url, "property");
   }, [item]);
 
+  if (slug && category) return <Navigate to={`/portfolio/${slug}`} replace />;
   if (isCategory) {
     if (loading) return <div className="section-container section-padding" />;
     const catMatch = items.some((i) => i.category && categorySlug(i.category) === category);
