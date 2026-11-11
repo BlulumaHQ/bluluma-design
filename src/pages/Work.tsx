@@ -4,7 +4,7 @@ import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FeedPortfolioCard from "@/components/FeedPortfolioCard";
 import { useLang } from "@/lib/i18n";
-import { categorySlug, feedCategories, usePortfolioFeed } from "@/lib/portfolioFeed";
+import { feedCategories, itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 
 const PER_PAGE = 20;
 const SITE = "https://bluluma-design-agency.lovable.app";
@@ -36,7 +36,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
   const { items: all, loading, error } = usePortfolioFeed();
   const cats = feedCategories(all);
   const activeCat = activeSlug ? cats.find((c) => c.slug === activeSlug) : undefined;
-  const items = activeSlug ? all.filter((i) => i.category && categorySlug(i.category) === activeSlug) : all;
+  const items = activeSlug ? all.filter((i) => itemInCategory(i, activeSlug)) : all;
 
   const page = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
   const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
