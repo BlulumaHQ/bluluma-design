@@ -5,6 +5,7 @@ import HexPattern from "@/components/HexPattern";
 import { useLang } from "@/lib/i18n";
 import { categorySlug, usePortfolioFeed } from "@/lib/portfolioFeed";
 import Work from "./Work";
+import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 
 const SITE = "https://bluluma-design-agency.lovable.app";
 
@@ -43,10 +44,10 @@ const PortfolioDetail = () => {
     const catMatch = items.some((i) => i.category && categorySlug(i.category) === category);
     if (catMatch) return <Work category={category} />;
     const proj = items.find((i) => i.slug === category);
-    if (proj) return <PortfolioDetailView slugOverride={category!} />;
+    if (proj && category) return <PortfolioDetailView slugOverride={category} />;
     return <Navigate to="/portfolio" replace />;
   }
-  return <PortfolioDetailView slugOverride={slug!} />;
+  return <PortfolioDetailView slugOverride={slug ?? ""} />;
 
   function PortfolioDetailView({ slugOverride }: { slugOverride: string }) {
     const it = items.find((i) => i.slug === slugOverride);
@@ -103,11 +104,11 @@ const PortfolioDetail = () => {
           <section className="section-border">
             <div className="section-container section-padding">
               <h2 className="text-2xl font-bold md:text-3xl">{tt("Pages", "頁面")}</h2>
-              <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="mt-8 columns-1 gap-6 md:columns-2">
                 {pages.map((g, i) => (
-                  <figure key={g.url + i}>
-                    <div className="aspect-[3/4] overflow-hidden rounded-xl border border-border bg-muted shadow-sm">
-                      <img src={g.url} alt={g.caption || `${it.title} page ${i + 1}`} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
+                  <figure key={g.url + i} className="mb-6 break-inside-avoid">
+                    <div className="overflow-hidden rounded-xl border border-border bg-muted shadow-sm">
+                      <img src={g.url} alt={g.caption || `${it.title} page ${i + 1}`} loading="lazy" decoding="async" className="block h-auto w-full" />
                     </div>
                     {g.caption && <figcaption className="mt-2 text-sm text-muted-foreground">{g.caption}</figcaption>}
                   </figure>
@@ -122,9 +123,7 @@ const PortfolioDetail = () => {
             <div className="section-container section-padding">
               <h2 className="text-center text-2xl font-bold md:text-3xl">{tt("Mobile", "手機版")}</h2>
               <div className="mx-auto mt-8 w-[280px] max-w-full rounded-[2.5rem] border-[10px] border-foreground bg-foreground p-0 shadow-xl">
-                <div className="feed-card-frame aspect-[9/19] overflow-y-auto rounded-[1.75rem] bg-background">
-                  <img src={mobile.url} alt={mobile.caption || `${it.title} mobile`} loading="lazy" decoding="async" className="block h-auto w-full" />
-                </div>
+                <PortfolioScreenshotViewport key={mobile.url} src={mobile.url} alt={mobile.caption || `${it.title} mobile`} variant="phone" />
               </div>
               {mobile.caption && <p className="mt-3 text-center text-sm text-muted-foreground">{mobile.caption}</p>}
             </div>
