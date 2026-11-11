@@ -15,4 +15,4 @@
 
 - [x] Select featured projects with client deduplication, first-category limits, and non-featured fallback.
 - [x] Use feed cards with opt-in desktop hover scrolling and lazy-image skeletons only in Real Results.
-- [ ] Run selection and preview tests; verify twelve cards and homepage-only hover at 1280px and 375px.
+- [x] Passed 17 selection/preview/regression tests; verified twelve distinct clients with loaded screenshots at 1280px and 375px, homepage-only hover, manual wheel control, and reduced-motion behavior.
