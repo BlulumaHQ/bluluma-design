@@ -16,6 +16,23 @@ export const cms = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: { persistSession: false },
 });
 
+export interface HeroShot {
+  slug: string;
+  featured_image_url: string | null;
+  mobile_url: string | null;
+}
+
+/** Reuse the public feed so hero assets obey the same Bluluma visibility rules. */
+export async function fetchHeroShots(slugs: string[]): Promise<HeroShot[]> {
+  const { fetchFeed } = await import("./portfolioFeed");
+  const items = await fetchFeed();
+  return items.filter((item) => slugs.includes(item.slug)).map((item) => ({
+    slug: item.slug,
+    featured_image_url: item.featured_image_url,
+    mobile_url: item.gallery?.find((asset) => asset.caption === "Mobile" && asset.type === "mobile_screenshot")?.url ?? null,
+  }));
+}
+
 export interface PortfolioDetails {
   live_url: string | null;
   services: string[] | null;
