@@ -21,7 +21,7 @@ const Contact = () => {
     setError("");
     setSubmitting(true);
     try {
-      const res = await fetch("https://formspree.io/f/xlgprnry", {
+      const res = await fetch("/.netlify/functions/contact", {
         method: "POST",
         body: new FormData(e.currentTarget),
         headers: { Accept: "application/json" },

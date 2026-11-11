@@ -52,7 +52,7 @@ const Start = () => {
     try {
       const fd = new FormData(e.currentTarget);
       fd.set("needs", needs.join(", "));
-      const res = await fetch("https://formspree.io/f/xlgprnry", {
+      const res = await fetch("/.netlify/functions/contact", {
         method: "POST",
         body: fd,
         headers: { Accept: "application/json" },
