@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, ExternalLink } from "lucide-react";
 import HexPattern from "@/components/HexPattern";
 import { useLang } from "@/lib/i18n";
-import { categorySlug, usePortfolioFeed } from "@/lib/portfolioFeed";
+import { itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 import Work from "./Work";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 
@@ -41,7 +41,7 @@ const PortfolioDetail = () => {
   if (slug && category) return <Navigate to={`/portfolio/${slug}`} replace />;
   if (isCategory) {
     if (loading) return <div className="section-container section-padding" />;
-    const catMatch = items.some((i) => i.category && categorySlug(i.category) === category);
+    const catMatch = items.some((i) => itemInCategory(i, category));
     if (catMatch) return <Work category={category} />;
     const proj = items.find((i) => i.slug === category);
     if (proj && category) return <PortfolioDetailView slugOverride={category} />;
