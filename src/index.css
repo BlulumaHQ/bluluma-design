@@ -335,3 +335,6 @@ html[lang="zh-TW"] body,
 .portfolio-preview-viewport:hover::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.feed-card-frame { scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior: contain; }
+.feed-card-frame::-webkit-scrollbar { display: none; }
