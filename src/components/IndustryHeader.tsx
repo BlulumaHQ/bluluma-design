@@ -29,7 +29,7 @@ const IndustryHeader = ({ industryLabel, industryLabelZh, dotColor, anchors }: P
         <div className="industry-lockup">
           <Button asChild variant="link" className="industry-brand"><Link to="/" aria-label="Bluluma"><span className="industry-logo"><img src={logo} alt="" /></span><span className="industry-wordmark">Bluluma</span></Link></Button>
           <span className="industry-slash" aria-hidden="true">/</span>
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="industry-pill"><span className="industry-dot" style={{ "--industry-dot": dotColor } as CSSProperties} />{lang === "zh" ? industryLabelZh : industryLabel}<ChevronDown /></Button>
             </DropdownMenuTrigger>
