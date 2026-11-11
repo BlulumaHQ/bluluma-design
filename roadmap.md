@@ -10,3 +10,9 @@
 - [x] Add the reusable industry header and rebuild Healthcare’s nine sections with bilingual copy.
 - [x] Connect live CMS hero screenshots and six category-scoped previews without changing the central feed.
 - [x] Verify navigation, previews, both languages, and mobile widths including 375px.
+
+# Homepage Real Results
+
+- [x] Select featured projects with client deduplication, first-category limits, and non-featured fallback.
+- [x] Use feed cards with opt-in desktop hover scrolling and lazy-image skeletons only in Real Results.
+- [x] Passed 17 selection/preview/regression tests; verified twelve distinct clients with loaded screenshots at 1280px and 375px, homepage-only hover, manual wheel control, and reduced-motion behavior.

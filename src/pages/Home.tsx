@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import HexPattern from "@/components/HexPattern";
-import { useState, useEffect, useCallback, FormEvent } from "react";
+import { useState, useEffect, useCallback, useMemo, FormEvent } from "react";
 import { projects } from "@/lib/projects";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
-import { useRandomPortfolioItems } from "@/lib/cms";
-import CmsPortfolioCard from "@/components/CmsPortfolioCard";
+import { usePortfolioFeed } from "@/lib/portfolioFeed";
+import { selectHomepageProjects } from "@/lib/homepagePortfolio";
+import FeedPortfolioCard from "@/components/FeedPortfolioCard";
+import { Skeleton } from "@/components/ui/skeleton";
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
 import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
@@ -147,10 +149,11 @@ const TestimonialsCarousel = () => {
 const Home = () => {
   const { t } = useLang();
   const {
-    items: randomPortfolio,
+    items: portfolioItems,
     loading: portfolioLoading,
     error: portfolioError,
-  } = useRandomPortfolioItems(12);
+  } = usePortfolioFeed();
+  const homepagePortfolio = useMemo(() => selectHomepageProjects(portfolioItems), [portfolioItems]);
 
   type RealEstateTile = {
     key: string;
@@ -357,7 +360,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════ REAL RESULTS — RANDOM CMS PORTFOLIO (SUBTLE BG) ═══════ */}
+      {/* ═══════ REAL RESULTS — CURATED CMS PORTFOLIO (SUBTLE BG) ═══════ */}
       <section className="section-border section-subtle-bg">
         <div className="section-container section-padding">
           <RevealSection>
@@ -365,19 +368,21 @@ const Home = () => {
             <p className="text-xl text-muted-foreground mb-12">{t("home.proof.sub")}</p>
           </RevealSection>
           {portfolioLoading && (
-            <p className="py-12 text-center text-sm text-muted-foreground">Loading portfolio…</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Loading portfolio">
+              {Array.from({ length: 12 }, (_, i) => <Skeleton key={i} className="aspect-[4/5] rounded-xl" />)}
+            </div>
           )}
           {!portfolioLoading && portfolioError && (
             <p className="py-12 text-center text-sm text-destructive">Unable to load portfolio projects.</p>
           )}
-          {!portfolioLoading && !portfolioError && randomPortfolio.length === 0 && (
+          {!portfolioLoading && !portfolioError && homepagePortfolio.length === 0 && (
             <p className="py-12 text-center text-sm text-muted-foreground">No portfolio projects found.</p>
           )}
-          {!portfolioLoading && randomPortfolio.length > 0 && (
+          {!portfolioLoading && homepagePortfolio.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {randomPortfolio.map((item, i) => (
+              {homepagePortfolio.map((item, i) => (
                 <RevealSection key={item.id} delay={i * 60} className="h-full">
-                  <CmsPortfolioCard item={item} />
+                  <FeedPortfolioCard item={item} autoScrollOnHover />
                 </RevealSection>
               ))}
             </div>
