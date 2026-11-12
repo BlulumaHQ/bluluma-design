@@ -60,7 +60,7 @@ import shopify1 from "@/assets/insights/inline/shopify-1.jpg";
 import shopify2 from "@/assets/insights/inline/shopify-2.jpg";
 import shopify3 from "@/assets/insights/inline/shopify-3.jpg";
 
-export const insightImages: Record<string, string> = {
+const legacyImages: Record<string, string> = {
   "work-vs-case-studies": insight1,
   "website-refresh-checklist-2026": insight2,
   "brand-identity-systems": insight3,
@@ -77,6 +77,14 @@ export const insightImages: Record<string, string> = {
   "how-to-build-a-website-that-converts": insight14,
   "shopify-vs-custom-ecommerce": insight15,
 };
+
+// Designed 4:3 feature images (src/assets/insights/featured/<slug>.webp) override the legacy ones.
+const featuredFiles = import.meta.glob("@/assets/insights/featured/*.webp", { eager: true, import: "default" }) as Record<string, string>;
+const featuredImages: Record<string, string> = Object.fromEntries(
+  Object.entries(featuredFiles).map(([file, url]) => [file.split("/").pop()!.replace(/\.webp$/, ""), url]),
+);
+
+export const insightImages: Record<string, string> = { ...legacyImages, ...featuredImages };
 
 export const insightInlineImages: Record<string, string[]> = {
   "work-vs-case-studies": [workVs1, workVs2, workVs3],

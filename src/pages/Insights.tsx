@@ -252,14 +252,14 @@ const Insights = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filtered.map((a, i) => {
-                const img = a.featuredImage ?? insightImages[a.slug];
+                const img = insightImages[a.slug] ?? a.featuredImage;
                 return (
                   <RevealSection key={a.slug} delay={i * 60}>
                     <Link
                       to={`/insights/${a.slug}`}
                       className="site-page-card site-insight-card block bg-background border border-border rounded-lg overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 h-full"
                     >
-                      <div className="aspect-[16/9] bg-muted overflow-hidden">
+                      <div className="aspect-[4/3] bg-muted overflow-hidden">
                         {img ? (
                           <img
                             src={img}

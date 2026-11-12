@@ -56,7 +56,7 @@ const InsightDetail = () => {
     );
   }
 
-  const heroImage = article.featuredImage ?? insightImages[article.slug];
+  const heroImage = insightImages[article.slug] ?? article.featuredImage;
   const inlineImages = insightInlineImages[article.slug] || [];
   const paragraphs = article.content.split(/\n{2,}/).filter(Boolean);
 
@@ -117,7 +117,7 @@ const InsightDetail = () => {
       {heroImage && (
         <section className="section-border">
           <div className="section-container">
-            <div className="aspect-[21/9] border border-border overflow-hidden">
+            <div className="mx-auto max-w-4xl aspect-[4/3] border border-border overflow-hidden">
               <img
                 src={heroImage}
                 alt={article.title}
