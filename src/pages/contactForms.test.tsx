@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { LangProvider } from "@/lib/i18n";
 import Contact from "./Contact";
@@ -36,6 +36,6 @@ describe.each([{ name: "Contact", Page: Contact }, { name: "Proposal", Page: Sta
     expect(Number(data.get("_t"))).toBeGreaterThan(0);
     expect(data.get("website_hp")).toBe("");
     expect(data.get("source")).toBe(name === "Contact" ? "bluluma contact form" : "bluluma start project");
-    await waitFor(() => expect(screen.getByRole("button", { name: /Request a Proposal|Get a Free Strategy Session|Get a Strategy/i })).not.toBeDisabled());
+    await waitFor(() => expect(form.querySelector('button[type="submit"]')).not.toBeDisabled());
   });
 });
