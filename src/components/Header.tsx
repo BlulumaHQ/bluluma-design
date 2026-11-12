@@ -24,8 +24,9 @@ const navItems: NavItem[] = [
   {
     labelKey: "nav.industries",
     children: [
-      { label: "Real Estate", to: "/real-estate" },
-      { label: "Healthcare", to: "/healthcare" },
+      { labelKey: "hc.healthcare", to: "/healthcare" },
+      { labelKey: "ind.realtors", to: "/real-estate" },
+      { labelKey: "ind.developers", to: "/presale" },
     ],
   },
   { labelKey: "nav.contact", to: "/contact" },
@@ -109,7 +110,7 @@ const Header = () => {
             return (
               <Link
                 key={item.to}
-                to={item.to!}
+                to={item.to ?? "/"}
                 className={`text-[15px] font-semibold transition-colors hover:text-primary ${
                   location.pathname === item.to ? "text-primary" : "text-foreground"
                 }`}
@@ -180,7 +181,7 @@ const Header = () => {
               ) : (
                 <Link
                   key={item.to}
-                  to={item.to!}
+                  to={item.to ?? "/"}
                   className={`text-base font-semibold transition-colors hover:text-primary ${
                     location.pathname === item.to ? "text-primary" : "text-foreground"
                   }`}

@@ -24,7 +24,7 @@ const IndustryHeader = ({ industryLabel, industryLabelZh, dotColor, anchors }: P
     </div>
   );
   return (
-    <header className="industry-header healthcare-theme">
+    <header className="industry-header">
       <div className="hc-container industry-header-inner">
         <div className="industry-lockup">
           <Button asChild variant="link" className="industry-brand"><Link to="/" aria-label="Bluluma"><span className="industry-logo"><img src={logo} alt="" /></span><span className="industry-wordmark">Bluluma</span></Link></Button>
@@ -35,7 +35,7 @@ const IndustryHeader = ({ industryLabel, industryLabelZh, dotColor, anchors }: P
             </DropdownMenuTrigger>
             <DropdownMenuContent className="industry-menu healthcare-theme" align="start" sideOffset={10} collisionPadding={12}>
               <DropdownMenuLabel className="industry-menu-label">{t("hc.industries")}</DropdownMenuLabel>
-              {[{ path: "/real-estate", key: "hc.realEstate" }, { path: "/healthcare", key: "hc.healthcare" }].map((item) => (
+              {[{ path: "/healthcare", key: "hc.healthcare" }, { path: "/real-estate", key: "ind.realtors" }, { path: "/presale", key: "ind.developers" }].map((item) => (
                 <DropdownMenuItem key={item.path} asChild className={pathname === item.path ? "industry-menu-current" : ""}><Link to={item.path}>{t(item.key)}{pathname === item.path && <Check className="ml-auto h-4 w-4" />}</Link></DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />
