@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import type { ReactNode } from "react";
 import IndustryHeader from "@/components/IndustryHeader";
+import { IndustryStat } from "@/components/IndustryWork";
 import HealthcareHeroCollage, { BrowserChrome } from "@/components/HealthcareHeroCollage";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 import Footer from "@/components/Footer";
@@ -41,7 +42,7 @@ const Dentist = () => {
               <h1 className="hc-h1">{t("hc.heroTitle")} <span>{t("hc.heroAccent")}</span></h1>
               <p className="hc-hero-description">{t("hc.heroDescription")}</p>
               <div className="hc-actions">{proposal()}<Button variant="outline" asChild className="hc-button hc-button-outline"><a href="#work">{t("hc.seeClinics")}</a></Button></div>
-              <div className="hc-stat"><strong>8</strong><p>{t("hc.stat")}</p></div>
+              <IndustryStat category="dental-healthcare" label={t("hc.stat")} />
             </Reveal>
             <HealthcareHeroCollage />
           </div>

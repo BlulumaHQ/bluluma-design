@@ -1,3 +1,9 @@
+# Three industry pages
+
+- [x] Share collage, work grid, accents, and live category counts; extend both industry menus.
+- [x] Rebuild Realtors, preserve pricing, add Pre-sale and audience navigation with Chinese translations.
+- [x] Verify all three pages in both languages at 1280px and 375px, CMS imagery, menus, ad redirect, category/project links, and preserved prices; 23 tests passed. CMS currently has four development entries, all displayed.
+
 # Portfolio refinements
 
 - [x] Add full-card links, hover lift/arrow, visible thin scrollbars, and persistent scroll hints.

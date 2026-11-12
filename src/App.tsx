@@ -23,6 +23,7 @@ import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 import Realtor from "./pages/Realtor";
 import Dentist from "./pages/Dentist";
+import Presale from "./pages/Presale";
 import PortfolioDetail from "./pages/PortfolioDetail";
 import PageLoader from "./components/PageLoader";
 
@@ -49,6 +50,8 @@ const App = () => (
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/portfolio" element={<Work />} />
+              <Route path="/portfolio/realtor-realty" element={<Navigate to="/portfolio/realtor" replace />} />
+              <Route path="/portfolio/real-estate-development-presale" element={<Navigate to="/portfolio/real-estate-development-pre-sale" replace />} />
               <Route path="/portfolio/page/:page" element={<Work />} />
               <Route path="/portfolio/:category/page/:page" element={<Work />} />
               <Route path="/portfolio/:category/:slug" element={<PortfolioDetail />} />
@@ -77,6 +80,7 @@ const App = () => (
               <Route path="/thank-you" element={<ThankYou />} />
             </Route>
             <Route path="/real-estate" element={<Realtor />} />
+            <Route path="/presale" element={<Presale />} />
             <Route path="/healthcare" element={<Dentist />} />
             {/* Permanent redirects from old industry URLs */}
             <Route path="/realtor" element={<Navigate to="/real-estate" replace />} />
