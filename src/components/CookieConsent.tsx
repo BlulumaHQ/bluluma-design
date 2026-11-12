@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 const STORAGE_KEY = "bluluma_cookie_consent";
 
@@ -10,6 +11,8 @@ interface CookiePreferences {
 }
 
 const CookieConsent = () => {
+  const { lang } = useLang();
+  const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const [visible, setVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [prefs, setPrefs] = useState<CookiePreferences>({
@@ -47,7 +50,7 @@ const CookieConsent = () => {
       >
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <p className="text-sm leading-relaxed" style={{ color: "#333" }}>
-            We use cookies to improve your experience and analyze traffic. You can accept all cookies or manage your preferences.
+            {tt("We use cookies to improve your experience and analyze traffic. You can accept all cookies or manage your preferences.", "我們使用 Cookie 來改善你的瀏覽體驗並分析流量。你可以接受所有 Cookie，或自行管理偏好設定。")}
           </p>
           <div className="flex items-center gap-3 shrink-0">
             <button
@@ -55,14 +58,14 @@ const CookieConsent = () => {
               className="px-4 py-2.5 text-sm font-medium rounded-lg w-full sm:w-auto"
               style={{ background: "#5887DA", color: "#fff" }}
             >
-              Accept All
+              {tt("Accept All", "全部接受")}
             </button>
             <button
               onClick={() => setShowSettings(true)}
               className="text-sm underline-offset-2 hover:underline w-full sm:w-auto text-center"
               style={{ color: "#666" }}
             >
-              Settings
+              {tt("Settings", "設定")}
             </button>
           </div>
         </div>
@@ -84,19 +87,19 @@ const CookieConsent = () => {
               <X size={18} />
             </button>
             <h3 className="text-lg font-semibold mb-4" style={{ color: "#111" }}>
-              Cookie Preferences
+              {tt("Cookie Preferences", "Cookie 偏好設定")}
             </h3>
             <div className="space-y-4">
-              <CookieRow label="Essential Cookies" description="Required for the site to function" checked disabled />
+              <CookieRow label={tt("Essential Cookies", "必要 Cookie")} description={tt("Required for the site to function", "網站運作所必需")} checked disabled />
               <CookieRow
-                label="Analytics Cookies"
-                description="Help us understand site usage"
+                label={tt("Analytics Cookies", "分析 Cookie")}
+                description={tt("Help us understand site usage", "幫助我們了解網站使用情況")}
                 checked={prefs.analytics}
                 onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
               />
               <CookieRow
-                label="Marketing Cookies"
-                description="Used for targeted advertising"
+                label={tt("Marketing Cookies", "行銷 Cookie")}
+                description={tt("Used for targeted advertising", "用於精準廣告投放")}
                 checked={prefs.marketing}
                 onChange={(v) => setPrefs((p) => ({ ...p, marketing: v }))}
               />
@@ -106,7 +109,7 @@ const CookieConsent = () => {
               className="mt-6 w-full py-2.5 text-sm font-medium rounded-lg"
               style={{ background: "#5887DA", color: "#fff" }}
             >
-              Save Preferences
+              {tt("Save Preferences", "儲存偏好設定")}
             </button>
           </div>
         </div>

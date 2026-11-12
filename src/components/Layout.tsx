@@ -1,3 +1,4 @@
+import { useLang } from "@/lib/i18n";
 import { Outlet, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./Header";
@@ -7,6 +8,7 @@ import CookieConsent from "./CookieConsent";
 import MobileStickyCTA from "./MobileStickyCTA";
 
 const Layout = () => {
+  const { t } = useLang();
   const { pathname } = useLocation();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -37,7 +39,7 @@ const Layout = () => {
         className="fixed right-0 top-1/2 -translate-y-1/2 z-40 cta-solid text-xs font-semibold px-3 py-6 hidden md:block rounded-l-md"
         style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
       >
-        Request a Proposal
+        {t("hc.proposal")}
       </Link>
 
       {/* Scroll to top */}

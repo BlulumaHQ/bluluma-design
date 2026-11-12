@@ -105,7 +105,7 @@ const dentistArticles: Article[] = [
     tags: ["AI", "Dental Clinic", "Automation", "Front Desk"],
     excerpt:
       "Most dental clinics still rely heavily on front desk staff for repetitive tasks. With the right setup, AI can handle a large portion of daily communication.",
-    seoTitle: "AI Automation for Dental Clinics | Sonykun Design",
+    seoTitle: "AI Automation for Dental Clinics | Bluluma",
     metaDescription:
       "Learn how AI automation can reduce front desk workload and improve patient communication for dental clinics.",
     content: [
@@ -132,7 +132,7 @@ const dentistArticles: Article[] = [
     tags: ["AEO", "SEO", "AI Search", "Dental Clinic"],
     excerpt:
       "Patients are starting to ask AI tools instead of Google. If your clinic is not structured properly online, AI will not mention you.",
-    seoTitle: "How to Make AI Recommend Your Dental Clinic | Sonykun Design",
+    seoTitle: "How to Make AI Recommend Your Dental Clinic | Bluluma",
     metaDescription:
       "Learn how Answer Engine Optimization (AEO) helps dental clinics get recommended by AI tools like ChatGPT and Google AI.",
     content: [
@@ -161,7 +161,7 @@ const dentistArticles: Article[] = [
     tags: ["AI Receptionist", "Lead Capture", "Dental Clinic", "Patient Experience"],
     excerpt:
       "An AI receptionist can handle incoming questions, reduce missed opportunities, and improve patient experience.",
-    seoTitle: "AI Receptionist for Dental Clinics | Sonykun Design",
+    seoTitle: "AI Receptionist for Dental Clinics | Bluluma",
     metaDescription:
       "How an AI receptionist helps dental clinics handle inquiries, capture leads, and improve patient experience.",
     content: [
@@ -225,3 +225,19 @@ export const getLatestByIndustry = (industry: Industry, n = 3) =>
     .slice()
     .sort((a, b) => (a.date < b.date ? 1 : -1))
     .slice(0, n);
+
+import { articlesZh } from "./articlesZh";
+
+/** Return the article with Chinese copy swapped in when lang is "zh". */
+export const localizeArticle = (a: Article, lang: "en" | "zh"): Article => {
+  const zh = lang === "zh" ? articlesZh[a.slug] : undefined;
+  if (!zh) return a;
+  return {
+    ...a,
+    title: zh.title,
+    excerpt: zh.excerpt,
+    content: zh.content.join("\n\n"),
+    seoTitle: zh.seoTitle,
+    metaDescription: zh.metaDescription,
+  };
+};

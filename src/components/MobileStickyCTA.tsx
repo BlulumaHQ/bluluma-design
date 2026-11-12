@@ -1,3 +1,4 @@
+import { useLang } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowUp, Mail } from "lucide-react";
@@ -5,6 +6,7 @@ import { ArrowUp, Mail } from "lucide-react";
 const HIDE_ON = ["/proposal", "/start", "/contact", "/thank-you"];
 
 const MobileStickyCTA = () => {
+  const { t } = useLang();
   const { pathname } = useLocation();
   const [showTop, setShowTop] = useState(false);
 
@@ -60,7 +62,7 @@ const MobileStickyCTA = () => {
               to="/proposal"
               className="flex-[1.4] inline-flex items-center justify-center h-12 rounded-full cta-solid text-sm font-semibold active:scale-[0.98] transition-transform"
             >
-              Request a Proposal
+              {t("hc.proposal")}
             </Link>
           </div>
         </div>

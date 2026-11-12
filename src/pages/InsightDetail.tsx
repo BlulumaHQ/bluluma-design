@@ -1,5 +1,8 @@
 import { useParams, Link } from "react-router-dom";
-import { getArticleBySlug } from "@/lib/articles";
+import { getArticleBySlug, localizeArticle } from "@/lib/articles";
+import { zhLabel } from "@/lib/articlesZh";
+import { useLang } from "@/lib/i18n";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insightImages, insightInlineImages } from "@/pages/insightImages";
 
@@ -20,23 +23,34 @@ const RevealSection = ({
   );
 };
 
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
+const formatDate = (iso: string, lang: "en" | "zh" = "en") =>
+  new Date(iso).toLocaleDateString(lang === "zh" ? "zh-TW" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 
 const InsightDetail = () => {
   const { slug } = useParams();
-  const article = slug ? getArticleBySlug(slug) : undefined;
+  const { lang } = useLang();
+  const zh = lang === "zh";
+  const tx = (en: string, z: string) => (zh ? z : en);
+  const L = (s: string) => (zh ? zhLabel(s) : s);
+  const found = slug ? getArticleBySlug(slug) : undefined;
+  const article = found ? localizeArticle(found, lang) : undefined;
+
+  useDocumentMeta({
+    title: article ? article.seoTitle : tx("Insight not found | Bluluma", "找不到文章｜Bluluma"),
+    description: article ? article.metaDescription : "",
+  });
 
   if (!article) {
     return (
       <div className="section-container section-padding">
-        <h1 className="text-2xl font-bold">Insight not found</h1>
+        <h1 className="text-2xl font-bold">{tx("Insight not found", "找不到這篇文章")}</h1>
         <Link to="/insights" className="text-primary mt-4 inline-block text-sm">
-          ← Back to Insights
+          {tx("← Back to Insights", "← 回到文章列表")}
         </Link>
       </div>
     );
@@ -58,10 +72,10 @@ const InsightDetail = () => {
             to="/insights"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
           >
-            ← Back to Insights
+            {tx("← Back to Insights", "← 回到文章列表")}
           </Link>
           <div className="flex flex-wrap items-center gap-2 mb-4 text-[10px] uppercase tracking-widest font-medium">
-            <span className="text-primary">{article.category}</span>
+            <span className="text-primary">{L(article.category)}</span>
             <span className="text-muted-foreground">·</span>
             <Link
               to={
@@ -73,11 +87,11 @@ const InsightDetail = () => {
               }
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              {article.industry}
+              {L(article.industry)}
             </Link>
             <span className="text-muted-foreground">·</span>
             <span className="text-muted-foreground normal-case tracking-normal">
-              {formatDate(article.date)}
+              {formatDate(article.date, lang)}
             </span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold max-w-3xl">
@@ -92,7 +106,7 @@ const InsightDetail = () => {
                 key={t}
                 className="text-[11px] px-2.5 py-1 border border-border rounded text-muted-foreground"
               >
-                {t}
+                {L(t)}
               </span>
             ))}
           </div>
@@ -141,7 +155,7 @@ const InsightDetail = () => {
                   <div className="my-10 border border-border overflow-hidden rounded-lg">
                     <img
                       src={inlineImages[i % inlineImages.length]}
-                      alt={`${article.title} — illustration`}
+                      alt={`${article.title} — ${tx("illustration", "插圖")}`}
                       className="w-full h-auto object-cover aspect-[16/9]"
                       loading="lazy"
                     />
@@ -160,58 +174,64 @@ const InsightDetail = () => {
             {isRealtor ? (
               <>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Need a better real estate website?
+                  {tx("Need a better real estate website?", "需要更好的房地產網站嗎？")}
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
                  
                 >
-                  Request a tailored proposal for a real estate website
-                  built to convert visitors into buyers and sellers.
+                  {tx(
+                    "Request a tailored proposal for a real estate website built to convert visitors into buyers and sellers.",
+                    "索取專屬提案，打造能把訪客轉換成買方與賣方的房地產網站。",
+                  )}
                 </p>
                 <Link
                   to="/realtor"
                   className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
-                  View Realtor Website Service
+                  {tx("View Realtor Website Service", "查看房仲網站服務")}
                 </Link>
               </>
             ) : isDentist ? (
               <>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Need a better dental practice website?
+                  {tx("Need a better dental practice website?", "需要更好的牙醫診所網站嗎？")}
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
                  
                 >
-                  Dental websites built to attract new patients and build
-                  trust from the first visit.
+                  {tx(
+                    "Dental websites built to attract new patients and build trust from the first visit.",
+                    "為吸引新病患而打造的牙醫診所網站，從第一次造訪就建立信任。",
+                  )}
                 </p>
                 <Link
                   to="/proposal"
                   className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
-                  Talk to Bluluma
+                  {tx("Talk to Bluluma", "與 Bluluma 聊聊")}
                 </Link>
               </>
             ) : (
               <>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Planning a Website Refresh?
+                  {tx("Planning a Website Refresh?", "正在規劃網站改版嗎？")}
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
                  
                 >
-                  If you're evaluating whether your website needs a redesign or
-                  structural update, we can help map the next step.
+                  {tx(
+                    "If you're evaluating whether your website needs a redesign or structural update, we can help map the next step.",
+                    "如果你正在評估網站是否需要重新設計或調整架構，我們可以幫你規劃下一步。",
+                  )}
                 </p>
                 <Link
                   to="/proposal"
                   className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
-                  Request a Quote
+                  {tx("Request a Quote", "索取報價")}
                 </Link>
               </>
             )}

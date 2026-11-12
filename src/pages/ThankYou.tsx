@@ -1,6 +1,7 @@
 import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useLang } from "@/lib/i18n";
 
 declare global {
   interface Window {
@@ -10,6 +11,8 @@ declare global {
 }
 
 const ThankYou = () => {
+  const { lang } = useLang();
+  const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   useEffect(() => {
     // TODO: Replace with real Meta Pixel ID once available
     if (window.fbq) {
@@ -29,15 +32,15 @@ const ThankYou = () => {
       <section className="site-page-hero ">
         <div className="section-container py-24 md:py-40 text-center">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-            THANK YOU
+            {tt("THANK YOU", "謝謝你")}
           </h1>
           <div className="mt-8 max-w-xl mx-auto space-y-4 text-muted-foreground">
-            <p>Thank you for reaching out.</p>
+            <p>{tt("Thank you for reaching out.", "感謝你與我們聯絡。")}</p>
             <p>
-              Your message has been received and we will review your inquiry shortly.
+              {tt("Your message has been received and we will review your inquiry shortly.", "我們已收到你的訊息，會盡快審閱你的詢問。")}
             </p>
             <p>
-              If your request is urgent, please email us directly at:{" "}
+              {tt("If your request is urgent, please email us directly at:", "如有急件，請直接寄信至：")}{" "}
               <a href="mailto:support@bluluma.com" className="text-foreground font-medium underline">
                 support@bluluma.com
               </a>
@@ -48,7 +51,7 @@ const ThankYou = () => {
               to="/"
               className="site-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
             >
-              Back to Home
+              {tt("Back to Home", "回到首頁")}
             </Link>
           </div>
         </div>

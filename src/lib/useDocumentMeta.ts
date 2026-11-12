@@ -3,7 +3,7 @@ import { useEffect } from "react";
 interface MetaOptions {
   title: string;
   description: string;
-  canonicalPath: string;
+  canonicalPath?: string;
 }
 
 

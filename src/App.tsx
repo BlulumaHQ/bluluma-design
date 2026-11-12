@@ -49,7 +49,6 @@ const App = () => (
         <PageLoader />
         <BrowserRouter basename={typeof window !== "undefined" && langFromPath(window.location.pathname) === "zh" ? ZH_PREFIX : undefined}>
           <ScrollToTop />
-          <LocaleHead />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
@@ -92,6 +91,7 @@ const App = () => (
             <Route path="/dentist" element={<Navigate to="/healthcare" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <LocaleHead />
         </BrowserRouter>
       </TooltipProvider>
     </LangProvider>

@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
+import { articlesZh, zhLabel } from "@/lib/articlesZh";
 import { useLang } from "@/lib/i18n";
 
 const RevealSection = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
@@ -102,7 +103,8 @@ const serviceData: Record<string, ServiceData> = {
 
 const ServiceDetail = () => {
   const { slug } = useParams();
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const zh = lang === "zh";
   const service = slug ? serviceData[slug] : undefined;
 
   if (!service) {
@@ -161,9 +163,9 @@ const ServiceDetail = () => {
                     to={`/insights/${article!.slug}`}
                     className="site-page-card block border border-border p-6 group hover:border-primary transition-colors"
                   >
-                    <span className="text-[10px] uppercase tracking-widest text-primary font-medium">{article!.tag}</span>
-                    <h3 className="text-sm font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">{article!.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{article!.summary}</p>
+                    <span className="text-[10px] uppercase tracking-widest text-primary font-medium">{zh ? zhLabel(article!.tag) : article!.tag}</span>
+                    <h3 className="text-sm font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">{zh ? articlesZh[article!.slug]?.title ?? article!.title : article!.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{zh ? articlesZh[article!.slug]?.excerpt ?? article!.summary : article!.summary}</p>
                   </Link>
                 </RevealSection>
               ))}

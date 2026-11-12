@@ -2,6 +2,17 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLang } from "@/lib/i18n";
 import { HREFLANG, absoluteUrl } from "@/lib/locale";
+import { routeMetaFor } from "@/lib/seoRoutes";
+
+const setMetaContent = (attr: "name" | "property", key: string, value: string) => {
+  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", value);
+};
 
 const setLink = (selector: string, attrs: Record<string, string>) => {
   let el = document.head.querySelector<HTMLLinkElement>(selector);
@@ -36,6 +47,16 @@ export default function LocaleHead() {
       document.head.appendChild(locale);
     }
     locale.setAttribute("content", lang === "zh" ? "zh_TW" : "en_CA");
+    // Static routes: language-correct title/description (runs after page effects).
+    const meta = routeMetaFor(pathname)?.[lang];
+    if (meta) {
+      document.title = meta.title;
+      setMetaContent("name", "description", meta.description);
+      setMetaContent("property", "og:title", meta.title);
+      setMetaContent("property", "og:description", meta.description);
+      setMetaContent("name", "twitter:title", meta.title);
+      setMetaContent("name", "twitter:description", meta.description);
+    }
   });
   return null;
 }

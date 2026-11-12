@@ -11,6 +11,10 @@ import {
 } from "@/lib/articles";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insightImages } from "@/pages/insightImages";
+import { localizeArticle } from "@/lib/articles";
+import { zhLabel } from "@/lib/articlesZh";
+import { useLang } from "@/lib/i18n";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const RevealSection = ({
   children,
@@ -29,11 +33,12 @@ const RevealSection = ({
   );
 };
 
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
+const formatDate = (iso: string, lang: "en" | "zh" = "en") =>
+  new Date(iso).toLocaleDateString(lang === "zh" ? "zh-TW" : "en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 
 const industryFromPath = (pathname: string): Industry | null => {
@@ -44,6 +49,10 @@ const industryFromPath = (pathname: string): Industry | null => {
 
 const Insights = () => {
   const { pathname } = useLocation();
+  const { lang } = useLang();
+  const zh = lang === "zh";
+  const L = (s: string) => (zh ? zhLabel(s) : s);
+  const tx = (en: string, z: string) => (zh ? z : en);
   const lockedIndustry = industryFromPath(pathname);
 
   const [search, setSearch] = useState("");
@@ -59,6 +68,7 @@ const Insights = () => {
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return articles
+      .map((a) => localizeArticle(a, lang))
       .filter((a) => (lockedIndustry ? a.industry === lockedIndustry : true))
       .filter((a) => (industry && !lockedIndustry ? a.industry === industry : true))
       .filter((a) => (category ? a.category === category : true))
@@ -66,20 +76,34 @@ const Insights = () => {
       .filter((a) =>
         q
           ? a.title.toLowerCase().includes(q) ||
+            L(a.category).toLowerCase().includes(q) ||
             a.excerpt.toLowerCase().includes(q) ||
-            a.tags.some((t) => t.toLowerCase().includes(q))
+            a.tags.some((t) => L(t).toLowerCase().includes(q))
           : true,
       )
       .slice()
       .sort((a, b) => (a.date < b.date ? 1 : -1));
-  }, [search, category, industry, activeTag, lockedIndustry]);
+  }, [search, category, industry, activeTag, lockedIndustry, lang]);
 
-  const heroTitle = lockedIndustry
-    ? `${lockedIndustry} Insights`
-    : "Insights";
-  const heroSubtitle = lockedIndustry
-    ? `Practical website, branding, and digital strategy insights for ${lockedIndustry.toLowerCase()}s.`
-    : "Practical website, branding, and digital strategy insights for service businesses.";
+  const heroTitle = zh
+    ? lockedIndustry
+      ? `${L(lockedIndustry)}文章`
+      : "文章"
+    : lockedIndustry
+      ? `${lockedIndustry} Insights`
+      : "Insights";
+  const heroSubtitle = zh
+    ? lockedIndustry
+      ? `給${L(lockedIndustry)}的網站、品牌與數位策略實用觀點。`
+      : "給服務型企業的網站、品牌與數位策略實用觀點。"
+    : lockedIndustry
+      ? `Practical website, branding, and digital strategy insights for ${lockedIndustry.toLowerCase()}s.`
+      : "Practical website, branding, and digital strategy insights for service businesses.";
+
+  useDocumentMeta({
+    title: zh ? `${heroTitle}｜Bluluma` : `${heroTitle} | Bluluma`,
+    description: heroSubtitle,
+  });
 
   return (
     <div className="site-page site-page-insights">
@@ -98,7 +122,7 @@ const Insights = () => {
               to="/insights"
               className="mt-6 inline-block text-sm text-primary hover:underline"
             >
-              ← View all Insights
+              {tx("← View all Insights", "← 查看所有文章")}
             </Link>
           )}
         </div>
@@ -113,7 +137,7 @@ const Insights = () => {
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search insights…"
+              placeholder={tx("Search insights…", "搜尋文章…")}
               className="w-full md:max-w-md px-4 py-3 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary transition-colors"
             />
           </div>
@@ -121,7 +145,7 @@ const Insights = () => {
           {/* Category */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
-              Category
+              {tx("Category", "分類")}
             </span>
             <Button variant="ghost"
               onClick={() => setCategory(null)}
@@ -131,7 +155,7 @@ const Insights = () => {
                   : "border-border text-muted-foreground hover:border-primary hover:text-primary"
               }`}
             >
-              All
+              {tx("All", "全部")}
             </Button>
             {allCategories.map((c) => (
               <Button variant="ghost"
@@ -143,7 +167,7 @@ const Insights = () => {
                     : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                 }`}
               >
-                {c}
+                {L(c)}
               </Button>
             ))}
           </div>
@@ -152,7 +176,7 @@ const Insights = () => {
           {!lockedIndustry && (
             <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
-                Industry
+                {tx("Industry", "產業")}
               </span>
               <Button variant="ghost"
                 onClick={() => setIndustry(null)}
@@ -162,7 +186,7 @@ const Insights = () => {
                     : "border-border text-muted-foreground hover:border-primary hover:text-primary"
                 }`}
               >
-                All
+                {tx("All", "全部")}
               </Button>
               {allIndustries.map((ind) => (
                 <Button variant="ghost"
@@ -174,7 +198,7 @@ const Insights = () => {
                       : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                   }`}
                 >
-                  {ind}
+                  {L(ind)}
                 </Button>
               ))}
             </div>
@@ -183,7 +207,7 @@ const Insights = () => {
           {/* Tags */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
-              Tags
+              {tx("Tags", "標籤")}
             </span>
             <Button variant="ghost"
               onClick={() => setActiveTag(null)}
@@ -193,7 +217,7 @@ const Insights = () => {
                   : "border-border text-muted-foreground hover:border-primary hover:text-primary"
               }`}
             >
-              All
+              {tx("All", "全部")}
             </Button>
             {allTags.map((tag) => (
               <Button variant="ghost"
@@ -205,13 +229,15 @@ const Insights = () => {
                     : "border-border text-foreground/70 hover:border-primary hover:text-primary"
                 }`}
               >
-                {tag}
+                {L(tag)}
               </Button>
             ))}
           </div>
 
           <div className="text-xs text-foreground/70 pt-2">
-            Sorted by date (newest first) · {filtered.length} article{filtered.length === 1 ? "" : "s"}
+            {zh
+              ? `依日期排序（最新優先）・共 ${filtered.length} 篇`
+              : `Sorted by date (newest first) · ${filtered.length} article${filtered.length === 1 ? "" : "s"}`}
           </div>
         </div>
       </section>
@@ -221,7 +247,7 @@ const Insights = () => {
         <div className="section-container section-padding">
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-muted-foreground">
-              No articles match your filters.
+              {tx("No articles match your filters.", "沒有符合條件的文章。")}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -244,21 +270,21 @@ const Insights = () => {
                         ) : (
                           <div className="w-full h-full bg-secondary flex items-center justify-center">
                             <span className="text-primary/40 text-xs uppercase tracking-widest font-semibold">
-                              {a.category}
+                              {L(a.category)}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="p-6 md:p-8">
                         <div className="flex flex-wrap items-center gap-2 mb-3 text-[10px] uppercase tracking-widest font-medium">
-                          <span className="text-primary">{a.category}</span>
+                          <span className="text-primary">{L(a.category)}</span>
                           <span className="text-muted-foreground">·</span>
                           <span className="text-muted-foreground">
-                            {a.industry}
+                            {L(a.industry)}
                           </span>
                           <span className="text-muted-foreground">·</span>
                           <span className="text-muted-foreground normal-case tracking-normal">
-                            {formatDate(a.date)}
+                            {formatDate(a.date, lang)}
                           </span>
                         </div>
                         <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors duration-200">
@@ -273,12 +299,12 @@ const Insights = () => {
                               key={t}
                               className="text-[10px] px-2 py-0.5 border border-border rounded text-muted-foreground"
                             >
-                              {t}
+                              {L(t)}
                             </span>
                           ))}
                         </div>
                         <span className="text-xs text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                          Read More
+                          {tx("Read More", "閱讀全文")}
                           <span>→</span>
                         </span>
                       </div>
