@@ -4,6 +4,10 @@ import { useLang } from "@/lib/i18n";
 import { HREFLANG, absoluteUrl } from "@/lib/locale";
 import { routeMetaFor } from "@/lib/seoRoutes";
 
+const PLATFORM_HOST = /(^|\.)(lovable\.app|workers\.dev|pages\.dev|netlify\.app)$/i;
+/** Preview/platform hosts stay noindex (set by index.html); never override that. */
+const onPlatformHost = () => PLATFORM_HOST.test(window.location.hostname.replace(/\.$/, ""));
+
 const setMetaContent = (attr: "name" | "property", key: string, value: string) => {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
   if (!el) {
@@ -40,7 +44,7 @@ export default function LocaleHead() {
   useEffect(() => {
     const path = CANONICAL_ALIASES[pathname] ?? pathname;
     const self = absoluteUrl(path, lang);
-    setMetaContent("name", "robots", NOINDEX.has(pathname) ? "noindex, follow" : "index, follow, max-image-preview:large");
+    if (!onPlatformHost()) setMetaContent("name", "robots", NOINDEX.has(pathname) ? "noindex, follow" : "index, follow, max-image-preview:large");
     setLink('link[rel="canonical"]', { rel: "canonical", href: self });
     setLink('link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: HREFLANG.en, href: absoluteUrl(path, "en") });
     setLink(`link[rel="alternate"][hreflang="${HREFLANG.zh}"]`, { rel: "alternate", hreflang: HREFLANG.zh, href: absoluteUrl(path, "zh") });
