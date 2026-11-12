@@ -293,7 +293,8 @@ export default function prerenderPlugin(): Plugin {
       }
       for (const p of pages) {
         const rel = localPath(p.path, p.lang);
-        const file = rel === "/" ? indexFile : path.join(outDir, rel, "index.html");
+        // /healthcare -> healthcare.html: served at /healthcare on Netlify without a trailing-slash redirect.
+        const file = rel === "/" ? indexFile : path.join(outDir, `${rel.slice(1)}.html`);
         fs.mkdirSync(path.dirname(file), { recursive: true });
         fs.writeFileSync(file, renderPage(template, p));
       }

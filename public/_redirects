@@ -11,5 +11,5 @@
 /zh/case-study/*  /zh/case-studies/:splat  301
 
 # SPA fallbacks (pre-rendered files are served first)
-/zh/*  /zh/index.html  200
+/zh/*  /zh.html  200
 /*     /index.html     200
