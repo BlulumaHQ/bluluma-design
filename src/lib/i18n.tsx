@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { industryTranslations } from "./industryTranslations";
 
 export type Lang = "en" | "zh";
 
@@ -18,6 +19,7 @@ export const useLang = () => useContext(LangContext);
 
 /* ── All translations ── */
 const translations: Record<string, Record<Lang, string>> = {
+  ...industryTranslations,
   // Healthcare industry landing page
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },

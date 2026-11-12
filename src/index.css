@@ -426,9 +426,13 @@ html[lang="zh-TW"] body,
   .feed-portfolio-card:hover, .feed-portfolio-card:hover .feed-portfolio-arrow { transform: none; }
 }
 
-/* Healthcare-specific semantic palette; never changes the main site theme. */
+/* Shared industry palette; healthcare-theme and hc-* remain compatible aliases. */
 html:has(.hc-page) { scroll-behavior: smooth; }
-.healthcare-theme {
+.industry-theme, .healthcare-theme {
+  --ind-accent: #5FD3B5;
+  --ind-gold: #E9B949;
+  --ind-gold-dark: #8A5A00;
+  --ind-badge-bg: #E3F5EF;
   --hc-ink: #14151F;
   --hc-surface: #1E2030;
   --hc-dark-border: #23252F;
@@ -475,7 +479,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .industry-slash { color: var(--hc-separator); font-size: 22px; font-weight: 300; }
 .industry-pill { height: 40px; padding: 0 14px; border-radius: 999px; border-color: var(--hc-control-border); background: var(--hc-surface); color: var(--hc-white); font-size: 15px; font-weight: 600; }
 .industry-pill:hover { background: var(--hc-bubble); color: var(--hc-white); }
-.industry-dot, .hc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--industry-dot, var(--hc-mint)); flex-shrink: 0; display: inline-block; }
+.industry-dot, .hc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--industry-dot, var(--ind-accent)); flex-shrink: 0; display: inline-block; }
 .industry-header-right { gap: 14px; min-width: 0; }
 .industry-nav { display: flex; gap: 4px; }
 .industry-nav a { color: var(--hc-dark-muted); font-size: 15px; font-weight: 500; padding: 0 7px; }
@@ -550,7 +554,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .hc-build-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .hc-build-row { display: flex; align-items: center; gap: 12px; border: 1px solid var(--hc-border); border-radius: 12px; padding: 18px 20px; font-size: 16px; line-height: 1.5; font-weight: 600; }
 .hc-build-row > span { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--hc-blue-wash); color: var(--hc-blue); flex-shrink: 0; }
-.hc-dark .hc-eyebrow { color: var(--hc-mint); }
+.hc-dark .hc-eyebrow { color: var(--ind-accent); }
 .hc-ai-list { margin-top: 28px; display: grid; gap: 12px; font-size: 16px; }
 .hc-ai-list li { display: flex; align-items: center; gap: 12px; }
 .hc-transcript { padding: 24px; border: 1px solid var(--hc-panel-border); border-radius: 16px; background: var(--hc-surface); }

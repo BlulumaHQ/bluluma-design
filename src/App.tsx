@@ -23,6 +23,7 @@ import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 import Realtor from "./pages/Realtor";
 import Dentist from "./pages/Dentist";
+import Presale from "./pages/Presale";
 import PortfolioDetail from "./pages/PortfolioDetail";
 import PageLoader from "./components/PageLoader";
 
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/thank-you" element={<ThankYou />} />
             </Route>
             <Route path="/real-estate" element={<Realtor />} />
+            <Route path="/presale" element={<Presale />} />
             <Route path="/healthcare" element={<Dentist />} />
             {/* Permanent redirects from old industry URLs */}
             <Route path="/realtor" element={<Navigate to="/real-estate" replace />} />
