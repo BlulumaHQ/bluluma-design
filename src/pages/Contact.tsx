@@ -13,6 +13,7 @@ const Contact = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [formLoadedAt] = useState(() => String(Date.now()));
 
   const inputClass = "w-full border border-border px-4 py-3 text-sm bg-background text-foreground rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground";
 
@@ -62,6 +63,11 @@ const Contact = () => {
           <RevealSection>
             <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
               <input type="hidden" name="source" value="bluluma contact form" />
+              <input type="hidden" name="_t" value={formLoadedAt} />
+              <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
+                <label htmlFor="website_hp">Leave this field empty</label>
+                <input type="text" id="website_hp" name="website_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="text-sm font-medium block mb-2">{t("contact.form.name")} *</label>
