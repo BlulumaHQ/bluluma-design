@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { industryTranslations } from "./industryTranslations";
+import { homeTranslations } from "./homeTranslations";
 
 export type Lang = "en" | "zh";
 
@@ -20,6 +21,7 @@ export const useLang = () => useContext(LangContext);
 /* ── All translations ── */
 const translations: Record<string, Record<Lang, string>> = {
   ...industryTranslations,
+  ...homeTranslations,
   // Healthcare industry landing page
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },
@@ -251,7 +253,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "home.pricing.sub": { en: "Transparent pricing for businesses ready to invest in growth.", zh: "為準備投資成長的企業提供透明定價。" },
   "home.pricing.label": { en: "Projects Start From", zh: "專案起價" },
   "home.pricing.range": { en: "$1,499 – $3,500+", zh: "$1,499 – $3,500+" },
-  "home.pricing.note": { en: "Most clients invest between $1,500 – $5,000+ depending on scope and complexity.", zh: "大多數客戶的投資額在 $1,500 – $5,000+ 之間，視範圍和複雜度而定。" },
+  "home.pricing.note": { en: "Most clients invest between $1,500 and $3,500+, depending on scope. Every proposal includes a fixed quote — no surprises.", zh: "多數客戶的投資額介於 $1,500 與 $3,500+ 之間，依專案範圍而定。每份提案都包含固定報價，沒有意外費用。" },
 
   // Home proof
   "home.proof.title": { en: "Real Results. Not Just Designs.", zh: "真實成果，不只是設計。" },

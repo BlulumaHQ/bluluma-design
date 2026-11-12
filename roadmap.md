@@ -1,3 +1,9 @@
+# Restyle pass 1
+
+- [x] Promote shared palette and restyle main Header/Footer without changing other page layouts or industry content.
+- [x] Rebuild bilingual homepage with accessible four-slide CMS collage hero and all ten requested sections; preserve curated projects.
+- [x] Verified 1280px/375px in EN/Chinese, slideshow advance/hover/focus/reduced motion, tabs/arrows/keyboard, loaded CMS collages, twelve unique project cards, industry pages, mobile drawer, testimonial navigation and proposal form destination; 29 tests passed with clean preview diagnostics.
+
 # Category renames and homepage pricing
 
 - [x] Match industry categories directly and reverse five legacy category redirects while preserving project links; unsupported Lovable _redirects additions omitted.
