@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
 import { useLang } from "@/lib/i18n";
@@ -120,10 +119,9 @@ const ServiceDetail = () => {
     .filter(Boolean);
 
   return (
-    <div>
+    <div className="site-page site-page-servicedetail">
       {/* Hero */}
-      <section className="section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
             <Link to="/services" className="text-xs text-muted-foreground hover:text-foreground transition-colors mb-6 inline-block">
@@ -152,7 +150,6 @@ const ServiceDetail = () => {
       {/* Related Insights */}
       {relatedArticles.length > 0 && (
         <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={4} />
           <div className="section-container section-padding">
             <RevealSection>
               <h2 className="text-2xl font-bold mb-8">{t("services.related-insights")}</h2>
@@ -162,7 +159,7 @@ const ServiceDetail = () => {
                 <RevealSection key={article!.slug} delay={i * 80}>
                   <Link
                     to={`/insights/${article!.slug}`}
-                    className="block border border-border p-6 group hover:border-primary transition-colors"
+                    className="site-page-card block border border-border p-6 group hover:border-primary transition-colors"
                   >
                     <span className="text-[10px] uppercase tracking-widest text-primary font-medium">{article!.tag}</span>
                     <h3 className="text-sm font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">{article!.title}</h3>
@@ -188,14 +185,14 @@ const ServiceDetail = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-border">
+      <section className="site-page-cta section-border">
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{t("services.detail.cta.title")}</h2>
             <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">{t("services.detail.cta.text")}</p>
             <Link
               to="/proposal"
-              className="inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
+              className="site-button inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               {t("services.cta.start")}
             </Link>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { Globe, Fingerprint, ShoppingBag, Bot, TrendingUp, Megaphone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
@@ -45,10 +44,9 @@ const services = [
 const Services = () => {
   const { t } = useLang();
   return (
-    <div>
+    <div className="site-page site-page-services">
       {/* Hero */}
-      <section className="section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24 relative z-10">
           <RevealSection>
             <h1 className="text-4xl md:text-5xl font-bold">{t("services.page.title")}</h1>
@@ -60,14 +58,14 @@ const Services = () => {
       {/* Services Grid */}
       <section className="relative overflow-hidden">
         <div className="section-container section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => {
               const Icon = s.icon;
               return (
                 <RevealSection key={s.to} delay={i * 80}>
                   <Link
                     to={s.to}
-                    className="block bg-background p-8 md:p-10 group transition-colors duration-300 hover:bg-secondary h-full"
+                    className="site-page-card block bg-background p-8 md:p-10 group transition-colors duration-300 hover:bg-secondary h-full"
                   >
                     <Icon size={24} strokeWidth={1.5} className="text-primary mb-4" />
                     <h2 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors">{t(s.titleKey)}</h2>
@@ -84,15 +82,14 @@ const Services = () => {
       </section>
 
       {/* CTA */}
-      <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={3} />
+      <section className="site-page-cta isolate section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{t("services.cta.ready")}</h2>
             <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">{t("services.cta.text")}</p>
             <Link
               to="/proposal"
-              className="inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
+              className="site-button inline-block bg-primary text-primary-foreground px-8 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               {t("services.cta.start")}
             </Link>

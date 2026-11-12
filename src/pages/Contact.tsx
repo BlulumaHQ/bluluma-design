@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useLang } from "@/lib/i18n";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,17 +42,16 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div className="site-page site-page-contact">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-dark section-border relative overflow-hidden">
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("contact.label")}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("contact.hero.title")}
             </h1>
-            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed">
               {t("contact.hero.sub")}
             </p>
           </RevealSection>
@@ -69,19 +70,19 @@ const Contact = () => {
                 <input type="text" id="website_hp" name="website_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="name" className="text-sm font-medium block mb-2">{t("contact.form.name")} *</label>
                   <input type="text" id="name" name="name" required className={inputClass} />
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="email" className="text-sm font-medium block mb-2">{t("contact.form.email")} *</label>
                   <input type="email" id="email" name="email" required className={inputClass} />
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="current_url" className="text-sm font-medium block mb-2">{t("contact.form.website")}</label>
                   <input type="text" id="current_url" name="current_url" className={inputClass} />
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="budget" className="text-sm font-medium block mb-2">{t("contact.form.budget")}</label>
                   <select id="budget" name="budget" className={inputClass}>
                     <option value="">{t("contact.form.budget.select")}</option>
@@ -91,7 +92,7 @@ const Contact = () => {
                     <option value="$10,000+">$10,000+</option>
                   </select>
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="timeline" className="text-sm font-medium block mb-2">{t("contact.form.timeline")}</label>
                   <select id="timeline" name="timeline" className={inputClass}>
                     <option value="">{t("contact.form.timeline.select")}</option>
@@ -101,7 +102,7 @@ const Contact = () => {
                     <option value="Flexible">{t("contact.form.timeline.flexible")}</option>
                   </select>
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <label htmlFor="project_type" className="text-sm font-medium block mb-2">{t("contact.form.project-type")} *</label>
                   <select id="project_type" name="project_type" required className={inputClass}>
                     <option value="">{t("contact.form.project-type.select")}</option>
@@ -113,7 +114,7 @@ const Contact = () => {
                   </select>
                 </div>
               </div>
-              <div>
+              <div className="site-page site-page-contact">
                 <label htmlFor="message" className="text-sm font-medium block mb-2">{t("contact.form.details")} *</label>
                 <textarea
                   id="message" name="message" rows={5} required
@@ -122,13 +123,13 @@ const Contact = () => {
                 />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
-              <button
+              <Button variant="ghost"
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg disabled:opacity-50"
+                className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg disabled:opacity-50"
               >
                 {submitting ? t("contact.form.sending") : t("cta.get-strategy")}
-              </button>
+              </Button>
             </form>
           </RevealSection>
 
@@ -138,11 +139,11 @@ const Contact = () => {
                 {t("contact.response")}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                <div>
+                <div className="site-page site-page-contact">
                   <h3 className="text-label mb-2">{t("footer.email")}</h3>
                   <p className="font-medium">support@bluluma.com</p>
                 </div>
-                <div>
+                <div className="site-page site-page-contact">
                   <h3 className="text-label mb-2">{t("footer.location")}</h3>
                   <p className="font-medium">Vancouver, BC, Canada</p>
                 </div>
@@ -151,6 +152,7 @@ const Contact = () => {
           </RevealSection>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };
