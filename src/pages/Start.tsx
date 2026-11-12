@@ -24,6 +24,7 @@ const Start = () => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [needs, setNeeds] = useState<string[]>([]);
+  const [formLoadedAt] = useState(() => String(Date.now()));
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -118,6 +119,11 @@ const Start = () => {
 
               <form onSubmit={handleSubmit} className="space-y-8">
                 <input type="hidden" name="source" value="bluluma start project" />
+                <input type="hidden" name="_t" value={formLoadedAt} />
+                <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
+                  <label htmlFor="website_hp">Leave this field empty</label>
+                  <input type="text" id="website_hp" name="website_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
