@@ -58,33 +58,50 @@ canvas {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 15% 15%;
+    --foreground: 223 26% 16%;
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 15%;
+    --card-foreground: 223 26% 16%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 15%;
-    --primary: 220 55% 55%;
+    --popover-foreground: 223 26% 16%;
+    --primary: 221 52% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 220 55% 45%;
-    --primary-glow: 250 50% 60%;
-    --secondary: 220 10% 96%;
+    --primary-dark: 222 56% 40%;
+    --primary-glow: 221 74% 71%;
+    --secondary: 220 50% 98%;
     --secondary-foreground: 220 15% 15%;
     --muted: 220 10% 94%;
-    --muted-foreground: 220 10% 45%;
+    --muted-foreground: 224 11% 40%;
     --accent: 220 15% 93%;
     --accent-foreground: 220 15% 15%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 10% 88%;
-    --input: 220 10% 88%;
-    --ring: 220 55% 55%;
+    --border: 225 19% 92%;
+    --input: 225 19% 92%;
+    --ring: 221 52% 50%;
     --radius: 0.5rem;
 
     /* Dark section tokens */
-    --dark-bg: 220 20% 10%;
-    --dark-fg: 0 0% 95%;
-    --dark-muted: 220 10% 50%;
-    --dark-border: 220 14% 22%;
+    --dark-bg: 235 22% 10%;
+    --dark-fg: 0 0% 100%;
+    --dark-muted: 225 16% 80%;
+    --dark-border: 230 15% 16%;
+    --site-surface: 233 23% 15%;
+    --site-panel-border: 230 16% 22%;
+    --site-control-border: 227 13% 26%;
+    --site-blue-light: 221 74% 71%;
+    --site-body: 223 14% 34%;
+    --site-nav: 224 15% 20%;
+    --site-wordmark: 221 39% 19%;
+    --site-label: 223 9% 46%;
+    --site-caption: 221 11% 61%;
+    --site-client: 223 17% 27%;
+    --site-mint: 164 57% 60%;
+    --site-mint-wash: 160 47% 93%;
+    --site-gold: 42 78% 60%;
+    --site-gold-wash: 42 81% 92%;
+    --site-gold-dark: 39 100% 27%;
+    --site-blue-wash: 222 62% 96%;
+    --site-card-shadow: 0 16px 36px -16px hsl(var(--dark-bg) / .16);
     --preview-scroll-thumb: 0 0% 0% / 0.18;
     --preview-scroll-thumb-hover: 0 0% 0% / 0.4;
     --preview-hint-background: 0 0% 100% / 0.9;
@@ -104,7 +121,8 @@ canvas {
     line-height: 1.7;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-foreground;
+    @apply font-bold text-foreground;
+    letter-spacing: 0;
   }
 }
 

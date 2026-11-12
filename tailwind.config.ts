@@ -32,6 +32,11 @@ export default {
         ],
       },
       colors: {
+        ink: "hsl(var(--dark-bg))",
+        surface: "hsl(var(--site-surface))",
+        "light-blue": "hsl(var(--site-blue-light))",
+        "body-text": "hsl(var(--site-body))",
+        heading: "hsl(var(--foreground))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
