@@ -8,6 +8,8 @@
     <title>Bluluma Design — AI-Powered Websites &amp; Branding</title>
     <meta name="description" content="Modern website design, branding, and AI-powered digital solutions for growing businesses. Vancouver-based digital design studio.">
     <meta name="author" content="Bluluma Design" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:site_name" content="Bluluma Design" />
     <link rel="canonical" href="https://bluluma.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,13 +20,13 @@
     <meta property="og:url" content="https://bluluma.com" />
     
     
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/bCCMipaZMMgU3uzBQ48gKBgft2r2/social-images/social-1773135914545-bluluma-design-social.webp">
+    <meta property="og:image" content="https://bluluma.com/og/bluluma-og.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     
     
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/bCCMipaZMMgU3uzBQ48gKBgft2r2/social-images/social-1773135914545-bluluma-design-social.webp">
+    <meta name="twitter:image" content="https://bluluma.com/og/bluluma-og.jpg">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -33,22 +35,31 @@
       "@graph": [
         {
           "@type": "Organization",
+          "@id": "https://bluluma.com/#organization",
           "name": "Bluluma Design",
+          "alternateName": "Bluluma 網頁與平面設計",
           "url": "https://bluluma.com",
-          "logo": "https://bluluma.com/logo.png",
-          "sameAs": []
+          "logo": "https://bluluma.com/images/bluluma-logo.png"
         },
         {
           "@type": "WebSite",
+          "@id": "https://bluluma.com/#website",
           "name": "Bluluma Design",
-          "url": "https://bluluma.com"
+          "url": "https://bluluma.com",
+          "inLanguage": ["en", "zh-Hant"],
+          "publisher": { "@id": "https://bluluma.com/#organization" }
         },
         {
           "@type": "ProfessionalService",
+          "@id": "https://bluluma.com/#business",
           "name": "Bluluma Design",
           "url": "https://bluluma.com",
-          "description": "Modern website design, branding, and AI-powered digital solutions for growing businesses.",
-          "areaServed": "Vancouver, BC, Canada",
+          "image": "https://bluluma.com/og/bluluma-og.jpg",
+          "logo": "https://bluluma.com/images/bluluma-logo.png",
+          "description": "Website design, branding, and AI-powered digital solutions for healthcare clinics, realtors, pre-sale developers and small businesses.",
+          "address": { "@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA" },
+          "areaServed": ["Vancouver", "Greater Vancouver", "British Columbia", "Canada"],
+          "knowsLanguage": ["en", "zh-Hant"],
           "serviceType": ["Website Design", "Brand Identity", "Digital Marketing", "AI Business Automation"]
         }
       ]

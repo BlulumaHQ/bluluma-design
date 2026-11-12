@@ -179,6 +179,30 @@ export const seoRoutes: RouteMeta[] = [
     },
   },
   {
+    path: "/process",
+    priority: 0.6,
+    en: {
+      title: "Our Website Design Process | Bluluma",
+      description: "How Bluluma plans, designs, builds and launches websites: a clear, structured process from first call to launch.",
+    },
+    zh: {
+      title: "網站設計流程｜Bluluma",
+      description: "Bluluma 如何規劃、設計、建置並上線網站：從第一次溝通到上線，清楚且有系統的流程。",
+    },
+  },
+  {
+    path: "/pricing",
+    priority: 0.6,
+    en: {
+      title: "Website Design Pricing | Bluluma",
+      description: "Website design and branding investment ranges for small businesses, clinics, realtors and pre-sale developers.",
+    },
+    zh: {
+      title: "網站設計價格｜Bluluma",
+      description: "中小企業、診所、房仲與預售建案的網站設計與品牌投資範圍。",
+    },
+  },
+  {
     path: "/agency",
     priority: 0.6,
     en: {

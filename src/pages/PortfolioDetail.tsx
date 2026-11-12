@@ -9,7 +9,6 @@ import { itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 import Work from "./Work";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 
-const SITE = "https://bluluma-design-agency.lovable.app";
 
 const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
   let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`);
@@ -32,13 +31,20 @@ const PortfolioDetail = () => {
 
   useEffect(() => {
     if (!item) return;
-    const title = `${item.title} | Bluluma Portfolio`;
+    const zh = lang === "zh";
+    const services = (item.services ?? []).filter(Boolean).map((sv) => serviceLabel(sv, lang));
+    const cat = zh ? item.categories_zh?.[0] ?? item.categories?.[0] : item.categories?.[0];
+    // Keep in sync with scripts/prerenderPlugin.ts (portfolioPages).
+    const title = zh ? `${item.title}｜網站設計作品｜Bluluma` : `${item.title} — Website Design | Bluluma Portfolio`;
+    const description = zh
+      ? `Bluluma 為 ${item.title} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
+      : item.excerpt?.trim() || `${item.title} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
     document.title = title;
-    if (item.excerpt) setMeta("description", item.excerpt);
+    setMeta("description", description);
+    setMeta("og:description", description, "property");
     setMeta("og:title", title, "property");
-    setMeta("og:url", `${SITE}/portfolio/${item.slug}`, "property");
     if (item.featured_image_url) setMeta("og:image", item.featured_image_url, "property");
-  }, [item]);
+  }, [item, lang]);
 
   if (slug && category) return <Navigate to={`/portfolio/${slug}`} replace />;
   if (isCategory) {

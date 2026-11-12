@@ -23,16 +23,28 @@ const setLink = (selector: string, attrs: Record<string, string>) => {
   Object.entries(attrs).forEach(([k, v]) => el!.setAttribute(k, v));
 };
 
+/** Duplicate URLs that render the same page as a canonical one. */
+const CANONICAL_ALIASES: Record<string, string> = {
+  "/start": "/contact",
+  "/proposal": "/contact",
+  "/work": "/portfolio",
+  "/case-study": "/case-studies",
+};
+/** Pages that should never be indexed. */
+const NOINDEX = new Set(["/thank-you"]);
+
 /** Canonical, og:url and hreflang alternates for every route, in both languages. */
 export default function LocaleHead() {
   const { lang } = useLang();
   const { pathname } = useLocation(); // basename already stripped by the router
   useEffect(() => {
-    const self = absoluteUrl(pathname, lang);
+    const path = CANONICAL_ALIASES[pathname] ?? pathname;
+    const self = absoluteUrl(path, lang);
+    setMetaContent("name", "robots", NOINDEX.has(pathname) ? "noindex, follow" : "index, follow, max-image-preview:large");
     setLink('link[rel="canonical"]', { rel: "canonical", href: self });
-    setLink('link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: HREFLANG.en, href: absoluteUrl(pathname, "en") });
-    setLink(`link[rel="alternate"][hreflang="${HREFLANG.zh}"]`, { rel: "alternate", hreflang: HREFLANG.zh, href: absoluteUrl(pathname, "zh") });
-    setLink('link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: absoluteUrl(pathname, "en") });
+    setLink('link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: HREFLANG.en, href: absoluteUrl(path, "en") });
+    setLink(`link[rel="alternate"][hreflang="${HREFLANG.zh}"]`, { rel: "alternate", hreflang: HREFLANG.zh, href: absoluteUrl(path, "zh") });
+    setLink('link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: absoluteUrl(path, "en") });
     let og = document.head.querySelector<HTMLMetaElement>('meta[property="og:url"]');
     if (!og) {
       og = document.createElement("meta");
@@ -48,7 +60,7 @@ export default function LocaleHead() {
     }
     locale.setAttribute("content", lang === "zh" ? "zh_TW" : "en_CA");
     // Static routes: language-correct title/description (runs after page effects).
-    const meta = routeMetaFor(pathname)?.[lang];
+    const meta = routeMetaFor(path)?.[lang];
     if (meta) {
       document.title = meta.title;
       setMetaContent("name", "description", meta.description);

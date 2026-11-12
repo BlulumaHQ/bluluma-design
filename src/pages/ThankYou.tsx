@@ -2,6 +2,7 @@ import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useLang } from "@/lib/i18n";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 declare global {
   interface Window {
@@ -13,6 +14,7 @@ declare global {
 const ThankYou = () => {
   const { lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
+  useDocumentMeta({ title: tt("Thank You | Bluluma", "謝謝你｜Bluluma"), description: "" });
   useEffect(() => {
     // TODO: Replace with real Meta Pixel ID once available
     if (window.fbq) {

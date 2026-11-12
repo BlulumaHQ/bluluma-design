@@ -129,9 +129,17 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "en": "Insights for Realtors",
     "zh": "房仲的數位經營洞察"
   },
+  "ind.insightsTitleDev": {
+    "en": "Insights for Pre-sale Marketing",
+    "zh": "預售建案行銷文章"
+  },
+  "ind.insightsMoreDev": {
+    "en": "View All Insights",
+    "zh": "查看所有文章"
+  },
   "ind.insightsMore": {
     "en": "View More Realtor Insights",
-    "zh": "查看更多房仲洞察"
+    "zh": "查看更多房仲文章"
   },
   "rt.featureNav": {
     "en": "CREA Auto-Listings",

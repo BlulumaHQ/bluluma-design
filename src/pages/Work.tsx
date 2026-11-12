@@ -1,5 +1,5 @@
 import SiteFinalCTA from "@/components/SiteFinalCTA";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FeedPortfolioCard from "@/components/FeedPortfolioCard";
@@ -7,7 +7,24 @@ import { useLang } from "@/lib/i18n";
 import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import { feedCategories, itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 
-const PER_PAGE = 20;
+// Desktop: 8 rows × 4 = 32 projects per page. Mobile/tablet keeps 20.
+const PER_PAGE_MOBILE = 20;
+const PER_PAGE_DESKTOP = 32;
+const DESKTOP_QUERY = "(min-width: 1024px)";
+
+const usePerPage = () => {
+  const get = () =>
+    typeof window !== "undefined" && window.matchMedia?.(DESKTOP_QUERY).matches ? PER_PAGE_DESKTOP : PER_PAGE_MOBILE;
+  const [perPage, setPerPage] = useState(get);
+  useEffect(() => {
+    const mq = window.matchMedia?.(DESKTOP_QUERY);
+    if (!mq) return;
+    const onChange = () => setPerPage(get());
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return perPage;
+};
 
 const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
   let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`);
@@ -31,6 +48,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
   const activeCat = activeSlug ? cats.find((c) => c.slug === activeSlug) : undefined;
   const items = activeSlug ? all.filter((i) => itemInCategory(i, activeSlug)) : all;
 
+  const PER_PAGE = usePerPage();
   const page = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
   const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
   const pageItems = items.slice((page - 1) * PER_PAGE, page * PER_PAGE);
@@ -46,13 +64,21 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
   );
 
   useEffect(() => {
-    const title = `${activeCat ? `${activeCat.name} Portfolio` : "Portfolio"}${page > 1 ? ` — Page ${page}` : ""} | Bluluma`;
+    const name = activeCat ? catName(activeCat) : "";
+    const pageSuffix = page > 1 ? tt(` — Page ${page}`, `（第 ${page} 頁）`) : "";
+    const title = activeCat
+      ? tt(`${name} Website Design Portfolio${pageSuffix} | Bluluma`, `${name}網站設計作品${pageSuffix}｜Bluluma`)
+      : tt(`Portfolio${pageSuffix} | Bluluma`, `作品集${pageSuffix}｜Bluluma`);
+    const desc = activeCat
+      ? tt(`Browse ${activeCat.count} ${name} websites designed and built by Bluluma.`, `瀏覽 Bluluma 為${name}產業打造的 ${activeCat.count} 個網站作品。`)
+      : description;
     document.title = title;
-    setMeta("description", description);
+    setMeta("description", desc);
     setMeta("og:title", title, "property");
-    setMeta("og:description", description, "property");
+    setMeta("og:description", desc, "property");
     setMeta("og:type", "website", "property");
-  }, [activeCat?.name, page, description, canonicalPath]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCat?.name, activeCat?.count, page, description, canonicalPath, lang]);
 
   if (!loading && !error && activeSlug && !activeCat) return <Navigate to="/portfolio" replace />;
   if (!loading && !error && page > totalPages)

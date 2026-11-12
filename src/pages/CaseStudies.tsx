@@ -1,7 +1,9 @@
 import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link, useParams } from "react-router-dom";
 import { useLang } from "@/lib/i18n";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
 import { caseStudyProjects, getProjectImage } from "@/lib/portfolio-system";
+import { INDUSTRY_ZH, localizeProject } from "@/lib/projectsZh";
 
 const CaseStudyList = () => {
   const { lang, t } = useLang();
@@ -24,7 +26,7 @@ const CaseStudyList = () => {
       <section className="section-border">
         <div className="section-container section-padding">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            {caseStudyProjects.map((project) => (
+            {caseStudyProjects.map((raw) => localizeProject(raw, lang)).map((project) => (
               <article key={project.slug} className="site-page-card portfolio-card rounded-xl border border-border bg-card shadow-sm">
                 <div className="px-5 pt-5">
                   <div className="flex items-center gap-1.5 rounded-t-xl border border-border border-b-0 bg-muted px-3 py-2">
@@ -34,11 +36,11 @@ const CaseStudyList = () => {
                     <span className="ml-3 text-[11px] text-muted-foreground">{tt("Before / After preview", "改版前後預覽")}</span>
                   </div>
                   <div className="portfolio-preview-box rounded-b-xl border border-border bg-muted">
-                    <img src={getProjectImage(project)} alt={`${project.name} case study preview`} loading="lazy" />
+                    <img src={getProjectImage(project)} alt={tt(`${project.name} case study preview`, `${project.name} 案例預覽`)} loading="lazy" />
                   </div>
                 </div>
                 <div className="portfolio-card-content p-5 md:p-6">
-                  <p className="mb-1.5 text-xs uppercase tracking-[0.12em] text-muted-foreground">{project.industry}</p>
+                  <p className="mb-1.5 text-xs uppercase tracking-[0.12em] text-muted-foreground">{lang === "zh" ? INDUSTRY_ZH[project.industry] ?? project.industry : project.industry}</p>
                   <h2 className="mb-2 text-xl font-semibold">{project.name}</h2>
                   <p className="mb-4 text-sm leading-relaxed text-muted-foreground md:text-base">{project.summary || project.description}</p>
                   <div className="space-y-2 pb-5 text-sm text-muted-foreground">
@@ -47,7 +49,7 @@ const CaseStudyList = () => {
                     <p><span className="font-medium text-foreground">{tt("Result:", "成果：")}</span> {project.outcome}</p>
                   </div>
                   <div className="mt-auto pt-2">
-                    <Link to={`/case-study/${project.slug}`} className="inline-flex rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary">
+                    <Link to={`/case-studies/${project.slug}`} className="inline-flex rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary">
                       {t("cta.read-case-study")}
                     </Link>
                   </div>
@@ -66,13 +68,21 @@ const CaseStudyDetail = () => {
   const { slug } = useParams();
   const { lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
-  const project = caseStudyProjects.find((item) => item.slug === slug);
+  const found = caseStudyProjects.find((item) => item.slug === slug);
+  const project = found ? localizeProject(found, lang) : undefined;
+
+  useDocumentMeta({
+    title: project
+      ? tt(`${project.name} Case Study | Bluluma`, `${project.name} 案例研究｜Bluluma`)
+      : tt("Case study not found | Bluluma", "找不到案例研究｜Bluluma"),
+    description: project ? project.summary || project.description : "",
+  });
 
   if (!project) {
     return (
       <div className="section-container section-padding text-center">
         <h1 className="text-2xl font-bold">{tt("Case study not found", "找不到案例研究")}</h1>
-        <Link to="/case-study" className="mt-4 inline-block text-primary">{tt("Back to Case Studies", "返回案例研究")}</Link>
+        <Link to="/case-studies" className="mt-4 inline-block text-primary">{tt("Back to Case Studies", "返回案例研究")}</Link>
       </div>
     );
   }
@@ -81,10 +91,10 @@ const CaseStudyDetail = () => {
     <div className="site-page site-page-casestudies">
       <section className="site-page-hero section-border">
         <div className="section-container py-16 md:py-24">
-          <Link to="/case-study" className="mb-6 inline-block text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link to="/case-studies" className="mb-6 inline-block text-sm text-muted-foreground transition-colors hover:text-foreground">
             {tt("← Case Studies", "← 案例研究")}
           </Link>
-          <p className="mb-3 text-xs uppercase tracking-[0.16em] text-muted-foreground">{project.industry}</p>
+          <p className="mb-3 text-xs uppercase tracking-[0.16em] text-muted-foreground">{lang === "zh" ? INDUSTRY_ZH[project.industry] ?? project.industry : project.industry}</p>
           <h1 className="text-4xl font-bold md:text-5xl">{project.name}</h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">{project.summary || project.description}</p>
         </div>
@@ -100,7 +110,7 @@ const CaseStudyDetail = () => {
               <span className="ml-3 text-[11px] text-muted-foreground">{tt("Scrollable website preview", "可滾動網站預覽")}</span>
             </div>
             <div className="portfolio-preview-box rounded-b-xl border border-border bg-muted">
-              <img src={getProjectImage(project)} alt={`${project.name} website preview`} loading="lazy" />
+              <img src={getProjectImage(project)} alt={tt(`${project.name} website preview`, `${project.name} 網站預覽`)} loading="lazy" />
             </div>
           </div>
         </div>

@@ -156,7 +156,7 @@ const PortfolioCard = ({ project, imageImport }: PortfolioCardProps) => {
           )}
           {project.caseStudy && (
             <Link
-              to={`/case-study/${project.slug}`}
+              to={`/case-studies/${project.slug}`}
               className="rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
             >
               {tt("View Case Study", "查看案例研究")} →

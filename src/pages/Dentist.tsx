@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import type { ReactNode } from "react";
+import IndustryInsights from "@/components/IndustryInsights";
 import IndustryHeader from "@/components/IndustryHeader";
 import { IndustryStat } from "@/components/IndustryWork";
 import HealthcareHeroCollage, { BrowserChrome } from "@/components/HealthcareHeroCollage";
@@ -68,7 +69,7 @@ const Dentist = () => {
           {!loading && !error && items.length === 0 && <p>{t("hc.work.empty")}</p>}
         </div></section>
         <section id="process" className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading("hc.process.label", "hc.process.title")}</Reveal><div className="hc-grid hc-grid-four">{[1, 2, 3, 4].map((n) => <Reveal key={n} delay={n * 80}><article className="hc-card"><span className="hc-step-number">{n}</span><h3>{t(`hc.process.${n}.title`)}</h3><p>{t(`hc.process.${n}.body`)}</p></article></Reveal>)}</div></div></section>
-        <section id="insights" className="hc-section"><div className="hc-container"><div className="hc-section-heading"><Reveal>{heading("hc.insights.label", "hc.insights.title")}</Reveal><Button variant="link" asChild className="hc-text-link"><Link to="/insights/dentist">{t("hc.insights.more")} →</Link></Button></div><div className="hc-grid hc-grid-three">{insights.map((article) => <Link key={article.slug} to={`/insights/${article.slug}`} className="hc-card hc-insight"><time dateTime={article.date}>{new Date(article.date).toLocaleDateString(lang === "zh" ? "zh-TW" : "en-US", { year: "numeric", month: "short", day: "numeric" })}</time><h3>{lang === "zh" ? t(`hc.article.${article.slug}.title`) : article.title}</h3><p>{lang === "zh" ? t(`hc.article.${article.slug}.excerpt`) : article.excerpt}</p><span className="hc-read-more">{t("hc.readMore")} →</span></Link>)}</div></div></section>
+        <IndustryInsights heading={<Reveal>{heading("hc.insights.label", "hc.insights.title")}</Reveal>} moreHref="/insights/dentist" moreLabel={t("hc.insights.more")} articles={insights} />
         <section id="cta" className="hc-final-section"><div className="hc-container"><div className="hc-final hc-dark"><h2 className="hc-h2">{t("hc.final.title")}</h2><p>{t("hc.final.body")}</p>{proposal("hc-button hc-button-light")}</div></div></section>
       </main>
       <Footer />
