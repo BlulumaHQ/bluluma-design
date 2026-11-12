@@ -961,6 +961,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .site-page-process .site-page-card h2 { font-size: 20px; }
 .site-page .site-page-hero .text-label { text-transform: uppercase; }
 .site-page .site-page-hero .site-button { font-size: 15px; }
+.site-page > .site-page-hero.section-subtle-bg, .site-page > .site-page-hero.bg-background { background: hsl(var(--dark-bg)); }
 .site-page .site-page-card .bg-red-400\/70 { background: hsl(var(--destructive) / .7); }
 .site-page .site-page-card .bg-yellow-400\/70 { background: hsl(var(--site-gold) / .7); }
 .site-page .site-page-card .bg-green-400\/70 { background: hsl(var(--site-mint) / .7); }
