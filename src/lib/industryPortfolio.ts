@@ -1,12 +1,7 @@
 import { useMemo } from "react";
 import { itemInCategory, usePortfolioFeed, type FeedItem } from "./portfolioFeed";
 
-// Landing-page category names also accept the CMS's current labels.
-const categoryAliases: Record<string, string[]> = {
-  "realtor-realty": ["realtor-realty", "realtor"],
-  "real-estate-development-presale": ["real-estate-development-presale", "real-estate-development-pre-sale"],
-};
-export const industryItems = (items: FeedItem[], category: string) => items.filter((item) => (categoryAliases[category] ?? [category]).some((slug) => itemInCategory(item, slug)));
+export const industryItems = (items: FeedItem[], category: string) => items.filter((item) => itemInCategory(item, category));
 export const visibleIndustryCount = (count: number) => count >= 3;
 export const developerAudience = (search: string) => new URLSearchParams(search).get("for") === "developer";
 export const industryClientTitles = (items: FeedItem[]) => [...new Set(items.slice(0, 5).map((item) => item.title.replace(/\s*-\s*[AB]$/i, "").trim()))];

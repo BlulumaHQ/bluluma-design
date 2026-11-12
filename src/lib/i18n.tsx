@@ -250,7 +250,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "home.pricing.title": { en: "Investment", zh: "投資方案" },
   "home.pricing.sub": { en: "Transparent pricing for businesses ready to invest in growth.", zh: "為準備投資成長的企業提供透明定價。" },
   "home.pricing.label": { en: "Projects Start From", zh: "專案起價" },
-  "home.pricing.range": { en: "$1,499 – $5,000+", zh: "$1,499 – $5,000+" },
+  "home.pricing.range": { en: "$1,499 – $3,500+", zh: "$1,499 – $3,500+" },
   "home.pricing.note": { en: "Most clients invest between $1,500 – $5,000+ depending on scope and complexity.", zh: "大多數客戶的投資額在 $1,500 – $5,000+ 之間，視範圍和複雜度而定。" },
 
   // Home proof
