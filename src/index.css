@@ -845,7 +845,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .home-slide .hc-booking-label { color: hsl(var(--note-color)); }
 .home-slide .hc-booking-label .hc-dot { background: hsl(var(--slide-color)); }
 .home-slide.home-tone-healthcare .hc-booking-label, .home-slide.home-tone-healthcare .hc-booking-label .hc-dot { color: var(--hc-success); }
-.home-slide .hc-booking-note p { color: hsl(var(--muted-foreground)); }
+.home-slide .hc-booking-note p { color: hsl(var(--muted-foreground)); font-size: 12px; line-height: 1.5; margin-top: 4px; }
 .home-slider-bar { border-top: 1px solid hsl(var(--dark-border)); }
 .home-slider-controls { display: flex; align-items: center; gap: 24px; }
 .home-slider-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr 1.35fr; flex: 1; min-width: 0; }

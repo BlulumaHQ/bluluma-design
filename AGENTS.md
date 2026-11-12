@@ -5,3 +5,4 @@
 - Industry pages share IndustryHeader, IndustryHeroCollage, IndustryWork, and the industry-theme/legacy healthcare-theme palette; category selectors sample feed copies and counts use the full matching pool so CMS ordering remains unchanged.
 - Match industry categories directly against feed-derived category slugs; keep legacy category redirects in portfolioRedirects and project URLs on the existing slug resolver to avoid redirect loops without changing CMS filtering.
 - Homepage project curation lives in a pure selector that samples feed copies; preview auto-scrolling is opt-in so other portfolio surfaces retain their behavior.
+- Homepage carousel timing is isolated in useHeroCarousel; homepage/chrome styling uses site-* and home-* selectors so legacy industry styles remain unchanged.
