@@ -27,7 +27,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },
   "hc.realEstate": { en: "Real Estate", zh: "房地產" },
-  "hc.healthcare": { en: "Healthcare", zh: "醫療產業" },
+  "hc.healthcare": { en: "Healthcare", zh: "醫療診所" },
   "hc.back": { en: "← Back to Bluluma Design", zh: "← 返回 Bluluma Design" },
   "hc.navigation": { en: "Healthcare navigation", zh: "醫療頁面導覽" },
   "hc.proposal": { en: "Request a Proposal", zh: "申請提案" },

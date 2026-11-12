@@ -115,7 +115,7 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategoryDef[] = [
   {
     slug: "travel-tourism-hotel",
     name: "Travel / Tourism / Hotel",
-    nameZh: "旅遊 / 觀光 / 酒店",
+    nameZh: "旅遊 / 觀光 / 飯店",
     description: {
       en: "Travel and tourism website portfolio — destination, tour operator and hospitality experiences.",
       zh: "旅遊與觀光網站作品集。",

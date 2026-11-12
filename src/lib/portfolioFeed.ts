@@ -24,6 +24,8 @@ export interface FeedItem {
   project_year: string | null;
   category: string | null;
   categories: string[] | null;
+  /** Chinese category names (CMS categories.name_zh, falling back to name), same order as `categories`. */
+  categories_zh?: string[] | null;
   homepage_full_url: string | null;
   gallery: GalleryItem[] | null;
 }
@@ -32,7 +34,7 @@ export const categorySlug = (name: string) =>
   name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const COLS =
-  "id,title,slug,excerpt,featured_image_url,is_featured,sort_order,show_on,publish_date,live_url,services,project_year,category,categories,homepage_full_url,gallery";
+  "id,title,slug,excerpt,featured_image_url,is_featured,sort_order,show_on,publish_date,live_url,services,project_year,category,categories,categories_zh,homepage_full_url,gallery";
 
 let cache: Promise<FeedItem[]> | null = null;
 
@@ -79,12 +81,24 @@ export const itemCategories = (it: FeedItem): string[] =>
 export const itemInCategory = (it: FeedItem, catSlug: string): boolean =>
   itemCategories(it).some((c) => categorySlug(c) === catSlug);
 
+/** English category name → Chinese name for one item (from the CMS name_zh column). */
+export const categoryZhMap = (it: FeedItem): Record<string, string> => {
+  const out: Record<string, string> = {};
+  const en = it.categories ?? [];
+  const zh = it.categories_zh ?? [];
+  en.forEach((name, i) => {
+    if (zh[i]) out[name] = zh[i];
+  });
+  return out;
+};
+
 export const feedCategories = (items: FeedItem[]) => {
-  const map = new Map<string, { name: string; slug: string; count: number }>();
+  const map = new Map<string, { name: string; nameZh?: string; slug: string; count: number }>();
   for (const it of items) {
+    const zhByName = categoryZhMap(it);
     for (const name of itemCategories(it)) {
       const slug = categorySlug(name);
-      const e = map.get(slug) ?? { name, slug, count: 0 };
+      const e = map.get(slug) ?? { name, nameZh: zhByName[name], slug, count: 0 };
       e.count++;
       map.set(slug, e);
     }

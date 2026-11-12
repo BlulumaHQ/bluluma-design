@@ -25,7 +25,7 @@ export default function PropertyIndustryPage({ developer }: { developer: boolean
   const heading = (label: string, title: string) => <><span className="hc-eyebrow">{label}</span><h2 className="hc-h2">{title}</h2></>;
   const proposal = (className = "hc-button") => <Button asChild className={className}><Link to="/proposal">{t("hc.proposal")}</Link></Button>;
   return <div className="industry-theme healthcare-theme ind-property hc-page" id="top">
-    <IndustryHeader industryLabel={developer ? "Developers & Pre-sale" : "Realtors"} industryLabelZh={developer ? "開發商與預售" : "房仲"} dotColor="var(--ind-accent)" anchors={[{ id: "feature", label: text("featureNav") }, { id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }]} />
+    <IndustryHeader dotColor="var(--ind-accent)" anchors={[{ id: "feature", label: text("featureNav") }, { id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }]} />
     <main className="hc-main">
       <section className="hc-hero hc-dark ind-property-hero"><IndustryAudienceSwitch developer={developer} /><div className="hc-container hc-two-columns">
         <Reveal><span className="hc-hero-badge"><span className="hc-dot" />{text("badge")}</span><h1 className="hc-h1">{text("heroTitle")} <span>{text("heroAccent")}</span></h1><p className="hc-hero-description">{text("heroDescription")}</p><div className="hc-actions">{proposal()}<Button variant="outline" asChild className="hc-button hc-button-outline"><a href="#work">{text("see")}</a></Button></div><IndustryStat category={category} label={text("stat")} /></Reveal>

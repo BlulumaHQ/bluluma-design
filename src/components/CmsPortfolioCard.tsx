@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getPortfolioUrl, type PortfolioItem } from "@/lib/cms";
+import { serviceLabel } from "@/lib/serviceLabels";
 import { useLang } from "@/lib/i18n";
 
 interface Props {
@@ -18,7 +19,7 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const details = item.details;
   const summary = details?.short_summary || item.excerpt || "";
-  const services = details?.services ?? [];
+  const services = (details?.services ?? []).map((s) => serviceLabel(s, lang));
   const liveUrl = details?.live_url || undefined;
   const detailUrl = getPortfolioUrl(item);
 

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import { serviceLabel } from "@/lib/serviceLabels";
 import { itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 import Work from "./Work";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
@@ -61,7 +62,7 @@ const PortfolioDetail = () => {
         </div>
       );
     }
-    const services = (it.services ?? []).filter(Boolean);
+    const services = (it.services ?? []).filter(Boolean).map((s) => serviceLabel(s, lang));
     const gallery = Array.isArray(it.gallery) ? it.gallery : [];
     const pages = gallery.filter((g) => g?.type === "page_screenshot" && g.url);
     const mobile = gallery.find((g) => g?.type === "mobile_screenshot" && g.url);

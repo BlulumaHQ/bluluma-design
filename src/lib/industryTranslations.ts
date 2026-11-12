@@ -3,11 +3,11 @@ import type { Lang } from "./i18n";
 export const industryTranslations: Record<string, Record<Lang, string>> = {
   "ind.realtors": {
     "en": "Realtors",
-    "zh": "房仲"
+    "zh": "房仲業者"
   },
   "ind.developers": {
-    "en": "Developers & Pre-sale",
-    "zh": "開發商與預售團隊"
+    "en": "Pre-sale",
+    "zh": "預售建案"
   },
   "ind.audience": {
     "en": "Choose your business",

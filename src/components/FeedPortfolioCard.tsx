@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import type { FeedItem } from "@/lib/portfolioFeed";
 import PortfolioScreenshotViewport from "./PortfolioScreenshotViewport";
+import { useLang } from "@/lib/i18n";
+import { serviceLabel } from "@/lib/serviceLabels";
 
 const FeedPortfolioCard = ({ item, autoScrollOnHover = false }: { item: FeedItem; autoScrollOnHover?: boolean }) => {
   const img = item.homepage_full_url || item.featured_image_url;
-  const services = (item.services ?? []).filter(Boolean);
+  const { lang } = useLang();
+  const services = (item.services ?? []).filter(Boolean).map((s) => serviceLabel(s, lang));
   return (
     <Link to={`/portfolio/${item.slug}`} className="feed-portfolio-card flex cursor-pointer flex-col rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
       <PortfolioScreenshotViewport src={img} alt={`${item.title} homepage`} autoScrollOnHover={autoScrollOnHover} />

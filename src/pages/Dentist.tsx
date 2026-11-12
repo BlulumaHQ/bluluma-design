@@ -11,6 +11,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useHealthcareProjects } from "@/lib/healthcarePortfolio";
 import { getLatestByIndustry } from "@/lib/articles";
 import { useLang } from "@/lib/i18n";
+import { serviceLabel } from "@/lib/serviceLabels";
 import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) => {
@@ -34,7 +35,7 @@ const Dentist = () => {
   const proposal = (className = "hc-button") => <Button asChild className={className}><Link to="/proposal">{t("hc.proposal")}</Link></Button>;
   return (
     <div className="healthcare-theme hc-page" id="top">
-      <IndustryHeader industryLabel="Healthcare" industryLabelZh="醫療產業" dotColor="var(--hc-mint)" anchors={[{ id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
+      <IndustryHeader dotColor="var(--hc-mint)" anchors={[{ id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
       <main className="hc-main">
         <section className="hc-hero hc-dark">
           <div className="hc-container hc-two-columns">
@@ -62,7 +63,7 @@ const Dentist = () => {
         <section id="work" className="hc-section"><div className="hc-container">
           <div className="hc-section-heading"><Reveal>{heading("hc.work.label", "hc.work.title")}</Reveal><Button variant="link" asChild className="hc-text-link"><Link to="/portfolio/dental-healthcare">{t("hc.work.all")} →</Link></Button></div>
           {error ? <p role="status">{t("hc.work.error")}</p> : <div className="hc-grid hc-grid-work" aria-busy={loading}>
-            {loading ? Array.from({ length: 6 }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${item.title} ${t("hc.homepage")}`} /></div><h3>{item.title}<span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.join(" · ")}</p> : null}</Link>)}
+            {loading ? Array.from({ length: 6 }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${item.title} ${t("hc.homepage")}`} /></div><h3>{item.title}<span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.map((s) => serviceLabel(s, lang)).join(" · ")}</p> : null}</Link>)}
           </div>}
           {!loading && !error && items.length === 0 && <p>{t("hc.work.empty")}</p>}
         </div></section>

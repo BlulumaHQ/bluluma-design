@@ -22,7 +22,8 @@ const setMeta = (name: string, content: string, attr: "name" | "property" = "nam
 const Work = ({ category: categoryProp }: { category?: string }) => {
   const { lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
-  const catName = (c: { name: string; slug: string }) => (lang === "zh" ? PORTFOLIO_CATEGORIES.find((d) => d.slug === c.slug)?.nameZh ?? c.name : c.name);
+  const catName = (c: { name: string; slug: string; nameZh?: string }) =>
+    lang === "zh" ? c.nameZh ?? PORTFOLIO_CATEGORIES.find((d) => d.slug === c.slug)?.nameZh ?? c.name : c.name;
   const params = useParams<{ category?: string; page?: string }>();
   const activeSlug = categoryProp ?? params.category;
   const { items: all, loading, error } = usePortfolioFeed();
