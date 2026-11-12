@@ -7,6 +7,11 @@ describe("industry portfolio rules", () => {
   it("counts every matching feed item including multi-category projects", () => {
     expect(industryItems([item("a", ["Realtor / Realty"]), item("b", ["Automotive", "Realtor / Realty"]), item("c", ["Dental / Healthcare"])], "realtor-realty").length).toBe(2);
   });
+  it("supports the live CMS Realtor and Pre-Sale labels for the requested landing categories", () => {
+    const feed = [item("eric", ["Realtor"]), item("park", ["Real Estate Development / Pre-Sale"])];
+    expect(industryItems(feed, "realtor-realty").map((row) => row.id)).toEqual(["eric"]);
+    expect(industryItems(feed, "real-estate-development-presale").map((row) => row.id)).toEqual(["park"]);
+  });
   it("hides the stat below three and shows it starting at three", () => {
     expect(visibleIndustryCount(2)).toBe(false);
     expect(visibleIndustryCount(3)).toBe(true);
