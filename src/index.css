@@ -829,7 +829,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .home-testimonial-dot.is-active { background: hsl(var(--primary)); }
 .home-final-section { padding-bottom: 96px; }
 .home-final { padding: 72px 48px; border-radius: 24px; text-align: center; }
-.home-final h2 { font-size: 40px; font-weight: 800; line-height: 1.1; max-width: 850px; margin: 0 auto; }
+.home-final h2 { font-size: 40px; font-weight: 800; line-height: 1.1; max-width: 850px; margin: 0 auto; text-wrap: balance; }
 .home-final p { color: hsl(var(--dark-muted)); font-size: 18px; max-width: 650px; margin: 24px auto 28px; }
 .home-hero { padding-top: 80px; }
 .home-slides { display: grid; }
@@ -839,7 +839,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .home-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid hsl(var(--site-panel-border)); background: hsl(var(--site-surface)); border-radius: 999px; font-size: 11px; line-height: 1.6; font-weight: 700; }
 .home-badge i { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: hsl(var(--slide-color)); }
 .home-page .home-slide h1, .home-page .home-slide-title { font-size: 60px; font-weight: 800; line-height: 1.02; margin-top: 24px; }
-.home-slide h1 span, .home-slide-title span { color: hsl(var(--site-blue-light)); display: block; }
+.home-slide h1 span, .home-slide-title span { color: hsl(var(--site-blue-light)); display: block; line-height: inherit; }
 .home-slide-description { color: hsl(var(--dark-muted)); font-size: 19px; margin-top: 24px; }
 .home-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .home-slide .hc-booking-label { color: hsl(var(--note-color)); }
