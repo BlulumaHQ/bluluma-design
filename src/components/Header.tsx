@@ -1,203 +1,22 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/bluluma-logo.svg";
-import { useLang } from "@/lib/i18n";
-import { ChevronDown } from "lucide-react";
-
-interface NavChild {
-  to: string;
-  label?: string;
-  labelKey?: string;
-}
-
-interface NavItem {
-  labelKey: string;
-  to?: string;
-  children?: NavChild[];
-}
-
-const navItems: NavItem[] = [
-  { labelKey: "nav.home", to: "/" },
-  { labelKey: "nav.services", to: "/services" },
-  { labelKey: "nav.portfolio", to: "/portfolio" },
-  { labelKey: "nav.insights", to: "/insights" },
-  {
-    labelKey: "nav.industries",
-    children: [
-      { labelKey: "hc.healthcare", to: "/healthcare" },
-      { labelKey: "ind.realtors", to: "/real-estate" },
-      { labelKey: "ind.developers", to: "/presale" },
-    ],
-  },
-  { labelKey: "nav.contact", to: "/contact" },
-];
-
-const Header = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import logo from '@/assets/bluluma-logo.svg';
+import { useLang } from '@/lib/i18n';
+import { Button } from './ui/button';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from './ui/sheet';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+const industries = [{ to: '/healthcare', key: 'hc.healthcare' }, { to: '/real-estate', key: 'ind.realtors' }, { to: '/presale', key: 'ind.developers' }];
+const links = [{ to: '/services', key: 'nav.services' }, { to: '/portfolio', key: 'nav.portfolio' }, { to: '/insights', key: 'nav.insights' }, { to: '/contact', key: 'nav.contact' }];
+export default function Header() {
   const { lang, setLang, t } = useLang();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setOpenDropdown(null);
-    setMobileOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 border-b border-border shadow-sm backdrop-blur-md"
-          : "bg-background border-b border-transparent"
-      }`}
-    >
-      <div className="section-container flex h-20 items-center justify-between md:h-24">
-        <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Bluluma logo" className="h-14 w-auto md:h-[75px]" />
-        </Link>
-
-        <nav className="hidden items-center gap-9 lg:flex" ref={dropdownRef}>
-          {navItems.map((item) => {
-            if (item.children) {
-              const isOpen = openDropdown === item.labelKey;
-              const isActive = item.children.some((child) => location.pathname.startsWith(child.to));
-              return (
-                <div key={item.labelKey} className="relative">
-                  <button
-                    onClick={() => setOpenDropdown(isOpen ? null : item.labelKey)}
-                    className={`flex items-center gap-1 text-[15px] font-semibold transition-colors ${
-                      isActive ? "text-primary" : "text-foreground hover:text-primary"
-                    }`}
-                  >
-                    {t(item.labelKey)}
-                    <ChevronDown size={14} className={`transition-transform ${isOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {isOpen && (
-                    <div className="absolute left-0 top-full z-50 mt-2 min-w-[190px] overflow-hidden rounded-lg border border-border bg-background shadow-lg">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.to}
-                          to={child.to}
-                          className="block px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          {child.labelKey ? t(child.labelKey) : child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-
-            return (
-              <Link
-                key={item.to}
-                to={item.to ?? "/"}
-                className={`text-[15px] font-semibold transition-colors hover:text-primary ${
-                  location.pathname === item.to ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {t(item.labelKey)}
-              </Link>
-            );
-          })}
-
-          <Link to="/proposal" className="cta-solid rounded-lg px-6 py-2.5 text-sm font-semibold">
-            {t("cta.get-strategy-short")}
-          </Link>
-
-          <div className="flex items-center gap-1 overflow-hidden rounded-md border border-border text-xs font-medium">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2.5 py-1.5 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("zh")}
-              className={`px-2.5 py-1.5 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              中文
-            </button>
-          </div>
-        </nav>
-
-        <div className="flex items-center gap-3 lg:hidden">
-          <div className="flex items-center overflow-hidden rounded-md border border-border text-xs font-medium">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 transition-colors ${lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("zh")}
-              className={`px-2 py-1 transition-colors ${lang === "zh" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              中文
-            </button>
-          </div>
-          <button className="flex flex-col gap-1.5 p-2" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
-            <span className={`block h-px w-6 bg-foreground transition-transform ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
-            <span className={`block h-px w-6 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-px w-6 bg-foreground transition-transform ${mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
-          </button>
-        </div>
-      </div>
-
-      {mobileOpen && (
-        <nav className="border-t border-border bg-background/95 backdrop-blur-md lg:hidden">
-          <div className="section-container flex flex-col gap-4 py-6">
-            {navItems.map((item) =>
-              item.children ? (
-                <div key={item.labelKey} className="flex flex-col gap-2">
-                  <span className="text-base font-semibold text-foreground">{t(item.labelKey)}</span>
-                  <div className="flex flex-col gap-2 pl-4">
-                    {item.children.map((child) => (
-                      <Link key={child.to} to={child.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
-                        {child.labelKey ? t(child.labelKey) : child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={item.to}
-                  to={item.to ?? "/"}
-                  className={`text-base font-semibold transition-colors hover:text-primary ${
-                    location.pathname === item.to ? "text-primary" : "text-foreground"
-                  }`}
-                >
-                  {t(item.labelKey)}
-                </Link>
-              ),
-            )}
-            <Link to="/proposal" className="cta-solid w-full rounded-lg px-6 py-3.5 text-center text-base font-semibold">
-              {t("cta.get-strategy-short")}
-            </Link>
-          </div>
-        </nav>
-      )}
-    </header>
-  );
-};
-
-export default Header;
+  const location = useLocation();
+  const [open, setOpen] = useState(false);
+  useEffect(() => setOpen(false), [location.pathname]);
+  const languages = <div className="site-languages" aria-label={t('hc.language')}><Button variant="ghost" onClick={() => setLang('en')} aria-pressed={lang === 'en'}>EN</Button><span aria-hidden="true">/</span><Button variant="ghost" onClick={() => setLang('zh')} aria-pressed={lang === 'zh'}>中文</Button></div>;
+  const navLink = (link: typeof links[number]) => <Link key={link.to} to={link.to} aria-current={location.pathname === link.to ? 'page' : undefined} className="site-nav-link">{t(link.key)}</Link>;
+  return <header className="site-header"><div className="site-container site-header-inner"><Link to="/" className="site-brand" aria-label="Bluluma Design"><span className="site-logo"><img src={logo} alt="" /></span><span className="site-wordmark">Blu<span>luma</span></span></Link>
+    <nav className="site-desktop-nav" aria-label={t('site.navigation')}>{links.slice(0,2).map(navLink)}<DropdownMenu modal={false}><DropdownMenuTrigger asChild><Button variant="ghost" className="site-nav-link">{t('nav.industries')}<ChevronDown size={14} /></Button></DropdownMenuTrigger><DropdownMenuContent className="site-industry-menu" align="start">{industries.map(link => <DropdownMenuItem key={link.to} asChild><Link to={link.to}>{t(link.key)}</Link></DropdownMenuItem>)}</DropdownMenuContent></DropdownMenu>{links.slice(2).map(navLink)}</nav>
+    <div className="site-header-actions">{languages}<Button asChild variant="site" className="site-header-proposal"><Link to="/proposal">{t('hc.proposal')}</Link></Button><Sheet open={open} onOpenChange={setOpen}><SheetTrigger asChild><Button variant="ghost" size="icon" className="site-mobile-trigger" aria-label={t('site.menu.open')}><Menu /></Button></SheetTrigger><SheetContent className="site-mobile-drawer"><SheetTitle>{t('site.navigation')}</SheetTitle><nav className="site-drawer-links">{links.slice(0,2).map(navLink)}<span className="site-eyebrow">{t('nav.industries')}</span>{industries.map(navLink)}{links.slice(2).map(navLink)}<Button asChild variant="site"><Link to="/proposal">{t('hc.proposal')}</Link></Button></nav></SheetContent></Sheet></div>
+  </div></header>;
+}
