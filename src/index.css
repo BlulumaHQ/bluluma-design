@@ -739,8 +739,9 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .site-header { position: sticky; top: 0; z-index: 50; height: 76px; background: hsl(var(--background)); border-bottom: 1px solid hsl(var(--border)); }
 .site-header-inner { display: flex; height: 100%; align-items: center; justify-content: space-between; gap: 22px; }
 .site-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.site-logo { display: block; position: relative; overflow: hidden; width: 30px; height: 38px; }
-.site-logo img { width: 100px; max-width: none; height: 38px; object-fit: contain; object-position: left; }
+.site-logo-full { display: block; height: 52px; width: auto; }
+.site-footer-logo { display: block; height: 64px; width: auto; margin-bottom: 8px; }
+@media (max-width:767px) { .site-logo-full { height: 44px; } }
 .site-wordmark { color: hsl(var(--site-wordmark)); font-size: 25px; font-weight: 800; line-height: 1; }
 .site-wordmark > span { color: hsl(var(--primary)); }
 .site-desktop-nav, .site-header-actions { display: flex; align-items: center; gap: 22px; }
