@@ -541,6 +541,7 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "en": "",
     "zh": "MLS 房源很實用，但並非以客戶轉換為設計目標。"
   },
+  "rt.article.high-converting-real-estate-website-2026.excerpt": { "en": "", "zh": "了解高轉換率房地產網站的架構、內容與設計關鍵。" },
   "rt.article.high-converting-real-estate-website-2026.title": {
     "en": "",
     "zh": "2026 年高轉換率房地產網站的關鍵"
