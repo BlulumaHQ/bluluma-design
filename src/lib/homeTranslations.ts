@@ -5,7 +5,7 @@ export const homeTranslations: Record<string, Record<Lang, string>> = {
   'home.carousel.next': { en: 'Next slide', zh: '下一張' },
   'home.carousel.pause': { en: 'Pause slideshow', zh: '暫停輪播' },
   'home.carousel.play': { en: 'Play slideshow', zh: '播放輪播' },
-  'home.any': { en: 'Any business', zh: '各類企業' },
+  'home.any': { en: 'Small business', zh: '中小企業' },
   'home.badge': { en: 'WEBSITES · BRANDING · AI AUTOMATION', zh: '網站設計 · 品牌識別 · AI 自動化' },
   'home.hero.generalTitle': { en: "We don't build websites.", zh: '我們不只做網站。' },
   'home.hero.generalAccent': { en: 'We build revenue systems.', zh: '我們打造營收系統。' },

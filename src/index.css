@@ -802,7 +802,11 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .site-dark { background: hsl(var(--dark-bg)); color: hsl(var(--dark-fg)); }
 .home-page .site-dark h1, .home-page .site-dark h2, .home-page .site-dark h3 { color: hsl(var(--dark-fg)); }
 .site-dark .site-eyebrow { color: hsl(var(--site-blue-light)); }
-.home-investment-grid { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(0,1fr); gap: 64px; align-items: center; }
+.home-investment-grid { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(0,1fr); gap: 32px; align-items: stretch; margin-top: 44px; }
+.home-investment-col { height: 100%; display: flex; flex-direction: column; }
+.home-investment-col > .home-comparison { flex: 1; height: 100%; margin-top: 0; }
+.home-investment-col > .home-investment-card { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+.home-investment-card > a { margin-top: auto; }
 .home-comparison { border: 1px solid hsl(var(--site-panel-border)); border-radius: 16px; border-collapse: separate; border-spacing: 0; overflow: hidden; width: 100%; margin-top: 36px; table-layout: fixed; }
 .home-comparison th { text-align: left; padding: 18px 20px; font-size: 12px; background: hsl(var(--site-surface)); color: hsl(var(--site-caption)); }
 .home-comparison th:last-child { color: hsl(var(--site-blue-light)); }

@@ -4,6 +4,7 @@ import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FeedPortfolioCard from "@/components/FeedPortfolioCard";
 import { useLang } from "@/lib/i18n";
+import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import { feedCategories, itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 
 const PER_PAGE = 20;
@@ -31,6 +32,7 @@ const setCanonical = (href: string) => {
 const Work = ({ category: categoryProp }: { category?: string }) => {
   const { lang } = useLang();
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
+  const catName = (c: { name: string; slug: string }) => (lang === "zh" ? PORTFOLIO_CATEGORIES.find((d) => d.slug === c.slug)?.nameZh ?? c.name : c.name);
   const params = useParams<{ category?: string; page?: string }>();
   const activeSlug = categoryProp ?? params.category;
   const { items: all, loading, error } = usePortfolioFeed();
@@ -45,7 +47,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
   const canonicalPath = page > 1 ? `${baseUrl}/page/${page}` : baseUrl;
 
   const heading = activeCat
-    ? `${activeCat.name} ${tt("Portfolio", "作品集")}`
+    ? `${catName(activeCat)} ${tt("Portfolio", "作品集")}`
     : tt("All Portfolio Projects", "全部作品集");
   const description = tt(
     "Browse every Bluluma client website by industry. Real projects, real businesses.",
@@ -86,7 +88,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
               <>
                 <Link to="/portfolio" className="hover:text-foreground">{tt("Portfolio", "作品集")}</Link>
                 <ChevronRight size={12} className="opacity-50" />
-                <span className="text-foreground">{activeCat.name}</span>
+                <span className="text-foreground">{catName(activeCat)}</span>
               </>
             ) : (
               <span className="text-foreground">{tt("Portfolio", "作品集")}</span>
@@ -98,7 +100,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
       </section>
 
       <section className="isolate section-border section-subtle-bg relative overflow-hidden">
-        <div className="site-container section-padding">
+        <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
           <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">
             <aside className="site-portfolio-sidebar lg:sticky lg:top-[110px] lg:self-start">
               <nav aria-label={tt("Portfolio categories", "作品分類")} className="text-sm">
@@ -115,7 +117,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
                   {cats.map((c) => (
                     <li key={c.slug}>
                       <NavLink to={`/portfolio/${c.slug}`} className={() => rowCls(activeSlug === c.slug)}>
-                        <span className="leading-snug">{c.name}</span>
+                        <span className="leading-snug">{catName(c)}</span>
                         <span className="tabular-nums text-xs text-muted-foreground">{c.count}</span>
                       </NavLink>
                     </li>
