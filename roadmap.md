@@ -1,5 +1,11 @@
 # Portfolio refinements
 
+# Three industry pages
+
+- [ ] Share collage, work grid, accents, and live category counts; extend both industry menus.
+- [ ] Rebuild Realtors, preserve pricing, add Pre-sale and audience navigation with Chinese translations.
+- [ ] Verify all three pages in both languages at 1280px and 375px, CMS imagery, menus, and ad redirect.
+
 - [x] Add full-card links, hover lift/arrow, visible thin scrollbars, and persistent scroll hints.
 - [x] Disable card-frame scrolling on touch while keeping phone previews scrollable.
 - [x] Use natural-ratio masonry for page screenshots without changing the CMS feed.
