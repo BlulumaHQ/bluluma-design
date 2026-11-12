@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { industryTranslations } from "./industryTranslations";
 import { homeTranslations } from "./homeTranslations";
+import { langFromPath, localizePath, type Lang as UrlLang } from "./locale";
 
-export type Lang = "en" | "zh";
+export type Lang = UrlLang;
 
 interface LangContextType {
   lang: Lang;
@@ -671,19 +672,18 @@ const translations: Record<string, Record<Lang, string>> = {
 };
 
 export const LangProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
-    return (localStorage.getItem("bluluma_lang") as Lang) || "en";
-  });
+  // Language comes from the URL (/zh/... = Chinese). No on-site storage.
+  const [lang] = useState<Lang>(() => (typeof window === "undefined" ? "en" : langFromPath(window.location.pathname)));
 
   const setLang = (l: Lang) => {
-    setLangState(l);
-    localStorage.setItem("bluluma_lang", l);
+    if (l === lang || typeof window === "undefined") return;
+    const { pathname, search, hash } = window.location;
+    window.location.assign(`${localizePath(pathname, l)}${search}${hash}`);
   };
 
   // Reflect language on <html lang="..."> so :lang(zh) styles apply
   if (typeof document !== "undefined") {
-    const htmlLang = lang === "zh" ? "zh-TW" : "en";
+    const htmlLang = lang === "zh" ? "zh-Hant" : "en";
     if (document.documentElement.lang !== htmlLang) {
       document.documentElement.lang = htmlLang;
     }

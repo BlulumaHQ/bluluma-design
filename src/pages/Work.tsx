@@ -8,7 +8,6 @@ import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import { feedCategories, itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 
 const PER_PAGE = 20;
-const SITE = "https://bluluma-design-agency.lovable.app";
 
 const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
   let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`);
@@ -18,15 +17,6 @@ const setMeta = (name: string, content: string, attr: "name" | "property" = "nam
     document.head.appendChild(el);
   }
   el.setAttribute("content", content);
-};
-const setCanonical = (href: string) => {
-  let el = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!el) {
-    el = document.createElement("link");
-    el.setAttribute("rel", "canonical");
-    document.head.appendChild(el);
-  }
-  el.setAttribute("href", href);
 };
 
 const Work = ({ category: categoryProp }: { category?: string }) => {
@@ -60,9 +50,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
     setMeta("description", description);
     setMeta("og:title", title, "property");
     setMeta("og:description", description, "property");
-    setMeta("og:url", `${SITE}${canonicalPath}`, "property");
     setMeta("og:type", "website", "property");
-    setCanonical(`${SITE}${canonicalPath}`);
   }, [activeCat?.name, page, description, canonicalPath]);
 
   if (!loading && !error && activeSlug && !activeCat) return <Navigate to="/portfolio" replace />;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLang } from "@/lib/i18n";
 import { IndustryReveal as Reveal } from "./IndustryReveal";
 
@@ -87,8 +88,8 @@ export default function RealtorPricing() {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href="/proposal"
+                    <Link
+                      to="/proposal"
                       className={`mt-8 inline-block text-center px-6 py-3.5 text-sm font-semibold rounded-lg ${
                         p.featured
                           ? "cta-solid"
@@ -96,7 +97,7 @@ export default function RealtorPricing() {
                       }`}
                     >
                       {p.cta}
-                    </a>
+                    </Link>
                   </div>
                 </Reveal>
               ))}

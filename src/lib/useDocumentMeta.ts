@@ -6,7 +6,6 @@ interface MetaOptions {
   canonicalPath: string;
 }
 
-const SITE = "https://bluluma-design-agency.lovable.app";
 
 const setMeta = (selector: string, attr: string, value: string, create: () => HTMLElement) => {
   let el = document.head.querySelector<HTMLElement>(selector);
@@ -29,12 +28,6 @@ export function useDocumentMeta({ title, description, canonicalPath }: MetaOptio
       return m;
     });
 
-    const canonical = `${SITE}${canonicalPath}`;
-    setMeta('link[rel="canonical"]', "href", canonical, () => {
-      const l = document.createElement("link");
-      l.setAttribute("rel", "canonical");
-      return l;
-    });
 
     setMeta('meta[property="og:title"]', "content", title, () => {
       const m = document.createElement("meta");
@@ -46,14 +39,10 @@ export function useDocumentMeta({ title, description, canonicalPath }: MetaOptio
       m.setAttribute("property", "og:description");
       return m;
     });
-    setMeta('meta[property="og:url"]', "content", canonical, () => {
-      const m = document.createElement("meta");
-      m.setAttribute("property", "og:url");
-      return m;
-    });
 
     return () => {
       document.title = prevTitle;
     };
+  // canonical/og:url/hreflang are set per route by LocaleHead
   }, [title, description, canonicalPath]);
 }

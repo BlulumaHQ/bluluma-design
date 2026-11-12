@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LangProvider } from "@/lib/i18n";
+import { ZH_PREFIX, langFromPath } from "@/lib/locale";
+import LocaleHead from "./components/LocaleHead";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Work from "./pages/Work";
@@ -45,8 +47,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <PageLoader />
-        <BrowserRouter>
+        <BrowserRouter basename={typeof window !== "undefined" && langFromPath(window.location.pathname) === "zh" ? ZH_PREFIX : undefined}>
           <ScrollToTop />
+          <LocaleHead />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
