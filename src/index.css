@@ -958,3 +958,10 @@ html:has(.hc-page) { scroll-behavior: smooth; }
   .site-page nav[aria-label="Pagination"] { flex-wrap: wrap; justify-content: center; }
 }
 @media (prefers-reduced-motion:reduce) { .site-page .site-page-card { transition: none; } .site-page .site-page-card:hover { transform: none; } }
+.site-page-process .site-page-card h2 { font-size: 20px; }
+.site-page .site-page-hero .text-label { text-transform: uppercase; }
+.site-page .site-page-hero .site-button { font-size: 15px; }
+.site-page .site-page-card .bg-red-400\/70 { background: hsl(var(--destructive) / .7); }
+.site-page .site-page-card .bg-yellow-400\/70 { background: hsl(var(--site-gold) / .7); }
+.site-page .site-page-card .bg-green-400\/70 { background: hsl(var(--site-mint) / .7); }
+@media (prefers-reduced-motion:reduce) { .site-page [style*="opacity"] { opacity: 1 !important; transform: none !important; transition: none !important; } }

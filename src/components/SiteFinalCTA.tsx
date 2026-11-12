@@ -10,8 +10,8 @@ export default function SiteFinalCTA() {
       <div className="site-container">
         <div className="home-final site-dark">
           <h2>{t("home.finalcta.title")}</h2>
-          <p>{t("home.finalcta.sub")}</p>
-          <Button asChild variant="siteLight"><Link to="/proposal">{t("cta.start-project")}</Link></Button>
+          <p>{t("home.final.body")}</p>
+          <Button asChild variant="siteLight"><Link to="/proposal">{t("hc.proposal")}</Link></Button>
         </div>
       </div>
     </section>

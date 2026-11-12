@@ -124,7 +124,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
               </nav>
             </aside>
 
-            <div className="site-page site-page-work">
+            <div>
               {loading && <p className="py-12 text-center text-sm text-muted-foreground">{tt("Loading portfolio…", "正在載入作品…")}</p>}
               {!loading && error && <p className="py-12 text-center text-sm text-destructive">{tt("Unable to load portfolio projects.", "無法載入作品資料。")}</p>}
               {!loading && !error && items.length === 0 && (

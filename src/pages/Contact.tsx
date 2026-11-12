@@ -70,19 +70,19 @@ const Contact = () => {
                 <input type="text" id="website_hp" name="website_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="name" className="text-sm font-medium block mb-2">{t("contact.form.name")} *</label>
                   <input type="text" id="name" name="name" required className={inputClass} />
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="email" className="text-sm font-medium block mb-2">{t("contact.form.email")} *</label>
                   <input type="email" id="email" name="email" required className={inputClass} />
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="current_url" className="text-sm font-medium block mb-2">{t("contact.form.website")}</label>
                   <input type="text" id="current_url" name="current_url" className={inputClass} />
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="budget" className="text-sm font-medium block mb-2">{t("contact.form.budget")}</label>
                   <select id="budget" name="budget" className={inputClass}>
                     <option value="">{t("contact.form.budget.select")}</option>
@@ -92,7 +92,7 @@ const Contact = () => {
                     <option value="$10,000+">$10,000+</option>
                   </select>
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="timeline" className="text-sm font-medium block mb-2">{t("contact.form.timeline")}</label>
                   <select id="timeline" name="timeline" className={inputClass}>
                     <option value="">{t("contact.form.timeline.select")}</option>
@@ -102,7 +102,7 @@ const Contact = () => {
                     <option value="Flexible">{t("contact.form.timeline.flexible")}</option>
                   </select>
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <label htmlFor="project_type" className="text-sm font-medium block mb-2">{t("contact.form.project-type")} *</label>
                   <select id="project_type" name="project_type" required className={inputClass}>
                     <option value="">{t("contact.form.project-type.select")}</option>
@@ -114,7 +114,7 @@ const Contact = () => {
                   </select>
                 </div>
               </div>
-              <div className="site-page site-page-contact">
+              <div>
                 <label htmlFor="message" className="text-sm font-medium block mb-2">{t("contact.form.details")} *</label>
                 <textarea
                   id="message" name="message" rows={5} required
@@ -139,11 +139,11 @@ const Contact = () => {
                 {t("contact.response")}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                <div className="site-page site-page-contact">
+                <div>
                   <h3 className="text-label mb-2">{t("footer.email")}</h3>
                   <p className="font-medium">support@bluluma.com</p>
                 </div>
-                <div className="site-page site-page-contact">
+                <div>
                   <h3 className="text-label mb-2">{t("footer.location")}</h3>
                   <p className="font-medium">Vancouver, BC, Canada</p>
                 </div>

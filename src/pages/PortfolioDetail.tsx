@@ -78,7 +78,7 @@ const PortfolioDetail = () => {
               <span className="text-foreground">{it.title}</span>
             </nav>
             <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr,1.3fr]">
-              <div className="site-page site-page-portfoliodetail">
+              <div>
                 <h1 className="text-3xl font-bold md:text-5xl">{it.title}</h1>
                 {services.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-1.5">

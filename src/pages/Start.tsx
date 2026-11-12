@@ -126,23 +126,23 @@ const Start = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="name" className="text-sm font-medium block mb-2">Full Name *</label>
                     <input id="name" name="name" type="text" required maxLength={100} className={inputClass} />
                   </div>
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="email" className="text-sm font-medium block mb-2">Email Address *</label>
                     <input id="email" name="email" type="email" required maxLength={255} className={inputClass} />
                   </div>
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="business" className="text-sm font-medium block mb-2">Business Name</label>
                     <input id="business" name="business" type="text" maxLength={150} className={inputClass} />
                   </div>
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="website" className="text-sm font-medium block mb-2">Website (optional)</label>
                     <input id="website" name="website" type="text" maxLength={255} placeholder="https://" className={inputClass} />
                   </div>
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="industry" className="text-sm font-medium block mb-2">Industry</label>
                     <select id="industry" name="industry" className={inputClass} defaultValue="">
                       <option value="" disabled>Select industry</option>
@@ -153,7 +153,7 @@ const Start = () => {
                       <option value="Other">Other</option>
                     </select>
                   </div>
-                  <div className="site-page site-page-start">
+                  <div>
                     <label htmlFor="budget" className="text-sm font-medium block mb-2">Budget Range *</label>
                     <select id="budget" name="budget" required className={inputClass} defaultValue="">
                       <option value="" disabled>Select budget range</option>
@@ -175,7 +175,7 @@ const Start = () => {
                   </div>
                 </div>
 
-                <div className="site-page site-page-start">
+                <div>
                   <span className="text-sm font-medium block mb-3">What do you need?</span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {NEEDS.map((n) => {
@@ -206,7 +206,7 @@ const Start = () => {
                   </div>
                 </div>
 
-                <div className="site-page site-page-start">
+                <div>
                   <label htmlFor="details" className="text-sm font-medium block mb-2">Project Details *</label>
                   <textarea
                     id="details"

@@ -25,7 +25,6 @@ const RevealSection = ({
   return (
     <div ref={ref} className={className}>
       {children}
-      <SiteFinalCTA />
     </div>
   );
 };
@@ -109,7 +108,7 @@ const Insights = () => {
       <section className="isolate section-border bg-background relative overflow-hidden">
         <div className="section-container py-8 space-y-5">
           {/* Search */}
-          <div className="site-page site-page-insights">
+          <div>
             <input
               type="search"
               value={search}

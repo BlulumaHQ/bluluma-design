@@ -121,19 +121,19 @@ const CaseStudyDetail = () => {
             </div>
 
             <div className="space-y-12">
-              <div className="site-page site-page-casestudies">
+              <div>
                 <h2 className="text-2xl font-bold">{tt("Design thinking", "設計思路")}</h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.strategy}</p>
               </div>
-              <div className="site-page site-page-casestudies">
+              <div>
                 <h2 className="text-2xl font-bold">{tt("Conversion strategy", "轉換策略")}</h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.summary}</p>
               </div>
-              <div className="site-page site-page-casestudies">
+              <div>
                 <h2 className="text-2xl font-bold">{tt("Business problem solved", "解決的商業問題")}</h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.description}</p>
               </div>
-              <div className="site-page site-page-casestudies">
+              <div>
                 <h2 className="text-2xl font-bold">{tt("Visual improvement", "視覺改善")}</h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tt(
                   "The redesign sharpens hierarchy, reduces friction, and gives the brand a cleaner premium presentation without decorative hover effects.",

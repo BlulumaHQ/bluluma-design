@@ -151,7 +151,6 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
           {project.liveUrl ? t("cta.visit-site") : t("cta.view-project")}
         </span>
       </div>
-      <SiteFinalCTA />
     </div>
   );
 
@@ -190,7 +189,7 @@ export const IndustriesList = () => {
                   className="site-page-card group bg-background p-8 hover:bg-secondary transition-colors flex gap-4 items-start"
                 >
                   <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
-                  <div className="site-page site-page-industries">
+                  <div>
                     <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{t(ind.nameKey)}</h3>
                     <p className="text-sm text-muted-foreground">{t(ind.descKey)}</p>
                     <span className="text-sm font-medium text-primary mt-3 inline-block">{t("cta.learn-more")}</span>
@@ -236,12 +235,12 @@ export const IndustryDetail = () => {
       <section>
         <div className="section-container section-padding max-w-3xl">
           <div className="space-y-12">
-            <div className="site-page site-page-industries">
+            <div>
               <h2 className="text-2xl font-bold mb-4">{t("industries.overview")}</h2>
               <p className="text-muted-foreground leading-relaxed">{t(industry.overviewKey)}</p>
             </div>
 
-            <div className="site-page site-page-industries">
+            <div>
               <h2 className="text-2xl font-bold mb-4">{t("industries.what-we-build")}</h2>
               <ul className="space-y-2">
                 {industry.whatWeBuildKeys.map((key, i) => (
@@ -254,7 +253,7 @@ export const IndustryDetail = () => {
             </div>
 
             {industry.projectSlugs.length > 0 && (
-              <div className="site-page site-page-industries">
+              <div>
                 <h2 className="text-2xl font-bold mb-6">{t("industries.featured")}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {industry.projectSlugs.map((s) => (

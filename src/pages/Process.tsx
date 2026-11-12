@@ -39,18 +39,18 @@ const Process = () => {
       {/* Steps (White) */}
       <section>
         <div className="section-container section-padding">
-          <div className="space-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
                 <RevealSection key={i} delay={i * 100}>
-                  <div className={`grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 py-12 ${i < steps.length - 1 ? "border-b border-border" : ""}`}>
-                    <div className="flex md:flex-col items-center md:items-start gap-4">
+                  <div className="site-page-card p-8">
+                    <div className="flex items-center gap-4 mb-6">
                       <span className="home-step-number">{step.num}</span>
                       <Icon size={28} strokeWidth={1.5} className="text-primary" />
                     </div>
-                    <div className="site-page site-page-process">
-                      <h2 className="text-2xl md:text-3xl font-bold mb-3">{t(step.titleKey)}</h2>
+                    <div>
+                      <h2 className="text-xl font-bold mb-3">{t(step.titleKey)}</h2>
                       <p className="text-muted-foreground leading-relaxed max-w-2xl">{t(step.descKey)}</p>
                     </div>
                   </div>
