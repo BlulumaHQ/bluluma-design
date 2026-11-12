@@ -1,3 +1,8 @@
+# Restyle pass 2
+
+- [ ] Restyle all remaining pages with scoped shared tokens, dark heroes, cards, forms, browser frames and final CTAs; preserve excluded pages and all content/logic.
+- [ ] Verify all page types in both languages at 1280px/375px, portfolio navigation/filtering, form validation without email delivery, and unchanged protected pages.
+
 # Restyle pass 1
 
 - [x] Promote shared palette and restyle main Header/Footer without changing other page layouts or industry content.
