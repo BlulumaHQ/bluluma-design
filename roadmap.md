@@ -1,3 +1,9 @@
+# Category renames and homepage pricing
+
+- [ ] Match industry categories directly and reverse five legacy category redirects while preserving project links.
+- [ ] Change only the homepage pricing range in both languages to $1,499 – $3,500+.
+- [ ] Verify CMS counts, category filters, six Realtor cards, four Presale cards, redirects, and pricing.
+
 # Three industry pages
 
 - [x] Share collage, work grid, accents, and live category counts; extend both industry menus.
