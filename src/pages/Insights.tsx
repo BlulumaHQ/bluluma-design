@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link, useLocation } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { useState, useMemo, useEffect } from "react";
 import {
   articles,
@@ -81,14 +82,14 @@ const Insights = () => {
     : "Practical website, branding, and digital strategy insights for service businesses.";
 
   return (
-    <div>
+    <div className="site-page site-page-insights">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border">
+      <section className="site-page-hero section-dark section-border">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{heroTitle}</h1>
           <p
             className="mt-4 max-w-xl leading-relaxed"
-            style={{ color: "hsl(220 10% 60%)" }}
+           
           >
             {heroSubtitle}
           </p>
@@ -105,7 +106,6 @@ const Insights = () => {
 
       {/* Filters */}
       <section className="isolate section-border bg-background relative overflow-hidden">
-        <HexPattern variation={6} />
         <div className="section-container py-8 space-y-5">
           {/* Search */}
           <div>
@@ -123,7 +123,7 @@ const Insights = () => {
             <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
               Category
             </span>
-            <button
+            <Button variant="ghost"
               onClick={() => setCategory(null)}
               className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                 category === null
@@ -132,9 +132,9 @@ const Insights = () => {
               }`}
             >
               All
-            </button>
+            </Button>
             {allCategories.map((c) => (
-              <button
+              <Button variant="ghost"
                 key={c}
                 onClick={() => setCategory(category === c ? null : c)}
                 className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
@@ -144,7 +144,7 @@ const Insights = () => {
                 }`}
               >
                 {c}
-              </button>
+              </Button>
             ))}
           </div>
 
@@ -154,7 +154,7 @@ const Insights = () => {
                 <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
                 Industry
               </span>
-              <button
+              <Button variant="ghost"
                 onClick={() => setIndustry(null)}
                 className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                   industry === null
@@ -163,9 +163,9 @@ const Insights = () => {
                 }`}
               >
                 All
-              </button>
+              </Button>
               {allIndustries.map((ind) => (
-                <button
+                <Button variant="ghost"
                   key={ind}
                   onClick={() => setIndustry(industry === ind ? null : ind)}
                   className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
@@ -175,7 +175,7 @@ const Insights = () => {
                   }`}
                 >
                   {ind}
-                </button>
+                </Button>
               ))}
             </div>
           )}
@@ -185,7 +185,7 @@ const Insights = () => {
             <span className="text-xs font-semibold uppercase tracking-widest text-foreground/70 mr-2">
               Tags
             </span>
-            <button
+            <Button variant="ghost"
               onClick={() => setActiveTag(null)}
               className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
                 activeTag === null
@@ -194,9 +194,9 @@ const Insights = () => {
               }`}
             >
               All
-            </button>
+            </Button>
             {allTags.map((tag) => (
-              <button
+              <Button variant="ghost"
                 key={tag}
                 onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                 className={`text-xs px-3 py-1.5 border rounded-lg transition-colors ${
@@ -206,7 +206,7 @@ const Insights = () => {
                 }`}
               >
                 {tag}
-              </button>
+              </Button>
             ))}
           </div>
 
@@ -231,7 +231,7 @@ const Insights = () => {
                   <RevealSection key={a.slug} delay={i * 60}>
                     <Link
                       to={`/insights/${a.slug}`}
-                      className="block bg-background border border-border rounded-lg overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 h-full"
+                      className="site-page-card site-insight-card block bg-background border border-border rounded-lg overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 h-full"
                     >
                       <div className="aspect-[16/9] bg-muted overflow-hidden">
                         {img ? (
@@ -242,7 +242,7 @@ const Insights = () => {
                             loading="lazy"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                          <div className="w-full h-full bg-secondary flex items-center justify-center">
                             <span className="text-primary/40 text-xs uppercase tracking-widest font-semibold">
                               {a.category}
                             </span>
@@ -290,6 +290,7 @@ const Insights = () => {
           )}
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };

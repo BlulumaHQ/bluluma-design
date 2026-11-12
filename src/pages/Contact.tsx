@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useLang } from "@/lib/i18n";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,17 +42,16 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div className="site-page site-page-contact">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-dark section-border relative overflow-hidden">
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("contact.label")}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("contact.hero.title")}
             </h1>
-            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed">
               {t("contact.hero.sub")}
             </p>
           </RevealSection>
@@ -122,13 +123,13 @@ const Contact = () => {
                 />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
-              <button
+              <Button variant="ghost"
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg disabled:opacity-50"
+                className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg disabled:opacity-50"
               >
                 {submitting ? t("contact.form.sending") : t("cta.get-strategy")}
-              </button>
+              </Button>
             </form>
           </RevealSection>
 
@@ -151,6 +152,7 @@ const Contact = () => {
           </RevealSection>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };

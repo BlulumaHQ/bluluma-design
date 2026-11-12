@@ -1,3 +1,4 @@
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -24,8 +25,8 @@ const ThankYou = () => {
   }, []);
 
   return (
-    <div>
-      <section>
+    <div className="site-page site-page-thankyou">
+      <section className="site-page-hero ">
         <div className="section-container py-24 md:py-40 text-center">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
             THANK YOU
@@ -45,13 +46,14 @@ const ThankYou = () => {
           <div className="mt-10">
             <Link
               to="/"
-              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
+              className="site-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors"
             >
               Back to Home
             </Link>
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };

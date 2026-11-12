@@ -1,5 +1,5 @@
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useEffect } from "react";
-import HexPattern from "@/components/HexPattern";
 import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FeedPortfolioCard from "@/components/FeedPortfolioCard";
@@ -71,13 +71,13 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
   const rowCls = (isActive: boolean) =>
     `group flex items-center justify-between gap-3 border-l-2 py-2.5 pl-4 pr-3 text-sm transition-colors ${
       isActive
-        ? "border-primary bg-primary/5 text-foreground font-medium"
+        ? "border-primary bg-primary/5 text-primary font-semibold"
         : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
     }`;
 
   return (
-    <div>
-      <section className="section-dark section-border">
+    <div className="site-page site-page-work">
+      <section className="site-page-hero section-dark section-border">
         <div className="section-container py-14 md:py-20">
           <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground">
             <Link to="/" className="hover:text-foreground">{tt("Home", "首頁")}</Link>
@@ -98,10 +98,9 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
       </section>
 
       <section className="isolate section-border section-subtle-bg relative overflow-hidden">
-        <HexPattern variation={8} />
-        <div className="mx-auto w-full max-w-[1880px] px-5 py-12 sm:px-8 md:py-16 lg:px-12">
+        <div className="site-container section-padding">
           <div className="grid gap-8 lg:grid-cols-[280px,1fr] lg:gap-10 xl:gap-12">
-            <aside className="lg:sticky lg:top-[110px] lg:self-start">
+            <aside className="site-portfolio-sidebar lg:sticky lg:top-[110px] lg:self-start">
               <nav aria-label={tt("Portfolio categories", "作品分類")} className="text-sm">
                 <p className="mb-4 pl-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   {tt("Portfolio", "作品集")}
@@ -165,6 +164,7 @@ const Work = ({ category: categoryProp }: { category?: string }) => {
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };

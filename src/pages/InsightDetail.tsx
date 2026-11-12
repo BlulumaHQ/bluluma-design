@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { getArticleBySlug } from "@/lib/articles";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insightImages, insightInlineImages } from "@/pages/insightImages";
@@ -51,10 +50,9 @@ const InsightDetail = () => {
   const isDentist = article.industry === "Dentist";
 
   return (
-    <div>
+    <div className="site-page site-page-insightdetail">
       {/* SEO-style hero */}
-      <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={7} />
+      <section className="site-page-hero isolate section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24">
           <Link
             to="/insights"
@@ -118,7 +116,7 @@ const InsightDetail = () => {
 
       {/* Content */}
       <section>
-        <div className="section-container section-padding max-w-3xl">
+        <div className="section-container section-padding site-article-column">
           {paragraphs.map((p, i) => {
             const trimmed = p.trim();
             const isList = trimmed
@@ -156,7 +154,7 @@ const InsightDetail = () => {
       </section>
 
       {/* Industry-aware CTA */}
-      <section className="section-dark section-border">
+      <section className="site-page-cta section-dark section-border">
         <div className="section-container py-16 md:py-24 text-center">
           <RevealSection>
             {isRealtor ? (
@@ -166,14 +164,14 @@ const InsightDetail = () => {
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
-                  style={{ color: "hsl(220 10% 60%)" }}
+                 
                 >
                   Request a tailored proposal for a real estate website
                   built to convert visitors into buyers and sellers.
                 </p>
                 <Link
                   to="/realtor"
-                  className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
+                  className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   View Realtor Website Service
                 </Link>
@@ -185,14 +183,14 @@ const InsightDetail = () => {
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
-                  style={{ color: "hsl(220 10% 60%)" }}
+                 
                 >
                   Dental websites built to attract new patients and build
                   trust from the first visit.
                 </p>
                 <Link
                   to="/proposal"
-                  className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
+                  className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Talk to Bluluma
                 </Link>
@@ -204,14 +202,14 @@ const InsightDetail = () => {
                 </h2>
                 <p
                   className="max-w-lg mx-auto mb-8 leading-relaxed"
-                  style={{ color: "hsl(220 10% 60%)" }}
+                 
                 >
                   If you're evaluating whether your website needs a redesign or
                   structural update, we can help map the next step.
                 </p>
                 <Link
                   to="/proposal"
-                  className="inline-block cta-solid px-8 py-3.5 text-sm font-semibold rounded-lg"
+                  className="inline-block site-button px-8 py-3.5 text-sm font-semibold rounded-lg"
                 >
                   Request a Quote
                 </Link>

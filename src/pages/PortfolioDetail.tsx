@@ -1,7 +1,8 @@
+import SiteBrowserFrame from "@/components/SiteBrowserFrame";
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, ExternalLink } from "lucide-react";
-import HexPattern from "@/components/HexPattern";
 import { useLang } from "@/lib/i18n";
 import { itemInCategory, usePortfolioFeed } from "@/lib/portfolioFeed";
 import Work from "./Work";
@@ -66,9 +67,8 @@ const PortfolioDetail = () => {
     const mobile = gallery.find((g) => g?.type === "mobile_screenshot" && g.url);
 
     return (
-      <article>
-        <section className="isolate section-border section-subtle-bg relative overflow-hidden">
-          <HexPattern variation={1} />
+      <article className="site-page site-page-portfoliodetail">
+        <section className="site-page-hero isolate section-border section-subtle-bg relative overflow-hidden">
           <div className="section-container py-10 md:py-14">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground">
               <Link to="/" className="hover:text-foreground">{tt("Home", "首頁")}</Link>
@@ -83,18 +83,18 @@ const PortfolioDetail = () => {
                 {services.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-1.5">
                     {services.map((s) => (
-                      <span key={s} className="rounded-full border border-border bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">{s}</span>
+                      <span key={s} className="site-project-tag rounded-full border px-2.5 py-1 text-xs font-medium">{s}</span>
                     ))}
                   </div>
                 )}
                 {it.live_url && (
-                  <a href={it.live_url} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+                  <a href={it.live_url} target="_blank" rel="noopener noreferrer" className="site-button mt-7 inline-flex items-center gap-2">
                     {tt("Visit Website", "瀏覽網站")} <ExternalLink size={14} />
                   </a>
                 )}
               </div>
               {it.featured_image_url && (
-                <img src={it.featured_image_url} alt={`${it.title} website`} loading="lazy" decoding="async" className="w-full rounded-xl border border-border shadow-md" />
+                <SiteBrowserFrame><img src={it.featured_image_url} alt={`${it.title} website`} loading="lazy" decoding="async" className="w-full h-auto" /></SiteBrowserFrame>
               )}
             </div>
           </div>
@@ -107,9 +107,9 @@ const PortfolioDetail = () => {
               <div className="mt-8 columns-1 gap-6 md:columns-2">
                 {pages.map((g, i) => (
                   <figure key={g.url + i} className="mb-6 break-inside-avoid">
-                    <div className="overflow-hidden rounded-xl border border-border bg-muted shadow-sm">
+                    <SiteBrowserFrame>
                       <img src={g.url} alt={g.caption || `${it.title} page ${i + 1}`} loading="lazy" decoding="async" className="block h-auto w-full" />
-                    </div>
+                    </SiteBrowserFrame>
                     {g.caption && <figcaption className="mt-2 text-sm text-muted-foreground">{g.caption}</figcaption>}
                   </figure>
                 ))}
@@ -129,6 +129,7 @@ const PortfolioDetail = () => {
             </div>
           </section>
         )}
+        <SiteFinalCTA />
       </article>
     );
   }

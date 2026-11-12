@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import agencyImage from "@/assets/bluluma-logo-3d-sign.jpg";
@@ -13,9 +12,8 @@ const Agency = () => {
   const { t, lang } = useLang();
 
   return (
-    <div>
-      <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={2} />
+    <div className="site-page site-page-agency">
+      <section className="site-page-hero isolate section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("agency.title")}</h1>
         </div>
@@ -41,13 +39,13 @@ const Agency = () => {
           </RevealDiv>
 
           <RevealDiv delay={100}>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { labelKey: "agency.focus", valueKey: "agency.focus.value" },
                 { labelKey: "agency.location", valueKey: "agency.location.value" },
                 { labelKey: "agency.founded", value: "2024" },
               ].map((item) => (
-                <div key={item.labelKey} className="bg-background p-8">
+                <div key={item.labelKey} className="site-page-card bg-background p-8">
                   <span className="text-label block mb-2">{t(item.labelKey)}</span>
                   <p className="text-lg font-semibold">{"valueKey" in item ? t(item.valueKey!) : item.value}</p>
                 </div>
@@ -83,10 +81,10 @@ const Agency = () => {
           </div>
 
           <RevealDiv delay={100}>
-            <div className="mt-16 pt-16 border-t border-border text-center">
+            <div className="site-page-inline-cta mt-16 text-center">
               <h2 className="text-3xl font-bold mb-4">{t("agency.work-with-us")}</h2>
               <p className="text-muted-foreground mb-8">{t("agency.work-with-us-sub")}</p>
-              <Link to="/proposal" className="cta-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
+              <Link to="/proposal" className="site-button cta-button inline-flex items-center px-8 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
                 {t("cta.contact-us")}
               </Link>
             </div>

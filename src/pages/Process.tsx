@@ -20,17 +20,16 @@ const Process = () => {
   const { t } = useLang();
 
   return (
-    <div>
+    <div className="site-page site-page-process">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-dark section-border relative overflow-hidden">
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("process.label")}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("process.hero.title")}
             </h1>
-            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed">
               {t("process.hero.sub")}
             </p>
           </RevealSection>
@@ -40,18 +39,18 @@ const Process = () => {
       {/* Steps (White) */}
       <section>
         <div className="section-container section-padding">
-          <div className="space-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
                 <RevealSection key={i} delay={i * 100}>
-                  <div className={`grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 py-12 ${i < steps.length - 1 ? "border-b border-border" : ""}`}>
-                    <div className="flex md:flex-col items-center md:items-start gap-4">
-                      <span className="text-5xl font-extrabold text-primary/20">{step.num}</span>
+                  <div className="site-page-card p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="home-step-number">{step.num}</span>
                       <Icon size={28} strokeWidth={1.5} className="text-primary" />
                     </div>
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-bold mb-3">{t(step.titleKey)}</h2>
+                      <h2 className="text-xl font-bold mb-3">{t(step.titleKey)}</h2>
                       <p className="text-muted-foreground leading-relaxed max-w-2xl">{t(step.descKey)}</p>
                     </div>
                   </div>
@@ -63,14 +62,14 @@ const Process = () => {
       </section>
 
       {/* CTA (Dark) */}
-      <section className="section-dark">
+      <section className="site-page-cta section-dark">
         <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("process.cta.title")}</h2>
-            <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("process.cta.sub")}</p>
+            <p className="mb-10 max-w-xl mx-auto">{t("process.cta.sub")}</p>
             <Link
               to="/proposal"
-              className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 site-button text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}
               <ArrowRight size={18} />

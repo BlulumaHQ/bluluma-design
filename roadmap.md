@@ -1,3 +1,8 @@
+# Restyle pass 2
+
+- [x] Restyled all remaining pages with scoped shared tokens, dark heroes, cards, forms, browser frames and final CTAs; preserved excluded files and all content/logic.
+- [x] Verified 124 route/language/viewport combinations at 1280px/375px without overflow or runtime exceptions, all 13 portfolio category counts/filters, project pages, 20-item pagination, 720px article column, and form validation with intercepted POSTs (no emails sent). All 41 tests passed; protected page/component/logo checksums unchanged; homepage retains 12 projects and visible industry collages load in both languages. Existing untranslated English copy was preserved as requested.
+
 # Restyle pass 1
 
 - [x] Promote shared palette and restyle main Header/Footer without changing other page layouts or industry content.

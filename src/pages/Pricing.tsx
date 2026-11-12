@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import { ArrowRight, Check, X } from "lucide-react";
@@ -13,17 +12,16 @@ const Pricing = () => {
   const { t } = useLang();
 
   return (
-    <div>
+    <div className="site-page site-page-pricing">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-dark section-border relative overflow-hidden">
         <div className="section-container py-24 md:py-36 relative z-10">
           <RevealSection>
             <p className="text-label mb-4">{t("pricing.label")}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               {t("pricing.hero.title")}
             </h1>
-            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed">
               {t("pricing.hero.sub")}
             </p>
           </RevealSection>
@@ -32,16 +30,15 @@ const Pricing = () => {
 
       {/* Pricing Block (White) */}
       <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={5} />
         <div className="section-container section-padding text-center">
           <RevealSection>
             <div className="inline-flex flex-col items-center border border-border p-12 md:p-16 bg-background rounded-xl max-w-lg w-full">
               <p className="text-label mb-4">{t("home.pricing.label")}</p>
-              <p className="text-5xl md:text-6xl font-extrabold gradient-text">{t("home.pricing.range")}</p>
+              <p className="text-5xl md:text-6xl font-extrabold site-page-price">{t("home.pricing.range")}</p>
               <p className="text-muted-foreground mt-4 text-sm max-w-sm">{t("home.pricing.note")}</p>
               <Link
                 to="/proposal"
-                className="mt-8 inline-flex items-center gap-2 px-8 py-4 cta-solid text-sm font-semibold rounded-lg"
+                className="mt-8 inline-flex items-center gap-2 px-8 py-4 site-button text-sm font-semibold rounded-lg"
               >
                 {t("cta.get-strategy")}
                 <ArrowRight size={16} />
@@ -82,14 +79,14 @@ const Pricing = () => {
       </section>
 
       {/* CTA (Dark) */}
-      <section className="section-dark">
+      <section className="site-page-cta section-dark">
         <div className="section-container py-20 md:py-32 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home.finalcta.title")}</h2>
-            <p className="mb-10 max-w-xl mx-auto" style={{ color: "hsl(220 10% 55%)" }}>{t("home.finalcta.sub")}</p>
+            <p className="mb-10 max-w-xl mx-auto">{t("home.finalcta.sub")}</p>
             <Link
               to="/proposal"
-              className="inline-flex items-center gap-2 px-8 py-4 cta-gradient text-base font-semibold rounded-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 site-button text-base font-semibold rounded-lg"
             >
               {t("cta.get-strategy")}
               <ArrowRight size={18} />

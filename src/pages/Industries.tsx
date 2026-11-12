@@ -1,5 +1,5 @@
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link, useParams } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { Heart, Briefcase, Building2, Sparkles, Palette, Wrench, ShoppingCart, GraduationCap } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { useLang } from "@/lib/i18n";
@@ -168,9 +168,8 @@ export const IndustriesList = () => {
   const { t } = useLang();
 
   return (
-    <div>
-      <section className="isolate section-border relative overflow-hidden bg-background">
-        <HexPattern variation={9} />
+    <div className="site-page site-page-industries">
+      <section className="site-page-hero isolate section-border relative overflow-hidden bg-background">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl md:text-5xl font-bold">{t("industries.title")}</h1>
           <p className="mt-4 text-muted-foreground max-w-xl">
@@ -180,14 +179,14 @@ export const IndustriesList = () => {
       </section>
       <section>
         <div className="section-container section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {industries.map((ind) => {
               const Icon = ind.icon;
               return (
                 <Link
                   key={ind.slug}
                   to={`/industries/${ind.slug}`}
-                  className="group bg-background p-8 hover:bg-secondary transition-colors flex gap-4 items-start"
+                  className="site-page-card group bg-background p-8 hover:bg-secondary transition-colors flex gap-4 items-start"
                 >
                   <Icon size={24} strokeWidth={1.5} className="text-primary flex-shrink-0 mt-1" />
                   <div>
@@ -201,6 +200,7 @@ export const IndustriesList = () => {
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };
@@ -222,8 +222,8 @@ export const IndustryDetail = () => {
   const Icon = industry.icon;
 
   return (
-    <div>
-      <section className="section-border">
+    <div className="site-page site-page-industries">
+      <section className="site-page-hero section-border">
         <div className="section-container py-16 md:py-24">
           <Link to="/industries" className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block">{t("industries.back")}</Link>
           <div className="flex items-center gap-4 mb-2">
@@ -264,13 +264,14 @@ export const IndustryDetail = () => {
             )}
 
             <div className="pt-8 border-t border-border">
-              <Link to="/proposal" className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors">
+              <Link to="/proposal" className="site-button inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-dark transition-colors">
                 {t("cta.start-project")}
               </Link>
             </div>
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };

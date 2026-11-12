@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState, useEffect, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -76,17 +77,16 @@ const Start = () => {
   };
 
   return (
-    <div>
+    <div className="site-page site-page-start">
       {/* Hero (Dark) */}
-      <section className="section-dark section-border relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-hero section-dark section-border relative overflow-hidden">
         <div className="section-container py-24 md:py-36 relative z-10">
           <Reveal>
             <p className="text-label mb-4">Start Your Project</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
               Tell Us About Your Project
             </h1>
-            <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl leading-relaxed">
               Share a few details about your business and what you need. We'll review your request and prepare a tailored proposal for you.
             </p>
           </Reveal>
@@ -181,7 +181,7 @@ const Start = () => {
                     {NEEDS.map((n) => {
                       const active = needs.includes(n);
                       return (
-                        <button
+                        <Button variant="ghost"
                           type="button"
                           key={n}
                           onClick={() => toggleNeed(n)}
@@ -200,7 +200,7 @@ const Start = () => {
                           >
                             {active && <Check size={12} strokeWidth={3} />}
                           </span>
-                        </button>
+                        </Button>
                       );
                     })}
                   </div>
@@ -222,13 +222,13 @@ const Start = () => {
                 {error && <p className="text-sm text-destructive">{error}</p>}
 
                 <div className="pt-2">
-                  <button
+                  <Button variant="ghost"
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg disabled:opacity-50"
+                    className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg disabled:opacity-50"
                   >
                     {submitting ? "Sending..." : "Request a Proposal"}
-                  </button>
+                  </Button>
                   <p className="mt-4 text-xs text-muted-foreground">
                     Typical response within 1 business day.
                   </p>
@@ -254,7 +254,7 @@ const Start = () => {
             ].map((s, i) => (
               <Reveal key={s.n} delay={i * 100}>
                 <div className="bg-background border border-border rounded-2xl p-8 h-full">
-                  <span className="text-sm font-semibold text-primary tracking-wider">{s.n}</span>
+                  <span className="home-step-number">{s.n}</span>
                   <h3 className="mt-4 text-xl font-bold">{s.title}</h3>
                   <p className="mt-3 text-base text-muted-foreground leading-relaxed">{s.desc}</p>
                 </div>
@@ -317,24 +317,23 @@ const Start = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="section-dark relative overflow-hidden">
-        <div className="logo-motif absolute inset-0 pointer-events-none" />
+      <section className="site-page-cta section-dark relative overflow-hidden">
         <div className="section-container py-20 md:py-28 relative z-10 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
               Ready to Get Started?
             </h2>
-            <p className="mt-6 text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "hsl(220 10% 60%)" }}>
+            <p className="mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
               Tell us about your project and we'll prepare a proposal tailored to your business.
             </p>
             <div className="mt-10">
-              <button
+              <Button variant="ghost"
                 type="button"
                 onClick={scrollToForm}
-                className="inline-flex items-center px-8 py-4 cta-solid text-sm font-semibold rounded-lg"
+                className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg"
               >
                 Request a Proposal
-              </button>
+              </Button>
             </div>
           </Reveal>
         </div>

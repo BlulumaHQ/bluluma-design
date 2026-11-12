@@ -1,5 +1,5 @@
+import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { Link, useParams } from "react-router-dom";
-import HexPattern from "@/components/HexPattern";
 import { useLang } from "@/lib/i18n";
 import { caseStudyProjects, getProjectImage } from "@/lib/portfolio-system";
 
@@ -8,9 +8,8 @@ const CaseStudyList = () => {
   const tt = (en: string, zh: string) => (lang === "zh" ? zh : en);
 
   return (
-    <div>
-      <section className="isolate section-border relative overflow-hidden">
-        <HexPattern variation={10} />
+    <div className="site-page site-page-casestudies">
+      <section className="site-page-hero isolate section-border relative overflow-hidden">
         <div className="section-container py-16 md:py-24">
           <h1 className="text-4xl font-bold md:text-5xl">{t("nav.case-studies")}</h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -26,7 +25,7 @@ const CaseStudyList = () => {
         <div className="section-container section-padding">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
             {caseStudyProjects.map((project) => (
-              <article key={project.slug} className="portfolio-card rounded-xl border border-border bg-card shadow-sm">
+              <article key={project.slug} className="site-page-card portfolio-card rounded-xl border border-border bg-card shadow-sm">
                 <div className="px-5 pt-5">
                   <div className="flex items-center gap-1.5 rounded-t-xl border border-border border-b-0 bg-muted px-3 py-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
@@ -58,6 +57,7 @@ const CaseStudyList = () => {
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };
@@ -78,8 +78,8 @@ const CaseStudyDetail = () => {
   }
 
   return (
-    <div>
-      <section className="section-border">
+    <div className="site-page site-page-casestudies">
+      <section className="site-page-hero section-border">
         <div className="section-container py-16 md:py-24">
           <Link to="/case-study" className="mb-6 inline-block text-sm text-muted-foreground transition-colors hover:text-foreground">
             {tt("← Case Studies", "← 案例研究")}
@@ -141,7 +141,7 @@ const CaseStudyDetail = () => {
                 )}</p>
               </div>
               <div className="border-t border-border pt-8">
-                <Link to="/proposal" className="inline-flex rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+                <Link to="/proposal" className="site-button inline-flex rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
                   {tt("Request a Proposal", "申請提案")}
                 </Link>
               </div>
@@ -149,6 +149,7 @@ const CaseStudyDetail = () => {
           </div>
         </div>
       </section>
+      <SiteFinalCTA />
     </div>
   );
 };
