@@ -14,35 +14,35 @@ export const seoRoutes: RouteMeta[] = [
     path: "/",
     priority: 1.0,
     en: {
-      title: "Bluluma Design — AI-Powered Websites & Branding",
-      description: "Modern website design, branding, and AI-powered digital solutions for growing businesses. Vancouver-based digital design studio.",
+      title: "Vancouver Website Design for Clinics & Real Estate | Bluluma",
+      description: "Bilingual English/Chinese websites for dental clinics, medical practices, realtors and pre-sale developers in Vancouver. Custom design built to convert.",
     },
     zh: {
-      title: "Bluluma Design｜溫哥華網站設計、品牌與 AI 數位方案",
-      description: "溫哥華的數位設計工作室，為成長中的企業提供現代網站設計、品牌識別與 AI 數位解決方案。",
+      title: "溫哥華醫療診所、房仲與建案網站設計｜中英雙語｜Bluluma",
+      description: "Bluluma 為溫哥華牙醫診所、醫療院所、房仲與預售建案打造高質感中英雙語網站，客製設計、專注帶來詢問與預約。",
     },
   },
   {
     path: "/healthcare",
     priority: 0.9,
     en: {
-      title: "Healthcare Website Design | Bluluma",
-      description: "Healthcare website design for dental clinics, medical practices and patient-focused healthcare businesses.",
+      title: "Dental & Medical Clinic Website Design Vancouver | Bluluma",
+      description: "Bilingual website design for dental clinics, orthodontists and medical practices in Vancouver, with online booking, patient forms and local SEO.",
     },
     zh: {
-      title: "醫療診所網站設計｜Bluluma",
-      description: "為牙醫診所、醫療院所與以病患為中心的健康照護業者打造的網站設計。",
+      title: "溫哥華牙醫與醫療診所網站設計｜Bluluma",
+      description: "為溫哥華牙醫診所、矯正診所與醫療院所打造中英雙語網站，包含線上預約、病患表單與在地 SEO。",
     },
   },
   {
     path: "/real-estate",
     priority: 0.9,
     en: {
-      title: "Realtor Website Design with CREA Auto-Listings | Bluluma",
+      title: "Vancouver Realtor Website Design with CREA Listings | Bluluma",
       description: "Personal-brand websites for REALTORS® and teams with CREA DDF® auto-listings, bilingual design and lead capture.",
     },
     zh: {
-      title: "房仲網站設計・CREA 物件自動同步｜Bluluma",
+      title: "溫哥華房仲網站設計・CREA 物件自動同步｜Bluluma",
       description: "為 REALTORS® 與房仲團隊打造個人品牌網站，CREA DDF® 物件自動上架、中英雙語設計與潛在客戶擷取。",
     },
   },
@@ -50,11 +50,11 @@ export const seoRoutes: RouteMeta[] = [
     path: "/presale",
     priority: 0.9,
     en: {
-      title: "Pre-sale & Real Estate Development Website Design | Bluluma",
+      title: "Pre-Sale & Development Website Design Vancouver | Bluluma",
       description: "Project websites for developers and pre-sale marketing teams, with VIP registration, floorplans and qualified lead routing.",
     },
     zh: {
-      title: "預售屋與建案網站設計｜Bluluma",
+      title: "溫哥華預售屋與建案網站設計｜Bluluma",
       description: "為建商與預售行銷團隊打造建案網站，包含 VIP 登記、格局圖與合格客戶分流。",
     },
   },
@@ -86,11 +86,11 @@ export const seoRoutes: RouteMeta[] = [
     path: "/services/web-design",
     priority: 0.7,
     en: {
-      title: "Web Design & Development | Bluluma",
+      title: "Custom Website Design & Development Vancouver | Bluluma",
       description: "Custom websites built for performance, clarity, and conversion. From single-page sites to complex multi-page platforms.",
     },
     zh: {
-      title: "網站設計與開發｜Bluluma",
+      title: "溫哥華客製網站設計與開發｜Bluluma",
       description: "為效能、清晰度與轉換率打造的客製網站。從單頁網站到複雜的多頁平台皆能勝任。",
     },
   },
@@ -194,7 +194,7 @@ export const seoRoutes: RouteMeta[] = [
     path: "/pricing",
     priority: 0.6,
     en: {
-      title: "Website Design Pricing | Bluluma",
+      title: "Custom Website Design Pricing Vancouver | Bluluma",
       description: "Website design and branding investment ranges for small businesses, clinics, realtors and pre-sale developers.",
     },
     zh: {
