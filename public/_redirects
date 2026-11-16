@@ -10,6 +10,43 @@
 /case-study/*     /case-studies/:splat     301
 /zh/case-study/*  /zh/case-studies/:splat  301
 
+# Old WordPress URLs (Search Console soft 404s) → new pages (permanent)
+/brand-graphic-design           /services/branding-design       301
+/web-design-development         /services/web-design            301
+/e-commerce-solution            /services/ecommerce-websites    301
+/category/*                     /insights                       301
+/tag/*                          /insights                       301
+/2015/*                         /insights                       301
+/2016/*                         /insights                       301
+/2017/*                         /insights                       301
+/2018/*                         /insights                       301
+/2019/*                         /insights                       301
+/2020/*                         /insights                       301
+/2021/*                         /insights                       301
+/2022/*                         /insights                       301
+/2023/*                         /insights                       301
+/2024/*                         /insights                       301
+/2025/*                         /insights                       301
+/zh-hant/brand-graphic-design   /zh/services/branding-design    301
+/zh-hant/web-design-development /zh/services/web-design         301
+/zh-hant/e-commerce-solution    /zh/services/ecommerce-websites 301
+/zh-hant/insights               /zh/insights                    301
+/zh-hant/category/*             /zh/insights                    301
+/zh-hant/tag/*                  /zh/insights                    301
+/zh-hant/2015/*                 /zh/insights                    301
+/zh-hant/2016/*                 /zh/insights                    301
+/zh-hant/2017/*                 /zh/insights                    301
+/zh-hant/2018/*                 /zh/insights                    301
+/zh-hant/2019/*                 /zh/insights                    301
+/zh-hant/2020/*                 /zh/insights                    301
+/zh-hant/2021/*                 /zh/insights                    301
+/zh-hant/2022/*                 /zh/insights                    301
+/zh-hant/2023/*                 /zh/insights                    301
+/zh-hant/2024/*                 /zh/insights                    301
+/zh-hant/2025/*                 /zh/insights                    301
+/zh-hant                        /zh                             301
+/zh-hant/*                      /zh                             301
+
 # SPA fallbacks (pre-rendered files are served first)
 /zh/*  /zh.html  200
 /*     /index.html     200
