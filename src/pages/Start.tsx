@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Check, X } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import { PACKAGE_MONTHLY, PACKAGE_NAME, PACKAGE_SETUP } from "@/lib/packagePricing";
 
 const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -33,6 +34,7 @@ const Start = () => {
   const { lang } = useLang();
   const zh = lang === "zh";
   const tt = (en: string, z: string) => (zh ? z : en);
+  const tx = (b: { en: string; zh: string }) => (zh ? b.zh : b.en);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -85,51 +87,28 @@ const Start = () => {
     }
   };
 
-  const scrollToForm = () => {
-    const el = document.getElementById("proposal-form");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <div className="site-page site-page-start">
       {/* Hero (Dark) */}
       <section className="site-page-hero section-dark section-border relative overflow-hidden">
-        <div className="section-container py-24 md:py-36 relative z-10">
+        <div className="section-container py-16 md:py-24 relative z-10">
           <Reveal>
             <p className="text-label mb-4">{tt("Start Your Project", "開始你的專案")}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
-              {tt("Tell Us About Your Project", "告訴我們你的專案")}
+              {tt("Tell Us About Your Business", "告訴我們你的事業")}
             </h1>
             <p className="mt-6 text-lg max-w-2xl leading-relaxed">
-              {tt("Share a few details about your business and what you need. We'll review your request and prepare a tailored proposal for you.", "簡單分享你的事業和需求，我們會審閱你的資料，並為你準備專屬提案。")}
+              {tt("A few details is all we need. We reply within 1 business day with clear next steps — no obligation.", "填幾個基本資料就好。我們會在 1 個工作天內回覆，告訴你下一步，沒有任何義務。")}
             </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Intro */}
-      <section>
-        <div className="section-container pt-20 md:pt-24 pb-4">
-          <Reveal>
-            <div className="max-w-3xl">
-              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                {tt("We work with businesses that want a stronger online presence — from branding and website design to marketing and automation.", "我們的合作對象，是想建立更強線上形象的企業：從品牌、網站設計到行銷與自動化。")}
-              </p>
-              <p className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground">
-                {tt("This form helps us understand your needs so we can recommend the right approach.", "這份表單能幫助我們了解你的需求，以便建議最合適的做法。")}
-              </p>
-            </div>
           </Reveal>
         </div>
       </section>
 
       {/* Form */}
       <section id="proposal-form" className="scroll-mt-24">
-        <div className="section-container py-16 md:py-20">
-          <Reveal>
-            <div className="max-w-3xl">
-              <p className="text-label mb-3">{tt("Project Intake", "專案資料")}</p>
-              <h2 className="text-2xl md:text-4xl font-extrabold mb-10">{tt("Project Details", "專案細節")}</h2>
+        <div className="section-container py-12 md:py-16 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+          <Reveal className="lg:col-span-2">
+            <div>
 
               <form onSubmit={handleSubmit} className="space-y-8">
                 <input type="hidden" name="source" value="bluluma start project" />
@@ -160,26 +139,17 @@ const Start = () => {
                     <label htmlFor="industry" className="text-sm font-medium block mb-2">{tt("Industry", "產業")}</label>
                     <select id="industry" name="industry" className={inputClass} defaultValue="">
                       <option value="" disabled>{tt("Select industry", "選擇產業")}</option>
-                      <option value="Dental Clinic">{tt("Dental Clinic", "牙醫診所")}</option>
-                      <option value="Real Estate">{tt("Real Estate", "房地產")}</option>
-                      <option value="Retail / E-commerce">{tt("Retail / E-commerce", "零售 / 電商")}</option>
-                      <option value="Professional Services">{tt("Professional Services", "專業服務")}</option>
+                      <option value="Healthcare / Dental">{tt("Healthcare / Dental", "醫療 / 牙醫診所")}</option>
+                      <option value="Realtor">{tt("Realtor", "房仲")}</option>
+                      <option value="Developer / Pre-sale">{tt("Developer / Pre-sale", "建商 / 預售建案")}</option>
+                      <option value="Shopify / E-commerce">{tt("Shopify / E-commerce", "Shopify / 電商")}</option>
+                      <option value="Restaurant">{tt("Restaurant", "餐廳")}</option>
                       <option value="Other">{tt("Other", "其他")}</option>
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="budget" className="text-sm font-medium block mb-2">{tt("Budget Range *", "預算範圍 *")}</label>
-                    <select id="budget" name="budget" required className={inputClass} defaultValue="">
-                      <option value="" disabled>{tt("Select budget range", "選擇預算範圍")}</option>
-                      <option value="Under $1,000">{tt("Under $1,000", "$1,000 以下")}</option>
-                      <option value="$1,000 – $3,000">$1,000 – $3,000</option>
-                      <option value="$3,000 – $8,000">$3,000 – $8,000</option>
-                      <option value="$8,000+">$8,000+</option>
-                    </select>
-                  </div>
-                  <div className="md:col-span-2">
-                    <label htmlFor="timeline" className="text-sm font-medium block mb-2">{tt("Timeline *", "時程 *")}</label>
-                    <select id="timeline" name="timeline" required className={inputClass} defaultValue="">
+                    <label htmlFor="timeline" className="text-sm font-medium block mb-2">{tt("Timeline (optional)", "時程（選填）")}</label>
+                    <select id="timeline" name="timeline" className={inputClass} defaultValue="">
                       <option value="" disabled>{tt("Select timeline", "選擇時程")}</option>
                       <option value="ASAP">{tt("ASAP", "越快越好")}</option>
                       <option value="Within 2–4 weeks">{tt("Within 2–4 weeks", "2–4 週內")}</option>
@@ -241,14 +211,33 @@ const Start = () => {
                     disabled={submitting}
                     className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg disabled:opacity-50"
                   >
-                    {submitting ? tt("Sending...", "傳送中…") : tt("Request a Proposal", "申請提案")}
+                    {submitting ? tt("Sending...", "傳送中…") : tt("Get Started", "送出")}
                   </Button>
                   <p className="mt-4 text-xs text-muted-foreground">
-                    {tt("Typical response within 1 business day.", "通常會在 1 個工作天內回覆。")}
+                    {tt("Reply within 1 business day · No obligation", "1 個工作天內回覆 · 沒有任何義務")}
                   </p>
                 </div>
               </form>
             </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <aside className="lg:sticky lg:top-28 space-y-6">
+              <div className="border border-border rounded-2xl p-7 bg-background">
+                <p className="text-label mb-3">{tx(PACKAGE_NAME.generic)}</p>
+                <p className="text-3xl font-extrabold">{PACKAGE_SETUP}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{tt(`setup + ${PACKAGE_MONTHLY} / month`, `建置費 + 每月 ${PACKAGE_MONTHLY}`)}</p>
+                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                  {tt("Website, conversion strategy, SEO, social posts, hosting and monthly reporting in one plan.", "網站、轉換策略、SEO、社群貼文、主機代管與每月報告，一個方案全包。")}
+                </p>
+                <Link to="/pricing" className="mt-4 inline-block text-sm font-semibold text-primary hover:underline">
+                  {tt("See what's included →", "查看方案內容 →")}
+                </Link>
+              </div>
+              <div className="border border-border rounded-2xl p-7 bg-background">
+                <p className="text-sm font-bold mb-2">{tt("Prefer email?", "想直接寫信？")}</p>
+                <a href="mailto:support@bluluma.com" className="text-sm text-primary font-semibold hover:underline">support@bluluma.com</a>
+              </div>
+            </aside>
           </Reveal>
         </div>
       </section>
@@ -313,7 +302,6 @@ const Start = () => {
                   {[
                     tt("You are only looking for the cheapest option", "你只想找最便宜的選擇"),
                     tt("You need instant same-day delivery", "你需要當天立即交件"),
-                    tt("You are not sure what you want yet", "你還不確定自己想要什麼"),
                     tt("You are not ready to invest in your business", "你還沒準備好投資自己的事業"),
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3">
@@ -335,19 +323,18 @@ const Start = () => {
         <div className="section-container py-20 md:py-28 relative z-10 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
-              {tt("Ready to Get Started?", "準備好開始了嗎？")}
+              {tt("Prefer to talk first?", "想先聊聊？")}
             </h2>
             <p className="mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-              {tt("Tell us about your project and we'll prepare a proposal tailored to your business.", "告訴我們你的專案，我們會為你的事業準備專屬提案。")}
+              {tt("Not sure what you need yet? Send us a short note and we'll help you figure out the right plan.", "還不確定需要什麼？寫幾句話給我們，我們幫你找出最適合的方案。")}
             </p>
             <div className="mt-10">
-              <Button variant="ghost"
-                type="button"
-                onClick={scrollToForm}
-                className="inline-flex items-center px-8 py-4 site-button text-sm font-semibold rounded-lg"
+              <a
+                href="mailto:support@bluluma.com"
+                className="inline-flex items-center px-8 py-4 site-button site-button-light text-sm font-semibold rounded-lg"
               >
-                {tt("Request a Proposal", "申請提案")}
-              </Button>
+                {tt("Email us", "寫信給我們")}
+              </a>
             </div>
           </Reveal>
         </div>
