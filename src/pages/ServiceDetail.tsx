@@ -3,6 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { insights } from "@/lib/insights";
 import { articlesZh, zhLabel } from "@/lib/articlesZh";
 import { useLang } from "@/lib/i18n";
+import BrandingDesignPage from "@/components/BrandingDesignPage";
 
 const RevealSection = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -106,6 +107,8 @@ const ServiceDetail = () => {
   const { t, lang } = useLang();
   const zh = lang === "zh";
   const service = slug ? serviceData[slug] : undefined;
+
+  if (slug === "branding-design") return <BrandingDesignPage />;
 
   if (!service) {
     return (

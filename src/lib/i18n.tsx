@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from "
 import { industryTranslations } from "./industryTranslations";
 import { homeTranslations } from "./homeTranslations";
 import { heroTranslations } from "./heroTranslations";
+import { brandingTranslations } from "./brandingTranslations";
 import { langFromPath, localizePath, type Lang as UrlLang } from "./locale";
 
 export type Lang = UrlLang;
@@ -25,6 +26,7 @@ const translations: Record<string, Record<Lang, string>> = {
   ...industryTranslations,
   ...homeTranslations,
   ...heroTranslations,
+  ...brandingTranslations,
   // Healthcare industry landing page
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },
