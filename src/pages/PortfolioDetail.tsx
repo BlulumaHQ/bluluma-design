@@ -1,5 +1,6 @@
 import SiteBrowserFrame from "@/components/SiteBrowserFrame";
 import { displayTitle } from "@/lib/displayTitle";
+import { isConceptProject } from "@/lib/portfolioConcept";
 import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
@@ -136,6 +137,11 @@ const PortfolioDetail = () => {
               {mobile.caption && <p className="mt-3 text-center text-sm text-muted-foreground">{mobile.caption}</p>}
             </div>
           </section>
+        )}
+        {isConceptProject(it.live_url) && (
+          <p className="section-container py-8 text-center text-xs text-muted-foreground">
+            {tt("Design concept for portfolio purposes only.", "設計概念作品，僅供作品集展示用途。")}
+          </p>
         )}
         <SiteFinalCTA />
       </article>

@@ -554,7 +554,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "testimonial.website-platform": { en: "Website Platform", zh: "網站平台" },
 
   // Testimonial quotes
-  "testimonial.1.quote": { en: "Bluluma transformed our online presence completely. The new website and brand identity have brought us more patient inquiries than we ever expected.", zh: "Bluluma 徹底改變了我們的線上形象。\n新的品牌與網站為我們帶來了比預期更多的患者詢問。" },
+  "testimonial.1.quote": { en: "Sony Lin has managed our professional websites for years, and he\u2019s always been punctual, dependable, and professional. Thank you, Sony, for taking such good care of our websites. I\u2019d recommend him without hesitation to anyone looking for a web designer.", zh: "Sony Lin 多年來一直負責管理我們診所的網站，\n他一向準時、可靠又專業。\n謝謝 Sony 把我們的網站照顧得這麼好，\n只要有人在找網頁設計師，我都會毫不猶豫地推薦他。" },
   "testimonial.2.quote": { en: "Working with Bluluma was seamless from start to finish. They understood our vision and delivered a platform that truly represents our development.", zh: "與 Bluluma 合作的過程非常順暢。\n他們完全理解我們的願景，並打造出真正代表這個開發案的品牌與網站。" },
   "testimonial.3.quote": { en: "The attention to detail and strategic thinking behind every design decision made all the difference. Our new site performs beyond expectations.", zh: "每一個設計決策背後都有清楚的策略思考與細節考量。\n我們的新網站表現遠遠超出預期。" },
   "testimonial.4.quote": { en: "Bluluma delivered a brand system and website that elevated our entire business. The clarity and professionalism speak for themselves.", zh: "Bluluma 為我們打造的品牌系統與網站，\n大幅提升了整體企業形象與市場專業度。" },
