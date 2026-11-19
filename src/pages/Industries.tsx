@@ -11,12 +11,6 @@ import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
 import nueranutra from "@/assets/projects/nuera-nutra.jpg";
 import vitaEnvironmental from "@/assets/projects/vita-environmental.jpg";
 import spaAlita from "@/assets/projects/spa-alita.jpg";
-import northshoreFinance from "@/assets/projects/northshore-finance.jpg";
-import urbanfitGym from "@/assets/projects/urbanfit-gym.jpg";
-import pacificInterior from "@/assets/projects/pacific-interior-studio.jpg";
-import greenleafLandscaping from "@/assets/projects/greenleaf-landscaping.jpg";
-import bluewaveConsulting from "@/assets/projects/bluewave-consulting.jpg";
-import oakridgeDental from "@/assets/projects/oakridge-dental-group.jpg";
 
 const projectImages: Record<string, string> = {
   "friendly-dental": friendlyDental,
@@ -25,12 +19,6 @@ const projectImages: Record<string, string> = {
   "nuera-nutra": nueranutra,
   "vita-environmental": vitaEnvironmental,
   "spa-alita": spaAlita,
-  "northshore-finance": northshoreFinance,
-  "urbanfit-gym": urbanfitGym,
-  "pacific-interior-studio": pacificInterior,
-  "greenleaf-landscaping": greenleafLandscaping,
-  "bluewave-consulting": bluewaveConsulting,
-  "oakridge-dental-group": oakridgeDental,
 };
 
 interface IndustryData {
@@ -51,7 +39,7 @@ const industries: IndustryData[] = [
     overviewKey: "ind.healthcare-dental.overview",
     icon: Heart,
     whatWeBuildKeys: ["ind.healthcare-dental.wb.1", "ind.healthcare-dental.wb.2", "ind.healthcare-dental.wb.3", "ind.healthcare-dental.wb.4", "ind.healthcare-dental.wb.5"],
-    projectSlugs: ["friendly-dental", "oakridge-dental-group"],
+    projectSlugs: ["friendly-dental"],
   },
   {
     slug: "professional-services",
@@ -60,7 +48,7 @@ const industries: IndustryData[] = [
     overviewKey: "ind.professional-services.overview",
     icon: Briefcase,
     whatWeBuildKeys: ["ind.professional-services.wb.1", "ind.professional-services.wb.2", "ind.professional-services.wb.3", "ind.professional-services.wb.4", "ind.professional-services.wb.5"],
-    projectSlugs: ["northshore-finance", "bluewave-consulting"],
+    projectSlugs: [],
   },
   {
     slug: "real-estate-construction",
@@ -78,7 +66,7 @@ const industries: IndustryData[] = [
     overviewKey: "ind.lifestyle-businesses.overview",
     icon: Sparkles,
     whatWeBuildKeys: ["ind.lifestyle-businesses.wb.1", "ind.lifestyle-businesses.wb.2", "ind.lifestyle-businesses.wb.3", "ind.lifestyle-businesses.wb.4", "ind.lifestyle-businesses.wb.5"],
-    projectSlugs: ["spa-alita", "urbanfit-gym"],
+    projectSlugs: ["spa-alita"],
   },
   {
     slug: "creative-luxury-brands",
@@ -87,7 +75,7 @@ const industries: IndustryData[] = [
     overviewKey: "ind.creative-luxury-brands.overview",
     icon: Palette,
     whatWeBuildKeys: ["ind.creative-luxury-brands.wb.1", "ind.creative-luxury-brands.wb.2", "ind.creative-luxury-brands.wb.3", "ind.creative-luxury-brands.wb.4", "ind.creative-luxury-brands.wb.5"],
-    projectSlugs: ["pacific-interior-studio"],
+    projectSlugs: [],
   },
   {
     slug: "home-services",
@@ -96,7 +84,7 @@ const industries: IndustryData[] = [
     overviewKey: "ind.home-services.overview",
     icon: Wrench,
     whatWeBuildKeys: ["ind.home-services.wb.1", "ind.home-services.wb.2", "ind.home-services.wb.3", "ind.home-services.wb.4", "ind.home-services.wb.5"],
-    projectSlugs: ["greenleaf-landscaping"],
+    projectSlugs: [],
   },
   {
     slug: "retail-ecommerce",
