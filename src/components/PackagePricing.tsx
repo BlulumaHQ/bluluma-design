@@ -54,11 +54,15 @@ export default function PackagePricing({ variant = "generic", showHeading = true
           <Reveal className="lg:col-span-2">
             <div className="h-full p-8 md:p-10 border border-primary rounded-xl bg-primary/5">
               <div className="text-xs uppercase tracking-widest text-primary font-semibold">{tx(PACKAGE_NAME[variant])}</div>
-              <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-4xl md:text-5xl font-extrabold">{PACKAGE_SETUP}</span>
-                <span className="text-sm text-muted-foreground">{tt("setup", "建置費")}</span>
-                <span className="text-2xl md:text-3xl font-bold">+ {PACKAGE_MONTHLY}</span>
-                <span className="text-sm text-muted-foreground">{tt("/ month", "／月")}</span>
+              <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-1 text-foreground">
+                <span className="inline-flex items-baseline gap-2 whitespace-nowrap">
+                  <span className="text-4xl md:text-5xl font-extrabold">{PACKAGE_SETUP}</span>
+                  <span className="text-sm text-muted-foreground">{tt("setup", "建置費")}</span>
+                </span>
+                <span className="inline-flex items-baseline gap-2 whitespace-nowrap">
+                  <span className="text-2xl md:text-3xl font-bold">+ {PACKAGE_MONTHLY}</span>
+                  <span className="text-sm text-muted-foreground">{tt("/ month", "／月")}</span>
+                </span>
               </div>
               <p className="mt-2 text-xs text-muted-foreground">{tx(PACKAGE_TERM[variant])}</p>
 
@@ -82,7 +86,7 @@ export default function PackagePricing({ variant = "generic", showHeading = true
           <Reveal delay={100}>
             <div className="h-full p-8 md:p-10 border border-border rounded-xl bg-background flex flex-col">
               <div className="text-xs uppercase tracking-widest text-primary font-semibold">{tt("Add-ons & other projects", "加購與其他專案")}</div>
-              <div className="mt-4 text-3xl font-extrabold">{tt("Custom quote", "另行報價")}</div>
+              <div className="mt-4 text-3xl font-extrabold text-foreground">{tt("Custom quote", "另行報價")}</div>
               <p className="mt-2 mb-6 text-sm text-muted-foreground leading-relaxed">
                 {tt("Priced to your scope after a short conversation.", "簡單了解需求後，依範圍報價。")}
               </p>

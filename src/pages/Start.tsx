@@ -224,7 +224,7 @@ const Start = () => {
             <aside className="lg:sticky lg:top-28 space-y-6">
               <div className="border border-border rounded-2xl p-7 bg-background">
                 <p className="text-label mb-3">{tx(PACKAGE_NAME.generic)}</p>
-                <p className="text-3xl font-extrabold">{PACKAGE_SETUP}</p>
+                <p className="text-3xl font-extrabold text-foreground">{PACKAGE_SETUP}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{tt(`setup + ${PACKAGE_MONTHLY} / month`, `建置費 + 每月 ${PACKAGE_MONTHLY}`)}</p>
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
                   {tt("Website, conversion strategy, SEO, social posts, hosting and monthly reporting in one plan.", "網站、轉換策略、SEO、社群貼文、主機代管與每月報告，一個方案全包。")}
