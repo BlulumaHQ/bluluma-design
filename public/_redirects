@@ -9,6 +9,8 @@
 /zh/case-study  /zh/case-studies 301
 /case-study/*     /case-studies/:splat     301
 /zh/case-study/*  /zh/case-studies/:splat  301
+/contact        /proposal        301
+/zh/contact     /zh/proposal     301
 
 # Old WordPress URLs (Search Console soft 404s) → new pages (permanent)
 /brand-graphic-design           /services/branding-design       301

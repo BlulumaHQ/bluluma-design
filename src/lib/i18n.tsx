@@ -508,7 +508,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "footer.privacy": { en: "Privacy", zh: "隱私權" },
   "footer.terms": { en: "Terms", zh: "使用條款" },
   "footer.services": { en: "Services", zh: "服務" },
-  "footer.link.solutions": { en: "Solutions", zh: "解決方案" },
+  "footer.link.solutions": { en: "Services", zh: "服務" },
   "footer.link.portfolio": { en: "Portfolio", zh: "作品集" },
   "footer.link.process": { en: "Process", zh: "流程" },
   "footer.link.insights": { en: "Insights", zh: "文章" },
@@ -546,8 +546,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "contact.form.error.network": { en: "Network error. Please try again.", zh: "網路連線錯誤，請再試一次。" },
 
   // Prev/Next
-  "prev": { en: "← Previous", zh: "← 上一頁" },
-  "next": { en: "Next →", zh: "下一頁 →" },
+  "prev": { en: "Previous", zh: "上一頁" },
+  "next": { en: "Next", zh: "下一頁" },
 
   // Testimonial project types
   "testimonial.brand-website": { en: "Brand + Website", zh: "品牌 + 網站" },

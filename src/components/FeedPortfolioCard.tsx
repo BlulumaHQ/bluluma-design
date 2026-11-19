@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { displayTitle } from "@/lib/displayTitle";
 import type { FeedItem } from "@/lib/portfolioFeed";
 import PortfolioScreenshotViewport from "./PortfolioScreenshotViewport";
 import { useLang } from "@/lib/i18n";
@@ -10,9 +11,9 @@ const FeedPortfolioCard = ({ item, autoScrollOnHover = false }: { item: FeedItem
   const services = (item.services ?? []).filter(Boolean).map((s) => serviceLabel(s, lang));
   return (
     <Link to={`/portfolio/${item.slug}`} className="feed-portfolio-card flex cursor-pointer flex-col rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
-      <PortfolioScreenshotViewport src={img} alt={`${item.title} homepage`} autoScrollOnHover={autoScrollOnHover} />
+      <PortfolioScreenshotViewport src={img} alt={`${displayTitle(item.title)} homepage`} autoScrollOnHover={autoScrollOnHover} />
       <div className="mt-4 flex min-w-0 items-center justify-between gap-3 text-base font-semibold text-foreground">
-        <span className="truncate">{item.title}</span>
+        <span className="truncate">{displayTitle(item.title)}</span>
         <span className="feed-portfolio-arrow shrink-0" aria-hidden="true">→</span>
       </div>
       {services.length > 0 && (

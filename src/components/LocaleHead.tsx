@@ -29,8 +29,8 @@ const setLink = (selector: string, attrs: Record<string, string>) => {
 
 /** Duplicate URLs that render the same page as a canonical one. */
 const CANONICAL_ALIASES: Record<string, string> = {
-  "/start": "/contact",
-  "/proposal": "/contact",
+  "/start": "/proposal",
+  "/contact": "/proposal",
   "/work": "/portfolio",
   "/case-study": "/case-studies",
 };

@@ -899,6 +899,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
   .home-slide-description { font-size: 17px; } .home-hero-actions { flex-direction: column; } .home-hero-actions a { width: 100%; }
   .home-slider-controls { flex-wrap: wrap; gap: 0; padding: 0; } .home-slider-tabs { display: flex; overflow-x: auto; flex: 0 0 100%; scrollbar-width: none; } .home-slider-tabs::-webkit-scrollbar { display:none; }
   .home-slider-tab { flex-shrink: 0; height: 72px; font-size: 15px; padding: 18px 24px; white-space: nowrap; }
+  .home-slider-tab { padding: 18px 16px; } .home-slider-tab:not(.is-active) > span:last-child { display: none; }
   .home-slider-arrows { justify-content: end; width: 100%; padding: 12px 24px; border-top: 1px solid hsl(var(--dark-border)); }
   .home-grid-three, .home-grid-four, .home-portfolio-grid { grid-template-columns: minmax(0,1fr); }
   .home-section-heading { flex-direction: column; align-items: start; }

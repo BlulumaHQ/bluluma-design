@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { displayTitle } from "@/lib/displayTitle";
 import { Check } from "lucide-react";
 import type { ReactNode } from "react";
 import IndustryInsights from "@/components/IndustryInsights";
@@ -65,7 +66,7 @@ const Dentist = () => {
         <section id="work" className="hc-section"><div className="hc-container">
           <div className="hc-section-heading"><Reveal>{heading("hc.work.label", "hc.work.title")}</Reveal><Button variant="link" asChild className="hc-text-link"><Link to="/portfolio/dental-healthcare">{t("hc.work.all")} →</Link></Button></div>
           {error ? <p role="status">{t("hc.work.error")}</p> : <div className="hc-grid hc-grid-work" aria-busy={loading}>
-            {loading ? Array.from({ length: 6 }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${item.title} ${t("hc.homepage")}`} /></div><h3>{item.title}<span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.map((s) => serviceLabel(s, lang)).join(" · ")}</p> : null}</Link>)}
+            {loading ? Array.from({ length: 6 }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${displayTitle(item.title)} ${t("hc.homepage")}`} /></div><h3>{displayTitle(item.title)}<span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.map((s) => serviceLabel(s, lang)).join(" · ")}</p> : null}</Link>)}
           </div>}
           {!loading && !error && items.length === 0 && <p>{t("hc.work.empty")}</p>}
         </div></section>

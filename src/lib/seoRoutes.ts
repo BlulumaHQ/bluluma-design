@@ -195,11 +195,11 @@ export const seoRoutes: RouteMeta[] = [
     priority: 0.6,
     en: {
       title: "Custom Website Design Pricing Vancouver | Bluluma",
-      description: "Website design and branding investment ranges for small businesses, clinics, realtors and pre-sale developers.",
+      description: "One Growth System plan for clinics, Realtors and pre-sale developers: $1,500 setup + $199/month for website, SEO, social posts, hosting and reporting.",
     },
     zh: {
       title: "網站設計價格｜Bluluma",
-      description: "中小企業、診所、房仲與預售建案的網站設計與品牌投資範圍。",
+      description: "診所、房仲與預售建案適用的成長系統方案：建置費 $1,500＋每月 $199，包含網站、SEO、社群貼文、主機代管與報告。",
     },
   },
   {
@@ -227,7 +227,7 @@ export const seoRoutes: RouteMeta[] = [
     },
   },
   {
-    path: "/contact",
+    path: "/proposal",
     priority: 0.7,
     en: {
       title: "Contact Bluluma — Start Your Project",

@@ -11,7 +11,7 @@ const MobileStickyCTA = () => {
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 320);
+    const onScroll = () => setShowTop(window.scrollY > 1600);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -28,13 +28,6 @@ const MobileStickyCTA = () => {
         }`}
         style={{ bottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}
       >
-        <a
-          href="mailto:support@bluluma.com"
-          aria-label="Email Bluluma"
-          className="mobile-cta-fab"
-        >
-          <Mail size={16} strokeWidth={1.6} />
-        </a>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
@@ -43,6 +36,9 @@ const MobileStickyCTA = () => {
           <ArrowUp size={16} strokeWidth={1.6} />
         </button>
       </div>
+
+      {/* Spacer so the fixed bar never covers the end of the footer */}
+      {!hideBar && <div className="md:hidden" aria-hidden="true" style={{ height: "calc(72px + env(safe-area-inset-bottom, 0px))" }} />}
 
       {/* Bottom sticky CTA bar (mobile + tablet) */}
       {!hideBar && (

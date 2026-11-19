@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { displayTitle } from "@/lib/displayTitle";
 import { BrowserChrome } from "./IndustryHeroCollage";
 import PortfolioScreenshotViewport from "./PortfolioScreenshotViewport";
 import { useIndustryProjects, visibleIndustryCount } from "@/lib/industryPortfolio";
@@ -16,6 +17,6 @@ export default function IndustryWork({ category, limit = 6, badgeSlugs = [] }: {
   const { t, lang } = useLang();
   if (error) return <p role="status">{t("ind.workError")}</p>;
   return <><div className="hc-grid hc-grid-work" aria-busy={loading}>
-    {loading ? Array.from({ length: limit }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${item.title} ${t("hc.homepage")}`} /></div><h3><span className="ind-work-title">{item.title}{badgeSlugs.includes(item.slug) && <span className="ind-crea-badge">CREA SYNC</span>}</span><span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.map((s) => serviceLabel(s, lang)).join(" · ")}</p> : null}</Link>)}
+    {loading ? Array.from({ length: limit }, (_, i) => <div key={i} className="hc-work-skeleton hc-skeleton" />) : items.map((item) => <Link key={item.id} to={`/portfolio/${item.slug}`} className="feed-portfolio-card hc-work-card"><div className="hc-work-browser"><BrowserChrome domain={hostname(item.live_url)} /><PortfolioScreenshotViewport src={item.homepage_full_url || item.featured_image_url} alt={`${displayTitle(item.title)} ${t("hc.homepage")}`} /></div><h3><span className="ind-work-title">{displayTitle(item.title)}{badgeSlugs.includes(item.slug) && <span className="ind-crea-badge">CREA SYNC</span>}</span><span className="feed-portfolio-arrow" aria-hidden="true">→</span></h3>{item.services?.length ? <p>{item.services.map((s) => serviceLabel(s, lang)).join(" · ")}</p> : null}</Link>)}
   </div>{!loading && !items.length && <p>{t("ind.workEmpty")}</p>}</>;
 }

@@ -1,4 +1,5 @@
 import SiteBrowserFrame from "@/components/SiteBrowserFrame";
+import { displayTitle } from "@/lib/displayTitle";
 import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
@@ -35,10 +36,10 @@ const PortfolioDetail = () => {
     const services = (item.services ?? []).filter(Boolean).map((sv) => serviceLabel(sv, lang));
     const cat = zh ? item.categories_zh?.[0] ?? item.categories?.[0] : item.categories?.[0];
     // Keep in sync with scripts/prerenderPlugin.ts (portfolioPages).
-    const title = zh ? `${item.title}｜網站設計作品｜Bluluma` : `${item.title} — Website Design | Bluluma Portfolio`;
+    const title = zh ? `${displayTitle(item.title)}｜網站設計作品｜Bluluma` : `${displayTitle(item.title)} — Website Design | Bluluma Portfolio`;
     const description = zh
-      ? `Bluluma 為 ${item.title} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
-      : item.excerpt?.trim() || `${item.title} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
+      ? `Bluluma 為 ${displayTitle(item.title)} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
+      : item.excerpt?.trim() || `${displayTitle(item.title)} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
     document.title = title;
     setMeta("description", description);
     setMeta("og:description", description, "property");
@@ -82,11 +83,11 @@ const PortfolioDetail = () => {
               <ChevronRight size={12} className="opacity-50" />
               <Link to="/portfolio" className="hover:text-foreground">{tt("Portfolio", "作品集")}</Link>
               <ChevronRight size={12} className="opacity-50" />
-              <span className="text-foreground">{it.title}</span>
+              <span className="text-foreground">{displayTitle(it.title)}</span>
             </nav>
             <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr,1.3fr]">
               <div>
-                <h1 className="text-3xl font-bold md:text-5xl">{it.title}</h1>
+                <h1 className="text-3xl font-bold md:text-5xl">{displayTitle(it.title)}</h1>
                 {services.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-1.5">
                     {services.map((s) => (
@@ -101,7 +102,7 @@ const PortfolioDetail = () => {
                 )}
               </div>
               {it.featured_image_url && (
-                <SiteBrowserFrame><img src={it.featured_image_url} alt={`${it.title} website`} loading="lazy" decoding="async" className="w-full h-auto" /></SiteBrowserFrame>
+                <SiteBrowserFrame><img src={it.featured_image_url} alt={`${displayTitle(it.title)} website`} loading="lazy" decoding="async" className="w-full h-auto" /></SiteBrowserFrame>
               )}
             </div>
           </div>
@@ -115,7 +116,7 @@ const PortfolioDetail = () => {
                 {pages.map((g, i) => (
                   <figure key={g.url + i} className="mb-6 break-inside-avoid">
                     <SiteBrowserFrame>
-                      <img src={g.url} alt={g.caption || `${it.title} page ${i + 1}`} loading="lazy" decoding="async" className="block h-auto w-full" />
+                      <img src={g.url} alt={g.caption || `${displayTitle(it.title)} page ${i + 1}`} loading="lazy" decoding="async" className="block h-auto w-full" />
                     </SiteBrowserFrame>
                     {g.caption && <figcaption className="mt-2 text-sm text-muted-foreground">{g.caption}</figcaption>}
                   </figure>
@@ -130,7 +131,7 @@ const PortfolioDetail = () => {
             <div className="section-container section-padding">
               <h2 className="text-center text-2xl font-bold md:text-3xl">{tt("Mobile", "手機版")}</h2>
               <div className="mx-auto mt-8 w-[280px] max-w-full rounded-[2.5rem] border-[10px] border-foreground bg-foreground p-0 shadow-xl">
-                <PortfolioScreenshotViewport key={mobile.url} src={mobile.url} alt={mobile.caption || `${it.title} mobile`} variant="phone" />
+                <PortfolioScreenshotViewport key={mobile.url} src={mobile.url} alt={mobile.caption || `${displayTitle(it.title)} mobile`} variant="phone" />
               </div>
               {mobile.caption && <p className="mt-3 text-center text-sm text-muted-foreground">{mobile.caption}</p>}
             </div>

@@ -1,10 +1,11 @@
+import { displayTitle } from "./displayTitle";
 import { useMemo } from "react";
 import { itemInCategory, usePortfolioFeed, type FeedItem } from "./portfolioFeed";
 
 export const industryItems = (items: FeedItem[], category: string) => items.filter((item) => itemInCategory(item, category));
 export const visibleIndustryCount = (count: number) => count >= 3;
 export const developerAudience = (search: string) => new URLSearchParams(search).get("for") === "developer";
-export const industryClientTitles = (items: FeedItem[]) => [...new Set(items.slice(0, 5).map((item) => item.title.replace(/\s*-\s*[AB]$/i, "").trim()))];
+export const industryClientTitles = (items: FeedItem[]) => [...new Set(items.slice(0, 5).map((item) => displayTitle(item.title)))];
 
 export function selectIndustryProjects(items: FeedItem[], category: string, limit = 6, random = Math.random) {
   const pool = industryItems(items, category);

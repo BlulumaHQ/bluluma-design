@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from './ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 const industries = [{ to: '/healthcare', key: 'hc.healthcare' }, { to: '/real-estate', key: 'ind.realtors' }, { to: '/presale', key: 'ind.developers' }];
-const links = [{ to: '/services', key: 'nav.services' }, { to: '/portfolio', key: 'nav.portfolio' }, { to: '/insights', key: 'nav.insights' }, { to: '/contact', key: 'nav.contact' }];
+const links = [{ to: '/services', key: 'nav.services' }, { to: '/portfolio', key: 'nav.portfolio' }, { to: '/insights', key: 'nav.insights' }, { to: '/proposal', key: 'nav.contact' }];
 export default function Header() {
   const { lang, setLang, t } = useLang();
   const location = useLocation();

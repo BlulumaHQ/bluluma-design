@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { displayTitle } from "@/lib/displayTitle";
 import { getPortfolioUrl, type PortfolioItem } from "@/lib/cms";
 import { serviceLabel } from "@/lib/serviceLabels";
 import { useLang } from "@/lib/i18n";
@@ -24,12 +25,12 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
   const detailUrl = getPortfolioUrl(item);
 
   return (
-    <CardWrapper detailUrl={detailUrl} title={item.title}>
+    <CardWrapper detailUrl={detailUrl} title={displayTitle(item.title)}>
       <div className="portfolio-preview-viewport relative bg-muted" style={{ height: 320 }}>
         {item.featured_image_url ? (
           <img
             src={item.featured_image_url}
-            alt={`${item.title} — portfolio project by Bluluma`}
+            alt={`${displayTitle(item.title)} — portfolio project by Bluluma`}
             loading="lazy"
             className="block w-full h-auto"
           />
@@ -41,7 +42,7 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="text-xl font-semibold md:text-2xl">{item.title}</h3>
+          <h3 className="text-xl font-semibold md:text-2xl">{displayTitle(item.title)}</h3>
           {details?.project_year && (
             <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
               {details.project_year}
