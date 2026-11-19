@@ -53,5 +53,7 @@ export const homeTranslations: Record<string, Record<Lang, string>> = {
   'site.menu.open': { en: 'Open menu', zh: '開啟選單' },
   'site.menu.close': { en: 'Close menu', zh: '關閉選單' },
   'site.navigation': { en: 'Main navigation', zh: '主要導覽' },
+  'footer.link.privacy': { en: 'Privacy Policy', zh: '隱私權政策' },
+  'footer.link.terms': { en: 'Terms of Service', zh: '服務條款' },
   'site.footer.copyright': { en: '© 2026 Bluluma Design · Vancouver, BC', zh: '© 2026 Bluluma Design · 加拿大溫哥華' },
 };

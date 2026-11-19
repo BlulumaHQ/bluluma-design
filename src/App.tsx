@@ -22,6 +22,7 @@ import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Start from "./pages/Start";
 import ThankYou from "./pages/ThankYou";
+import { Terms, Privacy } from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 import Realtor from "./pages/Realtor";
 import Dentist from "./pages/Dentist";
@@ -75,6 +76,8 @@ export const AppContent = () => (
         <Route path="/contact" element={<Navigate to="/proposal" replace />} />
         <Route path="/proposal" element={<Start />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Route>
       <Route path="/real-estate" element={<Realtor />} />
       <Route path="/presale" element={<Presale />} />

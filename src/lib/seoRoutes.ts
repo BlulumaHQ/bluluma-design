@@ -211,6 +211,32 @@ export const seoRoutes: RouteMeta[] = [
     },
   },
   {
+    path: "/privacy",
+    priority: 0.3,
+    updated: "2026-11-19",
+    en: {
+      title: "Privacy Policy | Bluluma",
+      description: "How Bluluma Design collects, uses and protects personal information from our website, proposals and client projects.",
+    },
+    zh: {
+      title: "隱私權政策｜Bluluma",
+      description: "Bluluma Design 如何收集、使用與保護網站、提案與客戶專案中的個人資料。",
+    },
+  },
+  {
+    path: "/terms",
+    priority: 0.3,
+    updated: "2026-11-19",
+    en: {
+      title: "Terms of Service | Bluluma",
+      description: "Terms for Bluluma website design projects, 12-month industry plans, hosting, care and SEO.",
+    },
+    zh: {
+      title: "服務條款｜Bluluma",
+      description: "Bluluma 網站設計專案、12 個月產業方案、主機代管、維護與 SEO 的服務條款。",
+    },
+  },
+  {
     path: "/agency",
     priority: 0.6,
     updated: "2026-11-19",
