@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import { ArrowRight, Check, X } from "lucide-react";
+import PackagePricing from "@/components/PackagePricing";
 
 const RevealSection = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -28,25 +29,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Pricing Block (White) */}
-      <section className="isolate section-border relative overflow-hidden">
-        <div className="section-container section-padding text-center">
-          <RevealSection>
-            <div className="inline-flex flex-col items-center border border-border p-12 md:p-16 bg-background rounded-xl max-w-lg w-full">
-              <p className="text-label mb-4">{t("home.pricing.label")}</p>
-              <p className="text-5xl md:text-6xl font-extrabold site-page-price">{t("home.pricing.range")}</p>
-              <p className="text-muted-foreground mt-4 text-sm max-w-sm">{t("home.pricing.note")}</p>
-              <Link
-                to="/proposal"
-                className="mt-8 inline-flex items-center gap-2 px-8 py-4 site-button text-sm font-semibold rounded-lg"
-              >
-                {t("cta.get-strategy")}
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </RevealSection>
-        </div>
-      </section>
+      <PackagePricing showHeading={false} />
 
       {/* Qualification (Subtle bg) */}
       <section className="section-border section-subtle-bg">

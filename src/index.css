@@ -836,6 +836,7 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .home-investment-card { border: 1px solid hsl(var(--site-panel-border)); background: hsl(var(--site-surface)); border-radius: 20px; padding: 40px; }
 .home-investment-card .site-eyebrow { color: hsl(var(--site-caption)); }
 .home-price { font-size: 52px; font-weight: 800; line-height: 1.15 !important; margin: 24px 0; color: hsl(var(--dark-fg)); }
+.home-price-monthly { display: block; margin-top: 6px; font-size: 18px; font-weight: 600; color: hsl(var(--dark-muted)); }
 .home-investment-note { font-size: 17px; color: hsl(var(--dark-muted)); margin-bottom: 28px; }
 .home-testimonials { margin-top: 44px; }
 .home-testimonials-window { overflow: hidden; padding: 4px 0; }

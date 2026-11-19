@@ -6,6 +6,7 @@ import IndustryHeader from "@/components/IndustryHeader";
 import { IndustryStat } from "@/components/IndustryWork";
 import HealthcareHeroCollage, { BrowserChrome } from "@/components/HealthcareHeroCollage";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
+import PackagePricing from "@/components/PackagePricing";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -68,6 +69,7 @@ const Dentist = () => {
           </div>}
           {!loading && !error && items.length === 0 && <p>{t("hc.work.empty")}</p>}
         </div></section>
+        <PackagePricing variant="healthcare" />
         <section id="process" className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading("hc.process.label", "hc.process.title")}</Reveal><div className="hc-grid hc-grid-four">{[1, 2, 3, 4].map((n) => <Reveal key={n} delay={n * 80}><article className="hc-card"><span className="hc-step-number">{n}</span><h3>{t(`hc.process.${n}.title`)}</h3><p>{t(`hc.process.${n}.body`)}</p></article></Reveal>)}</div></div></section>
         <IndustryInsights heading={<Reveal>{heading("hc.insights.label", "hc.insights.title")}</Reveal>} moreHref="/insights/dentist" moreLabel={t("hc.insights.more")} articles={insights} />
         <section id="cta" className="hc-final-section"><div className="hc-container"><div className="hc-final hc-dark"><h2 className="hc-h2">{t("hc.final.title")}</h2><p>{t("hc.final.body")}</p>{proposal("hc-button hc-button-light")}</div></div></section>

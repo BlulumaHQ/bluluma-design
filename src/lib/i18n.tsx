@@ -252,9 +252,11 @@ const translations: Record<string, Record<Lang, string>> = {
   // Home pricing
   "home.pricing.title": { en: "Investment", zh: "投資方案" },
   "home.pricing.sub": { en: "Transparent pricing for businesses ready to invest in growth.", zh: "為準備投資成長的企業提供透明定價。" },
-  "home.pricing.label": { en: "Projects Start From", zh: "專案起價" },
-  "home.pricing.range": { en: "$1,499 – $3,500+", zh: "$1,499 – $3,500+" },
-  "home.pricing.note": { en: "Most clients invest between $1,500 and $3,500+, depending on scope. Every proposal includes a fixed quote — no surprises.", zh: "多數客戶的投資額介於 $1,500 與 $3,500+ 之間，依專案範圍而定。每份提案都包含固定報價，沒有意外費用。" },
+  "home.pricing.label": { en: "Growth System", zh: "成長系統方案" },
+  "home.pricing.range": { en: "$1,500", zh: "$1,500" },
+  "home.pricing.monthly": { en: "setup + $199 / month", zh: "建置費 + 每月 $199" },
+  "home.pricing.note": { en: "One plan for clinics, Realtors and developers: website, conversion strategy, SEO, social posts, hosting and monthly reporting. Automation, ads and other projects are quoted separately.", zh: "診所、房仲與建商適用的單一方案：網站、轉換策略、SEO、社群貼文、主機代管與每月報告。自動化、廣告與其他專案另行報價。" },
+  "home.pricing.details": { en: "See what's included", zh: "查看方案內容" },
 
   // Home proof
   "home.proof.title": { en: "Real Results. Not Just Designs.", zh: "真實成果，不只是設計。" },

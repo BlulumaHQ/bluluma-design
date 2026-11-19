@@ -7,7 +7,7 @@ import IndustryHeroCollage from "./IndustryHeroCollage";
 import IndustryWork, { IndustryStat } from "./IndustryWork";
 import IndustryAudienceSwitch from "./IndustryAudienceSwitch";
 import IndustryFeatureDemo from "./IndustryFeatureDemo";
-import RealtorPricing from "./RealtorPricing";
+import PackagePricing from "./PackagePricing";
 import { IndustryReveal as Reveal } from "./IndustryReveal";
 import Footer from "./Footer";
 import { Button } from "./ui/button";
@@ -40,7 +40,7 @@ export default function PropertyIndustryPage({ developer }: { developer: boolean
       <section id="feature" className="hc-section hc-dark"><div className="hc-container hc-two-columns"><Reveal>{heading(text("featureLabel"), text("featureTitle"))}<p className="hc-section-description">{text("featureBody")}</p><ul className="hc-ai-list">{[1, 2, 3].map((n) => <li key={n}><span className="hc-dot" />{text(`feature.${n}`)}</li>)}</ul></Reveal><IndustryFeatureDemo developer={developer} /></div></section>
       <section id="build" className="hc-section"><div className="hc-container hc-build-grid"><Reveal>{heading(t("hc.build.label"), text("buildTitle"))}<p className="hc-section-description">{text("buildBody")}</p></Reveal><div className="hc-build-list">{Array.from({ length: 8 }, (_, i) => <div key={i} className="hc-build-row"><span><Check size={16} /></span>{text(`build.${i + 1}`)}</div>)}</div></div></section>
       <section id="work" className="hc-section hc-soft"><div className="hc-container"><div className="hc-section-heading"><Reveal>{heading(t("hc.work.label"), text("workTitle"))}</Reveal><Button variant="link" asChild className="hc-text-link"><Link to={`/portfolio/${category}`}>{text("workAll")} →</Link></Button></div><IndustryWork category={category} limit={6} badgeSlugs={developer ? undefined : ["erickimrealty"]} /></div></section>
-      {!developer && <RealtorPricing />}
+      <PackagePricing variant={developer ? "presale" : "realtor"} />
       <section className="ind-cross-section"><div className="hc-container"><div className="ind-cross"><div><span className="ind-gold-label">{text("crossLabel")}</span><h2>{text("crossTitle")}</h2></div><Button asChild variant="outline" className="hc-button ind-outline-dark"><Link to={developer ? "/real-estate" : "/presale"}>{text("crossButton")} →</Link></Button></div></div></section>
       <section id="process" className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading(t("hc.process.label"), t("ind.processTitle"))}</Reveal><div className="hc-grid hc-grid-four">{[1, 2, 3, 4].map((n) => <Reveal key={n} delay={n * 80}><article className="hc-card"><span className="hc-step-number">{n}</span><h3>{text(`process.${n}.title`)}</h3><p>{text(`process.${n}.body`)}</p></article></Reveal>)}</div></div></section>
       <IndustryInsights heading={<Reveal>{heading(t("hc.insights.label"), developer ? t("ind.insightsTitleDev") : t("ind.insightsTitle"))}</Reveal>} moreHref={developer ? "/insights" : "/insights/realtor"} moreLabel={developer ? t("ind.insightsMoreDev") : t("ind.insightsMore")} articles={insights} />
