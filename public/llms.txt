@@ -1,0 +1,38 @@
+# Bluluma Design
+
+> Bluluma is a Vancouver website design studio for healthcare clinics, REALTORS® and pre-sale developers. Each industry has its own clearly priced plan that combines a custom-designed website with ongoing hosting, care and growth work. Websites are built mobile-first, in English and Traditional Chinese, led by Creative Director Sony Lin (20+ years, 500+ websites).
+
+Bluluma focuses on three industries because they need high-customization websites that bring in bookings, leads and registrations: dental and medical clinics, REALTORS® (with CREA DDF® listings that update themselves), and pre-sale / development projects. Every plan includes custom design with two directions to choose from — not a template. Projects outside these three industries get a custom quote.
+
+The full site is available in Traditional Chinese (Taiwan wording) under the /zh/ path, e.g. https://bluluma.com/zh/.
+
+## Plans (CAD)
+
+- [Clinic Growth Plan](https://bluluma.com/healthcare): $1,688 setup + $149/month (12-month plan). Custom website with one-tap booking, service pages built for bookings, conversion strategy, SEO foundation and Google Business Profile setup, lead capture with instant auto-reply. Monthly: hosting, SSL, backups and security updates, up to 30 minutes of content updates, 1 SEO article plus a Google Business Profile update, and a monthly report. After 12 months: $99/month for hosting and care, or stay at $149/month to keep SEO going.
+- [Realtor Plan](https://bluluma.com/real-estate): $1,288 setup + $68/month (12-month plan, then month-to-month). Custom personal-brand design, CREA DDF® listings synced daily, sold listings moved to Sold automatically, a pre-sale listing manager for projects not on CREA, lead forms with instant auto-reply. Fully managed — the Realtor never has to log in. SEO available as an add-on.
+- [Pre-sale Launch Plan](https://bluluma.com/presale): from $6,888 + $399/month during the sales period. Project launch website, teaser page and VIP registration, floorplans and pricing released on the developer's schedule, automatic email follow-up for every registrant, leads routed to the sales team in real time. Final quote depends on project scope.
+- [All pricing](https://bluluma.com/pricing). Custom quotes cover other industries, ecommerce, AI receptionist and workflow automation, Chinese or second-language versions, and Google Ads / Meta Ads management.
+
+## Key pages
+
+- [Home](https://bluluma.com/): overview of the three industry plans and featured work.
+- [Portfolio](https://bluluma.com/portfolio): live websites for healthcare, real estate, pre-sale and other businesses.
+- [Industries](https://bluluma.com/industries): what Bluluma builds for each industry.
+- [Process](https://bluluma.com/process): how projects are planned, designed, built and launched.
+- [Case Studies](https://bluluma.com/case-studies): the problem, the process and the result.
+- [About Bluluma](https://bluluma.com/agency): the studio and Creative Director Sony Lin.
+- [Insights](https://bluluma.com/insights): articles on websites, branding and digital strategy.
+
+## Services
+
+- [Web Design & Development](https://bluluma.com/services/web-design)
+- [Ecommerce Websites](https://bluluma.com/services/ecommerce-websites)
+- [Branding & Identity](https://bluluma.com/services/branding-design)
+- [AI & Business Automation](https://bluluma.com/services/ai-automation)
+- [Digital Marketing](https://bluluma.com/services/digital-marketing)
+
+## Contact
+
+- [Start a project](https://bluluma.com/proposal)
+- Email: support@bluluma.com
+- Location: Vancouver, British Columbia, Canada
