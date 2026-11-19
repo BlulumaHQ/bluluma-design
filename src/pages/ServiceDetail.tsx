@@ -4,6 +4,8 @@ import { insights } from "@/lib/insights";
 import { articlesZh, zhLabel } from "@/lib/articlesZh";
 import { useLang } from "@/lib/i18n";
 import BrandingDesignPage from "@/components/BrandingDesignPage";
+import ConversionWebsitesPage from "@/components/ConversionWebsitesPage";
+import AiAutomationPage from "@/components/AiAutomationPage";
 
 const RevealSection = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -109,6 +111,8 @@ const ServiceDetail = () => {
   const service = slug ? serviceData[slug] : undefined;
 
   if (slug === "branding-design") return <BrandingDesignPage />;
+  if (slug === "web-design") return <ConversionWebsitesPage />;
+  if (slug === "ai-automation") return <AiAutomationPage />;
 
   if (!service) {
     return (
