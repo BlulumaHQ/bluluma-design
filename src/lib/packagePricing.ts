@@ -38,7 +38,7 @@ export const PACKAGES: Record<IndustryVariant, IndustryPackage> = {
       { en: "Hosting, updates and a monthly report", zh: "主機代管、內容更新與每月報告" },
     ],
     launch: [
-      { en: "Custom design — two directions to choose from", zh: "客製化設計，提供兩種方向任你選" },
+      { en: "Custom design built around your strategy", zh: "依策略量身打造的客製設計" },
       { en: "Service pages built for bookings", zh: "以預約為核心的服務項目頁面" },
       { en: "Conversion strategy: clear offer, CTA structure, booking forms", zh: "轉換策略：清楚的訴求、CTA 結構與預約表單" },
       { en: "SEO foundation and Google Business Profile setup", zh: "SEO 基礎架構與 Google 商家檔案設定" },
@@ -69,7 +69,7 @@ export const PACKAGES: Record<IndustryVariant, IndustryPackage> = {
       { en: "Fully managed — you never log in", zh: "全程代管，你完全不用登入" },
     ],
     launch: [
-      { en: "Custom personal-brand design — two directions to choose from", zh: "客製個人品牌設計，提供兩種方向任你選" },
+      { en: "Custom personal-brand design", zh: "客製個人品牌設計" },
       { en: "CREA DDF® auto-listings, synced daily", zh: "CREA DDF® 自動房源，每日同步" },
       { en: "Sold listings move to Sold automatically", zh: "成交物件自動移至「已售出」" },
       { en: "Pre-sale listing manager for projects not on CREA", zh: "預售房源管理，放上 CREA 沒有的建案" },
@@ -98,7 +98,7 @@ export const PACKAGES: Record<IndustryVariant, IndustryPackage> = {
       { en: "Leads sent to your sales team instantly", zh: "名單即時送到銷售團隊" },
     ],
     launch: [
-      { en: "Custom project design — two directions to choose from", zh: "客製建案設計，提供兩種方向任你選" },
+      { en: "Custom project design around your renderings", zh: "以建案效果圖打造的客製設計" },
       { en: "Teaser page and VIP registration", zh: "預告頁與 VIP 登記" },
       { en: "Floorplans and pricing released when you're ready", zh: "依你的時程釋出戶型圖與價格" },
       { en: "Automatic email follow-up for every registrant", zh: "每位登記者自動 email 跟進" },

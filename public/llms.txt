@@ -2,7 +2,7 @@
 
 > Bluluma is a Vancouver website design studio for healthcare clinics, REALTORS® and pre-sale developers. Each industry has its own clearly priced plan that combines a custom-designed website with ongoing hosting, care and growth work. Websites are built mobile-first, in English and Traditional Chinese, led by Creative Director Sony Lin (20+ years, 500+ websites).
 
-Bluluma focuses on three industries because they need high-customization websites that bring in bookings, leads and registrations: dental and medical clinics, REALTORS® (with CREA DDF® listings that update themselves), and pre-sale / development projects. Every plan includes custom design with two directions to choose from — not a template. Projects outside these three industries get a custom quote.
+Bluluma focuses on three industries because they need high-customization websites that bring in bookings, leads and registrations: dental and medical clinics, REALTORS® (with CREA DDF® listings that update themselves), and pre-sale / development projects. Every plan includes strategy-first custom design — not a template. Projects outside these three industries get a custom quote.
 
 The full site is available in Traditional Chinese (Taiwan wording) under the /zh/ path, e.g. https://bluluma.com/zh/.
 

@@ -4,6 +4,7 @@ import type { FeedItem } from "@/lib/portfolioFeed";
 import PortfolioScreenshotViewport from "./PortfolioScreenshotViewport";
 import { useLang } from "@/lib/i18n";
 import { serviceLabel } from "@/lib/serviceLabels";
+import VersionBadge from "./VersionBadge";
 
 const FeedPortfolioCard = ({ item, autoScrollOnHover = false }: { item: FeedItem; autoScrollOnHover?: boolean }) => {
   const img = item.homepage_full_url || item.featured_image_url;
@@ -13,7 +14,7 @@ const FeedPortfolioCard = ({ item, autoScrollOnHover = false }: { item: FeedItem
     <Link to={`/portfolio/${item.slug}`} className="feed-portfolio-card flex cursor-pointer flex-col rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
       <PortfolioScreenshotViewport src={img} alt={`${displayTitle(item.title)} homepage`} autoScrollOnHover={autoScrollOnHover} />
       <div className="mt-4 flex min-w-0 items-center justify-between gap-3 text-base font-semibold text-foreground">
-        <span className="truncate">{displayTitle(item.title)}</span>
+        <span className="flex min-w-0 items-center gap-2"><span className="truncate">{displayTitle(item.title)}</span><VersionBadge title={item.title} /></span>
         <span className="feed-portfolio-arrow shrink-0" aria-hidden="true">→</span>
       </div>
       {services.length > 0 && (

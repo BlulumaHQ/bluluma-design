@@ -234,8 +234,8 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "準備好擁有自動更新的網站了嗎？"
   },
   "rt.finalBody": {
-    "en": "Tell us about your business. You'll get a proposal with two design directions to choose from.",
-    "zh": "告訴我們您的業務需求，我們將提供包含兩種設計方向的提案，供您選擇。"
+    "en": "Tell us about your business. You'll get a clear proposal and next steps.",
+    "zh": "告訴我們您的業務需求，我們會提供清楚的提案與下一步。"
   },
   "ps.featureNav": {
     "en": "Pre-sale Launch",
@@ -330,8 +330,8 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "您的建案即將上市嗎？"
   },
   "ps.finalBody": {
-    "en": "Tell us about your timeline. You'll get a proposal with two design directions to choose from.",
-    "zh": "告訴我們您的上市時程，我們將提供包含兩種設計方向的提案，供您選擇。"
+    "en": "Tell us about your timeline. You'll get a clear proposal and next steps.",
+    "zh": "告訴我們您的上市時程，我們會提供清楚的提案與下一步。"
   },
   "rt.problem.1.title": {
     "en": "Listings go stale",
@@ -478,12 +478,12 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "了解您的品牌、主要服務區域與目標，並確認 CREA DDF® 存取權限。"
   },
   "rt.process.2.title": {
-    "en": "Two design directions",
-    "zh": "兩種設計方向"
+    "en": "Custom design",
+    "zh": "客製設計"
   },
   "rt.process.2.body": {
-    "en": "Two homepage concepts side by side. You pick the one that feels like you.",
-    "zh": "提供兩款首頁設計概念，讓您比較並選擇最能呈現個人特色的方向。"
+    "en": "A homepage designed around your personal brand. Once you approve it, we build the full site.",
+    "zh": "以個人品牌為核心設計首頁，您確認後才開始完整建置。"
   },
   "rt.process.3.title": {
     "en": "Build, sync & launch",
@@ -510,12 +510,12 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "了解建案、目標買家、上市時程，以及銷售團隊處理潛在客戶的方式。"
   },
   "ps.process.2.title": {
-    "en": "Two design directions",
-    "zh": "兩種設計方向"
+    "en": "Custom design",
+    "zh": "客製設計"
   },
   "ps.process.2.body": {
-    "en": "Two homepage concepts side by side, built around your renderings and brand.",
-    "zh": "以建案效果圖與品牌為核心，提供兩款首頁設計概念供您比較。"
+    "en": "A homepage built around your renderings and brand. Once you approve it, we build the full site.",
+    "zh": "以建案效果圖與品牌為核心設計首頁，您確認後才開始完整建置。"
   },
   "ps.process.3.title": {
     "en": "Build & launch",

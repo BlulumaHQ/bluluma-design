@@ -1,5 +1,6 @@
 import SiteBrowserFrame from "@/components/SiteBrowserFrame";
-import { displayTitle } from "@/lib/displayTitle";
+import { displayTitle, versionLetter } from "@/lib/displayTitle";
+import VersionBadge from "@/components/VersionBadge";
 import { isConceptProject } from "@/lib/portfolioConcept";
 import SiteFinalCTA from "@/components/SiteFinalCTA";
 import { useEffect } from "react";
@@ -37,7 +38,9 @@ const PortfolioDetail = () => {
     const services = (item.services ?? []).filter(Boolean).map((sv) => serviceLabel(sv, lang));
     const cat = zh ? item.categories_zh?.[0] ?? item.categories?.[0] : item.categories?.[0];
     // Keep in sync with scripts/prerenderPlugin.ts (portfolioPages).
-    const title = zh ? `${displayTitle(item.title)}｜網站設計作品｜Bluluma` : `${displayTitle(item.title)} — Website Design | Bluluma Portfolio`;
+    const ver = versionLetter(item.title);
+    const shown = ver ? (zh ? `${displayTitle(item.title)}（版本 ${ver}）` : `${displayTitle(item.title)} (Version ${ver})`) : displayTitle(item.title);
+    const title = zh ? `${shown}｜網站設計作品｜Bluluma` : `${shown} — Website Design | Bluluma Portfolio`;
     const description = zh
       ? `Bluluma 為 ${displayTitle(item.title)} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
       : item.excerpt?.trim() || `${displayTitle(item.title)} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
@@ -61,6 +64,9 @@ const PortfolioDetail = () => {
 
   function PortfolioDetailView({ slugOverride }: { slugOverride: string }) {
     const it = items.find((i) => i.slug === slugOverride);
+    const sibling = it && versionLetter(it.title)
+      ? items.find((i) => i.id !== it.id && versionLetter(i.title) && displayTitle(i.title) === displayTitle(it.title))
+      : undefined;
     if (loading) return <div className="section-container section-padding"><p className="py-24 text-center text-sm text-muted-foreground">{tt("Loading project…", "正在載入作品…")}</p></div>;
     if (error || !it) {
       return (
@@ -89,6 +95,7 @@ const PortfolioDetail = () => {
             <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr,1.3fr]">
               <div>
                 <h1 className="text-3xl font-bold md:text-5xl">{displayTitle(it.title)}</h1>
+                <VersionBadge title={it.title} className="mt-3" />
                 {services.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-1.5">
                     {services.map((s) => (
@@ -137,6 +144,14 @@ const PortfolioDetail = () => {
               {mobile.caption && <p className="mt-3 text-center text-sm text-muted-foreground">{mobile.caption}</p>}
             </div>
           </section>
+        )}
+        {sibling && (
+          <p className="section-container pt-10 text-center text-sm text-muted-foreground">
+            {tt("We proposed two versions to this client.", "我們為這位客戶提出了兩個版本的提案。")}{" "}
+            <Link to={`/portfolio/${sibling.slug}`} className="font-semibold text-primary hover:underline">
+              {tt(`See Version ${versionLetter(sibling.title)} →`, `查看版本 ${versionLetter(sibling.title)} →`)}
+            </Link>
+          </p>
         )}
         {isConceptProject(it.live_url) && (
           <p className="section-container py-8 text-center text-xs text-muted-foreground">
