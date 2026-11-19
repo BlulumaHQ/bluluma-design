@@ -3,8 +3,8 @@ import { isConceptProject } from "./portfolioConcept";
 
 describe("isConceptProject", () => {
   it.each([
-    [null, true],
-    ["", true],
+    [null, false],
+    ["", false],
     ["https://ttop-vancouver-a.sony-lin.workers.dev", true],
     ["https://mutt-puddles.netlify.app/", true],
     ["https://one-park-home.bluluma.com", true],
