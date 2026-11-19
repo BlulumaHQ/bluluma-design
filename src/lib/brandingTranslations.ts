@@ -1,0 +1,91 @@
+import type { Lang } from './i18n';
+
+// Copy for /services/branding-design (AccuQi Wellness case study page, Nov 2026).
+export const brandingTranslations: Record<string, Record<Lang, string>> = {
+  'br.crumb': { en: 'Services', zh: '服務項目' },
+  'br.h1a': { en: 'A brand that holds up from the logo to the', zh: '從 Logo 到店面，' },
+  'br.h1b': { en: 'storefront.', zh: '一以貫之的品牌。' },
+  'br.sub': {
+    en: 'Logo, colour, type and a brand guide your sign shop, printer and web team can actually follow — designed together, so every piece looks like the same business.',
+    zh: 'Logo、色彩、字體與品牌指南一次整體設計，招牌商、印刷廠和網站團隊都能照著執行，讓每個接觸點看起來都是同一個品牌。',
+  },
+  'br.cta': { en: 'Get a Quote', zh: '索取報價' },
+  'br.seeCase': { en: 'See the AccuQi case study', zh: '看 AccuQi 案例' },
+  'br.heroCap': { en: 'AccuQi Wellness — storefront signage & window graphics', zh: 'AccuQi Wellness — 店面招牌與櫥窗設計' },
+
+  'br.get.eyebrow': { en: 'What you get', zh: '服務內容' },
+  'br.get.h': { en: 'One identity system, ready for every place your customers see you.', zh: '一套完整識別系統，出現在客人看得到的每個地方。' },
+  'br.get.1.h': { en: 'Logo suite', zh: 'Logo 組合' },
+  'br.get.1.b': { en: 'Stacked and horizontal lockups, reversed and one-colour versions, icon and favicon.', zh: '直式與橫式組合、反白與單色版本、圖示與網站 favicon。' },
+  'br.get.2.h': { en: 'Colour & type', zh: '色彩與字體' },
+  'br.get.2.b': { en: 'A palette with exact print and screen values, plus heading and body fonts that pair well.', zh: '印刷與螢幕皆適用的精確色碼，以及搭配得宜的標題與內文字體。' },
+  'br.get.3.h': { en: 'Brand guide', zh: '品牌指南' },
+  'br.get.3.b': { en: 'Story, personality, logo rules and mood board in one PDF you hand to any supplier.', zh: '品牌故事、個性、Logo 使用規範與情境板，整理成一份可直接交給任何廠商的 PDF。' },
+  'br.get.4.h': { en: 'Real-world applications', zh: '實際應用' },
+  'br.get.4.b': { en: 'Signage, window graphics, business cards, merchandise and your website.', zh: '招牌、櫥窗貼、名片、周邊商品，以及網站。' },
+
+  'br.case.eyebrow': { en: 'Featured case study', zh: '精選案例' },
+  'br.case.body': {
+    en: 'AccuQi Wellness is a traditional Chinese wellness clinic offering massage, reflexology, acupuncture and acupressure. The brief: feel calm and caring, professional without feeling clinical — and read clearly from across the street.',
+    zh: 'AccuQi Wellness 是一間提供按摩、足部反射、針灸與穴位按壓的傳統中式養生中心。需求是：沉穩、溫暖、專業但不冰冷，而且從對街就能一眼看清楚。',
+  },
+  'br.case.client': { en: 'Client', zh: '客戶' },
+  'br.case.industry': { en: 'Industry', zh: '產業' },
+  'br.case.industryV': { en: 'Health & wellness', zh: '健康與養生' },
+  'br.case.scope': { en: 'Scope', zh: '範圍' },
+  'br.case.scopeV': { en: 'Logo, brand guide, signage, window graphics, print, merchandise', zh: 'Logo、品牌指南、招牌、櫥窗貼、印刷品、周邊商品' },
+
+  'br.logo.eyebrow': { en: 'The symbol', zh: '品牌符號' },
+  'br.logo.h': { en: 'One symbol of care, two ways to hold it.', zh: '一個關懷的符號，兩種呈現方式。' },
+  'br.logo.b': {
+    en: 'A Q formed with a supporting hand — thoughtful care, balance and comfort in one gesture. Stacked for square signs and cards, horizontal for the fascia and the website header, with reversed and one-colour versions for every surface.',
+    zh: '由一隻托起的手構成字母 Q，把細心照顧、平衡與安心融為一個動作。直式用於方形招牌與名片，橫式用於門楣與網站頁首，另有反白與單色版本對應各種材質。',
+  },
+  'br.colour.eyebrow': { en: 'Colour & type', zh: '色彩與字體' },
+  'br.colour.h': { en: 'Deep blue, calm teal, quiet neutrals.', zh: '深藍、沉靜青綠與安靜的中性色。' },
+  'br.colour.primary': { en: 'Primary', zh: '主色' },
+  'br.colour.secondary': { en: 'Secondary', zh: '輔助色' },
+  'br.colour.text': { en: 'Text', zh: '文字' },
+  'br.colour.bg': { en: 'Background', zh: '背景' },
+  'br.colour.space': { en: 'Space', zh: '留白' },
+  'br.type.head': { en: 'Headings', zh: '標題字體' },
+  'br.type.body': { en: 'Body & interface', zh: '內文與介面字體' },
+
+  'br.street.eyebrow': { en: 'From guide to street', zh: '從指南到街頭' },
+  'br.street.h': { en: 'Designed to the inch, then built.', zh: '精確到每一吋，再交付製作。' },
+  'br.street.b': {
+    en: 'The brand guide became production artwork: a hanging blade sign, a fascia band and a full set of window panels, each service labelled in English, Chinese and Korean. Every panel was drawn to its real measurements so the sign company could print without guessing.',
+    zh: '品牌指南直接延伸為製作稿：吊掛側招、門楣橫帶與整組櫥窗貼，每項服務都以英文、中文、韓文標示。每一片都依實際尺寸繪製，招牌商不必猜測就能直接輸出。',
+  },
+  'br.street.1.h': { en: 'Readable at a distance', zh: '遠距離也清楚' },
+  'br.street.1.b': { en: 'One service per panel, large line illustrations, phone and website at eye level.', zh: '每片一項服務、大型線條插畫，電話與網址放在視線高度。' },
+  'br.street.2.h': { en: 'Trilingual by design', zh: '三語一體設計' },
+  'br.street.2.b': { en: 'English, Chinese and Korean set in one system, not added as an afterthought.', zh: '英、中、韓三種語言在同一系統中規劃，而不是事後補上。' },
+  'br.street.3.h': { en: 'Print-ready files', zh: '可直接輸出的檔案' },
+  'br.street.3.b': { en: 'Panel sizes, bands and colours handed straight to the sign shop.', zh: '尺寸、色帶與色彩規格直接交給招牌商。' },
+
+  'br.app.eyebrow': { en: 'Brand applications', zh: '品牌應用' },
+  'br.app.h': { en: 'Same brand in every hand.', zh: '每一個接觸點，都是同一個品牌。' },
+  'br.app.cards': { en: 'Business cards', zh: '名片' },
+  'br.app.mug': { en: 'Branded merchandise', zh: '品牌周邊' },
+  'br.app.shirt': { en: 'Staff apparel', zh: '員工制服' },
+
+  'br.proc.eyebrow': { en: 'How it works', zh: '合作流程' },
+  'br.proc.h': { en: 'Strategy first, then design, then the real world.', zh: '先策略，再設計，最後落地。' },
+  'br.proc.step': { en: 'Step', zh: '步驟' },
+  'br.proc.1.h': { en: 'Discovery', zh: '需求探索' },
+  'br.proc.1.b': { en: 'Your services, customers and neighbourhood — what the brand needs to say.', zh: '了解您的服務、客群與商圈，釐清品牌要傳達什麼。' },
+  'br.proc.2.h': { en: 'Logo & identity', zh: 'Logo 與識別' },
+  'br.proc.2.b': { en: 'Logo concepts, refined into a complete system of colour and type.', zh: 'Logo 提案，再發展為完整的色彩與字體系統。' },
+  'br.proc.3.h': { en: 'Brand guide', zh: '品牌指南' },
+  'br.proc.3.b': { en: 'Everything documented, so anyone can use the brand correctly.', zh: '所有規範整理成冊，任何人都能正確使用品牌。' },
+  'br.proc.4.h': { en: 'Applications', zh: '實際應用' },
+  'br.proc.4.b': { en: 'Signage, print, merchandise and a website that matches.', zh: '招牌、印刷品、周邊商品，以及風格一致的網站。' },
+
+  'br.final.h': { en: 'Opening a location or refreshing your brand?', zh: '準備開新店，或想更新品牌形象？' },
+  'br.final.b': {
+    en: "Tell us about your business and where the brand needs to show up. We'll send a quote for the full identity — or just the pieces you need.",
+    zh: '告訴我們您的業務，以及品牌需要出現在哪些地方。我們會提供完整識別系統的報價，或只針對您需要的項目。',
+  },
+  'br.final.web': { en: 'Website Design', zh: '網站設計' },
+};

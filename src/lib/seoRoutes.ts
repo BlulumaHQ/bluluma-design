@@ -115,13 +115,14 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/services/branding-design",
     priority: 0.7,
+    updated: "2026-11-19",
     en: {
-      title: "Branding & Identity Design | Bluluma",
-      description: "Logo design, visual identity systems, and brand guidelines that create consistent, recognizable brands.",
+      title: "Branding & Identity Design — Logo, Brand Guide & Signage | Bluluma",
+      description: "Logo design, colour and type systems, brand guidelines and real-world applications — signage, window graphics and print. See the AccuQi Wellness case study.",
     },
     zh: {
-      title: "品牌與識別設計｜Bluluma",
-      description: "Logo 設計、視覺識別系統與品牌指南，打造一致、辨識度高的品牌。",
+      title: "品牌與識別設計｜Logo、品牌指南與招牌｜Bluluma",
+      description: "Logo 設計、色彩與字體系統、品牌指南，延伸到招牌、櫥窗貼與印刷品。看 AccuQi Wellness 品牌案例。",
     },
   },
   {
