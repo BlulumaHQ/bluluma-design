@@ -38,6 +38,56 @@ const ScrollToTop = () => {
   return null;
 };
 
+/** Route tree shared by the browser app and the build-time pre-render (src/entry-server.tsx). */
+export const AppContent = () => (
+  <>
+    <ScrollToTop />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<Work />} />
+        {Object.entries(portfolioCategoryRedirects).map(([oldSlug, canonicalSlug]) => (
+          <Route key={oldSlug} path={`/portfolio/${oldSlug}`} element={<Navigate to={`/portfolio/${canonicalSlug}`} replace />} />
+        ))}
+        <Route path="/portfolio/page/:page" element={<Work />} />
+        <Route path="/portfolio/:category/page/:page" element={<Work />} />
+        <Route path="/portfolio/:category/:slug" element={<PortfolioDetail />} />
+        <Route path="/portfolio/:category" element={<PortfolioDetail />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/case-study" element={<CaseStudyList />} />
+        <Route path="/case-study/:slug" element={<CaseStudyDetail />} />
+        <Route path="/case-studies" element={<CaseStudyList />} />
+        <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+        <Route path="/industries" element={<IndustriesList />} />
+        <Route path="/industries/:slug" element={<IndustryDetail />} />
+        <Route path="/solutions" element={<Solutions />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/agency" element={<Agency />} />
+        <Route path="/insights" element={<Insights />} />
+        <Route path="/insights/industry/:industry" element={<Insights />} />
+        <Route path="/insights/realtor" element={<Insights />} />
+        <Route path="/insights/dentist" element={<Insights />} />
+        <Route path="/insights/:slug" element={<InsightDetail />} />
+        <Route path="/start" element={<Start />} />
+        <Route path="/contact" element={<Navigate to="/proposal" replace />} />
+        <Route path="/proposal" element={<Start />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+      </Route>
+      <Route path="/real-estate" element={<Realtor />} />
+      <Route path="/presale" element={<Presale />} />
+      <Route path="/healthcare" element={<Dentist />} />
+      {/* Permanent redirects from old industry URLs */}
+      <Route path="/realtor" element={<Navigate to="/real-estate" replace />} />
+      <Route path="/dentist" element={<Navigate to="/healthcare" replace />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+    <LocaleHead />
+  </>
+);
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -48,50 +98,7 @@ const App = () => (
         <Sonner />
         <PageLoader />
         <BrowserRouter basename={typeof window !== "undefined" && langFromPath(window.location.pathname) === "zh" ? ZH_PREFIX : undefined}>
-          <ScrollToTop />
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/portfolio" element={<Work />} />
-              {Object.entries(portfolioCategoryRedirects).map(([oldSlug, canonicalSlug]) => (
-                <Route key={oldSlug} path={`/portfolio/${oldSlug}`} element={<Navigate to={`/portfolio/${canonicalSlug}`} replace />} />
-              ))}
-              <Route path="/portfolio/page/:page" element={<Work />} />
-              <Route path="/portfolio/:category/page/:page" element={<Work />} />
-              <Route path="/portfolio/:category/:slug" element={<PortfolioDetail />} />
-              <Route path="/portfolio/:category" element={<PortfolioDetail />} />
-              <Route path="/work" element={<Work />} />
-              <Route path="/case-study" element={<CaseStudyList />} />
-              <Route path="/case-study/:slug" element={<CaseStudyDetail />} />
-              <Route path="/case-studies" element={<CaseStudyList />} />
-              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
-              <Route path="/industries" element={<IndustriesList />} />
-              <Route path="/industries/:slug" element={<IndustryDetail />} />
-              <Route path="/solutions" element={<Solutions />} />
-              <Route path="/process" element={<Process />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/:slug" element={<ServiceDetail />} />
-              <Route path="/agency" element={<Agency />} />
-              <Route path="/insights" element={<Insights />} />
-              <Route path="/insights/industry/:industry" element={<Insights />} />
-              <Route path="/insights/realtor" element={<Insights />} />
-              <Route path="/insights/dentist" element={<Insights />} />
-              <Route path="/insights/:slug" element={<InsightDetail />} />
-              <Route path="/start" element={<Start />} />
-              <Route path="/contact" element={<Navigate to="/proposal" replace />} />
-              <Route path="/proposal" element={<Start />} />
-              <Route path="/thank-you" element={<ThankYou />} />
-            </Route>
-            <Route path="/real-estate" element={<Realtor />} />
-            <Route path="/presale" element={<Presale />} />
-            <Route path="/healthcare" element={<Dentist />} />
-            {/* Permanent redirects from old industry URLs */}
-            <Route path="/realtor" element={<Navigate to="/real-estate" replace />} />
-            <Route path="/dentist" element={<Navigate to="/healthcare" replace />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <LocaleHead />
+          <AppContent />
         </BrowserRouter>
       </TooltipProvider>
     </LangProvider>

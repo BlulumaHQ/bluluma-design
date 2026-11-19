@@ -10,12 +10,6 @@ import sonykunDesign from "@/assets/projects/sonykun-design.jpg";
 import kchenConstruction from "@/assets/projects/kchen-construction.jpg";
 import helenLam from "@/assets/projects/helen-lam-real-estate.jpg";
 import calinClub from "@/assets/projects/calin-club.jpg";
-import bluewaveConsulting from "@/assets/projects/bluewave-consulting.jpg";
-import greenleafLandscaping from "@/assets/projects/greenleaf-landscaping.jpg";
-import northshoreFinance from "@/assets/projects/northshore-finance.jpg";
-import oakridgeDentalGroup from "@/assets/projects/oakridge-dental-group.jpg";
-import pacificInteriorStudio from "@/assets/projects/pacific-interior-studio.jpg";
-import urbanfitGym from "@/assets/projects/urbanfit-gym.jpg";
 import { projects, type Project } from "@/lib/projects";
 
 export const projectImageMap: Record<string, string> = {
@@ -31,12 +25,6 @@ export const projectImageMap: Record<string, string> = {
   "kchen-construction": kchenConstruction,
   "helen-lam-real-estate": helenLam,
   "calin-club": calinClub,
-  "bluewave-consulting": bluewaveConsulting,
-  "greenleaf-landscaping": greenleafLandscaping,
-  "northshore-finance": northshoreFinance,
-  "oakridge-dental-group": oakridgeDentalGroup,
-  "pacific-interior-studio": pacificInteriorStudio,
-  "urbanfit-gym": urbanfitGym,
 };
 
 export const getProjectImage = (project: Project) => projectImageMap[project.slug] ?? project.image;

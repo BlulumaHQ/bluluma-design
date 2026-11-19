@@ -89,7 +89,7 @@ function collectPages(assetImage: (slug: string) => string | undefined): Page[] 
   for (const lang of ["en", "zh"] as Lang[]) {
     for (const r of seoRoutes) {
       const m = r[lang];
-      pages.push({ path: r.path, lang, title: m.title, description: m.description, body: "" });
+      pages.push({ path: r.path, lang, title: m.title, description: m.description, body: "", lastmod: r.updated });
     }
     for (const raw of articles) {
       const a = localizeArticle(raw, lang);
@@ -264,6 +264,43 @@ function portfolioPages(rows: FeedRow[]): Page[] {
   return pages;
 }
 
+
+/* ---------------- Full-page SSR for static routes ---------------- */
+// Renders each seoRoutes page with React (src/entry-server.tsx) so the static HTML
+// carries the page's real text, not just meta. Browser JS still mounts on top.
+async function createSsrRenderer(root: string) {
+  // The dev SSR transform emits jsxDEV calls, which need React's development builds.
+  const prevEnv = process.env.NODE_ENV;
+  process.env.NODE_ENV = "development";
+  const { createServer } = await import("vite");
+  const react = (await import("@vitejs/plugin-react-swc")).default;
+  const server = await createServer({
+    root,
+    configFile: false,
+    logLevel: "error",
+    appType: "custom",
+    server: { middlewareMode: true, hmr: false, watch: null },
+    plugins: [react()],
+    resolve: { alias: { "@": path.resolve(root, "src") } },
+    optimizeDeps: { noDiscovery: true, include: [] },
+  });
+  const mod = (await server.ssrLoadModule("/src/entry-server.tsx")) as { render: (p: string, l: Lang) => string };
+  return {
+    render: mod.render,
+    close: async () => {
+      await server.close();
+      process.env.NODE_ENV = prevEnv;
+    },
+  };
+}
+
+// Dev-server asset URLs (/src/assets/...) don't exist in the build; drop them so the
+// static markup never requests missing files (React re-renders with real URLs).
+const cleanSsrHtml = (html: string) =>
+  html
+    .replace(/\s(src|srcset|srcSet)="\/(src|@fs|node_modules)\/[^"]*"/g, "")
+    .replace(/url\(&quot;\/(src|@fs)\/[^)]*\)/g, "none");
+
 export default function prerenderPlugin(): Plugin {
   let config: ResolvedConfig;
   return {
@@ -290,6 +327,23 @@ export default function prerenderPlugin(): Plugin {
         config.logger.info(`bluluma-prerender: ${rows.length} portfolio projects from CMS`);
       } catch (e) {
         config.logger.warn(`bluluma-prerender: portfolio skipped (${(e as Error).message})`);
+      }
+      try {
+        const ssr = await createSsrRenderer(config.root);
+        let rendered = 0;
+        for (const p of pages) {
+          if (p.body || !seoRoutes.some((r) => r.path === p.path)) continue;
+          try {
+            p.body = cleanSsrHtml(ssr.render(p.path, p.lang));
+            rendered++;
+          } catch (e) {
+            config.logger.warn(`bluluma-prerender: SSR failed for ${localPath(p.path, p.lang)} (${(e as Error).message})`);
+          }
+        }
+        await ssr.close();
+        config.logger.info(`bluluma-prerender: server-rendered ${rendered} static pages`);
+      } catch (e) {
+        config.logger.warn(`bluluma-prerender: SSR unavailable (${(e as Error).message})`);
       }
       for (const p of pages) {
         const rel = localPath(p.path, p.lang);

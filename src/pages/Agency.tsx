@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLang } from "@/lib/i18n";
 import agencyImage from "@/assets/bluluma-logo-3d-sign.jpg";
+import MeetSony from "@/components/MeetSony";
 
 const RevealDiv = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -18,6 +19,8 @@ const Agency = () => {
           <h1 className="text-4xl md:text-5xl font-bold">{t("agency.title")}</h1>
         </div>
       </section>
+
+      <MeetSony full />
 
       <section>
         <div className="section-container section-padding">

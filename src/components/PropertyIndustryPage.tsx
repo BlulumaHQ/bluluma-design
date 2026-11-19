@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import IndustryInsights from "@/components/IndustryInsights";
 import IndustryHeader from "./IndustryHeader";
-import IndustryHeroCollage from "./IndustryHeroCollage";
-import IndustryWork, { IndustryStat } from "./IndustryWork";
+import IndustryLandingHero from "./IndustryLandingHero";
+import IndustryWork from "./IndustryWork";
 import IndustryAudienceSwitch from "./IndustryAudienceSwitch";
 import IndustryFeatureDemo from "./IndustryFeatureDemo";
 import PackagePricing from "./PackagePricing";
@@ -17,6 +17,9 @@ import { type Article, getArticleBySlug, getLatestByIndustry } from "@/lib/artic
 const PRESALE_INSIGHTS = ["high-converting-real-estate-website-2026", "how-to-build-a-website-that-converts", "conversion-ux-without-salesy-design"];
 import { useLang } from "@/lib/i18n";
 import { industryClientTitles, useIndustryProjects } from "@/lib/industryPortfolio";
+
+// Eric Kim's testimonial goes here once he replies; the block stays hidden until then.
+const REALTOR_TESTIMONIAL: { quote: string; name: string; company: string } | undefined = undefined;
 
 export default function PropertyIndustryPage({ developer }: { developer: boolean }) {
   const { lang, t } = useLang();
@@ -31,10 +34,7 @@ export default function PropertyIndustryPage({ developer }: { developer: boolean
   return <div className="industry-theme healthcare-theme ind-property hc-page" id="top">
     <IndustryHeader dotColor="var(--ind-accent)" anchors={[{ id: "feature", label: text("featureNav") }, { id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
     <main className="hc-main">
-      <section className="hc-hero hc-dark ind-property-hero"><IndustryAudienceSwitch developer={developer} /><div className="hc-container hc-two-columns">
-        <Reveal><span className="hc-hero-badge"><span className="hc-dot" />{text("badge")}</span><h1 className="hc-h1">{text("heroTitle")} <span>{text("heroAccent")}</span></h1><p className="hc-hero-description">{text("heroDescription")}</p><div className="hc-actions">{proposal()}<Button variant="outline" asChild className="hc-button hc-button-outline"><a href="#work">{text("see")}</a></Button></div><IndustryStat category={category} label={text("stat")} /></Reveal>
-        <IndustryHeroCollage windowA={developer ? { slug: "one-park-home-a", domain: "one-park-home.bluluma.com" } : { slug: "erickimrealty", domain: "erickimrealty.com" }} windowB={developer ? { slug: "oviedoproperties-a", domain: "oviedoproperties" } : { slug: "vickychairealty", domain: "vickychairealty.com" }} phoneSlug={developer ? "one-park-home-a" : "sterlingwongrealty"} note={{ tag: text("noteTag"), title: text("noteTitle"), sub: text("noteSub") }} />
-      </div></section>
+      <IndustryLandingHero variant={developer ? "presale" : "realtor"} top={<IndustryAudienceSwitch developer={developer} />} title={text("heroTitle")} accent={text("heroAccent")} description={t(developer ? "lp.ps.desc" : "lp.rt.desc")} secondaryLabel={text("see")} testimonial={developer ? undefined : REALTOR_TESTIMONIAL} />
       <section className="hc-client-strip"><div className="hc-container"><span>{text("clients")}</span><div>{clients.map((client, i) => <Fragment key={client}>{i > 0 && <i>·</i>}{client}</Fragment>)}</div></div></section>
       <section className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading(t("ind.problem"), text("problemTitle"))}</Reveal><div className="hc-grid hc-grid-three">{[1, 2, 3].map((n) => <Reveal key={n} delay={n * 70}><article className="hc-card hc-problem-card"><span className="hc-number">0{n}</span><h3>{text(`problem.${n}.title`)}</h3><p>{text(`problem.${n}.body`)}</p></article></Reveal>)}</div></div></section>
       <section id="feature" className="hc-section hc-dark"><div className="hc-container hc-two-columns"><Reveal>{heading(text("featureLabel"), text("featureTitle"))}<p className="hc-section-description">{text("featureBody")}</p><ul className="hc-ai-list">{[1, 2, 3].map((n) => <li key={n}><span className="hc-dot" />{text(`feature.${n}`)}</li>)}</ul></Reveal><IndustryFeatureDemo developer={developer} /></div></section>
