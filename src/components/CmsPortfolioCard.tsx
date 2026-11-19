@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { displayTitle } from "@/lib/displayTitle";
+import VersionBadge from "./VersionBadge";
 import { getPortfolioUrl, type PortfolioItem } from "@/lib/cms";
 import { serviceLabel } from "@/lib/serviceLabels";
 import { useLang } from "@/lib/i18n";
@@ -43,6 +44,7 @@ const CmsPortfolioCard = ({ item, variant = "default" }: Props) => {
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="text-xl font-semibold md:text-2xl">{displayTitle(item.title)}</h3>
+          <VersionBadge title={item.title} />
           {details?.project_year && (
             <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
               {details.project_year}

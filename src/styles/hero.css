@@ -268,3 +268,7 @@
 .lp-plan-price { min-width: 190px; }
 :lang(zh) .hv-title span { white-space: nowrap; }
 @media (max-width: 899px) { .lp-hero .hv-stage-healthcare { margin-bottom: 110px; } }
+
+/* portfolio version label */
+.version-badge { display: inline-flex; align-items: center; flex: none; padding: 2px 8px; border-radius: 999px; background: #E6ECFA; color: #2C4F9E; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.6; white-space: nowrap; vertical-align: middle; }
+.site-dark .version-badge, .hc-dark .version-badge { background: rgba(127, 162, 236, 0.16); color: #A9C0F2; }

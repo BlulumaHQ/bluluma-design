@@ -200,11 +200,15 @@ function portfolioPages(rows: FeedRow[]): Page[] {
       const path = `/portfolio/${r.slug}`;
       const services = (r.services ?? []).map((s) => (zh ? SERVICE_ZH[s] ?? s : s));
       const cat = zh ? r.categories_zh?.[0] ?? r.categories?.[0] : r.categories?.[0];
-      const title = zh ? `${r.title}｜網站設計作品｜Bluluma` : `${r.title} — Website Design | Bluluma Portfolio`;
+      // Same naming as src/lib/displayTitle.ts: "Client - A" → "Client (Version A)".
+      const ver = r.title.match(/\s[-–]\s*([A-Z])$/i)?.[1]?.toUpperCase();
+      const base = r.title.replace(/\s*[-–]\s*[A-Z0-9]$/i, "").trim();
+      const shown = ver ? (zh ? `${base}（版本 ${ver}）` : `${base} (Version ${ver})`) : base;
+      const title = zh ? `${shown}｜網站設計作品｜Bluluma` : `${shown} — Website Design | Bluluma Portfolio`;
       const description = zh
-        ? `Bluluma 為 ${r.title} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
+        ? `Bluluma 為 ${shown} 打造的網站作品${cat ? `（${cat}）` : ""}。服務內容：${services.join("、") || "網站設計"}。`
         : r.excerpt?.trim() ||
-          `${r.title} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
+          `${shown} website designed and built by Bluluma${cat ? ` (${cat})` : ""}. Services: ${services.join(", ") || "Website Design"}.`;
       const image = r.featured_image_url ?? r.homepage_full_url ?? undefined;
       pages.push({
         path,

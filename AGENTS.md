@@ -7,7 +7,7 @@
 - Homepage project curation lives in a pure selector that samples feed copies; preview auto-scrolling is opt-in so other portfolio surfaces retain their behavior.
 - Homepage carousel timing is isolated in useHeroCarousel; homepage/chrome styling uses site-* and home-* selectors so legacy industry styles remain unchanged.
 - Interior-page restyling is scoped under site-page, with SiteFinalCTA and SiteBrowserFrame for presentation only; protected homepage/chrome/industry selectors and portfolio/form logic remain independent.
-- Package pricing (Nov 2026: Healthcare $1,688 + $149/mo, Realtor $1,288 + $68/mo, Pre-sale from $6,888 + $399/mo during sales) lives only in src/lib/packagePricing.ts (PACKAGES) and renders through PackagePricing / PlanPrice / IndustryLandingHero; never hardcode prices elsewhere. Portfolio titles render through displayTitle() to hide internal -A/-B suffixes without touching feed data.
+- Package pricing (Nov 2026: Healthcare $1,688 + $149/mo, Realtor $1,288 + $68/mo, Pre-sale from $6,888 + $399/mo during sales) lives only in src/lib/packagePricing.ts (PACKAGES) and renders through PackagePricing / PlanPrice / IndustryLandingHero; never hardcode prices elsewhere. Portfolio titles render through displayTitle() (suffix stripped) plus VersionBadge ("Version A/B", from versionLetter()); detail pages link to the sibling version. Bluluma does not market "two design directions" — never add that claim to copy.
 
 # SEO rules (required on every change)
 
