@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { industryTranslations } from "./industryTranslations";
 import { homeTranslations } from "./homeTranslations";
+import { heroTranslations } from "./heroTranslations";
 import { langFromPath, localizePath, type Lang as UrlLang } from "./locale";
 
 export type Lang = UrlLang;
@@ -23,6 +24,7 @@ export const useLang = () => useContext(LangContext);
 const translations: Record<string, Record<Lang, string>> = {
   ...industryTranslations,
   ...homeTranslations,
+  ...heroTranslations,
   // Healthcare industry landing page
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },
@@ -200,7 +202,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "home.hero.h1.line1": { en: "We Don't Build Websites.", zh: "我們不只做網站。" },
   "home.hero.h1.line2": { en: "We Build Revenue Systems.", zh: "我們打造營收系統。" },
   "home.hero.sub": { en: "High-converting websites and AI automation systems designed to generate leads, increase sales, and scale your business.", zh: "高轉換率網站與 AI 自動化系統，專為產生潛在客戶、提升銷售和擴展業務而設計。" },
-  "home.hero.trust": { en: "Trusted by businesses across North America · 10+ Years Experience · Built for Conversion", zh: "受北美各地企業信賴 · 10+ 年經驗 · 以轉換為核心" },
+  "home.hero.trust": { en: "Trusted by Vancouver businesses · 20+ Years Experience · 500+ Websites", zh: "受溫哥華企業信賴 · 20+ 年經驗 · 500+ 個網站" },
 
   // Home problem
   "home.problem.title": { en: "Most Websites Don't Fail Because of Design.", zh: "大多數網站失敗不是因為設計。" },
@@ -252,10 +254,8 @@ const translations: Record<string, Record<Lang, string>> = {
   // Home pricing
   "home.pricing.title": { en: "Investment", zh: "投資方案" },
   "home.pricing.sub": { en: "Transparent pricing for businesses ready to invest in growth.", zh: "為準備投資成長的企業提供透明定價。" },
-  "home.pricing.label": { en: "Growth System", zh: "成長系統方案" },
-  "home.pricing.range": { en: "$1,500", zh: "$1,500" },
-  "home.pricing.monthly": { en: "setup + $199 / month", zh: "建置費 + 每月 $199" },
-  "home.pricing.note": { en: "One plan for clinics, Realtors and developers: website, conversion strategy, SEO, social posts, hosting and monthly reporting. Automation, ads and other projects are quoted separately.", zh: "診所、房仲與建商適用的單一方案：網站、轉換策略、SEO、社群貼文、主機代管與每月報告。自動化、廣告與其他專案另行報價。" },
+  "home.pricing.label": { en: "PLANS BY INDUSTRY", zh: "各產業方案" },
+  "home.pricing.note": { en: "Website, conversion strategy, hosting and care in one plan for each industry. Other businesses, automation and ads are quoted to your scope.", zh: "每個產業一個方案：網站、轉換策略、主機代管與維護一次包含。其他行業、自動化與廣告依需求報價。" },
   "home.pricing.details": { en: "See what's included", zh: "查看方案內容" },
 
   // Home proof
@@ -309,8 +309,9 @@ const translations: Record<string, Record<Lang, string>> = {
   "casestudy.not-found": { en: "Case study not found", zh: "找不到案例研究" },
 
   // Industries
-  "industries.title": { en: "Industries We Work With", zh: "產業" },
-  "industries.intro": { en: "We build digital platforms for businesses across a range of industries.", zh: "我們與不同產業合作，協助企業建立專業可信的數位形象與網站架構。" },
+  "industries.title": { en: "Industries We Specialize In", zh: "我們專精的產業" },
+  "industries.other": { en: "Other industries we work with — Get a Quote", zh: "其他合作產業（依需求報價）" },
+  "industries.intro": { en: "Healthcare clinics, Realtors and pre-sale developers, each with its own plan. We also take on selected projects in other industries.", zh: "醫療診所、房仲與預售建案開發商，各有專屬方案。我們也接受其他產業的精選專案。" },
   "industries.back": { en: "← Industries", zh: "← 產業" },
   "industries.overview": { en: "Overview", zh: "概述" },
   "industries.what-we-build": { en: "What We Typically Build", zh: "我們通常建立的項目" },
@@ -438,8 +439,8 @@ const translations: Record<string, Record<Lang, string>> = {
 
   // Pricing page
   "pricing.label": { en: "Investment", zh: "投資方案" },
-  "pricing.hero.title": { en: "Transparent Pricing for Serious Businesses", zh: "為認真的企業提供透明定價" },
-  "pricing.hero.sub": { en: "We work with businesses that understand the value of a high-converting digital presence. Here's what to expect.", zh: "我們與理解高轉換率數位形象價值的企業合作。以下是你可以預期的。" },
+  "pricing.hero.title": { en: "Clear Plans for Clinics, Realtors and Developers", zh: "診所、房仲與建商的清楚方案" },
+  "pricing.hero.sub": { en: "One plan for each industry we specialize in, with the price on the page. Everything else gets a custom quote.", zh: "我們專精的每個產業都有一個方案，價格清楚寫在頁面上。其他需求依範圍另行報價。" },
   "pricing.for.title": { en: "This is for you if:", zh: "適合以下企業：" },
   "pricing.for.1": { en: "You're a business ready to invest in real growth", zh: "你的企業準備投資於真正的成長" },
   "pricing.for.2": { en: "You value strategy over cheap templates", zh: "你重視策略勝過廉價模板" },
@@ -474,11 +475,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "agency.title": { en: "About Bluluma", zh: "關於我們" },
   "agency.p1": { en: "Bluluma Design is a Vancouver-based digital design studio focused on building modern websites, brand systems, and digital platforms for growing businesses.", zh: "Bluluma Design 是位於 Vancouver 的數位設計工作室，專注於品牌識別、網站平台與數位設計系統。" },
   "agency.p2": { en: "Our work combines design thinking, technology, and strategy to create digital experiences that support long-term growth. We focus on clarity, structure, and performance — building systems that work as hard as the businesses they represent.", zh: "我們以清晰的資訊架構、嚴謹的視覺系統與高效率的製作流程，協助企業建立可信且可延伸的品牌與網站。" },
-  "agency.p3": { en: "We work with businesses across healthcare, real estate, ecommerce, professional services, and more. Every project starts with understanding the business, its audience, and its goals.", zh: "我們與多個產業的企業合作，包括醫療、房地產、電商與專業服務等。\n每一個專案都從深入了解企業本身開始 —— 包含品牌定位、目標客群，以及企業的長期發展目標。" },
+  "agency.p3": { en: "We specialize in three industries — healthcare clinics, Realtors and pre-sale developers — and take on selected projects beyond them. Every project starts with understanding the business, its audience, and its goals.", zh: "我們專精三大產業：醫療診所、房仲與預售建案開發商，也接受精選的其他專案。\n每一個專案都從深入了解企業本身開始，包含品牌定位、目標客群與營運目標。" },
   "agency.work-with-us": { en: "Work With Us", zh: "與我們合作" },
   "agency.work-with-us-sub": { en: "Tell us about your next project.", zh: "告訴我們你的下一個專案。" },
   "agency.focus": { en: "Focus", zh: "核心領域" },
-  "agency.focus.value": { en: "Strategic Digital Design", zh: "策略型數位設計" },
+  "agency.focus.value": { en: "Healthcare · Realtors · Pre-sale", zh: "醫療診所 · 房仲 · 預售建案" },
   "agency.location": { en: "Location", zh: "地點" },
   "agency.location.value": { en: "Vancouver, BC", zh: "加拿大溫哥華" },
   "agency.founded": { en: "Founded", zh: "成立年份" },
@@ -673,9 +674,9 @@ const translations: Record<string, Record<Lang, string>> = {
   "svc.mkt.s4.b": { en: "Every marketing dollar should be accountable. We set up comprehensive tracking and deliver clear reports that show what's working, what's not, and where to invest next.", zh: "每一分行銷預算都應可被追蹤。我們建立完整追蹤機制並提供清楚報表，說明哪些有效、哪些無效以及下一步該投資何處。" },
 };
 
-export const LangProvider = ({ children }: { children: ReactNode }) => {
-  // Language comes from the URL (/zh/... = Chinese). No on-site storage.
-  const [lang] = useState<Lang>(() => (typeof window === "undefined" ? "en" : langFromPath(window.location.pathname)));
+export const LangProvider = ({ children, initialLang }: { children: ReactNode; initialLang?: Lang }) => {
+  // Language comes from the URL (/zh/... = Chinese). No on-site storage. initialLang is for the build-time pre-render.
+  const [lang] = useState<Lang>(() => initialLang ?? (typeof window === "undefined" ? "en" : langFromPath(window.location.pathname)));
 
   const setLang = (l: Lang) => {
     if (l === lang || typeof window === "undefined") return;

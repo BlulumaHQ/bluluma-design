@@ -378,8 +378,8 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "房仲不易分享資料"
   },
   "ps.problem.3.body": {
-    "en": "Co-op REALTORS® need a clean link, a one-pager and floorplans they can send to clients in seconds.",
-    "zh": "合作 REALTOR® 需要清楚的網站連結、單頁簡介與戶型圖，才能迅速將資料傳給客戶。"
+    "en": "Buyers and agents need a clean link and floorplans they can share in seconds.",
+    "zh": "買家與房仲需要清楚的網站連結與戶型圖，幾秒內就能分享出去。"
   },
   "rt.feature.1": {
     "en": "New listings published automatically",
@@ -402,8 +402,8 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "可下載 PDF 的戶型圖庫"
   },
   "ps.feature.3": {
-    "en": "Co-op REALTOR® page with marketing materials",
-    "zh": "提供行銷資料的合作 REALTOR® 專頁"
+    "en": "Registrations sent to your sales team instantly",
+    "zh": "登記名單即時送到銷售團隊"
   },
   "rt.build.1": {
     "en": "Personal brand website",
@@ -454,8 +454,8 @@ export const industryTranslations: Record<string, Record<Lang, string>> = {
     "zh": "周邊生活與設施介紹"
   },
   "ps.build.5": {
-    "en": "Co-op REALTOR® portal",
-    "zh": "合作 REALTOR® 專區"
+    "en": "Automatic email follow-up for registrants",
+    "zh": "登記者自動 email 跟進"
   },
   "ps.build.6": {
     "en": "Lead routing to CRM & inbox",

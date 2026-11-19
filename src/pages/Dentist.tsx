@@ -4,8 +4,8 @@ import { Check } from "lucide-react";
 import type { ReactNode } from "react";
 import IndustryInsights from "@/components/IndustryInsights";
 import IndustryHeader from "@/components/IndustryHeader";
-import { IndustryStat } from "@/components/IndustryWork";
-import HealthcareHeroCollage, { BrowserChrome } from "@/components/HealthcareHeroCollage";
+import { BrowserChrome } from "@/components/HealthcareHeroCollage";
+import IndustryLandingHero from "@/components/IndustryLandingHero";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 import PackagePricing from "@/components/PackagePricing";
 import Footer from "@/components/Footer";
@@ -15,7 +15,6 @@ import { useHealthcareProjects } from "@/lib/healthcarePortfolio";
 import { getLatestByIndustry } from "@/lib/articles";
 import { useLang } from "@/lib/i18n";
 import { serviceLabel } from "@/lib/serviceLabels";
-import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Reveal = ({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal({ delay });
@@ -29,28 +28,13 @@ const Dentist = () => {
   const { lang, t } = useLang();
   const { items, loading, error } = useHealthcareProjects();
   const insights = getLatestByIndustry("Dentist", 3);
-  useDocumentMeta({
-    title: "Healthcare Website Design | Bluluma",
-    description: "Healthcare website design for dental clinics, medical practices and patient-focused healthcare businesses.",
-    canonicalPath: "/healthcare",
-  });
   const heading = (label: string, title: string) => <><span className="hc-eyebrow">{t(label)}</span><h2 className="hc-h2">{t(title)}</h2></>;
   const proposal = (className = "hc-button") => <Button asChild className={className}><Link to="/proposal">{t("hc.proposal")}</Link></Button>;
   return (
     <div className="healthcare-theme hc-page" id="top">
       <IndustryHeader dotColor="var(--hc-mint)" anchors={[{ id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
       <main className="hc-main">
-        <section className="hc-hero hc-dark">
-          <div className="hc-container hc-two-columns">
-            <Reveal><span className="hc-hero-badge"><span className="hc-dot" />{t("hc.badge")}</span>
-              <h1 className="hc-h1">{t("hc.heroTitle")} <span>{t("hc.heroAccent")}</span></h1>
-              <p className="hc-hero-description">{t("hc.heroDescription")}</p>
-              <div className="hc-actions">{proposal()}<Button variant="outline" asChild className="hc-button hc-button-outline"><a href="#work">{t("hc.seeClinics")}</a></Button></div>
-              <IndustryStat category="dental-healthcare" label={t("hc.stat")} />
-            </Reveal>
-            <HealthcareHeroCollage />
-          </div>
-        </section>
+        <IndustryLandingHero variant="healthcare" title={t("hc.heroTitle")} accent={t("hc.heroAccent")} description={t("lp.hc.desc")} secondaryLabel={t("hc.seeClinics")} testimonial={{ quote: t("lp.hc.quote"), name: "Patrick Wu", company: "Friendly Dental Centre" }} />
         <section className="hc-client-strip"><div className="hc-container"><span>{t("hc.clients")}</span><div>Tsai Orthodontics <i>·</i> Friendly Dental Centre <i>·</i> Little Mountain Dental <i>·</i> Dr. Patrick Wu <i>·</i> Yang's Health Clinic</div></div></section>
         <section className="hc-section hc-soft"><div className="hc-container">
           <Reveal>{heading("hc.problem.label", "hc.problem.title")}</Reveal>

@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Check, X } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-import { PACKAGE_MONTHLY, PACKAGE_NAME, PACKAGE_SETUP } from "@/lib/packagePricing";
+import { INDUSTRY_LABEL, INDUSTRY_ORDER, PACKAGE_NAME, PACKAGES } from "@/lib/packagePricing";
 
 const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const ref = useScrollReveal<HTMLDivElement>({ delay });
@@ -224,10 +224,16 @@ const Start = () => {
             <aside className="lg:sticky lg:top-28 space-y-6">
               <div className="border border-border rounded-2xl p-7 bg-background">
                 <p className="text-label mb-3">{tx(PACKAGE_NAME.generic)}</p>
-                <p className="text-3xl font-extrabold text-foreground">{PACKAGE_SETUP}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{tt(`setup + ${PACKAGE_MONTHLY} / month`, `建置費 + 每月 ${PACKAGE_MONTHLY}`)}</p>
+                <ul className="space-y-3">
+                  {INDUSTRY_ORDER.map((v) => (
+                    <li key={v} className="flex items-baseline justify-between gap-3 text-sm">
+                      <span className="font-semibold text-foreground">{tx(INDUSTRY_LABEL[v])}</span>
+                      <span className="text-muted-foreground whitespace-nowrap">{PACKAGES[v].setupPrefix ? `${tx(PACKAGES[v].setupPrefix!)} ` : ""}{PACKAGES[v].setup} + {PACKAGES[v].monthly}{tt("/mo", "／月")}</span>
+                    </li>
+                  ))}
+                </ul>
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-                  {tt("Website, conversion strategy, SEO, social posts, hosting and monthly reporting in one plan.", "網站、轉換策略、SEO、社群貼文、主機代管與每月報告，一個方案全包。")}
+                  {tt("Other businesses and add-ons are quoted to your scope.", "其他行業與加購項目依需求報價。")}
                 </p>
                 <Link to="/pricing" className="mt-4 inline-block text-sm font-semibold text-primary hover:underline">
                   {tt("See what's included →", "查看方案內容 →")}

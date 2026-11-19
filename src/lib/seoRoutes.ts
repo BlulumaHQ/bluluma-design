@@ -5,6 +5,8 @@
 export interface RouteMeta {
   path: string;
   priority: number;
+  /** Date this page's content or meta last changed (YYYY-MM-DD) — update it with every content edit. Feeds sitemap <lastmod>. */
+  updated?: string;
   en: { title: string; description: string };
   zh: { title: string; description: string };
 }
@@ -13,49 +15,53 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/",
     priority: 1.0,
+    updated: "2026-11-19",
     en: {
-      title: "Vancouver Website Design for Clinics & Real Estate | Bluluma",
-      description: "Bilingual English/Chinese websites for dental clinics, medical practices, realtors and pre-sale developers in Vancouver. Custom design built to convert.",
+      title: "Vancouver Website Design for Clinics, Realtors & Pre-sale | Bluluma",
+      description: "Custom websites for dental clinics, Realtors and pre-sale developers in Vancouver. 20+ years, 500+ websites, bilingual EN/中文. Clinic plans from $1,688.",
     },
     zh: {
-      title: "溫哥華醫療診所、房仲與建案網站設計｜中英雙語｜Bluluma",
-      description: "Bluluma 為溫哥華牙醫診所、醫療院所、房仲與預售建案打造高質感中英雙語網站，客製設計、專注帶來詢問與預約。",
+      title: "溫哥華醫療診所、房仲與預售建案網站設計｜中英雙語｜Bluluma",
+      description: "Bluluma 為溫哥華牙醫診所、房仲與預售建案打造客製中英雙語網站。20 年以上經驗、500+ 個網站，價格清楚公開。",
     },
   },
   {
     path: "/healthcare",
     priority: 0.9,
+    updated: "2026-11-19",
     en: {
       title: "Dental & Medical Clinic Website Design Vancouver | Bluluma",
-      description: "Bilingual website design for dental clinics, orthodontists and medical practices in Vancouver, with online booking, patient forms and local SEO.",
+      description: "Clinic websites that fill your appointment book: one-tap booking, service pages and 12 months of local SEO. $1,688 setup + $149/month in Vancouver.",
     },
     zh: {
       title: "溫哥華牙醫與醫療診所網站設計｜Bluluma",
-      description: "為溫哥華牙醫診所、矯正診所與醫療院所打造中英雙語網站，包含線上預約、病患表單與在地 SEO。",
+      description: "讓預約滿檔的診所網站：一鍵預約、服務頁面與 12 個月在地 SEO。建置費 $1,688＋每月 $149，溫哥華在地團隊。",
     },
   },
   {
     path: "/real-estate",
     priority: 0.9,
+    updated: "2026-11-19",
     en: {
       title: "Vancouver Realtor Website Design with CREA Listings | Bluluma",
-      description: "Personal-brand websites for REALTORS® and teams with CREA DDF® auto-listings, bilingual design and lead capture.",
+      description: "Custom REALTOR® websites with CREA DDF® listings that update themselves, auto-posted sold homes and pre-sale listings. $1,288 setup + $68/month, fully managed.",
     },
     zh: {
-      title: "溫哥華房仲網站設計・CREA 物件自動同步｜Bluluma",
-      description: "為 REALTORS® 與房仲團隊打造個人品牌網站，CREA DDF® 物件自動上架、中英雙語設計與潛在客戶擷取。",
+      title: "溫哥華房仲網站設計・CREA 房源自動同步｜Bluluma",
+      description: "客製 REALTOR® 個人品牌網站，CREA DDF® 房源自動更新、成交物件自動發佈。建置費 $1,288＋每月 $68，全程代管。",
     },
   },
   {
     path: "/presale",
     priority: 0.9,
+    updated: "2026-11-19",
     en: {
       title: "Pre-Sale & Development Website Design Vancouver | Bluluma",
-      description: "Project websites for developers and pre-sale marketing teams, with VIP registration, floorplans and qualified lead routing.",
+      description: "Pre-sale project websites that fill your VIP list before launch day: registration, floorplans and leads sent straight to your sales team. From $6,888.",
     },
     zh: {
       title: "溫哥華預售屋與建案網站設計｜Bluluma",
-      description: "為建商與預售行銷團隊打造建案網站，包含 VIP 登記、格局圖與合格客戶分流。",
+      description: "在開賣前讓 VIP 名單滿載的建案網站：VIP 登記、戶型圖，名單即時送到銷售團隊。建案網站 $6,888 起。",
     },
   },
   {
@@ -157,13 +163,14 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/industries",
     priority: 0.6,
+    updated: "2026-11-19",
     en: {
-      title: "Industries We Serve | Bluluma",
-      description: "Website design for healthcare, realtors, pre-sale developers and small businesses in Vancouver and beyond.",
+      title: "Industries We Specialize In | Bluluma",
+      description: "Bluluma specializes in websites for healthcare clinics, Realtors and pre-sale developers, each with its own plan. Other projects get a custom quote.",
     },
     zh: {
-      title: "服務產業｜Bluluma",
-      description: "為溫哥華及各地的醫療、房仲、預售建商與中小企業提供網站設計。",
+      title: "專精產業｜Bluluma",
+      description: "Bluluma 專精醫療診所、房仲與預售建商網站，各有專屬方案；其他專案依需求報價。",
     },
   },
   {
@@ -193,25 +200,27 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/pricing",
     priority: 0.6,
+    updated: "2026-11-19",
     en: {
-      title: "Custom Website Design Pricing Vancouver | Bluluma",
-      description: "One Growth System plan for clinics, Realtors and pre-sale developers: $1,500 setup + $199/month for website, SEO, social posts, hosting and reporting.",
+      title: "Website Design Pricing for Clinics, Realtors & Developers | Bluluma",
+      description: "Clear plans by industry: clinics $1,688 + $149/mo, Realtors $1,288 + $68/mo, pre-sale projects from $6,888. Other projects get a custom quote.",
     },
     zh: {
-      title: "網站設計價格｜Bluluma",
-      description: "診所、房仲與預售建案適用的成長系統方案：建置費 $1,500＋每月 $199，包含網站、SEO、社群貼文、主機代管與報告。",
+      title: "網站設計價格｜診所、房仲與建商方案｜Bluluma",
+      description: "各產業方案價格公開：診所 $1,688＋每月 $149、房仲 $1,288＋每月 $68、預售建案 $6,888 起。其他專案依需求報價。",
     },
   },
   {
     path: "/agency",
     priority: 0.6,
+    updated: "2026-11-19",
     en: {
-      title: "About Bluluma — Vancouver Design Studio",
-      description: "Bluluma is a Vancouver-based studio designing websites, brands and AI-powered tools for growing businesses.",
+      title: "About Bluluma — Led by Creative Director Sony Lin",
+      description: "Bluluma is a Vancouver design studio led by Sony Lin: 20+ years and 500+ websites for clinics, Realtors and pre-sale developers, in English and Chinese.",
     },
     zh: {
-      title: "關於 Bluluma｜溫哥華設計工作室",
-      description: "Bluluma 是位於溫哥華的設計工作室，為成長中的企業設計網站、品牌與 AI 工具。",
+      title: "關於 Bluluma｜創意總監 Sony Lin 帶領的溫哥華設計工作室",
+      description: "Bluluma 由創意總監 Sony Lin 帶領，20 年以上經驗、500+ 個網站，專為診所、房仲與預售建案打造中英雙語網站。",
     },
   },
   {

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Heart, Briefcase, Building2, Sparkles, Palette, Wrench, ShoppingCart, GraduationCap } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { useLang } from "@/lib/i18n";
+import { INDUSTRY_LABEL, INDUSTRY_ORDER, PACKAGES } from "@/lib/packagePricing";
 
 import friendlyDental from "@/assets/projects/friendly-dental.jpg";
 import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
@@ -165,7 +166,7 @@ const ProjectThumbnail = ({ slug }: { slug: string }) => {
 };
 
 export const IndustriesList = () => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <div className="site-page site-page-industries">
@@ -179,6 +180,17 @@ export const IndustriesList = () => {
       </section>
       <section>
         <div className="section-container section-padding">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {INDUSTRY_ORDER.map((v) => (
+              <Link key={v} to={PACKAGES[v].href} className="site-page-card group bg-background p-8 hover:bg-secondary transition-colors flex flex-col">
+                <span className="text-label mb-2">{lang === "zh" ? PACKAGES[v].name.zh : PACKAGES[v].name.en}</span>
+                <h2 className="text-2xl font-bold group-hover:text-primary transition-colors">{lang === "zh" ? INDUSTRY_LABEL[v].zh : INDUSTRY_LABEL[v].en}</h2>
+                <p className="mt-3 text-sm text-muted-foreground">{PACKAGES[v].setupPrefix ? `${lang === "zh" ? PACKAGES[v].setupPrefix!.zh : PACKAGES[v].setupPrefix!.en} ` : ""}{PACKAGES[v].setup} + {PACKAGES[v].monthly}{lang === "zh" ? "／月" : "/mo"}</p>
+                <span className="text-sm font-medium text-primary mt-4 inline-block">{t("cta.learn-more")}</span>
+              </Link>
+            ))}
+          </div>
+          <h2 className="text-xl font-semibold mb-6">{t("industries.other")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {industries.map((ind) => {
               const Icon = ind.icon;
