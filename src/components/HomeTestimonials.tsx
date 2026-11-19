@@ -8,7 +8,6 @@ const testimonials = [
   { quote: 'testimonial.3.quote', name: 'Daniel Wong', company: 'BTN Real Estate Advisory' },
   { quote: 'testimonial.4.quote', name: 'Jessica Lee', company: 'NuEra Nutra' },
   { quote: 'testimonial.5.quote', name: 'Ryan Patel', company: 'Vita Environmental' },
-  { quote: 'testimonial.6.quote', name: 'David Nguyen', company: 'Pacific Interior Studio' },
 ];
 export default function HomeTestimonials() {
   const { t } = useLang();
