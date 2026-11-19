@@ -560,7 +560,6 @@ const translations: Record<string, Record<Lang, string>> = {
   "testimonial.3.quote": { en: "The attention to detail and strategic thinking behind every design decision made all the difference. Our new site performs beyond expectations.", zh: "每一個設計決策背後都有清楚的策略思考與細節考量。\n我們的新網站表現遠遠超出預期。" },
   "testimonial.4.quote": { en: "Bluluma delivered a brand system and website that elevated our entire business. The clarity and professionalism speak for themselves.", zh: "Bluluma 為我們打造的品牌系統與網站，\n大幅提升了整體企業形象與市場專業度。" },
   "testimonial.5.quote": { en: "Their process was structured, transparent, and efficient. We launched on time with a website that immediately started generating leads.", zh: "Bluluma 的工作流程清晰、透明且高效率。\n我們準時完成網站上線，而且新網站很快就開始為我們帶來客戶詢問。" },
-  "testimonial.6.quote": { en: "From strategy to launch, Bluluma brought a level of craft and professionalism that set them apart from every other agency we've worked with.", zh: "從策略到網站上線，Bluluma 展現出的專業程度與設計細節，\n遠遠超過我們合作過的其他設計公司。" },
 
   // Friendly Dental case study
   "cs.fd.overview.1": { en: "Friendly Dental is a modern dental clinic serving families and professionals in the Vancouver area. The practice had been operating for several years with a strong patient base but lacked a cohesive brand presence and digital platform that reflected the quality of care they provide.", zh: "Friendly Dental 是一家位於 Vancouver 的現代牙科診所，服務對象涵蓋家庭與專業人士。\n診所在多年營運中已累積穩定的患者基礎，但整體品牌形象與數位平台仍無法充分反映其醫療品質與專業形象。" },
