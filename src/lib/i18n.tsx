@@ -3,6 +3,7 @@ import { industryTranslations } from "./industryTranslations";
 import { homeTranslations } from "./homeTranslations";
 import { heroTranslations } from "./heroTranslations";
 import { brandingTranslations } from "./brandingTranslations";
+import { servicePagesTranslations } from "./servicePagesTranslations";
 import { langFromPath, localizePath, type Lang as UrlLang } from "./locale";
 
 export type Lang = UrlLang;
@@ -27,6 +28,7 @@ const translations: Record<string, Record<Lang, string>> = {
   ...homeTranslations,
   ...heroTranslations,
   ...brandingTranslations,
+  ...servicePagesTranslations,
   // Healthcare industry landing page
   "hc.language": { en: "Language", zh: "語言" },
   "hc.industries": { en: "INDUSTRIES", zh: "產業" },
@@ -226,9 +228,9 @@ const translations: Record<string, Record<Lang, string>> = {
 
   // Home core services
   "home.services.title": { en: "What We Build", zh: "我們打造什麼" },
-  "home.svc1.title": { en: "Conversion Website System", zh: "高轉換率網站系統" },
+  "home.svc1.title": { en: "Conversion Websites", zh: "高轉換率網站" },
   "home.svc1.desc": { en: "High-performance websites built to convert visitors into leads and customers. Every page, every section, every element is engineered for results.", zh: "以高效能打造的網站，將訪客轉化為潛在客戶和顧客。每一頁、每一區塊都以成果為導向。" },
-  "home.svc2.title": { en: "AI Automation System", zh: "AI 自動化系統" },
+  "home.svc2.title": { en: "AI Automation", zh: "AI 自動化" },
   "home.svc2.desc": { en: "Automate lead capture, follow-ups, and workflows to scale your business without increasing workload. Work smarter, not harder.", zh: "自動化潛在客戶捕捉、跟進和工作流程，讓你在不增加工作量的情況下擴展業務。" },
   "home.svc3.title": { en: "Brand Identity System", zh: "品牌識別系統" },
   "home.svc3.desc": { en: "Premium branding designed to build trust, authority, and perceived value. Position your business as the obvious choice in your market.", zh: "高端品牌設計，建立信任、權威和感知價值。讓你的企業成為市場中的首選。" },
@@ -403,13 +405,13 @@ const translations: Record<string, Record<Lang, string>> = {
   "sol.label": { en: "Our Solutions", zh: "我們的解決方案" },
   "sol.hero.title": { en: "Conversion Systems Built for Business Growth", zh: "為業務成長而打造的轉換系統" },
   "sol.hero.sub": { en: "We don't sell design. We build complete conversion systems that turn traffic into leads and leads into revenue.", zh: "我們不賣設計。我們打造完整的轉換系統，將流量轉化為潛在客戶、再轉化為營收。" },
-  "sol.cws.title": { en: "Conversion Website System", zh: "高轉換率網站系統" },
+  "sol.cws.title": { en: "Conversion Websites", zh: "高轉換率網站" },
   "sol.cws.desc": { en: "Websites that actually convert. We design websites with structure, psychology, and conversion in mind — not just aesthetics.", zh: "真正能轉換的網站。我們以結構、心理學和轉換為核心來設計網站——而非僅僅追求美觀。" },
   "sol.cws.f1": { en: "Conversion-first CTA strategy and placement", zh: "以轉換為核心的 CTA 策略與配置" },
   "sol.cws.f2": { en: "Structured funnel flow from landing to contact", zh: "從著陸到聯繫的結構化漏斗流程" },
   "sol.cws.f3": { en: "Mobile-first responsive optimization", zh: "行動裝置優先的響應式優化" },
   "sol.cws.f4": { en: "SEO-ready architecture for organic growth", zh: "SEO 友好架構，促進自然成長" },
-  "sol.ai.title": { en: "AI Automation System", zh: "AI 自動化系統" },
+  "sol.ai.title": { en: "AI Automation", zh: "AI 自動化" },
   "sol.ai.desc": { en: "Automate your business operations. We build systems that capture, qualify, and follow up with leads automatically.", zh: "自動化你的業務營運。我們打造能自動捕捉、篩選和跟進潛在客戶的系統。" },
   "sol.ai.f1": { en: "Automated lead capture and qualification", zh: "自動化潛在客戶捕捉與篩選" },
   "sol.ai.f2": { en: "Intelligent follow-up sequences", zh: "智慧跟進序列" },
@@ -537,7 +539,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "contact.form.timeline.flexible": { en: "Flexible", zh: "彈性" },
   "contact.form.project-type": { en: "Project Type", zh: "專案類型" },
   "contact.form.project-type.select": { en: "Select project type", zh: "選擇專案類型" },
-  "contact.form.project.website": { en: "Conversion Website System", zh: "高轉換率網站系統" },
+  "contact.form.project.website": { en: "Conversion Website", zh: "高轉換率網站" },
   "contact.form.project.ai": { en: "AI Automation System", zh: "AI 自動化系統" },
   "contact.form.project.brand": { en: "Brand Identity System", zh: "品牌識別系統" },
   "contact.form.project.ecom": { en: "Ecommerce Platform", zh: "電商平台" },
@@ -610,8 +612,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "services.detail.cta.text": { en: "Tell us about your project and we'll get back to you with a clear plan and next steps.", zh: "告訴我們你的專案，我們會提供清晰的計畫與下一步建議。" },
 
   // Web Design
-  "svc.web-design.title": { en: "Web Design & Development", zh: "網站設計與開發" },
-  "svc.web-design.desc": { en: "Custom websites built for performance, clarity, and conversion. From single-page sites to complex multi-page platforms.", zh: "為效能、清晰度與轉換率打造的客製網站。從單頁網站到複雜的多頁平台皆能勝任。" },
+  "svc.web-design.title": { en: "Conversion Websites", zh: "高轉換率網站" },
+  "svc.web-design.desc": { en: "Custom websites planned around one goal: turning visitors into bookings and leads. Packages for Healthcare, Realtors and Pre-sale; custom quotes for everyone else.", zh: "以「把訪客變成預約與名單」為目標規劃的客製網站。醫療、房仲與預售有固定方案，其他行業依需求報價。" },
   "svc.web-design.intro": { en: "We design and build modern websites that are fast, accessible, and optimized for conversion. Every site we create is custom — no templates, no page builders, no compromises.", zh: "我們設計與開發現代化網站，快速、易讀、並以轉換為核心。每個網站皆為客製打造——不使用模板、不用頁面編輯器、不妥協。" },
   "svc.web-design.s1.h": { en: "Custom Design, Not Templates", zh: "客製設計，非模板" },
   "svc.web-design.s1.b": { en: "Every website we build starts from scratch. We design based on your brand, your audience, and your business goals — not a pre-made theme. This means your site looks and performs exactly the way it should.", zh: "每一個網站都從零開始打造。我們依據你的品牌、受眾與業務目標設計——而非現成主題。這讓網站的外觀與表現都完全符合你的需求。" },
@@ -649,8 +651,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "svc.brand.s4.b": { en: "Your brand needs to perform across digital channels. We design with screens in mind — ensuring your identity system works beautifully on websites, social media, email, and digital advertising.", zh: "品牌需在各數位管道有效呈現。我們以螢幕為設計核心，確保識別系統在網站、社群、email 與數位廣告皆完美呈現。" },
 
   // AI Automation
-  "svc.ai.title": { en: "AI & Business Automation", zh: "AI 與商業自動化" },
-  "svc.ai.desc": { en: "Intelligent workflows, chatbots, and automation tools that streamline operations and improve efficiency.", zh: "智慧工作流程、聊天機器人與自動化工具，簡化營運並提升效率。" },
+  "svc.ai.title": { en: "AI Automation", zh: "AI 自動化" },
+  "svc.ai.desc": { en: "AI receptionist, missed-call text-back, lead follow-up, review requests and reminders — set up and run for you.", zh: "AI 接待員、未接來電自動回訊、名單跟進、評價邀請與預約提醒，全部幫你建置與代管。" },
   "svc.ai.intro": { en: "We build AI-powered tools and automation workflows that save time, reduce errors, and help businesses operate more efficiently. From chatbots to internal process automation, we make AI practical.", zh: "我們打造由 AI 驅動的工具與自動化流程，節省時間、減少錯誤並提升營運效率。從聊天機器人到內部流程自動化，讓 AI 真正實用。" },
   "svc.ai.s1.h": { en: "Practical AI Solutions", zh: "實用的 AI 解決方案" },
   "svc.ai.s1.b": { en: "We focus on AI that delivers measurable business value — not buzzwords. AI phone receptionists, customer service chatbots, content generation workflows, data analysis tools, and automated reporting are all in our toolkit.", zh: "我們專注於能帶來可衡量業務價值的 AI——而非流行詞。AI 電話接待、客服機器人、內容生成流程、資料分析工具與自動化報表皆為我們的能力範圍。" },

@@ -91,13 +91,14 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/services/web-design",
     priority: 0.7,
+    updated: "2026-11-19",
     en: {
-      title: "Custom Website Design & Development Vancouver | Bluluma",
-      description: "Custom websites built for performance, clarity, and conversion. From single-page sites to complex multi-page platforms.",
+      title: "Conversion Websites Vancouver — Custom Design + Monthly Care | Bluluma",
+      description: "Custom websites built to turn visitors into bookings and leads: clear offer, instant auto-reply forms, SEO foundation and monthly care. Packages for Healthcare, Realtors and Pre-sale.",
     },
     zh: {
-      title: "溫哥華客製網站設計與開發｜Bluluma",
-      description: "為效能、清晰度與轉換率打造的客製網站。從單頁網站到複雜的多頁平台皆能勝任。",
+      title: "溫哥華高轉換率網站｜客製設計與每月代管｜Bluluma",
+      description: "把訪客變成預約與名單的客製網站：清楚訴求、即時自動回覆表單、SEO 基礎與每月代管。提供醫療、房仲與預售專屬方案。",
     },
   },
   {
@@ -128,13 +129,14 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/services/ai-automation",
     priority: 0.7,
+    updated: "2026-11-19",
     en: {
-      title: "AI & Business Automation | Bluluma",
-      description: "Intelligent workflows, chatbots, and automation tools that streamline operations and improve efficiency.",
+      title: "AI Receptionist & Business Automation Vancouver | Bluluma",
+      description: "AI phone receptionist, missed-call text-back, instant lead follow-up, review requests, reminders and website chat — set up and fully managed for you. Get a quote.",
     },
     zh: {
-      title: "AI 與商業自動化｜Bluluma",
-      description: "智慧工作流程、聊天機器人與自動化工具，簡化營運並提升效率。",
+      title: "AI 接待員與商業自動化｜溫哥華｜Bluluma",
+      description: "AI 電話接待員、未接來電自動回訊、即時名單跟進、評價邀請、預約提醒與網站聊天助理，全部幫你建置與代管。歡迎索取報價。",
     },
   },
   {
