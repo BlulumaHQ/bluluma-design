@@ -18,8 +18,6 @@ const PRESALE_INSIGHTS = ["high-converting-real-estate-website-2026", "how-to-bu
 import { useLang } from "@/lib/i18n";
 import { industryClientTitles, useIndustryProjects } from "@/lib/industryPortfolio";
 
-// Eric Kim's testimonial goes here once he replies; the block stays hidden until then.
-const REALTOR_TESTIMONIAL: { quote: string; name: string; company: string } | undefined = undefined;
 
 export default function PropertyIndustryPage({ developer }: { developer: boolean }) {
   const { lang, t } = useLang();
@@ -34,7 +32,7 @@ export default function PropertyIndustryPage({ developer }: { developer: boolean
   return <div className="industry-theme healthcare-theme ind-property hc-page" id="top">
     <IndustryHeader dotColor="var(--ind-accent)" anchors={[{ id: "feature", label: text("featureNav") }, { id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
     <main className="hc-main">
-      <IndustryLandingHero variant={developer ? "presale" : "realtor"} top={<IndustryAudienceSwitch developer={developer} />} title={text("heroTitle")} accent={text("heroAccent")} description={t(developer ? "lp.ps.desc" : "lp.rt.desc")} secondaryLabel={text("see")} testimonial={developer ? undefined : REALTOR_TESTIMONIAL} />
+      <IndustryLandingHero variant={developer ? "presale" : "realtor"} top={<IndustryAudienceSwitch developer={developer} />} title={text("heroTitle")} accent={text("heroAccent")} description={t(developer ? "lp.ps.desc" : "lp.rt.desc")} secondaryLabel={text("see")} testimonial={developer ? undefined : { quote: t("lp.rt.quote"), name: "Eric Kim", company: "Eric Kim Realty" }} />
       <section className="hc-client-strip"><div className="hc-container"><span>{text("clients")}</span><div>{clients.map((client, i) => <Fragment key={client}>{i > 0 && <i>·</i>}{client}</Fragment>)}</div></div></section>
       <section className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading(t("ind.problem"), text("problemTitle"))}</Reveal><div className="hc-grid hc-grid-three">{[1, 2, 3].map((n) => <Reveal key={n} delay={n * 70}><article className="hc-card hc-problem-card"><span className="hc-number">0{n}</span><h3>{text(`problem.${n}.title`)}</h3><p>{text(`problem.${n}.body`)}</p></article></Reveal>)}</div></div></section>
       <section id="feature" className="hc-section hc-dark"><div className="hc-container hc-two-columns"><Reveal>{heading(text("featureLabel"), text("featureTitle"))}<p className="hc-section-description">{text("featureBody")}</p><ul className="hc-ai-list">{[1, 2, 3].map((n) => <li key={n}><span className="hc-dot" />{text(`feature.${n}`)}</li>)}</ul></Reveal><IndustryFeatureDemo developer={developer} /></div></section>

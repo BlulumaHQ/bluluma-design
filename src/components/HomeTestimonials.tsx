@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { useLang } from '@/lib/i18n';
 const testimonials = [
   { quote: 'testimonial.1.quote', name: 'Patrick Wu', company: 'Friendly Dental Centre' },
+  { quote: 'testimonial.6.quote', name: 'Eric Kim', company: 'Eric Kim Realty' },
   { quote: 'testimonial.2.quote', name: 'Sarah Thompson', company: 'Headwater Developments' },
   { quote: 'testimonial.3.quote', name: 'Daniel Wong', company: 'BTN Real Estate Advisory' },
   { quote: 'testimonial.4.quote', name: 'Jessica Lee', company: 'NuEra Nutra' },

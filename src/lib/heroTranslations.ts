@@ -50,6 +50,7 @@ export const heroTranslations: Record<string, Record<Lang, string>> = {
   'lp.ps.desc': { en: 'Project websites for developers and pre-sale marketing teams. A premium first impression, floorplans buyers can use, and every registration sent straight to your sales team.', zh: '專為開發商與預售行銷團隊打造的建案網站。高質感的第一印象、買家真的會用的戶型圖，每一筆登記都直接送到銷售團隊。' },
   'lp.ps.label': { en: 'Pre-sale & Developers', zh: '預售建案與開發商' },
   'lp.planHint': { en: 'per project', zh: '每個建案' },
+  'lp.rt.quote': { en: 'He delivers not just a website, but a complete business solution designed to enhance your brand, generate leads, and support long-term growth.', zh: '他交付的不只是一個網站，而是一套完整的商業解決方案，能提升你的品牌、帶來潛在客戶，並支撐長期成長。' },
   'lp.hc.quote': { en: 'Sony Lin has managed our professional websites for years, and he’s always been punctual, dependable, and professional.', zh: 'Sony Lin has managed our professional websites for years, and he’s always been punctual, dependable, and professional.' },
   'home.trust': { en: '500+ WEBSITES · 20+ YEARS · BILINGUAL EN/中文', zh: '500+ 個網站 · 20+ 年經驗 · 中英雙語' },
   'home.audience.title': { en: 'Specialists in three industries.', zh: '專精三大產業。' },

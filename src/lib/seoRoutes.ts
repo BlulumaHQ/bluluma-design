@@ -15,7 +15,7 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/",
     priority: 1.0,
-    updated: "2026-11-19",
+    updated: "2026-11-21",
     en: {
       title: "Vancouver Website Design for Clinics, Realtors & Pre-sale | Bluluma",
       description: "Custom websites for dental clinics, Realtors and pre-sale developers in Vancouver. 20+ years, 500+ websites, bilingual EN/中文. Clinic plans from $1,688.",
@@ -41,7 +41,7 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/real-estate",
     priority: 0.9,
-    updated: "2026-11-19",
+    updated: "2026-11-21",
     en: {
       title: "Vancouver Realtor Website Design with CREA Listings | Bluluma",
       description: "Custom REALTOR® websites with CREA DDF® listings that update themselves, auto-posted sold homes and pre-sale listings. $1,288 setup + $68/month, fully managed.",
