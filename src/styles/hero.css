@@ -49,6 +49,10 @@
 .hv-description { color: var(--hv-muted-dark); font-size: 19px; line-height: 1.6; margin-top: 24px; max-width: 540px; }
 .hv-price-line { margin-top: 20px; font-size: 14px; color: var(--hv-muted-dark); }
 .hv-price-line strong { color: #fff; font-weight: 700; }
+.hv-slide-quote { margin: 20px 0 0; max-width: 540px; padding-left: 14px; border-left: 2px solid rgba(255,255,255,0.28); }
+.hv-slide-quote blockquote { margin: 0; font-size: 14px; line-height: 1.55; font-style: italic; color: var(--hv-muted-dark); }
+.hv-slide-quote figcaption { margin-top: 6px; font-size: 13px; color: #fff; font-weight: 600; }
+@media (max-width: 767px) { .hv-slide-quote { display: none; } }
 
 /* light slide (healthcare) */
 .hv-slide-light .hv-badge { background: var(--hv-blue-wash); border-color: transparent; color: var(--hv-blue-deep); }

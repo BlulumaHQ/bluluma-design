@@ -10,14 +10,14 @@ import type { IndustryVariant } from '@/lib/packagePricing';
 type Slide = {
   name: string; key: string; light?: boolean; center?: boolean; icon?: typeof House;
   badge: string; title: string; accent: string; description: string;
-  primary: string; href: string; secondary: string; work: string; price?: IndustryVariant;
+  primary: string; href: string; secondary: string; work: string; price?: IndustryVariant; quote?: { text: string; name: string };
   visual: (eager: boolean) => ReactNode;
 };
 
 // Order approved Nov 2026: three industries first, then the general slide.
 const slides: Slide[] = [
   { name: 'hc.healthcare', key: 'healthcare', light: true, icon: CalendarCheck, badge: 'hv.badge.healthcare', title: 'hc.heroTitle', accent: 'hc.heroAccent', description: 'hv.desc.healthcare', primary: 'home.exploreHealthcare', href: '/healthcare', secondary: 'hc.seeClinics', work: '/portfolio/dental-healthcare', price: 'healthcare', visual: (e) => <HealthcareVisual eager={e} /> },
-  { name: 'ind.realtors', key: 'realtor', icon: House, badge: 'hv.badge.realtor', title: 'rt.heroTitle', accent: 'rt.heroAccent', description: 'hv.desc.realtor', primary: 'home.exploreRealtor', href: '/real-estate', secondary: 'rt.see', work: '/portfolio/realtor-realty', price: 'realtor', visual: (e) => <RealtorVisual eager={e} /> },
+  { name: 'ind.realtors', key: 'realtor', icon: House, badge: 'hv.badge.realtor', title: 'rt.heroTitle', accent: 'rt.heroAccent', description: 'hv.desc.realtor', primary: 'home.exploreRealtor', href: '/real-estate', secondary: 'rt.see', work: '/portfolio/realtor-realty', price: 'realtor', quote: { text: 'lp.rt.quote', name: 'Eric Kim · Eric Kim Realty' }, visual: (e) => <RealtorVisual eager={e} /> },
   { name: 'ind.developers', key: 'presale', icon: Building2, badge: 'hv.badge.presale', title: 'ps.heroTitle', accent: 'ps.heroAccent', description: 'hv.desc.presale', primary: 'hv.bookCall', href: '/proposal', secondary: 'ps.see', work: '/portfolio/real-estate-development-presale', price: 'presale', visual: (e) => <PresaleVisual eager={e} /> },
   { name: 'home.any', key: 'everyone', center: true, badge: 'home.badge', title: 'home.hero.generalTitle', accent: 'home.hero.generalAccent', description: 'home.hero.generalSub', primary: 'home.getQuote', href: '/proposal', secondary: 'home.seeWork', work: '/portfolio', visual: () => <EveryoneStrip /> },
 ];
@@ -45,6 +45,7 @@ export default function HomeHeroSlider() {
             <p className="hv-description">{t(slide.description)}</p>
             <div className="home-hero-actions"><Button asChild variant="site"><Link to={slide.href} tabIndex={isActive ? 0 : -1}>{t(slide.primary)}</Link></Button><Button asChild variant="siteOutline" className="hv-outline"><Link to={slide.work} tabIndex={isActive ? 0 : -1}>{t(slide.secondary)}</Link></Button></div>
             {slide.price && <HvPriceLine variant={slide.price} />}
+            {slide.quote && <figure className="hv-slide-quote"><blockquote>“{t(slide.quote.text)}”</blockquote><figcaption>— {slide.quote.name}</figcaption></figure>}
           </div>
           <div className="hv-visual">{slide.visual(i === 0)}</div>
         </div>;
