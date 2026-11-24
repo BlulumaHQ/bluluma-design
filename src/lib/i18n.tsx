@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from "
 import { industryTranslations } from "./industryTranslations";
 import { homeTranslations } from "./homeTranslations";
 import { heroTranslations } from "./heroTranslations";
+import { freeConceptTranslations } from "./freeConceptTranslations";
 import { brandingTranslations } from "./brandingTranslations";
 import { servicePagesTranslations } from "./servicePagesTranslations";
 import { langFromPath, localizePath, type Lang as UrlLang } from "./locale";
@@ -27,6 +28,7 @@ const translations: Record<string, Record<Lang, string>> = {
   ...industryTranslations,
   ...homeTranslations,
   ...heroTranslations,
+  ...freeConceptTranslations,
   ...brandingTranslations,
   ...servicePagesTranslations,
   // Healthcare industry landing page

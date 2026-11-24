@@ -10,6 +10,7 @@ import VersionBadge from "@/components/VersionBadge";
 import PortfolioScreenshotViewport from "@/components/PortfolioScreenshotViewport";
 import PackagePricing from "@/components/PackagePricing";
 import Footer from "@/components/Footer";
+import FreeConceptForm from "@/components/FreeConceptForm";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useHealthcareProjects } from "@/lib/healthcarePortfolio";
@@ -30,12 +31,13 @@ const Dentist = () => {
   const { items, loading, error } = useHealthcareProjects();
   const insights = getLatestByIndustry("Dentist", 3);
   const heading = (label: string, title: string) => <><span className="hc-eyebrow">{t(label)}</span><h2 className="hc-h2">{t(title)}</h2></>;
-  const proposal = (className = "hc-button") => <Button asChild className={className}><Link to="/proposal">{t("hc.proposal")}</Link></Button>;
+  const concept = (className = "hc-button") => <Button asChild className={className}><a href="#free-concept">{t("fc.cta")}</a></Button>;
+  const offer = { href: "#free-concept", cta: t("fc.cta"), label: t("fc.offer.label"), value: t("fc.offer.value"), sub: t("fc.offer.sub"), note: t("fc.offer.note"), items: [1, 2, 3, 4].map((n) => t(`fc.get.${n}`)) };
   return (
     <div className="healthcare-theme hc-page" id="top">
-      <IndustryHeader dotColor="var(--hc-mint)" anchors={[{ id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
+      <IndustryHeader dotColor="var(--hc-mint)" cta={{ href: "#free-concept", label: t("fc.cta") }} anchors={[{ id: "build", label: t("hc.nav.build") }, { id: "work", label: t("hc.nav.work") }, { id: "process", label: t("hc.nav.process") }, { id: "insights", label: t("hc.nav.insights") }]} />
       <main className="hc-main">
-        <IndustryLandingHero variant="healthcare" title={t("hc.heroTitle")} accent={t("hc.heroAccent")} description={t("lp.hc.desc")} secondaryLabel={t("hc.seeClinics")} testimonial={{ quote: t("lp.hc.quote"), name: "Patrick Wu", company: "Friendly Dental Centre" }} />
+        <IndustryLandingHero variant="healthcare" title={t("fc.hero.title")} accent={t("fc.hero.accent")} description={t("fc.hero.desc")} offer={offer} secondaryLabel={t("hc.seeClinics")} testimonial={{ quote: t("lp.hc.quote"), name: "Patrick Wu", company: "Friendly Dental Centre" }} />
         <section className="hc-client-strip"><div className="hc-container"><span>{t("hc.clients")}</span><div>Tsai Orthodontics <i>·</i> Friendly Dental Centre <i>·</i> Little Mountain Dental <i>·</i> Dr. Patrick Wu <i>·</i> Yang's Health Clinic</div></div></section>
         <section className="hc-section hc-soft"><div className="hc-container">
           <Reveal>{heading("hc.problem.label", "hc.problem.title")}</Reveal>
@@ -55,10 +57,11 @@ const Dentist = () => {
           </div>}
           {!loading && !error && items.length === 0 && <p>{t("hc.work.empty")}</p>}
         </div></section>
+        <FreeConceptForm />
         <PackagePricing variant="healthcare" />
-        <section id="process" className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading("hc.process.label", "hc.process.title")}</Reveal><div className="hc-grid hc-grid-four">{[1, 2, 3, 4].map((n) => <Reveal key={n} delay={n * 80}><article className="hc-card"><span className="hc-step-number">{n}</span><h3>{t(`hc.process.${n}.title`)}</h3><p>{t(`hc.process.${n}.body`)}</p></article></Reveal>)}</div></div></section>
+        <section id="process" className="hc-section hc-soft"><div className="hc-container"><Reveal>{heading("hc.process.label", "hc.process.title")}</Reveal><div className="hc-grid hc-grid-four">{[1, 2, 3, 4].map((n) => <Reveal key={n} delay={n * 80}><article className="hc-card"><span className="hc-step-number">{n}</span><h3>{t(n === 1 ? "fc.process.1.title" : `hc.process.${n}.title`)}</h3><p>{t(n === 1 ? "fc.process.1.body" : `hc.process.${n}.body`)}</p></article></Reveal>)}</div></div></section>
         <IndustryInsights heading={<Reveal>{heading("hc.insights.label", "hc.insights.title")}</Reveal>} moreHref="/insights/dentist" moreLabel={t("hc.insights.more")} articles={insights} />
-        <section id="cta" className="hc-final-section"><div className="hc-container"><div className="hc-final hc-dark"><h2 className="hc-h2">{t("hc.final.title")}</h2><p>{t("hc.final.body")}</p>{proposal("hc-button hc-button-light")}</div></div></section>
+        <section id="cta" className="hc-final-section"><div className="hc-container"><div className="hc-final hc-dark"><h2 className="hc-h2">{t("fc.final.title")}</h2><p>{t("fc.final.body")}</p>{concept("hc-button hc-button-light")}</div></div></section>
       </main>
       <Footer />
     </div>

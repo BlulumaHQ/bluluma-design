@@ -16,10 +16,12 @@ interface Props {
   secondaryLabel: string;
   testimonial?: Testimonial;
   top?: ReactNode;
+  /** Replaces the plan/price card with a free-offer card and points the primary CTA at an on-page anchor. */
+  offer?: { href: string; cta: string; label: string; value: string; sub: string; note: string; items: string[] };
 }
 
 /** Landing-page hero shared by /healthcare, /real-estate and /presale (Nov 2026 design). */
-export default function IndustryLandingHero({ variant, title, accent, description, secondaryLabel, testimonial, top }: Props) {
+export default function IndustryLandingHero({ variant, title, accent, description, secondaryLabel, testimonial, top, offer }: Props) {
   const { lang, t } = useLang();
   const zh = lang === "zh";
   const p = PACKAGES[variant];
@@ -38,19 +40,32 @@ export default function IndustryLandingHero({ variant, title, accent, descriptio
           <h1 className="hv-title">{title} <span>{accent}</span></h1>
           <p className="hv-description">{description}</p>
           <div className="lp-actions">
-            <Button asChild variant="site"><Link to="/proposal">{primary}</Link></Button>
+            <Button asChild variant="site">{offer ? <a href={offer.href}>{offer.cta}</a> : <Link to="/proposal">{primary}</Link>}</Button>
             <Button asChild variant="siteOutline" className="hv-outline"><a href="#work">{secondaryLabel}</a></Button>
           </div>
-          <div className="lp-plan">
-            <div className="lp-plan-price">
-              <span className="lp-plan-label">{tx(p.name).toUpperCase()}</span>
-              <span className="lp-plan-setup">{p.setupPrefix ? `${tx(p.setupPrefix)} ` : ""}{p.setup}</span>
-              <span className="lp-plan-monthly">{variant === "presale" ? "+ " : `${t("hv.setup")} + `}<strong>{p.monthly}{t("hv.perMonth")}</strong>{variant === "presale" ? ` · ${tx(p.monthlyNote)}` : ""}</span>
-              <span className="lp-plan-note">{variant === "presale" ? t("lp.planHint") : tx(p.monthlyNote)}</span>
+          {offer ? (
+            <div className="lp-plan lp-offer">
+              <div className="lp-plan-price">
+                <span className="lp-plan-label">{offer.label}</span>
+                <span className="lp-plan-setup">{offer.value}</span>
+                <span className="lp-plan-monthly"><strong>{offer.sub}</strong></span>
+                <span className="lp-plan-note">{offer.note}</span>
+              </div>
+              <div className="lp-plan-divider" aria-hidden="true" />
+              <ul>{offer.items.map((h) => <li key={h}><Check size={16} strokeWidth={2.6} aria-hidden="true" />{h}</li>)}</ul>
             </div>
-            <div className="lp-plan-divider" aria-hidden="true" />
-            <ul>{p.highlights.map((h) => <li key={h.en}><Check size={16} strokeWidth={2.6} aria-hidden="true" />{tx(h)}</li>)}</ul>
-          </div>
+          ) : (
+            <div className="lp-plan">
+              <div className="lp-plan-price">
+                <span className="lp-plan-label">{tx(p.name).toUpperCase()}</span>
+                <span className="lp-plan-setup">{p.setupPrefix ? `${tx(p.setupPrefix)} ` : ""}{p.setup}</span>
+                <span className="lp-plan-monthly">{variant === "presale" ? "+ " : `${t("hv.setup")} + `}<strong>{p.monthly}{t("hv.perMonth")}</strong>{variant === "presale" ? ` · ${tx(p.monthlyNote)}` : ""}</span>
+                <span className="lp-plan-note">{variant === "presale" ? t("lp.planHint") : tx(p.monthlyNote)}</span>
+              </div>
+              <div className="lp-plan-divider" aria-hidden="true" />
+              <ul>{p.highlights.map((h) => <li key={h.en}><Check size={16} strokeWidth={2.6} aria-hidden="true" />{tx(h)}</li>)}</ul>
+            </div>
+          )}
         </div>
         <div className="lp-side">
           <div className="hv-visual">{visual}</div>

@@ -28,14 +28,14 @@ export const seoRoutes: RouteMeta[] = [
   {
     path: "/healthcare",
     priority: 0.9,
-    updated: "2026-11-19",
+    updated: "2026-11-23",
     en: {
       title: "Dental & Medical Clinic Website Design Vancouver | Bluluma",
-      description: "Clinic websites that fill your appointment book: one-tap booking, service pages and 12 months of local SEO. $1,688 setup + $149/month in Vancouver.",
+      description: "Get a free homepage concept for your dental or orthodontic clinic, designed by hand in 2 business days. Clinic websites with booking and local SEO in Vancouver.",
     },
     zh: {
       title: "溫哥華牙醫與醫療診所網站設計｜Bluluma",
-      description: "讓預約滿檔的診所網站：一鍵預約、服務頁面與 12 個月在地 SEO。建置費 $1,688＋每月 $149，溫哥華在地團隊。",
+      description: "免費為你的牙科或齒顎矯正診所設計首頁概念，2 個工作天內交付。溫哥華診所網站設計，含線上預約與在地 SEO。",
     },
   },
   {

@@ -1,0 +1,48 @@
+import type { Lang } from './i18n';
+
+// Copy for the free homepage concept offer on /healthcare (Nov 2026 dental FB ad).
+export const freeConceptTranslations: Record<string, Record<Lang, string>> = {
+  // Hero
+  'fc.hero.title': { en: 'See what your clinic website', zh: '看看你的診所網站' },
+  'fc.hero.accent': { en: 'could become.', zh: '可以變成什麼樣子。' },
+  'fc.hero.desc': { en: 'Get a free homepage concept designed by hand for your dental or orthodontic clinic, plus a review of what to fix first. From a team that has built 500+ websites in Vancouver.', zh: '為你的牙科或齒顎矯正診所，免費量身設計一個首頁概念，並附上網站檢視報告，告訴你最該先改善什麼。來自在溫哥華打造超過 500 個網站的團隊。' },
+  'fc.cta': { en: 'Get My Free Concept →', zh: '索取免費首頁概念 →' },
+  'fc.offer.label': { en: 'FREE FOR CLINICS', zh: '診所免費申請' },
+  'fc.offer.value': { en: '$0', zh: '$0' },
+  'fc.offer.sub': { en: 'No cost. No sales call.', zh: '免費，不推銷。' },
+  'fc.offer.note': { en: 'Delivered in 2 business days', zh: '2 個工作天內交付' },
+  'fc.get.1': { en: 'A custom homepage concept for your clinic', zh: '為你的診所量身設計的首頁概念' },
+  'fc.get.2': { en: 'A review of your current site: what works, what to fix', zh: '現有網站檢視：哪裡做得好、哪裡要改善' },
+  'fc.get.3': { en: 'Ideas to turn more visitors into booked patients', zh: '把更多瀏覽者轉成預約患者的建議' },
+  'fc.get.4': { en: 'Google and AI search recommendations', zh: 'Google 與 AI 搜尋曝光建議' },
+  // Form section
+  'fc.label': { en: 'FREE HOMEPAGE CONCEPT', zh: '免費首頁概念' },
+  'fc.title': { en: 'Six quick questions. One custom concept.', zh: '回答六個問題，拿到專屬首頁概念。' },
+  'fc.body': { en: 'We review your website by hand and email you a homepage concept and a written review within 2 business days. No obligation to buy.', zh: '我們會親自檢視你的網站，並在 2 個工作天內把首頁概念和書面建議寄給你。沒有任何購買義務。' },
+  'fc.spots': { en: 'Each concept is designed by hand, so we take only 5 clinics a week.', zh: '每個概念都是親手設計，因此每週只接 5 間診所。' },
+  'fc.name': { en: 'Your name', zh: '你的姓名' },
+  'fc.email': { en: 'Email', zh: '電子郵件' },
+  'fc.practice': { en: 'Clinic name', zh: '診所名稱' },
+  'fc.website': { en: 'Current website', zh: '現有網站' },
+  'fc.goalQ': { en: 'What should your website do better?', zh: '你最希望網站在哪方面做得更好？' },
+  'fc.choose': { en: 'Choose one', zh: '請選擇一項' },
+  'fc.goal.patients': { en: 'Attract more new patients', zh: '吸引更多新患者' },
+  'fc.goal.expertise': { en: 'Better show our expertise', zh: '更清楚展現專業' },
+  'fc.goal.quality': { en: 'Reflect the quality of our care', zh: '呈現診所的照護品質' },
+  'fc.goal.search': { en: 'Show up higher on Google and AI search', zh: '提升 Google 與 AI 搜尋排名' },
+  'fc.goal.convert': { en: 'Turn more visitors into bookings', zh: '讓更多瀏覽者完成預約' },
+  'fc.goal.unsure': { en: 'Not sure yet', zh: '還不確定' },
+  'fc.planQ': { en: 'Where are you with your website?', zh: '你目前對網站的規劃是？' },
+  'fc.plan.active': { en: 'Actively looking for a new website', zh: '正在積極尋找新網站' },
+  'fc.plan.months': { en: 'Planning a change in the next few months', zh: '打算在幾個月內更換' },
+  'fc.plan.curious': { en: 'Just curious for now', zh: '目前只是想看看' },
+  'fc.submit': { en: 'Request My Free Concept →', zh: '送出申請 →' },
+  'fc.sending': { en: 'Sending…', zh: '傳送中…' },
+  'fc.error': { en: 'Something went wrong. Please try again.', zh: '發生錯誤，請再試一次。' },
+  'fc.note': { en: 'No sales call required. Your details are only used to send your concept.', zh: '不需要電話推銷。你的資料只用來寄送首頁概念。' },
+  // Process step 1 + final CTA
+  'fc.process.1.title': { en: 'Free homepage concept', zh: '免費首頁概念' },
+  'fc.process.1.body': { en: 'Send us your website. Within 2 business days you get a custom homepage concept and a review of what to fix.', zh: '提供你的網站，2 個工作天內收到專屬首頁概念與改善建議。' },
+  'fc.final.title': { en: 'See your new homepage before you spend a dollar.', zh: '花一分錢之前，先看到你的新首頁。' },
+  'fc.final.body': { en: 'Answer six quick questions and we’ll design a homepage concept for your clinic. Free, with no obligation.', zh: '回答六個簡單問題，我們就為你的診所設計首頁概念。免費，沒有任何義務。' },
+};

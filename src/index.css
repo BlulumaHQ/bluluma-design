@@ -992,3 +992,28 @@ html:has(.hc-page) { scroll-behavior: smooth; }
 .site-page .site-page-card .bg-yellow-400\/70 { background: hsl(var(--site-gold) / .7); }
 .site-page .site-page-card .bg-green-400\/70 { background: hsl(var(--site-mint) / .7); }
 @media (prefers-reduced-motion:reduce) { .site-page [style*="opacity"] { opacity: 1 !important; transform: none !important; transition: none !important; } }
+
+/* Free homepage concept form (/healthcare, Nov 2026) */
+.fc-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; align-items: start; }
+.fc-list { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.fc-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; color: var(--hc-ink); }
+.fc-list li svg { flex: none; margin-top: 3px; color: var(--hc-blue); }
+.fc-spots { margin-top: 24px; font-size: 14px; font-weight: 600; color: var(--hc-blue) !important; }
+.fc-form { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 32px; background: var(--hc-white); border: 1px solid var(--hc-border); border-radius: 16px; }
+.fc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fc-form label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--hc-ink); }
+.fc-form input[type="text"], .fc-form input[type="email"], .fc-form select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--hc-border); border-radius: 8px; background: var(--hc-white); color: var(--hc-ink); font-size: 16px; font-weight: 400; }
+.fc-form input:focus, .fc-form select:focus { outline: none; border-color: var(--hc-blue); box-shadow: 0 0 0 3px var(--hc-blue-wash); }
+.fc-form fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.fc-form legend { font-size: 14px; font-weight: 600; color: var(--hc-ink); margin-bottom: 10px; }
+.fc-form .fc-radio { flex-direction: row; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 1px solid var(--hc-border); border-radius: 8px; font-weight: 500; cursor: pointer; }
+.fc-form .fc-radio:has(input:checked) { border-color: var(--hc-blue); background: var(--hc-blue-wash); }
+.fc-radio input { width: 18px; height: 18px; accent-color: var(--hc-blue); }
+.fc-submit { width: 100%; margin-top: 4px; }
+.fc-error { color: #B42318 !important; font-size: 14px; }
+.fc-note { font-size: 13px; text-align: center; color: var(--hc-label) !important; }
+@media (max-width: 899px) {
+  .fc-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .fc-row { grid-template-columns: 1fr; }
+  .fc-form { padding: 22px 18px; }
+}

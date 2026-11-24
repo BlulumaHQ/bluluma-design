@@ -8,6 +8,8 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 interface Props {
   dotColor: string;
   anchors: { id: string; label: string }[];
+  /** Overrides the default "Request a Proposal" header button. */
+  cta?: { href: string; label: string };
 }
 
 /** The three industry landing pages, shown as tabs on desktop and a dropdown on small screens. */
@@ -17,7 +19,7 @@ const INDUSTRIES = [
   { path: "/presale", key: "ind.developers" },
 ];
 
-const IndustryHeader = ({ dotColor, anchors }: Props) => {
+const IndustryHeader = ({ dotColor, anchors, cta }: Props) => {
   const { lang, setLang, t } = useLang();
   const { pathname } = useLocation();
   const current = INDUSTRIES.find((i) => i.path === pathname) ?? INDUSTRIES[0];
@@ -73,7 +75,7 @@ const IndustryHeader = ({ dotColor, anchors }: Props) => {
         <div className="industry-header-right">
           <nav className="industry-desktop industry-nav" aria-label={t("hc.navigation")}>{anchors.map((anchor) => <Button asChild variant="link" key={anchor.id}><a href={`#${anchor.id}`}>{anchor.label}</a></Button>)}</nav>
           {languages()}
-          <Button asChild className="hc-button industry-proposal"><Link to="/proposal">{t("hc.proposal")}</Link></Button>
+          <Button asChild className="hc-button industry-proposal">{cta ? <a href={cta.href}>{cta.label}</a> : <Link to="/proposal">{t("hc.proposal")}</Link>}</Button>
         </div>
       </div>
     </header>

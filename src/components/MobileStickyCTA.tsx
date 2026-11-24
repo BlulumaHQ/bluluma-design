@@ -18,6 +18,8 @@ const MobileStickyCTA = () => {
   }, []);
 
   const hideBar = HIDE_ON.some((p) => pathname.startsWith(p));
+  // The healthcare page runs the free homepage concept offer (Nov 2026 dental ad).
+  const freeConcept = /^(\/zh)?\/healthcare\/?$/.test(pathname);
 
   return (
     <>
@@ -54,12 +56,21 @@ const MobileStickyCTA = () => {
               <Mail size={16} strokeWidth={1.7} />
               Contact
             </a>
-            <Link
-              to="/proposal"
-              className="flex-[1.4] inline-flex items-center justify-center h-12 rounded-full cta-solid text-sm font-semibold active:scale-[0.98] transition-transform"
-            >
-              {t("hc.proposal")}
-            </Link>
+            {freeConcept ? (
+              <a
+                href="#free-concept"
+                className="flex-[1.4] inline-flex items-center justify-center h-12 rounded-full cta-solid text-sm font-semibold active:scale-[0.98] transition-transform"
+              >
+                {t("fc.cta")}
+              </a>
+            ) : (
+              <Link
+                to="/proposal"
+                className="flex-[1.4] inline-flex items-center justify-center h-12 rounded-full cta-solid text-sm font-semibold active:scale-[0.98] transition-transform"
+              >
+                {t("hc.proposal")}
+              </Link>
+            )}
           </div>
         </div>
       )}
