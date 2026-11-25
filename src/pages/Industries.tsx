@@ -5,12 +5,12 @@ import { projects } from "@/lib/projects";
 import { useLang } from "@/lib/i18n";
 import { INDUSTRY_LABEL, INDUSTRY_ORDER, PACKAGES } from "@/lib/packagePricing";
 
-import friendlyDental from "@/assets/projects/friendly-dental.jpg";
-import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
-import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
-import nueranutra from "@/assets/projects/nuera-nutra.jpg";
-import vitaEnvironmental from "@/assets/projects/vita-environmental.jpg";
-import spaAlita from "@/assets/projects/spa-alita.jpg";
+import friendlyDental from "@/assets/projects/friendly-dental-website-design.webp";
+import liveAtHeadwater from "@/assets/projects/live-at-headwater-website-design.webp";
+import btnRealEstate from "@/assets/projects/btn-real-estate-website-design.webp";
+import nueranutra from "@/assets/projects/nuera-nutra-website-design.webp";
+import vitaEnvironmental from "@/assets/projects/vita-environmental-website-design.webp";
+import spaAlita from "@/assets/projects/spa-alita-website-design.webp";
 
 const projectImages: Record<string, string> = {
   "friendly-dental": friendlyDental,

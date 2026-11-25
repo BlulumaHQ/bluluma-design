@@ -1,15 +1,15 @@
-import friendlyDental from "@/assets/projects/friendly-dental.jpg";
-import liveAtHeadwater from "@/assets/projects/live-at-headwater.jpg";
-import btnRealEstate from "@/assets/projects/btn-real-estate.jpg";
-import nueranutra from "@/assets/projects/nuera-nutra.jpg";
-import vitaEnvironmental from "@/assets/projects/vita-environmental.jpg";
-import spaAlita from "@/assets/projects/spa-alita.jpg";
-import presotea from "@/assets/projects/presotea.jpg";
-import hsinHsinArt from "@/assets/projects/hsin-hsin-art-framing.jpg";
-import sonykunDesign from "@/assets/projects/sonykun-design.jpg";
-import kchenConstruction from "@/assets/projects/kchen-construction.jpg";
-import helenLam from "@/assets/projects/helen-lam-real-estate.jpg";
-import calinClub from "@/assets/projects/calin-club.jpg";
+import friendlyDental from "@/assets/projects/friendly-dental-website-design.webp";
+import liveAtHeadwater from "@/assets/projects/live-at-headwater-website-design.webp";
+import btnRealEstate from "@/assets/projects/btn-real-estate-website-design.webp";
+import nueranutra from "@/assets/projects/nuera-nutra-website-design.webp";
+import vitaEnvironmental from "@/assets/projects/vita-environmental-website-design.webp";
+import spaAlita from "@/assets/projects/spa-alita-website-design.webp";
+import presotea from "@/assets/projects/presotea-website-design.webp";
+import hsinHsinArt from "@/assets/projects/hsin-hsin-art-framing-website-design.webp";
+import sonykunDesign from "@/assets/projects/sonykun-design-website-design.webp";
+import kchenConstruction from "@/assets/projects/kchen-construction-website-design.webp";
+import helenLam from "@/assets/projects/helen-lam-real-estate-website-design.webp";
+import calinClub from "@/assets/projects/calin-club-website-design.webp";
 import { projects, type Project } from "@/lib/projects";
 
 export const projectImageMap: Record<string, string> = {

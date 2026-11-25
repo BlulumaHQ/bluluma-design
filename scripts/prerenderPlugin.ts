@@ -28,6 +28,7 @@ interface Page {
   description: string;
   body: string; // HTML placed inside #root until React mounts
   image?: string; // absolute URL for og:image / twitter:image
+  images?: string[]; // extra photos on the page, for the image sitemap
   jsonLd?: object[];
   priority?: number;
   lastmod?: string;
@@ -141,10 +142,13 @@ function sitemap(pages: Page[]) {
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${abs(p.path, "en")}"/>`,
       lastmod ? `    <lastmod>${lastmod}</lastmod>` : "",
       `    <priority>${priority.toFixed(1)}</priority>`,
+      ...[...new Set([p.image, ...(p.images ?? [])].filter((x): x is string => !!x && /^https?:/.test(x)))].map(
+        (src) => `    <image:image><image:loc>${esc(src)}</image:loc></image:image>`,
+      ),
       "  </url>",
     ].filter(Boolean).join("\n");
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join("\n")}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join("\n")}\n</urlset>\n`;
 }
 
 /* ---------------- Portfolio (from the central CMS at build time) ---------------- */
@@ -324,6 +328,13 @@ export default function prerenderPlugin(): Plugin {
         return file ? `${SITE}/assets/${file}` : undefined;
       };
       const pages = collectPages(assetImage);
+      // Inline article photos (src/assets/insights/inline/<slug>-N.webp) for the image sitemap.
+      for (const p of pages) {
+        const m = p.path.match(/^\/insights\/([a-z0-9-]+)$/);
+        if (!m) continue;
+        const re = new RegExp(`^${m[1]}-\\d-[^.]+\\.webp$`);
+        p.images = assets.filter((f) => re.test(f)).map((f) => `${SITE}/assets/${f}`);
+      }
       try {
         const rows = await fetchPortfolio();
         const extra = portfolioPages(rows);
